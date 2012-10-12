@@ -1,6 +1,21 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 bin
 obj
-
+*.suo
+*.user
+_ReSharper.*/
+Bin/
+Debug/
+Release/
+ClientBin/
+tmp/
+*.cache
+*.docstates
+*.idb
+*.pdb
+ipch/
+*_Spliced.*
+.metadata/
+target/
 # mstest test results
 TestResults
