@@ -1,0 +1,27 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Prolog.Scheduler"
+        x:Class="Prolog.Scheduler.MainWindow"
+        Title="Prolog Scheduler" 
+        Height="300" Width="300"
+        Icon="/Prolog.Scheduler;component/Resources/ApplicationIcon.ico" 
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Name="mnuMain" Grid.Row="0">
+            <MenuItem Header="_File" Name="mnuFile">
+                <MenuItem Header="E_xit" Name="mnuFileExit" Click="mnuFileExit_Click" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Name="btnNextSolution" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="3" Click="btnNextSolution_Click">Next Solution</Button>
+            <Button Name="btnRestart" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="3" Click="btnRestart_Click">Restart</Button>
+        </StackPanel>
+        <local:ScheduleControl Grid.Row="2" DataContext="{Binding Schedule}" />
+    </Grid>
+
+</Window>

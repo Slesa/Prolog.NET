@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Prolog.PrologInstruction" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="2.75" Width="1.75" />
+    <Members>
+      <Field Name="m_index" Hidden="true" />
+      <Field Name="m_instructionStream" Hidden="true" />
+      <Field Name="m_isBreakpoint" Hidden="true" />
+      <Field Name="m_isCurrentLocation" Hidden="true" />
+      <Method Name="PrologInstruction" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="WamInstruction" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACEAAAIAAEAAAAAAAAgAABAAAgAACAAAAAQAg=</HashCode>
+      <FileName>PrologInstruction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologStackFrame">
+    <Position X="11.75" Y="2.75" Width="1.75" />
+    <Members>
+      <Property Name="IPrologInstructionStreamContainer.WamInstructionStream" Hidden="true" />
+      <Field Name="m_clause" Hidden="true" />
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_currentInstruction" Hidden="true" />
+      <Field Name="m_instructionStream" Hidden="true" />
+      <Field Name="m_stackIndex" Hidden="true" />
+      <Field Name="m_variables" Hidden="true" />
+      <Method Name="PrologStackFrame" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="Synchronize" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Container" Type="Prolog.PrologStackFrameList" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.5" Y="2.75" />
+        <Point X="12.5" Y="2.375" />
+        <Point X="9.812" Y="2.375" />
+        <Point X="9.812" Y="2.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Variables" Type="Prolog.PrologVariableList" FixedToPoint="true">
+      <Path>
+        <Point X="13.062" Y="4.497" />
+        <Point X="13.062" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>iAAAAAQCAAAAAMAEAAgAAAAAgABBAAQAIAQIAAAgAAA=</HashCode>
+      <FileName>PrologStackFrame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Container" />
+      <Property Name="InstructionStream" />
+      <Property Name="Variables" />
+      <Property Name="CurrentInstruction" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologInstructionStream" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="2.75" Width="2" />
+    <Members>
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_wamInstructionStream" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Container" Type="Prolog.IPrologInstructionStreamContainer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.938" Y="2.75" />
+        <Point X="15.938" Y="1.781" />
+        <Point X="14" Y="1.781" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAIAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAA=</HashCode>
+      <FileName>PrologInstructionStream.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Container" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.PrologMachine">
+    <Position X="4.5" Y="2.75" Width="2" />
+    <Members>
+      <Method Name="AddBreakpoint" Hidden="true" />
+      <Method Name="ClearAllBreakpoints" Hidden="true" />
+      <Method Name="ClearBreakpoint" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Method Name="EndProgram" Hidden="true" />
+      <Method Name="GetArgumentVariables" Hidden="true" />
+      <Method Name="GetPermanentVariables" Hidden="true" />
+      <Method Name="GetTemporaryVariables" Hidden="true" />
+      <Method Name="IsBreakpoint" Hidden="true" />
+      <Field Name="m_arguments" Hidden="true" />
+      <Field Name="m_queryResults" Hidden="true" />
+      <Field Name="m_stackFrames" Hidden="true" />
+      <Field Name="m_temporaryVariables" Hidden="true" />
+      <Field Name="m_wamMachine" Hidden="true" />
+      <Method Name="ProcessResults" Hidden="true" />
+      <Method Name="PrologMachine" Hidden="true" />
+      <Method Name="RaiseExecutionComplete" Hidden="true" />
+      <Method Name="RaiseExecutionSuspended" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="Restart" Hidden="true" />
+      <Method Name="RunToBacktrack" Hidden="true" />
+      <Method Name="RunToSuccess" Hidden="true" />
+      <Method Name="StepIn" Hidden="true" />
+      <Method Name="StepOut" Hidden="true" />
+      <Method Name="StepOver" Hidden="true" />
+      <Method Name="Synchronize" Hidden="true" />
+      <Method Name="SynchronizeStackFrames" Hidden="true" />
+      <Method Name="SynchronizeVariables" Hidden="true" />
+      <Method Name="ToggleBreakpoint" Hidden="true" />
+      <Method Name="UpdateQueryResults" Hidden="true" />
+      <Property Name="WamMachine" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Program" Type="Prolog.Program" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="3" />
+        <Point X="2.5" Y="3" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.245" Y="0.039" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Query" Type="Prolog.Query" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="4.5" Y="4" />
+        <Point X="4.125" Y="4" />
+        <Point X="4.125" Y="4" />
+        <Point X="2.5" Y="4" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="StackFrames" Type="Prolog.PrologStackFrameList" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="3.5" />
+        <Point X="8.25" Y="3.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Arguments" Type="Prolog.PrologVariableList" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="4.898" />
+        <Point X="11.75" Y="4.898" />
+        <Point X="11.75" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="TemporaryVariables" Type="Prolog.PrologVariableList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="5.438" />
+        <Point X="6.875" Y="5.438" />
+        <Point X="6.875" Y="6.094" />
+        <Point X="11.5" Y="6.094" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="QueryResults" Type="Prolog.PrologQueryResults" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="6.188" />
+        <Point X="6.875" Y="6.188" />
+        <Point X="6.875" Y="7" />
+        <Point X="8.75" Y="7" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PerformanceStatistics" Type="Prolog.PerformanceStatistics" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="4.5" Y="5" />
+        <Point X="2.75" Y="5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>kAARAQFCMgBARALQAhAACAAMigAEBEggIApCKkVJEAA=</HashCode>
+      <FileName>PrologMachine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Program" />
+      <Property Name="Query" />
+      <Property Name="StackFrames" />
+      <Property Name="Arguments" />
+      <Property Name="TemporaryVariables" />
+      <Property Name="QueryResults" />
+      <Property Name="PerformanceStatistics" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologVariableList" Collapsed="true">
+    <Position X="11.5" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAQAAAAAAAAACAAABAAAAAAAAAQAKAAAAABAAAA=</HashCode>
+      <FileName>PrologVariableList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.PrologQueryEventArgs">
+    <Position X="8.75" Y="8" Width="2" />
+    <Members>
+      <Field Name="m_results" Hidden="true" />
+      <Method Name="PrologQueryEventArgs" Hidden="true" />
+      <Field Name="s_empty" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAADAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PrologQueryEventArgs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Results" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.PrologQueryResults" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="6.75" Width="1.75" />
+    <AssociationLine Name="Variables" Type="Prolog.PrologVariableList" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="7.031" />
+        <Point X="13.062" Y="7.031" />
+        <Point X="13.062" Y="6.441" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>PrologQueryResults.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Variables" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologStackFrameList" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.75" Width="2" />
+    <Members>
+      <Field Name="m_currentStackFrame" Hidden="true" />
+      <Field Name="m_machine" Hidden="true" />
+      <Method Name="Pop" Hidden="true" />
+      <Method Name="PrologStackFrameList" Hidden="true" />
+      <Method Name="Push" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAAAACAAAAIAAEAAAAAAAAgBCAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>PrologStackFrameList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Machine" />
+      <Property Name="CurrentStackFrame" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologVariable" BaseTypeListCollapsed="true">
+    <Position X="14" Y="5.75" Width="1.75" />
+    <Members>
+      <Method Name="GetFullName" Hidden="true" />
+      <Field Name="m_codeTerm" Hidden="true" />
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_fullName" Hidden="true" />
+      <Field Name="m_name" Hidden="true" />
+      <Field Name="m_register" Hidden="true" />
+      <Field Name="m_text" Hidden="true" />
+      <Method Name="PrologVariable" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Container" Type="Prolog.PrologVariableList" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.812" Y="5.75" />
+        <Point X="14.812" Y="5.375" />
+        <Point X="13.375" Y="5.375" />
+        <Point X="13.375" Y="5.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.846" Y="0.423" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAIAAAQCAAAAAoAEgAAAAAQAgAABAAUIAAAACCAAAAA=</HashCode>
+      <FileName>PrologVariable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Container" />
+      <Property Name="CodeTerm" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Program" Collapsed="true">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAgIACAQAAgABhBAAAAAAggEABAAAQBRAAABFQACQ=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Query" Collapsed="true">
+    <Position X="1" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAABEAAAAAAAAAAAAAAAAAAJAAAAEAAQ=</HashCode>
+      <FileName>Query.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.PerformanceStatistics" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAJAgAAACAIAAAAAAAAAAAAAAAAAAEAIAAAAAAAIAg=</HashCode>
+      <FileName>PerformanceStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.Code.CodeTerm" Collapsed="true">
+    <Position X="17.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAICAAAAAQAAAgAAAAAAAAEBAAGAgAAIAABAAAiA=</HashCode>
+      <FileName>Code\CodeTerm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Prolog.IPrologInstructionStreamContainer" Collapsed="true">
+    <Position X="11.25" Y="1.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPrologInstructionContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

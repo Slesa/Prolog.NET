@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.ProgramExplorerComponent"
+             Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:ProgramTreeUserControl x:Name="ctrlProgram"
+                                      Grid.Column="0" />
+        <GridSplitter Grid.Column="1" 
+                      ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" 
+                      HorizontalAlignment="Stretch" Width="5" />
+        <local:InstructionStreamUserControl x:Name="ctrlInstructionStream"
+                                            Grid.Column="2"
+                                            InstructionStream="{Binding SelectedClause.PrologInstructionStream, ElementName=ctrlProgram, Mode=OneWay}" />
+    </Grid>
+</UserControl>

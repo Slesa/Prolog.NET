@@ -1,0 +1,83 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.TranscriptComponent"
+             Width="300" Height="300">
+    <UserControl.Resources>
+        <Style x:Key="StretchedContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="TranscriptEntryStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}">
+                    <DataTrigger.Value>
+                        <local:TranscriptEntryTypes>Request</local:TranscriptEntryTypes>
+                    </DataTrigger.Value>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontStyle" Value="Italic"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local:PrologCommands.ExecuteCommand"
+                        Executed="CommandExecuteCommand_Executed" />
+        <CommandBinding Command="local:PrologCommands.DebugCommand"
+                        Executed="CommandDebugCommand_Executed" />
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:ProgramTreeUserControl x:Name="ctrlProgram"
+                                      Grid.Column="0" 
+                                      ClauseDoubleClicked="ctrlProgram_ClauseDoubleClicked" />
+        <GridSplitter Grid.Column="1" 
+                      ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" 
+                      HorizontalAlignment="Stretch" Width="5" />
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <TextBox Text="Transcript"
+                         DockPanel.Dock="Top" 
+                         Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
+                <ListBox Name="ctrlTranscriptEntries"
+                         DataContext="{Binding Transcript}" ItemsSource="{Binding Entries}"
+                         ItemContainerStyle="{StaticResource StretchedContainerStyle}"
+                         ScrollViewer.CanContentScroll="False"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ctrlTranscriptEntries_MouseDoubleClick">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Style="{StaticResource TranscriptEntryStyle}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+            <GridSplitter Grid.Row="1"
+                          ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" 
+                          HorizontalAlignment="Stretch" Height="5" />
+            <DockPanel Grid.Row="2">
+                <TextBox Text="Command"
+                         DockPanel.Dock="Top" 
+                         Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                    <Button VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Margin="3"
+                            Command="local:PrologCommands.ExecuteCommand">E_xecute</Button>
+                    <Button VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Margin="3" 
+                            Command="local:PrologCommands.DebugCommand">_Debug</Button>
+                </StackPanel>
+                <TextBox Name="txtCommand"
+                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
+                         TextWrapping="Wrap" AcceptsReturn="True" IsVisibleChanged="txtCommand_IsVisibleChanged" />
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

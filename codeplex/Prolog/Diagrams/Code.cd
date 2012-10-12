@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Prolog.Code.CodeVariable">
+    <Position X="16.25" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="CodeVariable" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_name" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAEgAAAAAQAAAAAAMAgAAIAABAAAiA=</HashCode>
+      <FileName>Code\CodeVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeCompoundTerm">
+    <Position X="18.75" Y="3.75" Width="2" />
+    <Members>
+      <Method Name="CodeCompoundTerm" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_children" Hidden="true" />
+      <Field Name="m_functor" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Field Name="s_emptyList" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Children" Type="Prolog.Code.CodeTerm" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="3.75" />
+        <Point X="20.25" Y="2.531" />
+        <Point X="17.75" Y="2.531" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAEgAAkAAAAAAAAAMIAAAIAABAAAyQ=</HashCode>
+      <FileName>Code\CodeCompoundTerm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Functor" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeFunctor" BaseTypeListCollapsed="true">
+    <Position X="24" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="CodeFunctor" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Property Name="CutFunctor" Hidden="true" />
+      <Property Name="CutFunctorName" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Property Name="ListFunctor" Hidden="true" />
+      <Property Name="ListFunctorName" Hidden="true" />
+      <Field Name="m_arity" Hidden="true" />
+      <Field Name="m_isOperator" Hidden="true" />
+      <Field Name="m_name" Hidden="true" />
+      <Property Name="NilFunctor" Hidden="true" />
+      <Property Name="NilFunctorName" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Field Name="s_cutFunctor" Hidden="true" />
+      <Field Name="s_cutFunctorName" Hidden="true" />
+      <Field Name="s_listFunctor" Hidden="true" />
+      <Field Name="s_listFunctorName" Hidden="true" />
+      <Field Name="s_nilFunctor" Hidden="true" />
+      <Field Name="s_nilFunctorName" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EAAEBAAAEAAEAEQEhIgAAAQACAAIAMIgAAIAABCAAyA=</HashCode>
+      <FileName>Code\CodeFunctor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeSentence" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="1.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeSentence" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_body" Hidden="true" />
+      <Field Name="m_comments" Hidden="true" />
+      <Field Name="m_head" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Head" Type="Prolog.Code.CodeCompoundTerm" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.188" Y="2.997" />
+        <Point X="22.188" Y="4" />
+        <Point X="20.75" Y="4" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAEgEABAAAAEAAAAMAgAAIAABAAIiA=</HashCode>
+      <FileName>Code\CodeSentence.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Head" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeSentenceDataObject" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="6.25" Width="2.5" />
+    <Members>
+      <Field Name="m_autoConvert" Hidden="true" />
+      <Field Name="m_codeSentenceDataFormat" Hidden="true" />
+      <Field Name="m_format" Hidden="true" />
+      <Field Name="m_object" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABEAAAAAAAAEAABAAQBAAAAAAgAQABAAAAAAA=</HashCode>
+      <FileName>Code\CodeSentenceDataObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeTerm" Collapsed="true">
+    <Position X="16.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAICAAAAAQAAAgAAAAAAAAEBAAGAgAAIAABAAAiA=</HashCode>
+      <FileName>Code\CodeTerm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValue">
+    <Position X="13.75" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToXElementBase" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAQAAggAAAAAAAAAAAAEAAAAIAAAAAAiA=</HashCode>
+      <FileName>Code\CodeValue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueBoolean">
+    <Position X="14.25" Y="6.25" Width="1.75" />
+    <Members>
+      <Method Name="CodeValueBoolean" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueBoolean.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueDateTime">
+    <Position X="12" Y="6.25" Width="1.75" />
+    <Members>
+      <Method Name="CodeValueDateTime" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueDateTime.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueDouble">
+    <Position X="9" Y="8.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeValueDouble" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueDouble.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueException">
+    <Position X="16.5" Y="6.25" Width="1.75" />
+    <Members>
+      <Method Name="CodeValueException" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueException.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueInteger">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeValueInteger" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueInteger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueNumeric" Collapsed="true">
+    <Position X="8" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAgAAAAAAAAAAAAEAAAAIAAAAAAiA=</HashCode>
+      <FileName>Code\CodeValueNumeric.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueObject">
+    <Position X="18.75" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeValueObject" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueString">
+    <Position X="10" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeValueString" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueString.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeValueType">
+    <Position X="20.75" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeValueType" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_value" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAQAAMAAAAIgABAAAiA=</HashCode>
+      <FileName>Code\CodeValueType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.Code.CodeComment">
+    <Position X="24.5" Y="1.25" Width="1.5" />
+    <Members>
+      <Method Name="CodeComment" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="m_text" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAgAAAAAAAAAAAAMAAAAIACBAAAiA=</HashCode>
+      <FileName>Code\CodeComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

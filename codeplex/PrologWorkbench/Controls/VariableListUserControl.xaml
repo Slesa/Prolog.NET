@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.VariableListUserControl"
+             x:Name="ctrlVariableList"
+             Height="300" Width="300">
+    <Grid>
+        <DockPanel>
+            <TextBox Text="{Binding Path=Caption, ElementName=ctrlVariableList}"
+                     DockPanel.Dock="Top" 
+                     Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
+            <ListBox ItemsSource="{Binding Path=Variables, ElementName=ctrlVariableList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} = {1}">
+                                    <Binding Path="FullName" />
+                                    <Binding Path="Text" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </Grid>
+</UserControl>

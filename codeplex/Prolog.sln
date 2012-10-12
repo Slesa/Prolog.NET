@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4FAD31D-97B1-40EA-BA4C-B1D88695DA83}"
+	ProjectSection(SolutionItems) = preProject
+		Copyright.txt = Copyright.txt
+		License - Lingua.txt = License - Lingua.txt
+		License - Windows API Code Pack.txt = License - Windows API Code Pack.txt
+		License.txt = License.txt
+		Prolog Diagrams.pptx = Prolog Diagrams.pptx
+		Prolog.NET.docx = Prolog.NET.docx
+		Prolog.NET.pdf = Prolog.NET.pdf
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{673C8710-F988-4982-9EBE-7CDE3135F2AF}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\farmer.prolog = Samples\farmer.prolog
+		Samples\list.prolog = Samples\list.prolog
+		Samples\peg.prolog = Samples\peg.prolog
+		Samples\schedule.prolog = Samples\schedule.prolog
+		Samples\zebra.prolog = Samples\zebra.prolog
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E98A0ED7-B684-4E20-9FE5-513CAE47CBA5}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\farmer.prolog.xml = Tests\farmer.prolog.xml
+		Tests\list.prolog.xml = Tests\list.prolog.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench", "PrologWorkbench\PrologWorkbench.csproj", "{65E6D859-7578-4A05-827C-3D36AE640364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologLibrary", "PrologLibrary\PrologLibrary.csproj", "{8BE9C282-573B-4D82-9578-7A50E13B3D85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologTest", "PrologTest\PrologTest.csproj", "{9FC4BB27-9852-4771-918A-9E5788380895}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PrologWorkbenchSetup", "PrologWorkbenchSetup\PrologWorkbenchSetup.vdproj", "{2113DAEB-38C3-4430-AC88-709B22DF5979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologScheduler", "PrologSchedule\PrologScheduler.csproj", "{3D81B439-74E4-4534-9D56-C8AAE9B320E2}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs09
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Prolog\\Prolog.csproj
+		SccProjectName1 = Prolog
+		SccLocalPath1 = Prolog
+		SccProjectUniqueName2 = PrologWorkbench\\PrologWorkbench.csproj
+		SccProjectName2 = PrologWorkbench
+		SccLocalPath2 = PrologWorkbench
+		SccProjectUniqueName3 = PrologLibrary\\PrologLibrary.csproj
+		SccProjectName3 = PrologLibrary
+		SccLocalPath3 = PrologLibrary
+		SccProjectUniqueName4 = PrologTest\\PrologTest.csproj
+		SccProjectName4 = PrologTest
+		SccLocalPath4 = PrologTest
+		SccProjectUniqueName5 = PrologWorkbenchSetup\\PrologWorkbenchSetup.vdproj
+		SccProjectName5 = PrologWorkbenchSetup
+		SccLocalPath5 = PrologWorkbenchSetup
+		SccProjectUniqueName6 = PrologSchedule\\PrologScheduler.csproj
+		SccProjectName6 = PrologSchedule
+		SccLocalPath6 = PrologSchedule
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE9C282-573B-4D82-9578-7A50E13B3D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE9C282-573B-4D82-9578-7A50E13B3D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE9C282-573B-4D82-9578-7A50E13B3D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE9C282-573B-4D82-9578-7A50E13B3D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2113DAEB-38C3-4430-AC88-709B22DF5979}.Debug|Any CPU.ActiveCfg = Debug
+		{2113DAEB-38C3-4430-AC88-709B22DF5979}.Release|Any CPU.ActiveCfg = Release
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{673C8710-F988-4982-9EBE-7CDE3135F2AF} = {C4FAD31D-97B1-40EA-BA4C-B1D88695DA83}
+		{E98A0ED7-B684-4E20-9FE5-513CAE47CBA5} = {C4FAD31D-97B1-40EA-BA4C-B1D88695DA83}
+	EndGlobalSection
+EndGlobal

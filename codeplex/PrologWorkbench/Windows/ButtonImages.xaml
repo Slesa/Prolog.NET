@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="imageStepIn" UriSource="Resources/StepIn.png" />
+    <BitmapImage x:Key="imageStepOut" UriSource="Resources/StepOut.png" />
+    <BitmapImage x:Key="imageStepOver" UriSource="Resources/StepOver.png" />
+</ResourceDictionary>

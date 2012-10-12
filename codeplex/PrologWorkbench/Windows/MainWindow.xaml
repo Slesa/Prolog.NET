@@ -1,0 +1,156 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Prolog.Workbench"
+        x:Class="Prolog.Workbench.MainWindow"
+        Height="{local:Settings WindowHeight}" 
+        Width="{local:Settings WindowWidth}" 
+        Left="{local:Settings WindowLeft}" 
+        Top="{local:Settings WindowTop}" 
+        WindowState="{local:Settings WindowState}" 
+        Icon="/Prolog.Workbench;component/Resources/ApplicationIcon.ico" Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonImages.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:ApplicationTitleConverter x:Key="ApplicationTitleConverter" />
+            <local:ViewConverter x:Key="ViewConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New"             Executed="CommandNew_Executed" />
+        <CommandBinding Command="ApplicationCommands.Open"            Executed="CommandOpen_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save"            Executed="CommandSave_Executed"           CanExecute="CommandSave_CanExecute" />
+        <CommandBinding Command="ApplicationCommands.SaveAs"          Executed="CommandSaveAs_Executed"         CanExecute="CommandSaveAs_CanExecute" />
+        <CommandBinding Command="ApplicationCommands.Close"           Executed="CommandClose_Executed"          CanExecute="CommandClose_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.EnableOptimization" Executed="CommandEnableOptimization_Executed" CanExecute="CommandEnableOptimization_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.EnableStatistics"   Executed="CommandEnableStatistics_Executed"   CanExecute="CommandEnableStatistics_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.EnableTrace"        Executed="CommandEnableTrace_Executed"        CanExecute="CommandEnableTrace_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.Exit"               Executed="CommandExit_Executed"               CanExecute="CommandExit_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.HelpAbout"          Executed="CommandHelpAbout_Executed"          CanExecute="CommandHelpAbout_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.ViewDebug"          Executed="CommandViewDebug_Executed"          CanExecute="CommandViewDebug_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.ViewProgram"        Executed="CommandViewProgram_Executed"        CanExecute="CommandViewProgram_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.ViewTrace"          Executed="CommandViewTrace_Executed"          CanExecute="CommandViewTrace_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.ViewTranscript"     Executed="CommandViewTranscript_Executed"     CanExecute="CommandViewTranscript_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.AddBreakpoint"        Executed="CommandDebugAddBreakpoint_Executed"        CanExecute="CommandDebugAddBreakpoint_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.ClearAllBreakpoints"  Executed="CommandDebugClearAllBreakpoints_Executed"  CanExecute="CommandDebugClearAllBreakpoints_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.ClearBreakpoint"      Executed="CommandDebugClearBreakpoint_Executed"      CanExecute="CommandDebugClearBreakpoint_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.EndProgram"           Executed="CommandDebugEndProgram_Executed"           CanExecute="CommandDebugEndProgram_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.Restart"              Executed="CommandDebugRestart_Executed"              CanExecute="CommandDebugRestart_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.RunToBacktrack"       Executed="CommandDebugRunToBacktrack_Executed"       CanExecute="CommandDebugRunToBacktrack_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.RunToSuccess"         Executed="CommandDebugRunToSuccess_Executed"         CanExecute="CommandDebugRunToSuccess_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.StepIn"               Executed="CommandDebugStepIn_Executed"               CanExecute="CommandDebugStepIn_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.StepOut"              Executed="CommandDebugStepOut_Executed"              CanExecute="CommandDebugStepOut_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.StepOver"             Executed="CommandDebugStepOver_Executed"             CanExecute="CommandDebugStepOver_CanExecute" />
+        <CommandBinding Command="local:PrologDebugCommands.ToggleBreakpoint"     Executed="CommandDebugToggleBreakpoint_Executed"     CanExecute="CommandDebugToggleBreakpoint_CanExecute" />
+    </Window.CommandBindings>
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource ApplicationTitleConverter}" Mode="OneWay" >
+            <Binding Path="Program.FileName" />
+            <Binding Path="Program.IsModified" />
+        </MultiBinding>
+    </Window.Title>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Name="mnuMain" Grid.Row="0">
+            <MenuItem Header="_File" Name="mnuFile">
+                <MenuItem Header="_New" Name="mnuFileNew" Command="ApplicationCommands.New" />
+                <MenuItem Header="_Open" Name="mnuFileOpen" Command="ApplicationCommands.Open" />
+                <MenuItem Header="_Save" Name="mnuFileSave" Command="ApplicationCommands.Save" />
+                <MenuItem Header="Save _As" Name="mnuFileSaveAs" Command="ApplicationCommands.SaveAs" />
+                <MenuItem Header="Close" Name="mnuFileClose" Command="ApplicationCommands.Close" />
+                <Separator />
+                <MenuItem Header="E_xit" Name="mnuFileExit" Command="local:PrologCommands.Exit" />
+            </MenuItem>
+            <MenuItem Header="_Edit" Name="mnuEdit">
+                <MenuItem Header="Cu_t" Name="mnuEditCut" Command="ApplicationCommands.Cut" />
+                <MenuItem Header="_Copy" Name="mnuEditCopy" Command="ApplicationCommands.Copy" />
+                <MenuItem Header="_Paste" Name="mnuEditPaste" Command="ApplicationCommands.Paste" />
+            </MenuItem>
+            <MenuItem Header="_View" Name="mnuView">
+                <MenuItem Header="_Transcript" Name="mnuViewTranscript" Command="local:PrologCommands.ViewTranscript"
+                          IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Transcript}" />
+                <MenuItem Header="Pro_gram" Name="mnuViewProgram" Command="local:PrologCommands.ViewProgram" 
+                          IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Program}" />
+                <MenuItem Header="_Debug" Name="mnuViewDebug" Command="local:PrologCommands.ViewDebug" 
+                          IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Debug}" />
+                <MenuItem Header="T_race" Name="mnuViewTrace" Command="local:PrologCommands.ViewTrace" 
+                          IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Trace}" />
+            </MenuItem>
+            <MenuItem Header="_Transcript" Name="mnuTranscript"
+                      Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Transcript}">
+                <MenuItem Header="E_xecute" Name="mnuTranscriptExecuteCommand" Command="local:PrologCommands.ExecuteCommand" />
+                <MenuItem Header="_Debug" Name="mnuTranscriptDebugCommand" Command="local:PrologCommands.DebugCommand" />
+                <MenuItem Header="_Continue" Name="mnuTranscriptContinueCommand" Command="local:PrologDebugCommands.RunToSuccess" />
+                <Separator />
+                <MenuItem Header="Move _Up" Name="mnuTranscriptMoveUp" Command="local:PrologCommands.MoveUp" />
+                <MenuItem Header="Move _Down" Name="mnuTranscriptMoveDown" Command="local:PrologCommands.MoveDown" />
+                <Separator />
+                <MenuItem Header="Enable _Optimization" Name="mnuTranscriptEnableOptimization" Command="local:PrologCommands.EnableOptimization" 
+                          IsChecked="{Binding Program.IsOptimized}" />
+                <MenuItem Header="Enable _Statistics" Name="mnuTranscriptEnableStatistics" Command="local:PrologCommands.EnableStatistics" 
+                          IsChecked="{Binding StatisticsEnabled}" />
+            </MenuItem>
+            <MenuItem Header="_Program" Name="mnuProgram"
+                      Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Program}">
+                <MenuItem Header="Move _Up" Name="mnuProgramMoveUp" Command="local:PrologCommands.MoveUp" />
+                <MenuItem Header="Move _Down" Name="mnuProgramMoveDown" Command="local:PrologCommands.MoveDown" />
+                <Separator />
+                <MenuItem Header="Enable _Optimization" Name="mnuProgramEnableOptimization" Command="local:PrologCommands.EnableOptimization" 
+                          IsChecked="{Binding Program.IsOptimized}" />
+            </MenuItem>
+            <MenuItem Header="Tra_ce" Name="mnuTrace"
+                      Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Trace}">
+                <MenuItem Header="_Enable" Name="mnuTraceEnable" Command="local:PrologCommands.EnableTrace" 
+                          IsChecked="{Binding TraceEnabled}" />
+                <MenuItem Header="_Clear" Name="mnuTraceClear" Command="local:PrologCommands.ClearTrace" />
+            </MenuItem>
+            <MenuItem Header="_Debug" Name="mnuDebug"
+                      Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Debug}">
+                <MenuItem Header="Restart" Name="mnuDebugRestart" Command="local:PrologDebugCommands.Restart" />
+                <MenuItem Header="Run to Backtrack" Name="mnuDebugRunToBacktrack" Command="local:PrologDebugCommands.RunToBacktrack" />
+                <MenuItem Header="Run to Success" Name="mnuDebugRunToSuccess" Command="local:PrologDebugCommands.RunToSuccess" />
+                <MenuItem Header="Step Into" Name="mnuDebugStepIn" Command="local:PrologDebugCommands.StepIn" />
+                <MenuItem Header="Step Over" Name="mnuDebugStepOver" Command="local:PrologDebugCommands.StepOver" />
+                <MenuItem Header="Return to Caller" Name="mnuDebugStepOut" Command="local:PrologDebugCommands.StepOut" />
+                <Separator />
+                <MenuItem Header="Add Breakpoint" Name="mnuDebugAddBreakpoint" Command="local:PrologDebugCommands.AddBreakpoint" />
+                <MenuItem Header="Remove Breakpoint" Name="mnuDebugClearBreakpoint" Command="local:PrologDebugCommands.ClearBreakpoint" />
+                <MenuItem Header="Toggle Breakpoint" Name="mnuDebugToggleBreakpoint" Command="local:PrologDebugCommands.ToggleBreakpoint" />
+                <MenuItem Header="Remove All Breakpoints" Name="mnuDebugClearAllBreakpoints" Command="local:PrologDebugCommands.ClearAllBreakpoints" />
+            </MenuItem>
+            <MenuItem Header="_Help" Name="mnuHelp">
+                <MenuItem Header="_About Prolog.NET" Name="mnuHelpAbout" Command="local:PrologCommands.HelpAbout" />
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Grid.Row="1">
+            <ToolBar Visibility="Collapsed">
+                <Button Command="local:PrologDebugCommands.StepIn">
+                    <Image Source="{StaticResource imageStepIn}" />
+                </Button>
+                <Button Command="local:PrologDebugCommands.StepOut">
+                    <Image Source="{StaticResource imageStepOut}" />
+                </Button>
+                <Button Command="local:PrologDebugCommands.StepOver">
+                    <Image Source="{StaticResource imageStepOver}" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <local:TranscriptComponent x:Name="ctrlTranscript" 
+                                   Grid.Row="2"
+                                   Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Transcript}" />
+        <local:TraceComponent x:Name="ctrlTrace"
+                              Grid.Row="2"
+                              Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Trace}" />
+        <local:ProgramExplorerComponent x:Name="ctrlProgram"
+                                        Grid.Row="2"
+                                        Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Program}" />
+        <local:DebugComponent x:Name="ctrlDebug"
+                              Grid.Row="2"
+                              Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Debug}" />
+    </Grid>
+</Window>

@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{171A6B22-168C-4662-8706-131C098622BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Prolog</RootNamespace>
+    <AssemblyName>Prolog</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lingua, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clause.cs" />
+    <Compile Include="Code\CodeCompoundTerm.cs" />
+    <Compile Include="Code\CodeValue.cs" />
+    <Compile Include="Code\CodeSentence.cs" />
+    <Compile Include="Code\CodeSentenceDataObject.cs" />
+    <Compile Include="Code\CodeTerm.cs" />
+    <Compile Include="Code\CodeTermList.cs" />
+    <Compile Include="Code\CodeValueBoolean.cs" />
+    <Compile Include="Code\CodeValueDateTime.cs" />
+    <Compile Include="Code\CodeValueDouble.cs" />
+    <Compile Include="Code\CodeValueInteger.cs" />
+    <Compile Include="Code\CodeValueNumeric.cs" />
+    <Compile Include="Code\CodeValueType.cs" />
+    <Compile Include="Code\CodeValueString.cs" />
+    <Compile Include="Code\CodeVariable.cs" />
+    <Compile Include="Code\CodeCompoundTermList.cs" />
+    <Compile Include="Code\CodeFunctor.cs" />
+    <Compile Include="Code\CodeValueObject.cs" />
+    <Compile Include="Code\CodeValueException.cs" />
+    <Compile Include="Code\CodeCommentList.cs" />
+    <Compile Include="Code\CodeComment.cs" />
+    <Compile Include="Code\CodeList.cs" />
+    <Compile Include="Common\IImmuttable.cs" />
+    <Compile Include="Common\IReadableCollection.cs" />
+    <Compile Include="Common\IReadableList.cs" />
+    <Compile Include="Common\ReadableList.cs" />
+    <Compile Include="Compiler.cs" />
+    <Compile Include="BacktrackingPredicate.cs" />
+    <Compile Include="CodePredicateDelegate.cs" />
+    <Compile Include="CodePredicate.cs" />
+    <Compile Include="Grammar\Nonterminals\AdditionalStatementElements.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryElementExpression700.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryOp700.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryOp500.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryOp400.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryOp200.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryElementExpression500.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryElementExpression400.cs" />
+    <Compile Include="Grammar\Nonterminals\BinaryElementExpression200.cs" />
+    <Compile Include="Grammar\Nonterminals\UnaryElementExpression200.cs" />
+    <Compile Include="Grammar\Nonterminals\UnaryOp200.cs" />
+    <Compile Include="Grammar\Nonterminals\Element.cs" />
+    <Compile Include="Grammar\Nonterminals\StatementElement.cs" />
+    <Compile Include="Grammar\Nonterminals\Value.cs" />
+    <Compile Include="Grammar\Terminals\CloseBrace.cs" />
+    <Compile Include="Grammar\Terminals\LiteralDouble.cs" />
+    <Compile Include="Grammar\Terminals\OpCanUnify.cs" />
+    <Compile Include="Grammar\Terminals\OpBitwiseNegate.cs" />
+    <Compile Include="Grammar\Terminals\OpPower.cs" />
+    <Compile Include="Grammar\Terminals\OpBitwiseExclusiveOr.cs" />
+    <Compile Include="Grammar\Terminals\OpRemainder.cs" />
+    <Compile Include="Grammar\Terminals\OpShiftLeft.cs" />
+    <Compile Include="Grammar\Terminals\OpShiftRight.cs" />
+    <Compile Include="Grammar\Terminals\OpBitwiseAnd.cs" />
+    <Compile Include="Grammar\Terminals\OpBitwiseOr.cs" />
+    <Compile Include="Grammar\Terminals\OpTermGreater.cs" />
+    <Compile Include="Grammar\Terminals\OpTermGreaterEqual.cs" />
+    <Compile Include="Grammar\Terminals\OpTermLess.cs" />
+    <Compile Include="Grammar\Terminals\OpTermLessEqual.cs" />
+    <Compile Include="Grammar\Terminals\OpTermUnequal.cs" />
+    <Compile Include="Grammar\Terminals\OpTermEqual.cs" />
+    <Compile Include="Grammar\Terminals\OpCannotUnify.cs" />
+    <Compile Include="Grammar\Terminals\OpComposedOf.cs" />
+    <Compile Include="Grammar\Terminals\OpenBrace.cs" />
+    <Compile Include="Grammar\Terminals\OpIs.cs" />
+    <Compile Include="Grammar\Terminals\OpUnify.cs" />
+    <Compile Include="LibraryMethods\AllSolutionMethods.cs" />
+    <Compile Include="LibraryMethods\ControlConstructMethods.cs" />
+    <Compile Include="LibraryMethods\TermProcessingMethods.cs" />
+    <Compile Include="LibraryMethods\TypeValueTestingMethods.cs" />
+    <Compile Include="BacktrackingPredicateDelegate.cs" />
+    <Compile Include="WamMachineStepEventArgsState.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalProcedureComments.cs" />
+    <Compile Include="Grammar\Terminals\Comment.cs" />
+    <Compile Include="Grammar\Terminals\ProcedureComment.cs" />
+    <Compile Include="Grammar\Terminals\LineComment.cs" />
+    <Compile Include="LibraryMethods\RandomNumberMethods.cs" />
+    <Compile Include="PerformanceStatistics.cs" />
+    <Compile Include="PrologQueryEventArgs.cs" />
+    <Compile Include="PrologQueryResults.cs" />
+    <Compile Include="Grammar\Nonterminals\AdditionalProgramStatements.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalProgramStatement.cs" />
+    <Compile Include="Grammar\Nonterminals\Program.cs" />
+    <Compile Include="Grammar\Terminals\Semicolon.cs" />
+    <Compile Include="LibraryMethods\ValueComparisonMethods.cs" />
+    <Compile Include="LibraryMethods\StringExpressionMethods.cs" />
+    <Compile Include="LibraryMethods\TypeConversionExpressionMethods.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="WamContext.cs" />
+    <Compile Include="WamDeferenceTypes.cs" />
+    <Compile Include="WamMachineStepEventArgs.cs" />
+    <Compile Include="WamReferenceTargetMapping.cs" />
+    <Compile Include="WamValueBoolean.cs" />
+    <Compile Include="WamValueDateTime.cs" />
+    <Compile Include="WamValueDouble.cs" />
+    <Compile Include="WamValueException.cs" />
+    <Compile Include="LibraryList.cs" />
+    <Compile Include="Predicate.cs" />
+    <Compile Include="LibraryMethod.cs" />
+    <Compile Include="PredicateDelegate.cs" />
+    <Compile Include="FunctionDelegate.cs" />
+    <Compile Include="LibraryMethods\ArithmeticExpressionMethods.cs" />
+    <Compile Include="LibraryMethods\TermUnificationMethods.cs" />
+    <Compile Include="LibraryMethodList.cs" />
+    <Compile Include="Grammar\Terminals\LiteralBoolean.cs" />
+    <Compile Include="Library.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalCompoundTermBody.cs" />
+    <Compile Include="Grammar\Terminals\LiteralString.cs" />
+    <Compile Include="Grammar\Terminals\Cut.cs" />
+    <Compile Include="Grammar\Terminals\OpModulo.cs" />
+    <Compile Include="Grammar\Terminals\OpDivide.cs" />
+    <Compile Include="Grammar\Terminals\OpMultiply.cs" />
+    <Compile Include="Grammar\Terminals\OpSubtract.cs" />
+    <Compile Include="Grammar\Terminals\OpAdd.cs" />
+    <Compile Include="Grammar\Terminals\OpGreaterEqual.cs" />
+    <Compile Include="Grammar\Terminals\OpGreater.cs" />
+    <Compile Include="Grammar\Terminals\OpLessEqual.cs" />
+    <Compile Include="Grammar\Terminals\OpLess.cs" />
+    <Compile Include="Grammar\Terminals\OpUnequal.cs" />
+    <Compile Include="Grammar\Terminals\OpEqual.cs" />
+    <Compile Include="WamValue.cs" />
+    <Compile Include="Grammar\Nonterminals\AdditionalListItems.cs" />
+    <Compile Include="Grammar\Nonterminals\ListItem.cs" />
+    <Compile Include="Grammar\Nonterminals\ListItems.cs" />
+    <Compile Include="Grammar\Nonterminals\ListTailItem.cs" />
+    <Compile Include="Grammar\Nonterminals\ListTail.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalListTail.cs" />
+    <Compile Include="Grammar\Nonterminals\ListBody.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalListBody.cs" />
+    <Compile Include="Grammar\Nonterminals\List.cs" />
+    <Compile Include="Grammar\Terminals\CloseBracket.cs" />
+    <Compile Include="Grammar\Terminals\Bar.cs" />
+    <Compile Include="Grammar\Terminals\OpenBracket.cs" />
+    <Compile Include="WamMachineStates.cs" />
+    <Compile Include="IPrologInstructionContainer.cs" />
+    <Compile Include="IPrologVariableListContainer.cs" />
+    <Compile Include="PrologVariableList.cs" />
+    <Compile Include="PrologVariable.cs" />
+    <Compile Include="WamReferenceTargetList.cs" />
+    <Compile Include="PrologStackFrameList.cs" />
+    <Compile Include="UnifyModes.cs" />
+    <Compile Include="WamChoicePoint.cs" />
+    <Compile Include="WamValueInteger.cs" />
+    <Compile Include="WamValueObject.cs" />
+    <Compile Include="ExecutionResults.cs" />
+    <Compile Include="Grammar\Nonterminals\Statement.cs" />
+    <Compile Include="Grammar\Nonterminals\Query.cs" />
+    <Compile Include="PrologStackFrame.cs" />
+    <Compile Include="WamInstructionStreamClauseAttribute.cs" />
+    <Compile Include="Grammar\Nonterminals\PrologNonterminal.cs" />
+    <Compile Include="Grammar\Nonterminals\Clause.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalRuleBody.cs" />
+    <Compile Include="Grammar\Nonterminals\CompoundTermBody.cs" />
+    <Compile Include="Grammar\Nonterminals\AdditionalCompoundTermMembers.cs" />
+    <Compile Include="Grammar\Nonterminals\CompoundTermMember.cs" />
+    <Compile Include="Grammar\Nonterminals\Term.cs" />
+    <Compile Include="Grammar\Nonterminals\OptionalTermBody.cs" />
+    <Compile Include="Grammar\Terminals\PrologTerminal.cs" />
+    <Compile Include="Grammar\Terminals\Atom.cs" />
+    <Compile Include="Grammar\Terminals\LiteralInteger.cs" />
+    <Compile Include="Grammar\Terminals\Variable.cs" />
+    <Compile Include="Grammar\Terminals\OpenParenthesis.cs" />
+    <Compile Include="Grammar\Terminals\CloseParenthesis.cs" />
+    <Compile Include="Grammar\Terminals\Comma.cs" />
+    <Compile Include="Grammar\Terminals\Period.cs" />
+    <Compile Include="Grammar\Terminals\ColonDash.cs" />
+    <Compile Include="Grammar\Terminals\Whitespace.cs" />
+    <Compile Include="ProcedureClauseList.cs" />
+    <Compile Include="WamEnvironment.cs" />
+    <Compile Include="Functor.cs" />
+    <Compile Include="WamInstruction.cs" />
+    <Compile Include="WamInstructionPointer.cs" />
+    <Compile Include="WamInstructionRegister.cs" />
+    <Compile Include="WamInstructionRegisterTypes.cs" />
+    <Compile Include="WamInstructionStream.cs" />
+    <Compile Include="WamInstructionOpCodes.cs" />
+    <Compile Include="WamInstructionStreamAttribute.cs" />
+    <Compile Include="WamInstructionStreamBuilder.cs" />
+    <Compile Include="WamInstructionStreamVariableAttribute.cs" />
+    <Compile Include="Procedure.cs" />
+    <Compile Include="ProgramProcedureList.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
+    <Compile Include="WamReferenceTarget.cs" />
+    <Compile Include="RoutedClauseEventArgs.cs" />
+    <Compile Include="RoutedClauseEventHandler.cs" />
+    <Compile Include="WamCompoundTerm.cs" />
+    <Compile Include="PrologInstruction.cs" />
+    <Compile Include="PrologInstructionStream.cs" />
+    <Compile Include="WamValueType.cs" />
+    <Compile Include="WamValueString.cs" />
+    <Compile Include="WamVariable.cs" />
+    <Compile Include="PrologMachine.cs" />
+    <Compile Include="WamMachine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagrams\Prolog.cd" />
+    <None Include="Diagrams\Code.cd" />
+    <None Include="Diagrams\Compiler.cd" />
+    <None Include="Diagrams\Program.cd" />
+    <None Include="Diagrams\Runtime.cd" />
+    <None Include="Diagrams\WamMachine.cd" />
+    <None Include="Diagrams\WamTerm.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Redistribute\Lingua.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

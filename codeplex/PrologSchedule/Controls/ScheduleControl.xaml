@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Prolog.Scheduler.ScheduleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+             xmlns:local="clr-namespace:Prolog.Scheduler"
+             Height="300" Width="300">
+    <UserControl.Resources>
+        <Style x:Key="sDayHeading" TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="PowderBlue" />
+        </Style>
+        <Style x:Key="sShiftHeading" TargetType="Label">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="270"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="PowderBlue" />
+        </Style>
+    </UserControl.Resources>
+    <Grid ShowGridLines="True" Name="gridSchedule">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource sDayHeading}">Monday</Label>
+        <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource sDayHeading}">Tuesday</Label>
+        <Label Grid.Row="0" Grid.Column="3" Style="{StaticResource sDayHeading}">Wednesday</Label>
+        <Label Grid.Row="0" Grid.Column="4" Style="{StaticResource sDayHeading}">Thursday</Label>
+        <Label Grid.Row="0" Grid.Column="5" Style="{StaticResource sDayHeading}">Friday</Label>
+        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource sShiftHeading}">First</Label>
+        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource sShiftHeading}">Second</Label>
+        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource sShiftHeading}">Third</Label>
+        <local:ScheduleDayControl Grid.Row="1" Grid.Column="1" DataContext="{Binding Monday.First}" />
+        <local:ScheduleDayControl Grid.Row="2" Grid.Column="1" DataContext="{Binding Monday.Second}" />
+        <local:ScheduleDayControl Grid.Row="3" Grid.Column="1" DataContext="{Binding Monday.Third}" />
+        <local:ScheduleDayControl Grid.Row="1" Grid.Column="2" DataContext="{Binding Tuesday.First}" />
+        <local:ScheduleDayControl Grid.Row="2" Grid.Column="2" DataContext="{Binding Tuesday.Second}" />
+        <local:ScheduleDayControl Grid.Row="3" Grid.Column="2" DataContext="{Binding Tuesday.Third}" />
+        <local:ScheduleDayControl Grid.Row="1" Grid.Column="3" DataContext="{Binding Wednesday.First}" />
+        <local:ScheduleDayControl Grid.Row="2" Grid.Column="3" DataContext="{Binding Wednesday.Second}" />
+        <local:ScheduleDayControl Grid.Row="3" Grid.Column="3" DataContext="{Binding Wednesday.Third}" />
+        <local:ScheduleDayControl Grid.Row="1" Grid.Column="4" DataContext="{Binding Thursday.First}" />
+        <local:ScheduleDayControl Grid.Row="2" Grid.Column="4" DataContext="{Binding Thursday.Second}" />
+        <local:ScheduleDayControl Grid.Row="3" Grid.Column="4" DataContext="{Binding Thursday.Third}" />
+        <local:ScheduleDayControl Grid.Row="1" Grid.Column="5" DataContext="{Binding Friday.First}" />
+        <local:ScheduleDayControl Grid.Row="2" Grid.Column="5" DataContext="{Binding Friday.Second}" />
+        <local:ScheduleDayControl Grid.Row="3" Grid.Column="5" DataContext="{Binding Friday.Third}" />
+    </Grid>
+</UserControl>

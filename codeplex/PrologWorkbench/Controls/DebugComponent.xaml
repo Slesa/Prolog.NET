@@ -1,0 +1,58 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.DebugComponent"
+             Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:StackFrameListUserControl x:Name="ctrlStackFrames"
+                                         Grid.Column="0"
+                                         StackFrames="{Binding Machine.StackFrames}"/>
+        <GridSplitter Grid.Column="1" 
+                      ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" 
+                      Width="5" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <local:InstructionStreamUserControl x:Name="ctrlInstructionStream"
+                                            Grid.Column="2"
+                                            InstructionStream="{Binding SelectedItem.InstructionStream, ElementName=ctrlStackFrames, Mode=OneWay}" />
+        <GridSplitter Grid.Column="3" 
+                      ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" 
+                      Width="5" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <local:VariableListUserControl x:Name="ctrlArguments"
+                                           Grid.Row="0"
+                                           Caption="Temporary Variables" 
+                                           Variables="{Binding Machine.TemporaryVariables}" />
+            <GridSplitter Grid.Row="1"
+                          ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" 
+                          Height="5" 
+                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <local:VariableListUserControl x:Name="ctrlTemporaryVariables"
+                                           Grid.Row="2"
+                                           Caption="Arguments" 
+                                           Variables="{Binding Machine.Arguments}" />
+            <GridSplitter Grid.Row="3"
+                          ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" 
+                          Height="5" 
+                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <local:VariableListUserControl x:Name="ctrlPermanentVariables"
+                                           Grid.Row="4"
+                                           Caption="Permanent Variables" 
+                                           Variables="{Binding SelectedItem.Variables, ElementName=ctrlStackFrames, Mode=OneWay}" />
+        </Grid>
+    </Grid>
+</UserControl>
