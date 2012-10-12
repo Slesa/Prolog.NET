@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="Prolog.WamMachine">
+    <Position X="4.75" Y="0.5" Width="3" />
+    <Members>
+      <Method Name="Backtrack" Hidden="true" />
+      <Method Name="Bind" Hidden="true" />
+      <Method Name="CannotUnify" Hidden="true" />
+      <Method Name="CanUnify" Hidden="true" />
+      <Method Name="ClearContextStack" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Method Name="CreateCompoundTerm" Hidden="true" />
+      <Method Name="CreateVariable" Hidden="true" />
+      <Property Name="CurrentContext" Hidden="true" />
+      <Property Name="CurrentStructure" Hidden="true" />
+      <Property Name="CurrentStructureIndex" Hidden="true" />
+      <Property Name="CurrentUnifyMode" Hidden="true" />
+      <Field Name="DEFAULT_STACK_SIZE_LIMIT" Hidden="true" />
+      <Method Name="Evaluate" Hidden="true" />
+      <Method Name="Execute" Hidden="true" />
+      <Property Name="Generation" Hidden="true" />
+      <Method Name="GetEnvironment" Hidden="true" />
+      <Method Name="GetInstructionPointer" Hidden="true" />
+      <Method Name="GetPermanentVariables" Hidden="true" />
+      <Method Name="GetRegister" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Property Name="InstructionPointer" Hidden="true" />
+      <Field Name="m_contextStack" Hidden="true" />
+      <Field Name="m_currentContext" Hidden="true" />
+      <Field Name="m_performanceStatistics" Hidden="true" />
+      <Field Name="m_program" Hidden="true" />
+      <Field Name="m_query" Hidden="true" />
+      <Field Name="m_stackSizeLimit" Hidden="true" />
+      <Field Name="MAX_STACK_SIZE_LIMIT" Hidden="true" />
+      <Method Name="OnAllocate" Hidden="true" />
+      <Method Name="OnCall" Hidden="true" />
+      <Method Name="OnCut" Hidden="true" />
+      <Method Name="OnDeallocate" Hidden="true" />
+      <Method Name="OnExecute" Hidden="true" />
+      <Method Name="OnGetBoundVariable" Hidden="true" />
+      <Method Name="OnGetStructure" Hidden="true" />
+      <Method Name="OnGetUnboundVariable" Hidden="true" />
+      <Method Name="OnGetValue" Hidden="true" />
+      <Method Name="OnLibraryCall" Hidden="true" />
+      <Method Name="OnLibraryCallBacktrackingPredicate" Hidden="true" />
+      <Method Name="OnLibraryCallFunction" Hidden="true" />
+      <Method Name="OnLibraryCallPredicate" Hidden="true" />
+      <Method Name="OnNoop" Hidden="true" />
+      <Method Name="OnProceed" Hidden="true" />
+      <Method Name="OnPutBoundVariable" Hidden="true" />
+      <Method Name="OnPutStructure" Hidden="true" />
+      <Method Name="OnPutUnboundVariable" Hidden="true" />
+      <Method Name="OnPutValue" Hidden="true" />
+      <Method Name="OnRetryMeElse" Hidden="true" />
+      <Method Name="OnSetBoundVariable" Hidden="true" />
+      <Method Name="OnSetUnboundVariable" Hidden="true" />
+      <Method Name="OnSetValue" Hidden="true" />
+      <Method Name="OnSuccess" Hidden="true" />
+      <Method Name="OnTrustMe" Hidden="true" />
+      <Method Name="OnTryMeElse" Hidden="true" />
+      <Method Name="OnUnifyBoundVariable" Hidden="true" />
+      <Method Name="OnUnifyUnboundVariable" Hidden="true" />
+      <Method Name="OnUnifyValue" Hidden="true" />
+      <Method Name="PopContext" Hidden="true" />
+      <Property Name="PredicateEnumerator" Hidden="true" />
+      <Method Name="PushContext" Hidden="true" />
+      <Method Name="RaiseStepped" Hidden="true" />
+      <Property Name="ReturnInstructionPointer" Hidden="true" />
+      <Method Name="RunToBacktrack" Hidden="true" />
+      <Method Name="RunToSuccess" Hidden="true" />
+      <Method Name="SetRegister" Hidden="true" />
+      <Property Name="StackSizeLimit" Hidden="true" />
+      <Method Name="Step" Hidden="true" />
+      <Method Name="StepIn" Hidden="true" />
+      <Method Name="StepOut" Hidden="true" />
+      <Method Name="StepOver" Hidden="true" />
+      <Method Name="Trail" Hidden="true" />
+      <Method Name="Unify" Hidden="true" />
+      <Method Name="UnwindTrail" Hidden="true" />
+      <Method Name="WamMachine" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Environment" Type="Prolog.WamEnvironment" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="1.566" />
+        <Point X="8.438" Y="1.566" />
+        <Point X="8.438" Y="3" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ArgumentRegisters" Type="Prolog.WamReferenceTarget">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.06" Y="0.235" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TemporaryRegisters" Type="Prolog.WamReferenceTarget">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.05" Y="0.235" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ChoicePoint" Type="Prolog.WamChoicePoint" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="1.282" />
+        <Point X="12.188" Y="1.282" />
+        <Point X="12.188" Y="3" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="CutChoicePoint" Type="Prolog.WamChoicePoint" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="0.926" />
+        <Point X="13.5" Y="0.926" />
+        <Point X="13.5" Y="3" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>otIjhZHGYE5AgQSAAhKgBgDNEQAURF0KogQAhMRREFI=</HashCode>
+      <FileName>WamMachine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Program" />
+      <Property Name="Query" />
+      <Property Name="Environment" />
+      <Property Name="PerformanceStatistics" />
+      <Property Name="ChoicePoint" />
+      <Property Name="CutChoicePoint" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ArgumentRegisters" />
+      <Property Name="TemporaryRegisters" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Prolog.WamEnvironment">
+    <Position X="7.5" Y="3" Width="3" />
+    <Members>
+      <Field Name="m_cutChoicePoint" Hidden="true" />
+      <Field Name="m_id" Hidden="true" />
+      <Field Name="m_permanentRegisters" Hidden="true" />
+      <Field Name="m_predecessor" Hidden="true" />
+      <Field Name="m_returnInstructionPointer" Hidden="true" />
+      <Field Name="s_nextId" Hidden="true" />
+      <Method Name="WamEnvironment" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Predecessor" Type="Prolog.WamEnvironment" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="3.312" />
+        <Point X="10.875" Y="3.312" />
+        <Point X="10.875" Y="2.625" />
+        <Point X="9.938" Y="2.625" />
+        <Point X="9.938" Y="3" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.911" Y="0.466" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PermanentRegisters" Type="Prolog.WamReferenceTarget" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.062" Y="4.488" />
+        <Point X="8.062" Y="6" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.461" Y="0.246" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEICAAEAAAAQAAAAAAAAAEEABAAAAAQAAAAABQAAAAA=</HashCode>
+      <FileName>WamEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Predecessor" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PermanentRegisters" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Prolog.WamChoicePoint">
+    <Position X="12" Y="3" Width="3" />
+    <Members>
+      <Field Name="m_argumentRegisters" Hidden="true" />
+      <Field Name="m_backtrackInstructionPointer" Hidden="true" />
+      <Field Name="m_cutChoicePoint" Hidden="true" />
+      <Field Name="m_environment" Hidden="true" />
+      <Field Name="m_generation" Hidden="true" />
+      <Field Name="m_predecessor" Hidden="true" />
+      <Field Name="m_predicateEnumerator" Hidden="true" />
+      <Field Name="m_returnInstructionPointer" Hidden="true" />
+      <Field Name="m_stackIndex" Hidden="true" />
+      <Field Name="m_trail" Hidden="true" />
+      <Field Name="s_nextGeneration" Hidden="true" />
+      <Method Name="WamChoicePoint" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Predecessor" Type="Prolog.WamChoicePoint" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15" Y="3.562" />
+        <Point X="15.594" Y="3.562" />
+        <Point X="15.594" Y="2.625" />
+        <Point X="14.375" Y="2.625" />
+        <Point X="14.375" Y="3" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.909" Y="0.434" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ArgumentRegisters" Type="Prolog.WamReferenceTarget" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12" Y="4.688" />
+        <Point X="9.961" Y="4.688" />
+        <Point X="9.961" Y="6" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.463" Y="0.237" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CutChoicePoint" Type="Prolog.WamChoicePoint" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15" Y="4" />
+        <Point X="15.594" Y="4" />
+        <Point X="15.594" Y="1.979" />
+        <Point X="13.875" Y="1.979" />
+        <Point X="13.875" Y="3" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.14" Y="1.081" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Trail" Type="Prolog.WamVariable" FixedFromPoint="true">
+      <Path>
+        <Point X="12.5" Y="4.873" />
+        <Point X="12.5" Y="7.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.607" Y="0.141" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>kkIAAAECAAAQICABAAAAIEAABCBAAAAAAgAAgAACEBA=</HashCode>
+      <FileName>WamChoicePoint.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Predecessor" />
+      <Property Name="Environment" />
+      <Property Name="CutChoicePoint" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ArgumentRegisters" />
+      <Property Name="Trail" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Prolog.WamReferenceTarget" Collapsed="true">
+    <Position X="4.75" Y="6" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAACABAAAAAAAAAEAAAAAAAAAAABA=</HashCode>
+      <FileName>WamReferenceTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.WamVariable" Collapsed="true">
+    <Position X="12" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAFACABACAAAAAAAQAAAAAEAAAAABA=</HashCode>
+      <FileName>WamVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.Program" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAgIACAQAAgABhBAAAAAAggEABAAAQBRAAABFQACQ=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prolog.Query" Collapsed="true">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAABEAAAAAAAAAAAAAAAAAAJAAAAEAAQ=</HashCode>
+      <FileName>Query.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.PerformanceStatistics" Collapsed="true">
+    <Position X="1" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAJAgAAACAIAAAAAAAAAAAAAAAAAAEAIAAAAAAAIAg=</HashCode>
+      <FileName>PerformanceStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

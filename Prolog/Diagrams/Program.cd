@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Prolog.Program">
+    <Position X="0.5" Y="3.75" Width="1.75" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Contains" Hidden="true" />
+      <Method Name="Load" Hidden="true" />
+      <Field Name="m_fileName" Hidden="true" />
+      <Field Name="m_isModified" Hidden="true" />
+      <Field Name="m_isOptimized" Hidden="true" />
+      <Field Name="m_libraries" Hidden="true" />
+      <Field Name="m_procedures" Hidden="true" />
+      <Property Name="PragmaOptimizeFunctor" Hidden="true" />
+      <Property Name="PragmaOptimizeFunctorName" Hidden="true" />
+      <Method Name="ProcessOptimizePragma" Hidden="true" />
+      <Method Name="ProcessPragma" Hidden="true" />
+      <Method Name="Program" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="Read" Hidden="true" />
+      <Field Name="s_pragmaOptimizeFunctor" Hidden="true" />
+      <Field Name="s_pragmaOptimizeFunctorName" Hidden="true" />
+      <Method Name="Save" Hidden="true" />
+      <Method Name="SaveAs" Hidden="true" />
+      <Method Name="Touch" Hidden="true" />
+      <Method Name="Write" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Procedures" Type="Prolog.ProgramProcedureList" FixedToPoint="true">
+      <Path>
+        <Point X="2.25" Y="4.25" />
+        <Point X="4.5" Y="4.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEIAgIACAQAAgABhBAAAAAAggEABAAAQBRAAABFQACQ=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Procedures" />
+      <Property Name="Libraries" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prolog.Procedure" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <AssociationLine Name="Clauses" Type="Prolog.ProcedureClauseList" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="4.25" />
+        <Point X="10" Y="4.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Container" Type="Prolog.ProgramProcedureList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="3.75" />
+        <Point X="7.25" Y="3.115" />
+        <Point X="5.375" Y="3.115" />
+        <Point X="5.375" Y="3.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAEAAAAAAAAAAAAAASAAAAABAAgAUQ=</HashCode>
+      <FileName>Procedure.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Functor" />
+      <Property Name="Clauses" />
+      <Property Name="Container" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.Clause">
+    <Position X="12" Y="3.75" Width="1.75" />
+    <Members>
+      <Method Name="Clause" Hidden="true" />
+      <Method Name="InvalidateInstructionStream" Hidden="true" />
+      <Method Name="InvalidatePosition" Hidden="true" />
+      <Property Name="IPrologInstructionStreamContainer.WamInstructionStream" Hidden="true" />
+      <Field Name="m_codeSentence" Hidden="true" />
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_prologInstructionStream" Hidden="true" />
+      <Field Name="m_wamInstructionStream" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="WamInstructionStream" Hidden="true" />
+    </Members>
+    <AssociationLine Name="CodeSentence" Type="Prolog.Code.CodeSentence" FixedFromPoint="true">
+      <Path>
+        <Point X="13.75" Y="4.003" />
+        <Point X="16" Y="4.003" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PrologInstructionStream" Type="Prolog.PrologInstructionStream" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="4.677" />
+        <Point X="16.359" Y="4.677" />
+        <Point X="16.359" Y="5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Container" Type="Prolog.ProcedureClauseList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.125" Y="3.75" />
+        <Point X="12.125" Y="3.106" />
+        <Point X="10.875" Y="3.106" />
+        <Point X="10.875" Y="3.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAIAQCAAIAAIAEAAAAQAAAgAQAAASAIANABAAEAAA=</HashCode>
+      <FileName>Clause.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CodeSentence" />
+      <Property Name="PrologInstructionStream" />
+      <Property Name="Container" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prolog.Query" Collapsed="true">
+    <Position X="20.75" Y="3.75" Width="2" />
+    <AssociationLine Name="CodeSentence" Type="Prolog.Code.CodeSentence" FixedToPoint="true">
+      <Path>
+        <Point X="20.75" Y="3.938" />
+        <Point X="17.5" Y="3.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.087" Y="0.108" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="WamInstructionStream" Type="Prolog.WamInstructionStream" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="21.125" Y="4.312" />
+        <Point X="21.125" Y="7.531" />
+        <Point X="17.25" Y="7.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Libraries" Type="Prolog.LibraryMethod" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.188" Y="4.312" />
+        <Point X="22.188" Y="8.148" />
+        <Point X="13.5" Y="8.148" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAABEAAAAAAAAAAAAAAAAAAJAAAAEAAQ=</HashCode>
+      <FileName>Query.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CodeSentence" />
+      <Property Name="WamInstructionStream" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Libraries" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Prolog.ProgramProcedureList" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.75" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Contains" Hidden="true" />
+      <Field Name="m_procedureIndex" Hidden="true" />
+      <Field Name="m_program" Hidden="true" />
+      <Method Name="ProgramProcedureList" Hidden="true" />
+      <Method Name="Remove" Hidden="true" />
+      <Method Name="TryGetProcedure" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Program" Type="Prolog.Program" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="3.938" />
+        <Point X="2.25" Y="3.938" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAQAAAAAICAAACAAABAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>ProgramProcedureList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Program" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.Functor" Collapsed="true">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAABQAAEAAEEEAEhIgAACQACAAIAMIgAIAAAACAAyA=</HashCode>
+      <FileName>Functor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.ProcedureClauseList" Collapsed="true">
+    <Position X="10" Y="3.75" Width="1.75" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Contains" Hidden="true" />
+      <Field Name="m_procedure" Hidden="true" />
+      <Method Name="MoveDown" Hidden="true" />
+      <Method Name="MoveUp" Hidden="true" />
+      <Method Name="ProcedureClauseList" Hidden="true" />
+      <Method Name="Remove" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Procedure" Type="Prolog.Procedure" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="3.875" />
+        <Point X="8" Y="3.875" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAMAAAAAAAAAgAAgAAAABAAAAAAAAAAAQAAAAAAQAAA=</HashCode>
+      <FileName>ProcedureClauseList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Procedure" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.Code.CodeSentence" Collapsed="true">
+    <Position X="16" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="CodeSentence" Hidden="true" />
+      <Property Name="Comments" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Field Name="ElementName" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Property Name="Head" Hidden="true" />
+      <Field Name="m_body" Hidden="true" />
+      <Field Name="m_comments" Hidden="true" />
+      <Field Name="m_head" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="ToXElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAEgEABAAAAEAAAAMAgAAIAABAAIiA=</HashCode>
+      <FileName>Code\CodeSentence.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Prolog.PrologInstructionStream" Collapsed="true">
+    <Position X="15.75" Y="5" Width="2" />
+    <Members>
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_wamInstructionStream" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAIAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAA=</HashCode>
+      <FileName>PrologInstructionStream.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Container" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.PrologInstruction">
+    <Position X="18" Y="5" Width="1.75" />
+    <Members>
+      <Field Name="m_index" Hidden="true" />
+      <Field Name="m_instructionStream" Hidden="true" />
+      <Field Name="m_isBreakpoint" Hidden="true" />
+      <Field Name="m_isCurrentLocation" Hidden="true" />
+      <Method Name="PrologInstruction" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="WamInstruction" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACEAAAIAAEAAAAAAAAgAABAAAgAACAAAAAQAg=</HashCode>
+      <FileName>PrologInstruction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prolog.LibraryList" Collapsed="true">
+    <Position X="4.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAABAAAAAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>LibraryList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prolog.Library">
+    <Position X="6.25" Y="7.5" Width="1.75" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Contains" Hidden="true" />
+      <Method Name="Library" Hidden="true" />
+      <Field Name="m_isModified" Hidden="true" />
+      <Field Name="m_methods" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+      <Method Name="RaisePropertyChanged" Hidden="true" />
+      <Field Name="s_standard" Hidden="true" />
+      <Method Name="Touch" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABIAAAACAAAAAAAhGAAAAAAAgIAAAAAAAAAAABAQAEA=</HashCode>
+      <FileName>Library.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Methods" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prolog.LibraryMethodList">
+    <Position X="9.75" Y="7.5" Width="2" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Contains" Hidden="true" />
+      <Method Name="LibraryMethodList" Hidden="true" />
+      <Field Name="m_library" Hidden="true" />
+      <Method Name="Remove" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAABAAAAAAAAAAAAEAAAAAQAAA=</HashCode>
+      <FileName>LibraryMethodList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Library" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.LibraryMethod">
+    <Position X="12" Y="7.5" Width="1.5" />
+    <Members>
+      <Method Name="LibraryMethod" Hidden="true" />
+      <Field Name="m_canEvaluate" Hidden="true" />
+      <Field Name="m_container" Hidden="true" />
+      <Field Name="m_functor" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Container" Type="Prolog.LibraryMethodList" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.625" Y="7.5" />
+        <Point X="12.625" Y="7.125" />
+        <Point X="10.75" Y="7.125" />
+        <Point X="10.75" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQgAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAQQ=</HashCode>
+      <FileName>LibraryMethod.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Container" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.Function" Collapsed="true">
+    <Position X="10.75" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Prolog.LibraryMethod" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="12.75" Y="8.796" />
+        <Point X="12.75" Y="9.375" />
+        <Point X="11.5" Y="9.375" />
+        <Point X="11.5" Y="9.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FunctionDelegate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.Predicate" Collapsed="true">
+    <Position X="13.25" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Prolog.LibraryMethod" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="12.75" Y="8.796" />
+        <Point X="12.75" Y="9.375" />
+        <Point X="14" Y="9.375" />
+        <Point X="14" Y="9.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAA=</HashCode>
+      <FileName>Predicate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PredicateDelegate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Prolog.WamInstructionStream" Collapsed="true">
+    <Position X="15.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAABAACAAEAABQAAAAABAAAAAAAAAAgAA=</HashCode>
+      <FileName>WamInstructionStream.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Prolog.IPrologInstructionStreamContainer">
+    <Position X="11.5" Y="5.75" Width="2.75" />
+    <AssociationLine Name="WamInstructionStream" Type="Prolog.WamInstructionStream">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.05" Y="0.298" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPrologInstructionContainer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WamInstructionStream" />
+    </ShowAsAssociation>
+  </Interface>
+  <Delegate Name="Prolog.PredicateDelegate" Collapsed="true">
+    <Position X="13.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PredicateDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Prolog.FunctionDelegate" Collapsed="true">
+    <Position X="10.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FunctionDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
