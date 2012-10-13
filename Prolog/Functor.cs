@@ -13,6 +13,15 @@ namespace Prolog
     /// </summary>
     public sealed class Functor : IEquatable<Functor>, IImmuttable
     {
+        static readonly string s_cutFunctorName = "!";
+        static readonly string s_listFunctorName = ".";
+        static readonly string s_nilFunctorName = "nil";
+        static readonly string s_pragmaFunctorName = "pragma";
+        static readonly Functor s_cutFunctor = new Functor(CutFunctorName, 0);
+        static readonly Functor s_listFunctor = new Functor(ListFunctorName, 2);
+        static readonly Functor s_nilFunctor = new Functor(NilFunctorName, 0);
+        static readonly Functor s_pragmaFunctor = new Functor(PragmaFunctorName, 2);
+            
         public Functor(string name, int arity)
         {
             if (string.IsNullOrEmpty(name))
@@ -28,18 +37,6 @@ namespace Prolog
             Arity = arity;
         }
 
-        static Functor()
-        {
-            PragmaFunctor = new Functor(PragmaFunctorName, 2);
-            NilFunctor = new Functor(NilFunctorName, 0);
-            ListFunctor = new Functor(ListFunctorName, 2);
-            CutFunctor = new Functor(CutFunctorName, 0);
-            PragmaFunctorName = "pragma";
-            NilFunctorName = "nil";
-            ListFunctorName = ".";
-            CutFunctorName = "!";
-        }
-
         public static Functor Create(CodeFunctor codeFunctor)
         {
             return new Functor(codeFunctor.Name, codeFunctor.Arity);
@@ -47,14 +44,39 @@ namespace Prolog
 
         public string Name { get; private set; }
         public int Arity { get; private set; }
-        public static string CutFunctorName { get; private set; }
-        public static string ListFunctorName { get; private set; }
-        public static string NilFunctorName { get; private set; }
-        public static string PragmaFunctorName { get; private set; }
-        public static Functor CutFunctor { get; private set; }
-        public static Functor ListFunctor { get; private set; }
-        public static Functor NilFunctor { get; private set; }
-        public static Functor PragmaFunctor { get; private set; }
+
+        public static string CutFunctorName { get { return s_cutFunctorName; } }
+        public static string ListFunctorName { get { return s_listFunctorName; } }
+
+        public static string NilFunctorName
+        {
+            get { return s_nilFunctorName; }
+        }
+
+        public static string PragmaFunctorName
+        {
+            get { return s_pragmaFunctorName; }
+        }
+
+        public static Functor CutFunctor
+        {
+            get { return s_cutFunctor; }
+        }
+
+        public static Functor ListFunctor
+        {
+            get { return s_listFunctor; }
+        }
+
+        public static Functor NilFunctor
+        {
+            get { return s_nilFunctor; }
+        }
+
+        public static Functor PragmaFunctor
+        {
+            get { return s_pragmaFunctor; }
+        }
 
         public override bool Equals(object obj)
         {

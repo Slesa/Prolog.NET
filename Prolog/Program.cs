@@ -13,6 +13,9 @@ namespace Prolog
 {
     public sealed class Program : INotifyPropertyChanged
     {
+        static readonly string _pragmaOptimizeFunctorName = "optimize";
+        static readonly CodeFunctor _pragmaOptimizeFunctor = new CodeFunctor(PragmaOptimizeFunctorName, 0);
+
         string _fileName;
         bool _isModified;
         bool _isOptimized;
@@ -27,12 +30,6 @@ namespace Prolog
 
             Libraries = LibraryList.Create();
             Libraries.Add(Library.Standard);
-        }
-
-        static Program()
-        {
-            PragmaOptimizeFunctor = new CodeFunctor(PragmaOptimizeFunctorName, 0);
-            PragmaOptimizeFunctorName = "optimize";
         }
 
         public static Program Load(string fileName)
@@ -51,8 +48,16 @@ namespace Prolog
             return program;
         }
 
-        public static string PragmaOptimizeFunctorName { get; private set; }
-        public static CodeFunctor PragmaOptimizeFunctor { get; private set; }
+        public static string PragmaOptimizeFunctorName
+        {
+            get { return _pragmaOptimizeFunctorName; }
+        }
+
+        public static CodeFunctor PragmaOptimizeFunctor
+        {
+            get { return _pragmaOptimizeFunctor; }
+        }
+
         public ProgramProcedureList Procedures { get; private set; }
 
         public string FileName
