@@ -10,51 +10,24 @@ namespace Prolog.Grammar
     //
     internal sealed class Term : PrologNonterminal
     {
-        #region Fields
-
-        private CodeCompoundTerm m_codeCompoundTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(Term lhs, Atom atom, OptionalTermBody optionalTermBody)
         {
             CodeCompoundTerm codeCompoundTerm;
 
             if (optionalTermBody.CodeTerms == null)
             {
-                CodeFunctor codeFunctor = new CodeFunctor(atom.Text);
-
+                var codeFunctor = new CodeFunctor(atom.Text);
                 codeCompoundTerm = new CodeCompoundTerm(codeFunctor);
             }
             else
             {
-                CodeFunctor codeFunctor = new CodeFunctor(atom.Text, optionalTermBody.CodeTerms.Count);
-
-                if (codeFunctor.Arity == 0)
-                {
-                    codeCompoundTerm = new CodeCompoundTerm(codeFunctor);
-                }
-                else
-                {
-                    codeCompoundTerm = new CodeCompoundTerm(codeFunctor, optionalTermBody.CodeTerms);
-                }
+                var codeFunctor = new CodeFunctor(atom.Text, optionalTermBody.CodeTerms.Count);
+                codeCompoundTerm = codeFunctor.Arity == 0 ? new CodeCompoundTerm(codeFunctor) : new CodeCompoundTerm(codeFunctor, optionalTermBody.CodeTerms);
             }
 
             lhs.CodeCompoundTerm = codeCompoundTerm;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeCompoundTerm CodeCompoundTerm
-        {
-            get { return m_codeCompoundTerm; }
-            private set { m_codeCompoundTerm = value; }
-        }
-
-        #endregion
+        public CodeCompoundTerm CodeCompoundTerm { get; private set; }
     }
 }

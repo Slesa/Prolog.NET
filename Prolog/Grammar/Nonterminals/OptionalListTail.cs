@@ -11,14 +11,6 @@ namespace Prolog.Grammar
     //
     internal sealed class OptionalListTail : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(OptionalListTail lhs, ListTail listTail)
         {
             lhs.CodeTerm = listTail.CodeTerm;
@@ -27,16 +19,6 @@ namespace Prolog.Grammar
         public static void Rule(OptionalListTail lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

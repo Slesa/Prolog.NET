@@ -11,8 +11,6 @@ namespace Prolog
 {
     internal static class StringExpressionMethods
     {
-        #region Public Methods
-
         public static CodeTerm Substring(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length >= 2);
@@ -20,22 +18,21 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                CodeValue argValue1 = (CodeValue)arguments[1];
+                var argValue0 = (CodeValue) arguments[0];
+                var argValue1 = (CodeValue) arguments[1];
 
-                string value = Convert.ToString(argValue0.Object);
-                int index = Convert.ToInt32(argValue1.Object);
+                var value = Convert.ToString(argValue0.Object);
+                var index = Convert.ToInt32(argValue1.Object);
                 if (arguments.Length == 2)
                 {
                     return new CodeValueString(value.Substring(index));
                 }
-                else // arguments.Length == 3
-                {
-                    CodeValue argValue2 = (CodeValue)arguments[2];
+                // arguments.Length == 3
 
-                    int length = Convert.ToInt32(argValue2.Object);
-                    return new CodeValueString(value.Substring(index, length));
-                }
+                var argValue2 = (CodeValue) arguments[2];
+                var length = Convert.ToInt32(argValue2.Object);
+                return new CodeValueString(value.Substring(index, length));
+
             }
             catch (Exception ex)
             {
@@ -49,9 +46,9 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
+                var argValue0 = (CodeValue)arguments[0];
 
-                string value = Convert.ToString(argValue0.Object);
+                var value = Convert.ToString(argValue0.Object);
                 return new CodeValueInteger(value.Length);
             }
             catch (Exception ex)
@@ -66,11 +63,12 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                CodeValue argValue1 = (CodeValue)arguments[1];
+                var argValue0 = (CodeValue)arguments[0];
+                var value = Convert.ToString(argValue0.Object);
 
-                string value = Convert.ToString(argValue0.Object);
-                string substring = Convert.ToString(argValue1.Object);
+                var argValue1 = (CodeValue)arguments[1];
+                var substring = Convert.ToString(argValue1.Object);
+
                 return new CodeValueBoolean(value.Contains(substring));
             }
             catch (Exception ex)
@@ -85,13 +83,15 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                CodeValue argValue1 = (CodeValue)arguments[1];
-                CodeValue argValue2 = (CodeValue)arguments[2];
+                var argValue0 = (CodeValue)arguments[0];
+                var value = Convert.ToString(argValue0.Object);
 
-                string value = Convert.ToString(argValue0.Object);
-                string oldValue = Convert.ToString(argValue1.Object);
-                string newValue = Convert.ToString(argValue2.Object);
+                var argValue1 = (CodeValue)arguments[1];
+                var oldValue = Convert.ToString(argValue1.Object);
+
+                var argValue2 = (CodeValue)arguments[2];
+                var newValue = Convert.ToString(argValue2.Object);
+
                 return new CodeValueString(value.Replace(oldValue, newValue));
             }
             catch (Exception ex)
@@ -99,7 +99,5 @@ namespace Prolog
                 return new CodeValueException(ex);
             }
         }
-
-        #endregion
     }
 }

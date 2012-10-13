@@ -15,8 +15,6 @@ namespace Prolog.Code
     {
         public const string ElementName = "CodeComment";
 
-        private string m_text;
-
         public CodeComment(string text)
         {
             if (text == null)
@@ -24,26 +22,22 @@ namespace Prolog.Code
                 text = string.Empty;
             }
 
-            m_text = text;
+            Text = text;
         }
 
         public static CodeComment Create(XElement xCodeComment)
         {
-            string text = xCodeComment.Value;
-
+            var text = xCodeComment.Value;
             return new CodeComment(text);
         }
 
-        public string Text
-        {
-            get { return m_text; }
-        }
+        public string Text { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeComment rhs = obj as CodeComment;
+            var rhs = obj as CodeComment;
             if (rhs == null) return false;
 
             return Text == rhs.Text;
@@ -51,10 +45,8 @@ namespace Prolog.Code
 
         public override int GetHashCode()
         {
-            int result = 0;
-
+            var result = 0;
             result ^= Text.GetHashCode();
-
             return result;
         }
 

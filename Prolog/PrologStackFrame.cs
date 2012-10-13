@@ -12,20 +12,10 @@ namespace Prolog
     /// </summary>
     public sealed class PrologStackFrame : IPrologInstructionStreamContainer, IPrologVariableListContainer, INotifyPropertyChanged
     {
-        #region Fields
-
-        private PrologStackFrameList m_container;
-        private int m_stackIndex;
-
-        private PrologInstructionStream m_instructionStream;
-        private PrologVariableList m_variables;
-        private Clause m_clause;
-
-        private PrologInstruction m_currentInstruction;
-
-        #endregion
-
-        #region Constructors
+        PrologInstructionStream _instructionStream;
+        PrologVariableList _variables;
+        Clause _clause;
+        PrologInstruction _currentInstruction;
 
         internal PrologStackFrame(PrologStackFrameList container, int stackIndex)
         {
@@ -38,112 +28,68 @@ namespace Prolog
                 throw new ArgumentOutOfRangeException("stackIndex");
             }
 
-            m_container = container;
-            m_stackIndex = stackIndex;
+            Container = container;
+            StackIndex = stackIndex;
 
-            m_instructionStream = null;
-            m_variables = null;
-            m_clause = null;
+            _instructionStream = null;
+            _variables = null;
+            _clause = null;
         }
 
-        #endregion
+        public PrologStackFrameList Container { get; private set; }
 
-        #region Public Properties
-
-        public PrologStackFrameList Container
-        {
-            get { return m_container; }
-        }
-
-        public int StackIndex
-        {
-            get { return m_stackIndex; }
-        }
+        public int StackIndex { get; private set; }
 
         public PrologInstructionStream InstructionStream
         {
-            get
-            {
-                if (m_instructionStream == null)
-                {
-                    m_instructionStream = new PrologInstructionStream(this);
-                }
-
-                return m_instructionStream;
-            }
+            get { return _instructionStream ?? (_instructionStream = new PrologInstructionStream(this)); }
         }
 
         public PrologVariableList Variables
         {
-            get
-            {
-                if (m_variables == null)
-                {
-                    m_variables = new PrologVariableList(this);
-                }
-
-                return m_variables;
-            }
+            get { return _variables ?? (_variables = new PrologVariableList(this)); }
         }
 
         public Clause Clause
         {
             get
             {
-                if (m_clause == null)
+                if (_clause == null)
                 {
-                    WamInstructionStream wamInstructionStream = InstructionStream.WamInstructionStream;
-                    foreach (WamInstructionStreamAttribute attribute in wamInstructionStream.Attributes)
+                    var wamInstructionStream = InstructionStream.WamInstructionStream;
+                    foreach (var attribute in wamInstructionStream.Attributes)
                     {
-                        WamInstructionStreamClauseAttribute clauseAttribute = attribute as WamInstructionStreamClauseAttribute;
+                        var clauseAttribute = attribute as WamInstructionStreamClauseAttribute;
                         if (clauseAttribute != null)
                         {
-                            m_clause = Container.Machine.Program.Procedures[clauseAttribute.Functor].Clauses[clauseAttribute.Index];
+                            _clause = Container.Machine.Program.Procedures[clauseAttribute.Functor].Clauses[clauseAttribute.Index];
                             break;
                         }
                     }
                 }
-
-                return m_clause;
+                return _clause;
             }
         }
 
         public PrologInstruction CurrentInstruction
         {
-            get { return m_currentInstruction; }
+            get { return _currentInstruction; }
             private set
             {
-                if (value != m_currentInstruction)
+                if (value != _currentInstruction)
                 {
-                    m_currentInstruction = value;
+                    _currentInstruction = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("CurrentInstruction"));
                 }
             }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public override string ToString()
         {
-            if (Clause != null)
-            {
-                return string.Format("{0} : {1}", Clause.Container.Procedure.Functor, Clause.Index);
-            }
-
-            return "<Anonymous>";
+            return Clause != null ? string.Format("{0} : {1}", Clause.Container.Procedure.Functor, Clause.Index) : "<Anonymous>";
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region IPrologInstructionStreamContainer Members
 
         WamInstructionStream IPrologInstructionStreamContainer.WamInstructionStream
         {
@@ -153,15 +99,10 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Internal Members
-
         internal void Synchronize()
         {
-            WamInstructionPointer wamInstructionPointer = Container.Machine.WamMachine.GetInstructionPointer(StackIndex);
-
-            PrologInstruction currentInstruction = InstructionStream[wamInstructionPointer.Index];
+            var wamInstructionPointer = Container.Machine.WamMachine.GetInstructionPointer(StackIndex);
+            var currentInstruction = InstructionStream[wamInstructionPointer.Index];
             if (CurrentInstruction != currentInstruction)
             {
                 if (CurrentInstruction != null)
@@ -176,18 +117,12 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

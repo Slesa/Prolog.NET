@@ -13,19 +13,11 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeValueObject : CodeValue, IEquatable<CodeValueObject>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValueObject";
-
-        private object m_value;
-
-        #endregion
-
-        #region Constructors
 
         public CodeValueObject(object value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static new CodeValueObject Create(XElement xCodeValueObject)
@@ -33,29 +25,18 @@ namespace Prolog.Code
             throw new NotSupportedException();
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
             get { return Value; }
         }
 
-        public object Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public object Value { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeValueObject rhs = obj as CodeValueObject;
+            var rhs = obj as CodeValueObject;
             if (rhs == null) return false;
 
             return Object == rhs.Object;
@@ -68,9 +49,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeValueObject lhs, CodeValueObject rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -91,10 +72,6 @@ namespace Prolog.Code
                 new XElement(ElementName, Value.ToString()));
         }
 
-        #endregion
-
-        #region IEquatable<CodeObject> Members
-
         public override bool Equals(CodeValue other)
         {
             return Equals(other as CodeValueObject);
@@ -102,11 +79,9 @@ namespace Prolog.Code
 
         public bool Equals(CodeValueObject other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Object == other.Object;
         }
-
-        #endregion
     }
 }

@@ -44,7 +44,7 @@ namespace Prolog.Code
 
             if (Count != rhs.Count) return false;
 
-            for (int idx = 0; idx < Count; ++idx)
+            for (var idx = 0; idx < Count; ++idx)
             {
                 if (this[idx] != rhs[idx]) return false;
             }
@@ -76,7 +76,7 @@ namespace Prolog.Code
 
         public XElement ToXElement()
         {
-            XElement result = new XElement(ElementName);
+            var result = new XElement(ElementName);
 
             foreach (CodeComment codeComment in this)
             {

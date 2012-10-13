@@ -14,13 +14,7 @@ namespace Prolog.Grammar
     [Nonterminal(IsStart = true)]
     internal sealed class Program : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeSentence> m_codeSentences = new List<CodeSentence>();
-
-        #endregion
-
-        #region Rules
+        readonly List<CodeSentence> _codeSentences = new List<CodeSentence>();
 
         public static void Rule(Program lhs, OptionalProgramStatement optionalProgramStatement, AdditionalProgramStatements additionalProgramStatements)
         {
@@ -31,15 +25,9 @@ namespace Prolog.Grammar
             lhs.CodeSentences.AddRange(additionalProgramStatements.CodeSentences);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public List<CodeSentence> CodeSentences
         {
-            get { return m_codeSentences; }
+            get { return _codeSentences; }
         }
-
-        #endregion
     }
 }

@@ -12,16 +12,6 @@ namespace Prolog
     /// </summary>
     public sealed class Procedure
     {
-        #region Fields
-
-        private ProgramProcedureList m_container;
-        private Functor m_functor;
-        private ProcedureClauseList m_clauses;
-        
-        #endregion
-
-        #region Constructors
-
         internal Procedure(ProgramProcedureList container, Functor functor)
         {
             if (container == null)
@@ -32,43 +22,19 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            m_container = container;
-            m_functor = functor;
-            m_clauses = new ProcedureClauseList(this, new ObservableCollection<Clause>());
+            Container = container;
+            Functor = functor;
+            Clauses = new ProcedureClauseList(this, new ObservableCollection<Clause>());
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public ProgramProcedureList Container
-        {
-            get { return m_container; }
-        }
-
-        public Functor Functor
-        {
-            get { return m_functor; }
-        }
-
-        public ProcedureClauseList Clauses
-        {
-            get { return m_clauses; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public ProgramProcedureList Container { get; private set; }
+        public Functor Functor { get; private set; }
+        public ProcedureClauseList Clauses { get; private set; }
 
         public override string ToString()
         {
             return string.Format("{0}", Functor);
         }
-
-        #endregion
-
-        #region Internal Methods
 
         internal void InvalidateInstructionStream()
         {
@@ -85,7 +51,5 @@ namespace Prolog
                 clause.InvalidatePosition();
             }
         }
-
-        #endregion
     }
 }

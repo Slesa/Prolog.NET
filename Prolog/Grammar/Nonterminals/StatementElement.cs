@@ -13,17 +13,9 @@ namespace Prolog.Grammar
     //
     internal sealed class StatementElement : PrologNonterminal
     {
-        #region Fields
-
-        private CodeCompoundTerm m_codeCompoundTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(StatementElement lhs, BinaryElementExpression700 binaryTermExpression)
         {
-            CodeCompoundTerm codeCompoundTerm =  binaryTermExpression.CodeTerm as CodeCompoundTerm;
+            var codeCompoundTerm =  binaryTermExpression.CodeTerm as CodeCompoundTerm;
             if (codeCompoundTerm == null)
             {
                 throw new InvalidOperationException("Non-term expression specified.");
@@ -37,16 +29,6 @@ namespace Prolog.Grammar
             lhs.CodeCompoundTerm = new CodeCompoundTerm(CodeFunctor.CutFunctor);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeCompoundTerm CodeCompoundTerm
-        {
-            get { return m_codeCompoundTerm; }
-            private set { m_codeCompoundTerm = value; }
-        }
-
-        #endregion
+        public CodeCompoundTerm CodeCompoundTerm { get; private set; }
     }
 }

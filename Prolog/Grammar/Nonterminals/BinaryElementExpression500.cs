@@ -11,20 +11,12 @@ namespace Prolog.Grammar
     //
     internal sealed class BinaryElementExpression500 : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(BinaryElementExpression500 lhs, BinaryElementExpression500 binaryElementExpression500, BinaryOp500 binaryOp500, BinaryElementExpression400 binaryElementExpression400)
         {
             lhs.CodeTerm =
                 new CodeCompoundTerm(
                     binaryOp500.CodeFunctor,
-                    new CodeTerm[] { binaryElementExpression500.CodeTerm, binaryElementExpression400.CodeTerm });
+                    new[] { binaryElementExpression500.CodeTerm, binaryElementExpression400.CodeTerm });
         }
 
         public static void Rule(BinaryElementExpression500 lhs, BinaryElementExpression400 binaryElementExpression400)
@@ -32,16 +24,6 @@ namespace Prolog.Grammar
             lhs.CodeTerm = binaryElementExpression400.CodeTerm;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

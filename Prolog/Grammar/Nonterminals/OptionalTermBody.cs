@@ -13,14 +13,6 @@ namespace Prolog.Grammar
     //
     internal sealed class OptionalTermBody : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeTerm> m_codeTerms;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(OptionalTermBody lhs, OpenParenthesis openParenthesis, OptionalCompoundTermBody optionalCompoundTermBody, CloseParenthesis closeParenthesis)
         {
             lhs.CodeTerms = new List<CodeTerm>();
@@ -33,16 +25,6 @@ namespace Prolog.Grammar
         public static void Rule(OptionalTermBody lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
-        public List<CodeTerm> CodeTerms
-        {
-            get { return m_codeTerms; }
-            private set { m_codeTerms = value; }
-        }
-
-        #endregion
+        public List<CodeTerm> CodeTerms { get; private set; }
     }
 }

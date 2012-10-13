@@ -3,19 +3,13 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
 using Prolog.Code;
 
 namespace Prolog
 {
     internal static class ArithmeticExpressionMethods
     {
-        #region Public Methods
-
         public static CodeTerm Negate(CodeTerm[] arguments)
         {
             try
@@ -482,36 +476,27 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private static void GetOperand(CodeTerm[] arguments, out Operand operand)
+        static void GetOperand(CodeTerm[] arguments, out Operand operand)
         {
             Debug.Assert(arguments.Length == 1);
 
-            CodeValue argValue = (CodeValue)arguments[0];
-
+            var argValue = (CodeValue)arguments[0];
             operand = Operand.Create(argValue.Object);
         }
 
-        private static void GetOperands(CodeTerm[] arguments, out Operand lhs, out Operand rhs)
+        static void GetOperands(CodeTerm[] arguments, out Operand lhs, out Operand rhs)
         {
             Debug.Assert(arguments.Length == 2);
 
-            CodeValue argValue0 = (CodeValue)arguments[0];
-            CodeValue argValue1 = (CodeValue)arguments[1];
+            var argValue0 = (CodeValue)arguments[0];
+            var argValue1 = (CodeValue)arguments[1];
 
             lhs = Operand.Create(argValue0.Object);
             rhs = Operand.Create(argValue1.Object);
         }
 
-        #endregion
-
-        private abstract class Operand
+        abstract class Operand
         {
-            #region Constructors
-
             public static Operand Create(object value)
             {
                 if (value is int)
@@ -522,13 +507,8 @@ namespace Prolog
                 {
                     return new DoubleOperand((double)value);
                 }
-
                 throw new ArgumentException("value");
             }
-
-            #endregion
-
-            #region Public Properties
 
             public virtual bool IsInteger
             {
@@ -550,91 +530,46 @@ namespace Prolog
                 get;
             }
 
-            #endregion
-
-            #region Public Methods
-
             public abstract object Negate();
-
             public abstract object Increment();
-
             public abstract object Decrement();
-
             public abstract object Add(Operand rhs);
-
             public abstract object Subtract(Operand rhs);
-
             public abstract object Multiply(Operand rhs);
-
             public abstract object Divide(Operand rhs);
-
             public abstract object IntegerDivide(Operand rhs);
-
             public abstract object Remainder(Operand rhs);
-
             public abstract object Modulo(Operand rhs);
-
             public abstract object BitwiseAnd(Operand rhs);
-
             public abstract object BitwiseOr(Operand rhs);
-
             public abstract object BitwiseXor(Operand rhs);
-
             public abstract object BitwiseNot();
-
             public abstract object ShiftLeft(Operand rhs);
-
             public abstract object BitwiseShiftRight(Operand rhs);
-
             public abstract object IntegerShiftRight(Operand rhs);
-
             public abstract object AbsoluteValue();
-
             public abstract object Sign();
-
             public abstract object Minimum(Operand rhs);
-
             public abstract object Maximum(Operand rhs);
-
             public abstract object Power(Operand rhs);
-
             public abstract object SquareRoot();
-
             public abstract object ArcTangent();
-
             public abstract object Cosine();
-
             public abstract object ArcCosine();
-
             public abstract object Sine();
-
             public abstract object ArcSine();
-
             public abstract object Exp();
-
             public abstract object Log();
-
-            #endregion
         }
 
-        private sealed class IntegerOperand : Operand
+        sealed class IntegerOperand : Operand
         {
-            #region Fields
-
-            private int m_value;
-
-            #endregion
-
-            #region Constructors
+            readonly int _value;
 
             public IntegerOperand(int value)
             {
-                m_value = value;
+                _value = value;
             }
-
-            #endregion
-
-            #region Public Properties
 
             public override bool IsInteger
             {
@@ -643,17 +578,13 @@ namespace Prolog
 
             public override int AsInteger
             {
-                get { return m_value; }
+                get { return _value; }
             }
 
             public override double AsDouble
             {
-                get { return m_value; }
+                get { return _value; }
             }
-
-            #endregion
-
-            #region Public Methods
 
             public override object Negate()
             {
@@ -819,28 +750,16 @@ namespace Prolog
             {
                 return Math.Log(AsInteger);
             }
-
-            #endregion
         }
 
-        private sealed class DoubleOperand : Operand
+        sealed class DoubleOperand : Operand
         {
-            #region Fields
-
-            private double m_value;
-
-            #endregion
-
-            #region Constructors
+            readonly double _value;
 
             public DoubleOperand(double value)
             {
-                m_value = value;
+                _value = value;
             }
-
-            #endregion
-
-            #region Public Properties
 
             public override bool IsDouble
             {
@@ -849,17 +768,13 @@ namespace Prolog
 
             public override int AsInteger
             {
-                get { return (int)m_value; }
+                get { return (int)_value; }
             }
 
             public override double AsDouble
             {
-                get { return m_value; }
+                get { return _value; }
             }
-
-            #endregion
-
-            #region Public Methods
 
             public override object Negate()
             {
@@ -1025,8 +940,6 @@ namespace Prolog
             {
                 return Math.Log(AsDouble);
             }
-
-            #endregion
         }
     }
 }

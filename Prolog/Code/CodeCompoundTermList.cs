@@ -78,7 +78,7 @@ namespace Prolog.Code
         public XElement ToXElement()
         {
             var result = new XElement(ElementName);
-            foreach (CodeCompoundTerm codeCompoundTerm in this)
+            foreach (var codeCompoundTerm in this)
             {
                 result.Add(codeCompoundTerm.ToXElement());
             }

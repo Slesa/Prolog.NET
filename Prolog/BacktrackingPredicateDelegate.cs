@@ -4,8 +4,6 @@
 
 using System.Collections.Generic;
 
-using Prolog.Code;
-
 namespace Prolog
 {
     internal delegate IEnumerable<bool> BacktrackingPredicateDelegate(WamMachine machine, WamReferenceTarget[] arguments);

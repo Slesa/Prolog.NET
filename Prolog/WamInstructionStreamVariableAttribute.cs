@@ -8,15 +8,6 @@ namespace Prolog
 {
     internal sealed class WamInstructionStreamVariableAttribute : WamInstructionStreamAttribute, IImmuttable
     {
-        #region Fields
-
-        private string m_name;
-        private WamInstructionRegister m_register;
-
-        #endregion
-
-        #region Constructors
-
         public WamInstructionStreamVariableAttribute(int index, string name, WamInstructionRegister register)
             : base(index)
         {
@@ -28,25 +19,11 @@ namespace Prolog
             {
                 throw new ArgumentException("Register is unused.", "register");
             }
-
-            m_name = name;
-            m_register = register;
+            Name = name;
+            Register = register;
         }
 
-        #endregion
-
-        #region Fields
-
-        public string Name
-        {
-            get { return m_name; }
-        }
-
-        public WamInstructionRegister Register
-        {
-            get { return m_register; }
-        }
-
-        #endregion
+        public string Name { get; private set; }
+        public WamInstructionRegister Register { get; private set; }
     }
 }

@@ -12,13 +12,7 @@ namespace Prolog.Grammar
     //
     internal sealed class CompoundTermBody : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeTerm> m_codeTerms = new List<CodeTerm>();
-
-        #endregion
-
-        #region Rules
+        readonly List<CodeTerm> _codeTerms = new List<CodeTerm>();
 
         public static void Rule(CompoundTermBody lhs, CompoundTermMember compoundTermMember, AdditionalCompoundTermMembers additionalCompoundTermMembers)
         {
@@ -26,15 +20,9 @@ namespace Prolog.Grammar
             lhs.CodeTerms.AddRange(additionalCompoundTermMembers.CodeTerms);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public List<CodeTerm> CodeTerms
         {
-            get { return m_codeTerms; }
+            get { return _codeTerms; }
         }
-
-        #endregion
     }
 }

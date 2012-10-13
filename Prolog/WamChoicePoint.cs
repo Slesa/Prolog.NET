@@ -8,100 +8,34 @@ namespace Prolog
 {
     internal sealed class WamChoicePoint
     {
-        #region Fields
-
-        public static int s_nextGeneration;
-
-        private int m_generation;
-        private WamChoicePoint m_predecessor;
-        private WamEnvironment m_environment;
-        private int m_stackIndex;
-        private WamInstructionPointer m_returnInstructionPointer;
-        private WamReferenceTargetList m_argumentRegisters;
-        private WamChoicePoint m_cutChoicePoint;
-
-        private WamInstructionPointer m_backtrackInstructionPointer;
-        private IEnumerator<bool> m_predicateEnumerator;
-
-        private List<WamVariable> m_trail;
-
-        #endregion
-
-        #region Constructors
+        public static int NextGeneration;
 
         public WamChoicePoint(WamChoicePoint predecessor, WamEnvironment environment, int stackIndex, WamInstructionPointer returnInstructionPointer, IEnumerable<WamReferenceTarget> argumentRegisters, WamChoicePoint cutChoicePoint)
         {
-            m_generation = s_nextGeneration++;
+            Generation = NextGeneration++;
 
-            m_predecessor = predecessor;
-            m_environment = environment;
-            m_stackIndex = stackIndex;
-            m_returnInstructionPointer = returnInstructionPointer;
-            m_argumentRegisters = new WamReferenceTargetList(argumentRegisters);
-            m_cutChoicePoint = cutChoicePoint;
+            Predecessor = predecessor;
+            Environment = environment;
+            StackIndex = stackIndex;
+            ReturnInstructionPointer = returnInstructionPointer;
+            ArgumentRegisters = new WamReferenceTargetList(argumentRegisters);
+            CutChoicePoint = cutChoicePoint;
 
-            m_backtrackInstructionPointer = WamInstructionPointer.Undefined;
-            m_predicateEnumerator = null;
+            BacktrackInstructionPointer = WamInstructionPointer.Undefined;
+            PredicateEnumerator = null;
 
-            m_trail = new List<WamVariable>();
+            Trail = new List<WamVariable>();
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public int Generation
-        {
-            get { return m_generation; }
-        }
-
-        public WamChoicePoint Predecessor
-        {
-            get { return m_predecessor; }
-        }
-
-        public WamEnvironment Environment
-        {
-            get { return m_environment; }
-        }
-
-        public int StackIndex
-        {
-            get { return m_stackIndex; }
-        }
-
-        public WamInstructionPointer ReturnInstructionPointer
-        {
-            get { return m_returnInstructionPointer; }
-        }
-
-        public WamReferenceTargetList ArgumentRegisters
-        {
-            get { return m_argumentRegisters; }
-        }
-
-        public WamChoicePoint CutChoicePoint
-        {
-            get { return m_cutChoicePoint; }
-        }
-
-        public WamInstructionPointer BacktrackInstructionPointer
-        {
-            get { return m_backtrackInstructionPointer; }
-            internal set { m_backtrackInstructionPointer = value; }
-        }
-
-        public IEnumerator<bool> PredicateEnumerator
-        {
-            get { return m_predicateEnumerator; }
-            internal set { m_predicateEnumerator = value; }
-        }
-
-        public IList<WamVariable> Trail
-        {
-            get { return m_trail; }
-        }
-
-        #endregion
+        public int Generation { get; private set; }
+        public WamChoicePoint Predecessor { get; private set; }
+        public WamEnvironment Environment { get; private set; }
+        public int StackIndex { get; private set; }
+        public WamInstructionPointer ReturnInstructionPointer { get; private set; }
+        public WamReferenceTargetList ArgumentRegisters { get; private set; }
+        public WamChoicePoint CutChoicePoint { get; private set; }
+        public WamInstructionPointer BacktrackInstructionPointer { get; internal set; }
+        public IEnumerator<bool> PredicateEnumerator { get; internal set; }
+        public List<WamVariable> Trail { get; private set; }
     }
 }

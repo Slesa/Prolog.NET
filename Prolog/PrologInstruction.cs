@@ -12,17 +12,11 @@ namespace Prolog
     /// </summary>
     public sealed class PrologInstruction : INotifyPropertyChanged
     {
-        #region Fields
+        readonly PrologInstructionStream _instructionStream;
+        readonly int _index;
 
-        private PrologInstructionStream m_instructionStream;
-        private int m_index;
-
-        private bool m_isCurrentLocation;
-        private bool m_isBreakpoint;
-
-        #endregion
-
-        #region Constructors
+        bool _isCurrentLocation;
+        bool _isBreakpoint;
 
         internal PrologInstruction(PrologInstructionStream instructionStream, int index)
         {
@@ -31,25 +25,21 @@ namespace Prolog
                 throw new ArgumentNullException("instructionStream");
             }
 
-            m_instructionStream = instructionStream;
-            m_index = index;
+            _instructionStream = instructionStream;
+            _index = index;
 
-            m_isCurrentLocation = false;
-            m_isBreakpoint = false;
+            _isCurrentLocation = false;
+            _isBreakpoint = false;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool IsCurrentInstruction
         {
-            get { return m_isCurrentLocation; }
+            get { return _isCurrentLocation; }
             internal set
             {
-                if (value != m_isCurrentLocation)
+                if (value != _isCurrentLocation)
                 {
-                    m_isCurrentLocation = value;
+                    _isCurrentLocation = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("IsCurrentInstruction"));
                 }
             }
@@ -57,49 +47,35 @@ namespace Prolog
 
         public bool IsBreakpoint
         {
-            get { return m_isBreakpoint; }
+            get { return _isBreakpoint; }
             internal set
             {
-                if (value != m_isBreakpoint)
+                if (value != _isBreakpoint)
                 {
-                    m_isBreakpoint = value;
+                    _isBreakpoint = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("IsBreakpoint"));
                 }
             }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public override string ToString()
         {
             return WamInstruction.ToString();
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-        #region Hidden Members
-
-        private WamInstruction WamInstruction
+        WamInstruction WamInstruction
         {
-            get { return m_instructionStream.Container.WamInstructionStream[m_index]; }
+            get { return _instructionStream.Container.WamInstructionStream[_index]; }
         }
 
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

@@ -8,16 +8,10 @@ namespace Prolog
 {
     internal struct WamInstructionPointer : IEquatable<WamInstructionPointer>, IImmuttable
     {
-        #region Fields
+        static readonly WamInstructionPointer _undefined = new WamInstructionPointer();
 
-        private static WamInstructionPointer s_undefined = new WamInstructionPointer();
-
-        private WamInstructionStream m_instructionStream;
-        private int m_index;
-
-        #endregion
-
-        #region Constructors
+        private readonly WamInstructionStream _instructionStream;
+        private readonly int _index;
 
         public WamInstructionPointer(WamInstructionStream instructionStream)
         {
@@ -25,44 +19,35 @@ namespace Prolog
             {
                 throw new ArgumentNullException("instructionStream");
             }
-
-            m_instructionStream = instructionStream;
-            m_index = 0;
+            _instructionStream = instructionStream;
+            _index = 0;
         }
 
         public WamInstructionPointer(WamInstructionStream instructionStream, int index)
         {
-            m_instructionStream = instructionStream;
-            m_index = index;
+            _instructionStream = instructionStream;
+            _index = index;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public static WamInstructionPointer Undefined
         {
-            get { return s_undefined; }
+            get { return _undefined; }
         }
 
         public WamInstructionStream InstructionStream
         {
-            get { return m_instructionStream; }
+            get { return _instructionStream; }
         }
 
         public int Index
         {
-            get { return m_index; }
+            get { return _index; }
         }
 
         public WamInstruction Instruction
         {
             get { return InstructionStream[Index]; }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public WamInstructionPointer GetNext()
         {
@@ -80,10 +65,8 @@ namespace Prolog
 
             try
             {
-                WamInstructionPointer rhs = (WamInstructionPointer)obj;
-
-                return InstructionStream == rhs.InstructionStream
-                       && Index == rhs.Index;
+                var rhs = (WamInstructionPointer)obj;
+                return InstructionStream == rhs.InstructionStream && Index == rhs.Index;
             }
             catch (InvalidCastException)
             {
@@ -93,8 +76,7 @@ namespace Prolog
 
         public override int GetHashCode()
         {
-            return InstructionStream.GetHashCode()
-                   ^ Index.GetHashCode();
+            return InstructionStream.GetHashCode() ^ Index.GetHashCode();
         }
 
         public static bool operator ==(WamInstructionPointer lhs, WamInstructionPointer rhs)
@@ -107,21 +89,9 @@ namespace Prolog
             return !(lhs == rhs);
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
-        #endregion
-
-        #region IEquatable<Functor> Members
-
         public bool Equals(WamInstructionPointer other)
         {
-            return InstructionStream == other.InstructionStream
-                   && Index == other.Index;
+            return InstructionStream == other.InstructionStream && Index == other.Index;
         }
-
-        #endregion
     }
 }

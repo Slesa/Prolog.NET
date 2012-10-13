@@ -11,20 +11,11 @@ namespace Prolog
 {
     public class PrologVariable : INotifyPropertyChanged
     {
-        #region Fields
-
-        private PrologVariableList m_container;
-
-        private string m_register;
-        private string m_name;
-        private string m_fullName;
-
-        private string m_text = "*";
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Constructors
+        string _register;
+        string _name;
+        string _fullName;
+        string _text = "*";
+        CodeTerm _codeTerm;
 
         internal PrologVariable(PrologVariableList container)
         {
@@ -32,29 +23,20 @@ namespace Prolog
             {
                 throw new ArgumentNullException("container");
             }
-
-            m_container = container;
+            Container = container;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public PrologVariableList Container
-        {
-            get { return m_container; }
-        }
+        public PrologVariableList Container { get; private set; }
 
         public string Register
         {
-            get { return m_register; }
+            get { return _register; }
             internal set
             {
-                if (value != m_register)
+                if (value != _register)
                 {
-                    m_register = value;
-                    RaisePropertyChanged(new PropertyChangedEventArgs("Name"));
-
+                    _register = value;
+                    RaisePropertyChanged(new PropertyChangedEventArgs("Register"));
                     FullName = GetFullName();
                 }
             }
@@ -62,14 +44,13 @@ namespace Prolog
 
         public string Name
         {
-            get { return m_name; }
+            get { return _name; }
             internal set
             {
-                if (value != m_name)
+                if (value != _name)
                 {
-                    m_name = value;
+                    _name = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("Name"));
-
                     FullName = GetFullName();
                 }
             }
@@ -77,12 +58,12 @@ namespace Prolog
 
         public string FullName
         {
-            get { return m_fullName; }
+            get { return _fullName; }
             internal set
             {
-                if (value != m_fullName)
+                if (value != _fullName)
                 {
-                    m_fullName = value;
+                    _fullName = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("FullName"));
                 }
             }
@@ -90,7 +71,7 @@ namespace Prolog
 
         public string Text
         {
-            get { return m_text; }
+            get { return _text; }
             internal set
             {
                 if (value == null)
@@ -98,9 +79,9 @@ namespace Prolog
                     throw new ArgumentNullException("value");
                 }
 
-                if (value != m_text)
+                if (value != _text)
                 {
-                    m_text = value;
+                    _text = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("Text"));
                 }
             }
@@ -108,72 +89,38 @@ namespace Prolog
 
         public CodeTerm CodeTerm
         {
-            get { return m_codeTerm; }
+            get { return _codeTerm; }
             internal set
             {
-                if (value != m_codeTerm)
+                if (value != _codeTerm)
                 {
-                    m_codeTerm = value;
+                    _codeTerm = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("CodeTerm"));
-
-                    if (m_codeTerm == null)
-                    {
-                        Text = "*";
-                    }
-                    else
-                    {
-                        Text = m_codeTerm.ToString();
-                    }
+                    Text = _codeTerm == null ? "*" : _codeTerm.ToString();
                 }
             }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public override string ToString()
         {
-            if (string.IsNullOrEmpty(Name))
-            {
-                return string.Format("{0} = {1}", Register, Text);
-            }
-            else
-            {
-                return string.Format("{0}/{1} = {2}", Register, Name, Text);
-            }
+            return string.IsNullOrEmpty(Name) 
+                ? string.Format("{0} = {1}", Register, Text) 
+                : string.Format("{0}/{1} = {2}", Register, Name, Text);
         }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-        #region Hidden Members
-
-        private string GetFullName()
+        string GetFullName()
         {
-            if (string.IsNullOrEmpty(Name))
-            {
-                return Register;
-            }
-            else
-            {
-                return string.Format("{0}/{1}", Register, Name);
-            }
+            return string.IsNullOrEmpty(Name) ? Register : string.Format("{0}/{1}", Register, Name);
         }
 
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

@@ -12,16 +12,7 @@ namespace Prolog
 {
     internal sealed class WamCompoundTerm : WamReferenceTarget
     {
-        #region Fields
-
         private static WamReferenceTarget[] s_emptyList = new WamReferenceTarget[0];
-
-        private Functor m_functor;
-        private WamReferenceTarget[] m_children;
-
-        #endregion
-
-        #region Constructors
 
         private WamCompoundTerm(Functor functor)
         {
@@ -30,15 +21,8 @@ namespace Prolog
                 throw new ArgumentNullException("functor");
             }
 
-            m_functor = functor;
-            if (functor.Arity == 0)
-            {
-                m_children = s_emptyList;
-            }
-            else
-            {
-                m_children = new WamReferenceTarget[functor.Arity];
-            }
+            Functor = functor;
+            Children = functor.Arity == 0 ? s_emptyList : new WamReferenceTarget[functor.Arity];
         }
 
         public static WamCompoundTerm Create(Functor functor)
@@ -48,73 +32,37 @@ namespace Prolog
 
         public static WamCompoundTerm Create(CodeCompoundTerm codeCompoundTerm)
         {
-            Functor functor = Functor.Create(codeCompoundTerm.Functor);
-
-            WamCompoundTerm result = WamCompoundTerm.Create(functor);
-
-            for (int index = 0; index < functor.Arity; ++index)
+            var functor = Functor.Create(codeCompoundTerm.Functor);
+            var result = WamCompoundTerm.Create(functor);
+            for (var index = 0; index < functor.Arity; ++index)
             {
                 result.Children[index] = WamReferenceTarget.Create(codeCompoundTerm.Children[index]);
             }
-
             return result;
         }
 
         public override WamReferenceTarget Clone()
         {
-            WamCompoundTerm result = new WamCompoundTerm(Functor);
-
-            for (int index = 0; index < Functor.Arity; ++index)
+            var result = new WamCompoundTerm(Functor);
+            for (var index = 0; index < Functor.Arity; ++index)
             {
                 result.Children[index] = Children[index].Clone();
             }
-
             return result;
         }
 
-        #endregion
+        public Functor Functor { get; private set; }
 
-        #region Public Properties
-
-        public Functor Functor
-        {
-            get { return m_functor; }
-        }
-
-        public WamReferenceTarget[] Children
-        {
-            get { return m_children; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public WamReferenceTarget[] Children { get; private set; }
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             if (Functor == Functor.ListFunctor)
             {
-                string lhs;
-                if (Children[0] == null)
-                {
-                    lhs = "_";
-                }
-                else
-                {
-                    lhs = Children[0].ToString();
-                }
-
-                string rhs;
-                if (Children[1] == null)
-                {
-                    rhs = "_";
-                }
-                else
-                {
-                    rhs = Children[1].ToString();
-                }
+                var lhs = Children[0] == null ? "_" : Children[0].ToString();
+                var rhs = Children[1] == null ? "_" : Children[1].ToString();
 
                 sb.Append("[");
                 sb.Append(lhs);
@@ -150,7 +98,7 @@ namespace Prolog
                     sb.Append("(");
 
                     string prefix = null;
-                    foreach (WamReferenceTarget child in Children)
+                    foreach (var child in Children)
                     {
                         sb.Append(prefix); prefix = ",";
 
@@ -165,7 +113,6 @@ namespace Prolog
                     sb.Append(")");
                 }
             }
-
             return sb.ToString();
         }
 
@@ -174,19 +121,15 @@ namespace Prolog
             return this;
         }
 
-        #endregion
-
-        #region Hidden Members
-
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
             if (Functor == Functor.ListFunctor)
             {
-                List<CodeTerm> head = new List<CodeTerm>();
+                var head = new List<CodeTerm>();
                 CodeTerm tail = null;
 
-                CodeTerm codeTermHead = Children[0].GetCodeTerm(dereferenceType, mapping);
-                CodeTerm codeTermTail = Children[1].GetCodeTerm(dereferenceType, mapping);
+                var codeTermHead = Children[0].GetCodeTerm(dereferenceType, mapping);
+                var codeTermTail = Children[1].GetCodeTerm(dereferenceType, mapping);
 
                 head.Add(codeTermHead);
 
@@ -199,28 +142,20 @@ namespace Prolog
                 {
                     tail = codeTermTail;
                 }
-
                 return new CodeList(head, tail);
             }
-            else
+
+            if (Functor.Arity == 0)
             {
-                if (Functor.Arity == 0)
-                {
-                    return new CodeCompoundTerm(new CodeFunctor(Functor.Name));
-                }
-                else
-                {
-                    List<CodeTerm> children = new List<CodeTerm>();
-                    foreach (WamReferenceTarget child in Children)
-                    {
-                        children.Add(child.GetCodeTerm(dereferenceType, mapping));
-                    }
-
-                    return new CodeCompoundTerm(new CodeFunctor(Functor.Name, Functor.Arity), children);
-                }
+                return new CodeCompoundTerm(new CodeFunctor(Functor.Name));
             }
-        }
 
-        #endregion
+            var children = new List<CodeTerm>();
+            foreach (var child in Children)
+            {
+                children.Add(child.GetCodeTerm(dereferenceType, mapping));
+            }
+            return new CodeCompoundTerm(new CodeFunctor(Functor.Name, Functor.Arity), children);
+        }
     }
 }

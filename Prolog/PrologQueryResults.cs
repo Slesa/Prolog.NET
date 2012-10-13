@@ -2,9 +2,6 @@
  * Licensed under the terms of the Microsoft Public License (Ms-PL).
  */
 
-using System;
-using System.Collections.ObjectModel;
-
 namespace Prolog
 {
     /// <summary>
@@ -12,28 +9,11 @@ namespace Prolog
     /// </summary>
     public sealed class PrologQueryResults : IPrologVariableListContainer
     {
-        #region Fields
-
-        private PrologVariableList m_variables;
-
-        #endregion
-
-        #region Constructors
-
         internal PrologQueryResults()
         {
-            m_variables = new PrologVariableList(this);
+            Variables = new PrologVariableList(this);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public PrologVariableList Variables
-        {
-            get { return m_variables; }
-        }
-
-        #endregion
+        public PrologVariableList Variables { get; private set; }
     }
 }

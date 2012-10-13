@@ -6,28 +6,11 @@ namespace Prolog
 {
     internal abstract class WamInstructionStreamAttribute : IImmuttable
     {
-        #region Fields
-
-        private int m_index;
-
-        #endregion
-
-        #region Constructors
-
-        public WamInstructionStreamAttribute(int index)
+        protected WamInstructionStreamAttribute(int index)
         {
-            m_index = index;
+            Index = index;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public int Index
-        {
-            get { return m_index; }
-        }
-
-        #endregion
+        public int Index { get; private set; }
     }
 }

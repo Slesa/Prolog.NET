@@ -15,17 +15,11 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeSentenceDataObject : IDataObject
     {
-        #region Fields
+        static string _codeSentenceDataFormat = "CodeSentenceDataFormat";
 
-        private static string m_codeSentenceDataFormat = "CodeSentenceDataFormat";
-
-        private object m_object;
-        private string m_format;
-        private bool m_autoConvert;
-
-        #endregion
-
-        #region Constructors
+        object _object;
+        string _format;
+        bool _autoConvert;
 
         public CodeSentenceDataObject(CodeSentence codeSentence)
         {
@@ -34,29 +28,21 @@ namespace Prolog.Code
                 throw new ArgumentNullException("codeSentence");
             }
 
-            m_object = codeSentence;
-            m_format = CodeSentenceDataFormat;
-            m_autoConvert = true;
+            _object = codeSentence;
+            _format = CodeSentenceDataFormat;
+            _autoConvert = true;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public static string CodeSentenceDataFormat
         {
-            get { return m_codeSentenceDataFormat; }
+            get { return _codeSentenceDataFormat; }
         }
-
-        #endregion
-
-        #region IDataObject Members
 
         public object GetData(string format, bool autoConvert)
         {
-            if (format != m_format)
+            if (format != _format)
             {
-                if (!m_autoConvert || !autoConvert)
+                if (!_autoConvert || !autoConvert)
                 {
                     return null;
                 }
@@ -64,19 +50,18 @@ namespace Prolog.Code
 
             if (format == CodeSentenceDataFormat)
             {
-                if (m_format == CodeSentenceDataFormat)
+                if (_format == CodeSentenceDataFormat)
                 {
-                    CodeSentence codeSentenceValue = m_object as CodeSentence;
+                    var codeSentenceValue = _object as CodeSentence;
                     return codeSentenceValue;
                 }
 
-                if (m_format == DataFormats.StringFormat
-                    || m_format == DataFormats.UnicodeText)
+                if (_format == DataFormats.StringFormat || _format == DataFormats.UnicodeText)
                 {
-                    string stringValue = m_object as string;
+                    var stringValue = _object as string;
                     if (stringValue != null)
                     {
-                        CodeSentence[] codeSentences = Parser.Parse(stringValue);
+                        var codeSentences = Parser.Parse(stringValue);
                         if (codeSentences != null
                             && codeSentences.Length >= 1)
                         {
@@ -87,19 +72,18 @@ namespace Prolog.Code
                 }
             }
 
-            if (format == DataFormats.StringFormat
-                || format == DataFormats.UnicodeText)
+            if (format == DataFormats.StringFormat || format == DataFormats.UnicodeText)
             {
-                if (m_format == CodeSentenceDataFormat)
+                if (_format == CodeSentenceDataFormat)
                 {
-                    CodeSentence codeSentenceValue = m_object as CodeSentence;
+                    var codeSentenceValue = _object as CodeSentence;
                     return codeSentenceValue.ToString();
                 }
 
-                if (m_format == DataFormats.StringFormat
-                    || m_format == DataFormats.UnicodeText)
+                if (_format == DataFormats.StringFormat
+                    || _format == DataFormats.UnicodeText)
                 {
-                    string stringValue = m_object as string;
+                    var stringValue = _object as string;
                     return stringValue;
                 }
             }
@@ -126,28 +110,23 @@ namespace Prolog.Code
         {
             // We can always retrieve the data if the requested format matches the format on the clipboard.
             //
-            if (format == m_format)
+            if (format == _format)
             {
                 return true;
             }
 
             // Conversion not allowed...
             //
-            if (!m_autoConvert || !autoConvert)
+            if (!_autoConvert || !autoConvert)
             {
                 return false;
             }
 
             // Convertable formats...
             //
-            if (format == CodeSentenceDataFormat
-                || format == DataFormats.StringFormat
-                || format == DataFormats.UnicodeText)
-            {
-                return true;
-            }
-
-            return false;
+            return format == CodeSentenceDataFormat
+                   || format == DataFormats.StringFormat
+                   || format == DataFormats.UnicodeText;
         }
 
         public bool GetDataPresent(Type format)
@@ -167,12 +146,9 @@ namespace Prolog.Code
 
         public string[] GetFormats(bool autoConvert)
         {
-            if (!autoConvert)
-            {
-                return new string[] { m_format };
-            }
-
-            return new string[] { CodeSentenceDataFormat, DataFormats.StringFormat, DataFormats.UnicodeText };
+            return !autoConvert 
+                ? new[] { _format } 
+                : new[] { CodeSentenceDataFormat, DataFormats.StringFormat, DataFormats.UnicodeText };
         }
 
         public string[] GetFormats()
@@ -191,9 +167,9 @@ namespace Prolog.Code
                 throw new ArgumentNullException("data");
             }
 
-            m_format = format;
-            m_object = data;
-            m_autoConvert = autoConvert;
+            _format = format;
+            _object = data;
+            _autoConvert = autoConvert;
         }
 
         public void SetData(Type format, object data)
@@ -211,7 +187,5 @@ namespace Prolog.Code
         {
             SetData(data.GetType(), data);
         }
-
-        #endregion
     }
 }

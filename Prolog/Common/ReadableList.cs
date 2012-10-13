@@ -14,8 +14,8 @@ namespace Prolog
     [Serializable]
     public class ReadableList<T> : IReadableList<T>, INotifyCollectionChanged, ISerializable
     {
-        IList<T> _items;
-        ObservableCollection<T> _observableCollection;
+        readonly IList<T> _items;
+        readonly ObservableCollection<T> _observableCollection;
 
         public ReadableList()
         {

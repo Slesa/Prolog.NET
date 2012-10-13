@@ -14,15 +14,7 @@ namespace Prolog
     /// </remarks>
     public sealed class PrologStackFrameList : ReadableList<PrologStackFrame>, INotifyPropertyChanged
     {
-        #region Fields
-
-        private PrologMachine m_machine;
-
-        private PrologStackFrame m_currentStackFrame;
-
-        #endregion
-
-        #region Constructors
+        PrologStackFrame _currentStackFrame;
 
         internal PrologStackFrameList(PrologMachine machine)
         {
@@ -31,49 +23,30 @@ namespace Prolog
                 throw new ArgumentNullException("machine");
             }
 
-            m_machine = machine;
+            Machine = machine;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public PrologMachine Machine
-        {
-            get { return m_machine; }
-        }
+        public PrologMachine Machine { get; private set; }
 
         public PrologStackFrame CurrentStackFrame
         {
-            get { return m_currentStackFrame; }
+            get { return _currentStackFrame; }
             internal set
             {
-                if (value != m_currentStackFrame)
+                if (value != _currentStackFrame)
                 {
-                    m_currentStackFrame = value;
+                    _currentStackFrame = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("CurrentStackFrame"));
                 }
             }
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Hidden Members
-
-        #region Internal Members
 
         internal PrologStackFrame Push()
         {
-            PrologStackFrame item = new PrologStackFrame(this, Items.Count);
-
+            var item = new PrologStackFrame(this, Items.Count);
             Items.Add(item);
-
             return item;
         }
 
@@ -84,28 +57,22 @@ namespace Prolog
                 throw new InvalidOperationException("List is empty.");
             }
 
-            int index = Items.Count - 1;
-
-            PrologStackFrame item = Items[index];
+            var index = Items.Count - 1;
+            var item = Items[index];
             if (item == CurrentStackFrame)
             {
                 CurrentStackFrame = null;
             }
             Items.RemoveAt(index);
-
             return item;
         }
 
-        #endregion
-
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

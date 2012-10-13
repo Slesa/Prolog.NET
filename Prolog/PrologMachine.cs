@@ -16,19 +16,7 @@ namespace Prolog
     /// </remarks>
     public sealed class PrologMachine : IPrologVariableListContainer, INotifyPropertyChanged
     {
-        #region Fields
-
         private WamMachine m_wamMachine;
-
-        private PrologStackFrameList m_stackFrames;
-        private PrologVariableList m_arguments;
-        private PrologVariableList m_temporaryVariables;
-
-        private PrologQueryResults m_queryResults;
-
-        #endregion
-
-        #region Constructors
 
         private PrologMachine(Program program, Query query)
         {
@@ -43,13 +31,13 @@ namespace Prolog
 
             m_wamMachine = WamMachine.Create(program, query);
 
-            m_stackFrames = new PrologStackFrameList(this);
-            m_arguments = new PrologVariableList(this);
-            m_temporaryVariables = new PrologVariableList(this);
+            StackFrames = new PrologStackFrameList(this);
+            Arguments = new PrologVariableList(this);
+            TemporaryVariables = new PrologVariableList(this);
 
             Synchronize();
 
-            m_queryResults = null;
+            QueryResults = null;
         }
 
         public static PrologMachine Create(Program program, Query query)
@@ -66,16 +54,8 @@ namespace Prolog
             return new PrologMachine(program, query);
         }
 
-        #endregion
-
-        #region Events
-
         public event EventHandler ExecutionSuspended;
         public event EventHandler<PrologQueryEventArgs> ExecutionComplete;
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         /// Gets the <see cref="Prolog.Program"/> used to evaluate the <see cref="Query"/>.
@@ -93,35 +73,15 @@ namespace Prolog
             get { return WamMachine.Query; }
         }
 
-        public PrologStackFrameList StackFrames
-        {
-            get { return m_stackFrames; }
-        }
-
-        public PrologVariableList Arguments
-        {
-            get { return m_arguments; }
-        }
-
-        public PrologVariableList TemporaryVariables
-        {
-            get { return m_temporaryVariables; }
-        }
-
-        public PrologQueryResults QueryResults
-        {
-            get { return m_queryResults; }
-            private set { m_queryResults = value; }
-        }
+        public PrologStackFrameList StackFrames { get; private set; }
+        public PrologVariableList Arguments { get; private set; }
+        public PrologVariableList TemporaryVariables { get; private set; }
+        public PrologQueryResults QueryResults { get; private set; }
 
         public PerformanceStatistics PerformanceStatistics
         {
             get { return WamMachine.PerformanceStatistics; }
         }
-
-        #endregion
-
-        #region Public Methods: Run
 
         public bool CanEndProgram
         {
@@ -139,9 +99,7 @@ namespace Prolog
         public void Restart()
         {
             WamMachine.Initialize();
-
             Synchronize();
-
             QueryResults = null;
         }
 
@@ -155,10 +113,8 @@ namespace Prolog
 
         public ExecutionResults RunToBacktrack()
         {
-            ExecutionResults results = WamMachine.RunToBacktrack();
-
+            var results = WamMachine.RunToBacktrack();
             ProcessResults(results);
-
             return results;
         }
 
@@ -172,10 +128,8 @@ namespace Prolog
 
         public ExecutionResults RunToSuccess()
         {
-            ExecutionResults results = WamMachine.RunToSuccess();
-
+            var results = WamMachine.RunToSuccess();
             ProcessResults(results);
-
             return results;
         }
 
@@ -189,10 +143,8 @@ namespace Prolog
 
         public ExecutionResults StepIn()
         {
-            ExecutionResults results = WamMachine.StepIn();
-
+            var results = WamMachine.StepIn();
             ProcessResults(results);
-
             return results;
         }
 
@@ -206,10 +158,8 @@ namespace Prolog
 
         public ExecutionResults StepOut()
         {
-            ExecutionResults results = WamMachine.StepOut();
-
+            var results = WamMachine.StepOut();
             ProcessResults(results);
-
             return results;
         }
 
@@ -223,16 +173,10 @@ namespace Prolog
 
         public ExecutionResults StepOver()
         {
-            ExecutionResults results = WamMachine.StepOver();
-
+            var results = WamMachine.StepOver();
             ProcessResults(results);
-
             return results;
         }
-
-        #endregion
-
-        #region Public Methods: Breakpoint
 
         public bool CanAddBreakpoint
         {
@@ -266,32 +210,20 @@ namespace Prolog
         public void ToggleBreakpoint()
         { }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Internal Members
 
         internal WamMachine WamMachine
         {
             get { return m_wamMachine; }
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private bool IsBreakpoint(WamInstructionPointer wamInstructionPointer)
+        bool IsBreakpoint(WamInstructionPointer wamInstructionPointer)
         {
             //HACK: Implement
             return false;
         }
 
-        private void ProcessResults(ExecutionResults results)
+        void ProcessResults(ExecutionResults results)
         {
             Synchronize();
 
@@ -303,35 +235,30 @@ namespace Prolog
                         RaiseExecutionComplete(new PrologQueryEventArgs(QueryResults));
                     }
                     break;
-
                 case ExecutionResults.Failure:
                     {
                         RaiseExecutionComplete(new PrologQueryEventArgs(null));
                     }
                     break;
-
                 case ExecutionResults.None:
                 case ExecutionResults.Backtrack:
                     {
                         RaiseExecutionSuspended();
                     }
                     break;
-
                 default:
                     throw new InvalidOperationException(string.Format("Unknown results {0}.", results));
             }
         }
 
-        private void UpdateQueryResults()
+        void UpdateQueryResults()
         {
-            PrologQueryResults queryResults = new PrologQueryResults();
-
+            var queryResults = new PrologQueryResults();
             queryResults.Variables.Synchronize(GetPermanentVariables(0, true));
-
             QueryResults = queryResults;
         }
 
-        private void RaiseExecutionSuspended()
+        void RaiseExecutionSuspended()
         {
             if (ExecutionSuspended != null)
             {
@@ -339,7 +266,7 @@ namespace Prolog
             }
         }
 
-        private void RaiseExecutionComplete(PrologQueryEventArgs e)
+        void RaiseExecutionComplete(PrologQueryEventArgs e)
         {
             if (ExecutionComplete != null)
             {
@@ -347,7 +274,7 @@ namespace Prolog
             }
         }
 
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
@@ -355,19 +282,15 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Hidden Members: SynchronizeState
-
-        private void Synchronize()
+        void Synchronize()
         {
             SynchronizeStackFrames();
             SynchronizeVariables();
         }
 
-        private void SynchronizeStackFrames()
+        void SynchronizeStackFrames()
         {
-            int size = WamMachine.StackIndex + 1;
+            var size = WamMachine.StackIndex + 1;
 
             // Remove obsolete entries from stack.
             //
@@ -378,7 +301,7 @@ namespace Prolog
 
             // Purge stack frames that do not match their WAM machine counterparts.
             //
-            for (int index = 0; index < Math.Min(size, StackFrames.Count); ++index)
+            for (var index = 0; index < Math.Min(size, StackFrames.Count); ++index)
             {
                 if (StackFrames[index].InstructionStream.WamInstructionStream == WamMachine.GetInstructionPointer(index).InstructionStream)
                 {
@@ -402,7 +325,7 @@ namespace Prolog
             }
         }
 
-        private void SynchronizeVariables()
+        void SynchronizeVariables()
         {
             TemporaryVariables.Synchronize(GetTemporaryVariables());
 
@@ -410,72 +333,60 @@ namespace Prolog
 
             for (int stackIndex = 0; stackIndex <= WamMachine.StackIndex; ++stackIndex)
             {
-                PrologStackFrame stackFrame = StackFrames[stackIndex];
+                var stackFrame = StackFrames[stackIndex];
                 stackFrame.Variables.Synchronize(GetPermanentVariables(stackIndex, false));
             }
         }
 
-        private PrologVariableList GetTemporaryVariables()
+        PrologVariableList GetTemporaryVariables()
         {
-            PrologVariableList result = new PrologVariableList();
+            var result = new PrologVariableList();
 
-            for (int index = 0; index < WamMachine.TemporaryRegisters.Count; ++index)
+            for (var index = 0; index < WamMachine.TemporaryRegisters.Count; ++index)
             {
-                string value = "*";
-                WamReferenceTarget referenceTarget = WamMachine.TemporaryRegisters[index];
+                var value = "*";
+                var referenceTarget = WamMachine.TemporaryRegisters[index];
                 if (referenceTarget != null)
                 {
                     value = referenceTarget.ToString();
                 }
-
                 result.Add(string.Format("X{0}", index)).Text = value;
             }
-
             return result;
         }
 
-        private PrologVariableList GetArgumentVariables()
+        PrologVariableList GetArgumentVariables()
         {
-            PrologVariableList result = new PrologVariableList();
+            var result = new PrologVariableList();
 
-            for (int index = 0; index < WamMachine.ArgumentRegisters.Count; ++index)
+            for (var index = 0; index < WamMachine.ArgumentRegisters.Count; ++index)
             {
                 string value = "*";
-                WamReferenceTarget referenceTarget = WamMachine.ArgumentRegisters[index];
+                var referenceTarget = WamMachine.ArgumentRegisters[index];
                 if (referenceTarget != null)
                 {
                     value = referenceTarget.ToString();
                 }
-
                 result.Add(string.Format("A{0}", index)).Text = value;
             }
 
             return result;
         }
 
-        private PrologVariableList GetPermanentVariables(int stackIndex, bool getCodeTerm)
+        PrologVariableList GetPermanentVariables(int stackIndex, bool getCodeTerm)
         {
-            PrologVariableList result = new PrologVariableList();
-
-            WamEnvironment environment = WamMachine.GetEnvironment(stackIndex);
+            var result = new PrologVariableList();
+            var environment = WamMachine.GetEnvironment(stackIndex);
             if (environment != null)
             {
                 // Retrieve register name assignments from instruction stream.
                 //
-                Dictionary<int, string> variableNames;
-                WamInstructionStream wamInstructionStream = WamMachine.GetInstructionPointer(stackIndex).InstructionStream;
-                if (wamInstructionStream != null)
-                {
-                    variableNames = wamInstructionStream.GetPermanentVariableAssignments();
-                }
-                else
-                {
-                    variableNames = new Dictionary<int, string>();
-                }
+                var wamInstructionStream = WamMachine.GetInstructionPointer(stackIndex).InstructionStream;
+                var variableNames = wamInstructionStream != null ? wamInstructionStream.GetPermanentVariableAssignments() : new Dictionary<int, string>();
 
-                for (int index = 0; index < environment.PermanentRegisters.Count; ++index)
+                for (var index = 0; index < environment.PermanentRegisters.Count; ++index)
                 {
-                    PrologVariable variable = result.Add(string.Format("Y{0}", index));
+                    var variable = result.Add(string.Format("Y{0}", index));
 
                     string name;
                     if (variableNames.TryGetValue(index, out name))
@@ -483,7 +394,7 @@ namespace Prolog
                         variable.Name = name;
                     }
 
-                    WamReferenceTarget referenceTarget = environment.PermanentRegisters[index];
+                    var referenceTarget = environment.PermanentRegisters[index];
                     if (referenceTarget != null)
                     {
                         if (getCodeTerm)
@@ -497,10 +408,7 @@ namespace Prolog
                     }
                 }
             }
-
             return result;
         }
-
-        #endregion
     }
 }

@@ -8,35 +8,18 @@ namespace Prolog
 {
     internal class WamMachineStepEventArgs : EventArgs
     {
-        #region Fields
-
-        private WamMachineStepEventArgsState m_state;
-        private bool m_breakpoint;
-
-        #endregion
-
-        #region Constructors
+        WamMachineStepEventArgsState _state;
 
         public WamMachineStepEventArgs(WamMachineStepEventArgsState state)
         {
-            m_state = state;
+            _state = state;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public WamInstructionPointer InstructionPointer
         {
-            get { return m_state.InstructionPointer; }
+            get { return _state.InstructionPointer; }
         }
 
-        public bool Breakpoint
-        {
-            get { return m_breakpoint; }
-            set { m_breakpoint = value; }
-        }
-
-        #endregion
+        public bool Breakpoint { get; set; }
     }
 }

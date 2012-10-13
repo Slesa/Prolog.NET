@@ -13,14 +13,6 @@ namespace Prolog.Grammar
     //
     internal sealed class BinaryOp500 : PrologNonterminal
     {
-        #region Fields
-
-        private CodeFunctor m_codeFunctor;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(BinaryOp500 lhs, OpAdd op)
         {
             lhs.CodeFunctor = new CodeFunctor(op.Text, 2, true);
@@ -41,16 +33,6 @@ namespace Prolog.Grammar
             lhs.CodeFunctor = new CodeFunctor(op.Text, 2, true);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeFunctor CodeFunctor
-        {
-            get { return m_codeFunctor; }
-            private set { m_codeFunctor = value; }
-        }
-
-        #endregion
+        public CodeFunctor CodeFunctor { get; private set; }
     }
 }

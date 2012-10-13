@@ -2,7 +2,6 @@
  * Licensed under the terms of the Microsoft Public License (Ms-PL).
  */
 
-using Lingua;
 using Prolog.Code;
 
 namespace Prolog.Grammar
@@ -12,14 +11,6 @@ namespace Prolog.Grammar
     //
     internal sealed class OptionalProgramStatement : PrologNonterminal
     {
-        #region Fields
-
-        private CodeSentence m_codeSentence;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(OptionalProgramStatement lhs, Statement statement)
         {
             lhs.CodeSentence = statement.CodeSentence;
@@ -28,16 +19,6 @@ namespace Prolog.Grammar
         public static void Rule(OptionalProgramStatement lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeSentence CodeSentence
-        {
-            get { return m_codeSentence; }
-            private set { m_codeSentence = value; }
-        }
-
-        #endregion
+        public CodeSentence CodeSentence { get; private set; }
     }
 }

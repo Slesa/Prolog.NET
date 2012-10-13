@@ -3,7 +3,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Prolog.Code
@@ -11,17 +10,11 @@ namespace Prolog.Code
     [Serializable]
     public abstract class CodeTerm : IEquatable<CodeTerm>, IImmuttable
     {
-        #region Fields
-
         public const string ElementName = "CodeTerm";
-
-        #endregion
-
-        #region Constructors
 
         public static CodeTerm Create(XElement xCodeTerm)
         {
-            foreach (XElement xSubtype in xCodeTerm.Elements())
+            foreach (var xSubtype in xCodeTerm.Elements())
             {
                 if (xSubtype.Name == CodeValue.ElementName) return CodeValue.Create(xSubtype);
                 if (xSubtype.Name == CodeVariable.ElementName) return CodeVariable.Create(xSubtype);
@@ -33,10 +26,6 @@ namespace Prolog.Code
 
             throw new InvalidOperationException("No subtype element specified.");
         }
-
-        #endregion
-
-        #region Public Properties
 
         public virtual bool IsCodeCompoundTerm
         {
@@ -78,15 +67,11 @@ namespace Prolog.Code
             get { return (CodeList)this; }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public static bool operator ==(CodeTerm lhs, CodeTerm rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -98,21 +83,11 @@ namespace Prolog.Code
 
         public abstract XElement ToXElement();
 
-        #endregion
-
-        #region IEquatable<CodeTerm> Members
-
         public abstract bool Equals(CodeTerm other);
-
-        #endregion
-
-        #region Hidden Members
 
         protected virtual XElement ToXElementBase(XElement content)
         {
             return new XElement(ElementName, content);
         }
-
-        #endregion
     }
 }

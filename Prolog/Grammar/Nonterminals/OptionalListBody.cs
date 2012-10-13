@@ -11,14 +11,6 @@ namespace Prolog.Grammar
     //
     internal sealed class OptionalListBody : PrologNonterminal
     {
-        #region Fields
-
-        private CodeList m_codeList;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(OptionalListBody lhs, ListBody listBody)
         {
             lhs.CodeList = listBody.CodeList;
@@ -27,16 +19,6 @@ namespace Prolog.Grammar
         public static void Rule(OptionalListBody lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeList CodeList
-        {
-            get { return m_codeList; }
-            private set { m_codeList = value; }
-        }
-
-        #endregion
+        public CodeList CodeList { get; private set; }
     }
 }

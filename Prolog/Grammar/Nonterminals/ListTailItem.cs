@@ -11,18 +11,9 @@ namespace Prolog.Grammar
     //
     internal sealed class ListTailItem : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(ListTailItem lhs, Variable variable)
         {
-            CodeVariable codeVariable = new CodeVariable(variable.Text);
-
+            var codeVariable = new CodeVariable(variable.Text);
             lhs.CodeTerm = codeVariable;
         }
 
@@ -31,16 +22,6 @@ namespace Prolog.Grammar
             lhs.CodeTerm = list.CodeList;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

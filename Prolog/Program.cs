@@ -8,40 +8,31 @@ using System.ComponentModel;
 using System.IO;
 
 using Prolog.Code;
-using Prolog.Grammar;
 
 namespace Prolog
 {
     public sealed class Program : INotifyPropertyChanged
     {
-        #region Fields
-
-        private static string s_pragmaOptimizeFunctorName = "optimize";
-
-        private static CodeFunctor s_pragmaOptimizeFunctor = new CodeFunctor(PragmaOptimizeFunctorName, 0);
-
-        private string m_fileName;
-        private bool m_isModified;
-
-        private ProgramProcedureList m_procedures;
-        private bool m_isOptimized;
-
-        private LibraryList m_libraries;
-
-        #endregion
-
-        #region Constructors
+        string _fileName;
+        bool _isModified;
+        bool _isOptimized;
 
         public Program()
         {
-            m_fileName = null;
-            m_isModified = false;
+            _fileName = null;
+            _isModified = false;
 
-            m_procedures = new ProgramProcedureList(this, new ObservableCollection<Procedure>());
-            m_isOptimized = false;
+            Procedures = new ProgramProcedureList(this, new ObservableCollection<Procedure>());
+            _isOptimized = false;
 
-            m_libraries = LibraryList.Create();
-            m_libraries.Add(Library.Standard);
+            Libraries = LibraryList.Create();
+            Libraries.Add(Library.Standard);
+        }
+
+        static Program()
+        {
+            PragmaOptimizeFunctor = new CodeFunctor(PragmaOptimizeFunctorName, 0);
+            PragmaOptimizeFunctorName = "optimize";
         }
 
         public static Program Load(string fileName)
@@ -51,7 +42,7 @@ namespace Prolog
                 throw new ArgumentNullException("fileName");
             }
 
-            Program program = new Program();
+            var program = new Program();
             program.Read(fileName);
 
             program.FileName = fileName;
@@ -60,28 +51,13 @@ namespace Prolog
             return program;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public static string PragmaOptimizeFunctorName
-        {
-            get { return s_pragmaOptimizeFunctorName; }
-        }
-
-        public static CodeFunctor PragmaOptimizeFunctor
-        {
-            get { return s_pragmaOptimizeFunctor; }
-        }
-
-        public ProgramProcedureList Procedures
-        {
-            get { return m_procedures; }
-        }
+        public static string PragmaOptimizeFunctorName { get; private set; }
+        public static CodeFunctor PragmaOptimizeFunctor { get; private set; }
+        public ProgramProcedureList Procedures { get; private set; }
 
         public string FileName
         {
-            get { return m_fileName; }
+            get { return _fileName; }
             private set
             {
                 if (value == string.Empty)
@@ -89,9 +65,9 @@ namespace Prolog
                     value = null;
                 }
 
-                if (value != m_fileName)
+                if (value != _fileName)
                 {
-                    m_fileName = value;
+                    _fileName = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("FileName"));
                 }
             }
@@ -99,12 +75,12 @@ namespace Prolog
 
         public bool IsModified
         {
-            get { return m_isModified; }
+            get { return _isModified; }
             private set
             {
-                if (value != m_isModified)
+                if (value != _isModified)
                 {
-                    m_isModified = value;
+                    _isModified = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("IsModified"));
                 }
             }
@@ -112,32 +88,24 @@ namespace Prolog
 
         public bool IsOptimized
         {
-            get { return m_isOptimized; }
+            get { return _isOptimized; }
             set
             {
-                if (value != m_isOptimized)
+                if (value != _isOptimized)
                 {
-                    m_isOptimized = value;
+                    _isOptimized = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("IsOptimized"));
 
-                    foreach (Procedure procedure in Procedures)
+                    foreach (var procedure in Procedures)
                     {
                         procedure.InvalidateInstructionStream();
                     }
-
                     Touch();
                 }
             }
         }
 
-        public LibraryList Libraries
-        {
-            get { return m_libraries; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public LibraryList Libraries { get; private set; }
 
         public bool Contains(CodeSentence codeSentence)
         {
@@ -150,7 +118,7 @@ namespace Prolog
                 throw new ArgumentException("Program cannot contain query.", "codeSentence");
             }
 
-            Functor functor = Functor.Create(codeSentence.Head.Functor);
+            var functor = Functor.Create(codeSentence.Head.Functor);
             Procedure procedure;
             if (Procedures.TryGetProcedure(functor, out procedure))
             {
@@ -173,31 +141,26 @@ namespace Prolog
             {
                 throw new ArgumentException("Query cannot be added to program.", "codeSentence");
             }
-
-            Functor functor = Functor.Create(codeSentence.Head.Functor);
-
+            var functor = Functor.Create(codeSentence.Head.Functor);
             if (functor == Functor.PragmaFunctor)
             {
                 ProcessPragma(codeSentence);
-
                 return null;
             }
-            else
+
+            // Find procedure associated with codeSentence.  Create a new procedure if necessary.
+            //
+            Procedure procedure;
+            if (!Procedures.TryGetProcedure(functor, out procedure))
             {
-                // Find procedure associated with codeSentence.  Create a new procedure if necessary.
-                //
-                Procedure procedure;
-                if (!Procedures.TryGetProcedure(functor, out procedure))
-                {
-                    procedure = Procedures.Add(functor);
-                }
-
-                // Create clause for codeSentence.
-                //
-                Clause clause = procedure.Clauses.Add(codeSentence);
-
-                return clause;
+                procedure = Procedures.Add(functor);
             }
+
+            // Create clause for codeSentence.
+            //
+            var clause = procedure.Clauses.Add(codeSentence);
+            return clause;
+
         }
 
         public void Touch()
@@ -211,9 +174,7 @@ namespace Prolog
             {
                 throw new InvalidOperationException("File name not specified.");
             }
-
             Write(FileName);
-
             IsModified = false;
         }
 
@@ -230,54 +191,39 @@ namespace Prolog
             IsModified = false;
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-        #region Hidden Members
-
-        private void Read(string path)
+        void Read(string path)
         {
-            using (StreamReader reader = new StreamReader(path))
+            using (var reader = new StreamReader(path))
             {
-                string text = reader.ReadToEnd();
-
-                CodeSentence[] codeSentences = Parser.Parse(text);
-
+                var text = reader.ReadToEnd();
+                var codeSentences = Parser.Parse(text);
                 if (codeSentences == null)
                 {
                     throw new ApplicationException("Source file is empty or cannot be processed.");
                 }
-
-                foreach (CodeSentence codeSentence in codeSentences)
+                foreach (var codeSentence in codeSentences)
                 {
                     Add(codeSentence);
                 }
             }
         }
 
-        private void Write(string path)
+        void Write(string path)
         {
-            using (StreamWriter writer = new StreamWriter(path))
+            using (var writer = new StreamWriter(path))
             {
                 string prefix = null;
-
                 if (IsOptimized)
                 {
                     writer.Write(prefix); prefix = Environment.NewLine + Environment.NewLine;
-
                     writer.WriteLine("pragma(optimize,true).");
                 }
-
-                foreach (Procedure procedure in Procedures)
+                foreach (var procedure in Procedures)
                 {
                     writer.Write(prefix); prefix = Environment.NewLine + Environment.NewLine;
-
-                    foreach (Clause clause in procedure.Clauses)
+                    foreach (var clause in procedure.Clauses)
                     {
                         writer.WriteLine(clause.ToString());
                     }
@@ -285,7 +231,7 @@ namespace Prolog
             }
         }
 
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
@@ -293,43 +239,34 @@ namespace Prolog
             }
         }
 
-        private void ProcessPragma(CodeSentence codeSentence)
+        void ProcessPragma(CodeSentence codeSentence)
         {
             if (codeSentence.Body.Count != 0)
             {
                 return;
             }
-
-            CodeCompoundTerm pragma = codeSentence.Head;
-
-            CodeCompoundTerm pragmaName = pragma.Children[0].AsCodeCompoundTerm;
-            CodeTerm pragmaArgument = pragma.Children[1];
-            if (pragmaName != null
-                && pragmaArgument != null)
+            var pragma = codeSentence.Head;
+            var pragmaName = pragma.Children[0].AsCodeCompoundTerm;
+            var pragmaArgument = pragma.Children[1];
+            if (pragmaName == null || pragmaArgument == null) return;
+            if (pragmaName.Functor == PragmaOptimizeFunctor)
             {
-                if (pragmaName.Functor == PragmaOptimizeFunctor)
-                {
-                    ProcessOptimizePragma(pragmaArgument);
-                }
+                ProcessOptimizePragma(pragmaArgument);
             }
         }
 
-        private void ProcessOptimizePragma(CodeTerm pragmaArgument)
+        void ProcessOptimizePragma(CodeTerm pragmaArgument)
         {
-            CodeValue pragmaValue = pragmaArgument.AsCodeValue;
-            if (pragmaValue != null)
+            var pragmaValue = pragmaArgument.AsCodeValue;
+            if (pragmaValue == null) return;
+            if (pragmaValue.Object.Equals(true))
             {
-                if (pragmaValue.Object.Equals(true))
-                {
-                    IsOptimized = true;
-                }
-                if (pragmaValue.Object.Equals(false))
-                {
-                    IsOptimized = false;
-                }
+                IsOptimized = true;
+            }
+            if (pragmaValue.Object.Equals(false))
+            {
+                IsOptimized = false;
             }
         }
-
-        #endregion
     }
 }

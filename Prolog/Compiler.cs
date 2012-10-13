@@ -11,16 +11,9 @@ namespace Prolog
 {
     internal sealed class Compiler
     {
-        #region Fields
-
-        private WamInstructionStreamBuilder m_instructionStreamBuilder;
-        private byte m_nextTemporaryRegisterId;
-        private byte m_nextPermanentRegisterId;
-        private Dictionary<string, WamInstructionRegister> m_variableAssignments;
-
-        #endregion
-
-        #region Public Methods
+        byte _nextTemporaryRegisterId;
+        byte _nextPermanentRegisterId;
+        Dictionary<string, WamInstructionRegister> _variableAssignments;
 
         public WamInstructionStream Compile(CodeSentence codeSentence, LibraryList libraries, bool optimize)
         {
@@ -34,15 +27,15 @@ namespace Prolog
             // When true, indicates we are compiling code for a procedure clause.  When false, indicates we
             // are compiling for an ad hoc query.
             //
-            bool isClause = (functor != null);
+            var isClause = (functor != null);
 
             if (isClause)
             {
-                WamInstructionStreamClauseAttribute clauseAttribute = new WamInstructionStreamClauseAttribute(
-                    m_instructionStreamBuilder.NextIndex,
+                var clauseAttribute = new WamInstructionStreamClauseAttribute(
+                    InstructionStreamBuilder.NextIndex,
                     functor,
                     index);
-                m_instructionStreamBuilder.AddAttribute(clauseAttribute);
+                InstructionStreamBuilder.AddAttribute(clauseAttribute);
             }
 
             if (isClause)
@@ -75,7 +68,7 @@ namespace Prolog
 
             if (codeSentence.Head != null)
             {
-                for (int idx = 0; idx < codeSentence.Head.Children.Count; ++idx)
+                for (var idx = 0; idx < codeSentence.Head.Children.Count; ++idx)
                 {
                     Get(codeSentence.Head.Children[idx], GetArgumentRegister(idx));
                 }
@@ -83,17 +76,16 @@ namespace Prolog
 
             if (codeSentence.Body.Count > 0)
             {
-                for (int idxProcedure = 0; idxProcedure < codeSentence.Body.Count; ++idxProcedure)
+                for (var idxProcedure = 0; idxProcedure < codeSentence.Body.Count; ++idxProcedure)
                 {
-                    CodeCompoundTerm codeCompoundTerm = codeSentence.Body[idxProcedure];
+                    var codeCompoundTerm = codeSentence.Body[idxProcedure];
 
-                    for (int idxArgument = 0; idxArgument < codeCompoundTerm.Children.Count; ++idxArgument)
+                    for (var idxArgument = 0; idxArgument < codeCompoundTerm.Children.Count; ++idxArgument)
                     {
                         Put(codeCompoundTerm.Children[idxArgument], GetArgumentRegister(idxArgument), libraries);
                     }
 
-                    bool isLastCall = (idxProcedure == codeSentence.Body.Count - 1);
-
+                    var isLastCall = (idxProcedure == codeSentence.Body.Count - 1);
                     if (isClause)
                     {
                         if (isLastCall)
@@ -144,29 +136,18 @@ namespace Prolog
             return InstructionStreamBuilder.ToInstructionStream();
         }
 
-        #endregion
+        private WamInstructionStreamBuilder InstructionStreamBuilder { get; set; }
 
-        #region Hidden Properties
-
-        private WamInstructionStreamBuilder InstructionStreamBuilder
-        {
-            get { return m_instructionStreamBuilder; }
-        }
-
-        #endregion
-
-        #region Hidden Methods
-
-        private void Initialize()
+        void Initialize()
         {
 
-            m_instructionStreamBuilder = new WamInstructionStreamBuilder();
-            m_nextTemporaryRegisterId = 0;
-            m_nextPermanentRegisterId = 0;
-            m_variableAssignments = new Dictionary<string, WamInstructionRegister>();
+            InstructionStreamBuilder = new WamInstructionStreamBuilder();
+            _nextTemporaryRegisterId = 0;
+            _nextPermanentRegisterId = 0;
+            _variableAssignments = new Dictionary<string, WamInstructionRegister>();
         }
 
-        private void Put(CodeTerm codeTerm, WamInstructionRegister targetRegister, LibraryList libraries)
+        void Put(CodeTerm codeTerm, WamInstructionRegister targetRegister, LibraryList libraries)
         {
             if (codeTerm.IsCodeList)
             {
@@ -194,14 +175,14 @@ namespace Prolog
             throw new InvalidOperationException("Unsupported codeTerm type.");
         }
 
-        private void Put(CodeValue codeValue, WamInstructionRegister targetRegister)
+        void Put(CodeValue codeValue, WamInstructionRegister targetRegister)
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.PutValue, WamValue.Create(codeValue), targetRegister));
         }
 
-        private void Put(CodeVariable codeVariable, WamInstructionRegister targetRegister)
+        void Put(CodeVariable codeVariable, WamInstructionRegister targetRegister)
         {
-            WamInstructionRegister sourceRegister = GetRegisterAssignment(codeVariable.Name);
+            var sourceRegister = GetRegisterAssignment(codeVariable.Name);
             if (sourceRegister.IsUnused)
             {
                 sourceRegister = GetNextPermanentRegister(codeVariable.Name);
@@ -213,21 +194,19 @@ namespace Prolog
             }
         }
 
-        private void Put(CodeCompoundTerm codeCompoundTerm, WamInstructionRegister targetRegister, LibraryList libraries)
+        void Put(CodeCompoundTerm codeCompoundTerm, WamInstructionRegister targetRegister, LibraryList libraries)
         {
-            WamInstructionRegister[] childrenRegisters = new WamInstructionRegister[codeCompoundTerm.Children.Count];
+            var childrenRegisters = new WamInstructionRegister[codeCompoundTerm.Children.Count];
 
             // Build substructures.
             //
-            for (int idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
+            for (var idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
             {
-                CodeTerm child = codeCompoundTerm.Children[idx];
-
+                var child = codeCompoundTerm.Children[idx];
                 if (child.IsCodeList)
                 {
                     child = ConvertCodeList(child.AsCodeList);
                 }
-
                 if (child.IsCodeCompoundTerm)
                 {
                     childrenRegisters[idx] = GetNextTemporaryRegister();
@@ -235,22 +214,21 @@ namespace Prolog
                 }
             }
 
-            Functor functor = Functor.Create(codeCompoundTerm.Functor);
+            var functor = Functor.Create(codeCompoundTerm.Functor);
 
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.PutStructure, functor, targetRegister));
-            for (int idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
+            for (var idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
             {
-                CodeTerm child = codeCompoundTerm.Children[idx];
+                var child = codeCompoundTerm.Children[idx];
 
                 if (child.IsCodeList)
                 {
                     child = ConvertCodeList(child.AsCodeList);
                 }
-
                 if (child.IsCodeVariable)
                 {
-                    string variableName = child.AsCodeVariable.Name;
-                    WamInstructionRegister variableRegister = GetRegisterAssignment(variableName);
+                    var variableName = child.AsCodeVariable.Name;
+                    var variableRegister = GetRegisterAssignment(variableName);
                     if (variableRegister.IsUnused)
                     {
                         variableRegister = GetNextPermanentRegister(variableName);
@@ -276,42 +254,38 @@ namespace Prolog
             }
         }
 
-        private void Get(CodeTerm codeTerm, WamInstructionRegister sourceRegister)
+        void Get(CodeTerm codeTerm, WamInstructionRegister sourceRegister)
         {
             if (codeTerm.IsCodeList)
             {
                 codeTerm = ConvertCodeList(codeTerm.AsCodeList);
             }
-
             if (codeTerm.IsCodeVariable)
             {
                 Get(codeTerm.AsCodeVariable, sourceRegister);
                 return;
             }
-
             if (codeTerm.IsCodeCompoundTerm)
             {
                 Get(codeTerm.AsCodeCompoundTerm, sourceRegister);
                 return;
             }
-
             if (codeTerm.IsCodeValue)
             {
                 Get(codeTerm.AsCodeValue, sourceRegister);
                 return;
             }
-
             throw new InvalidOperationException("Unsupported codeTerm type.");
         }
 
-        private void Get(CodeValue codeValue, WamInstructionRegister sourceRegister)
+        void Get(CodeValue codeValue, WamInstructionRegister sourceRegister)
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.GetValue, sourceRegister, WamValue.Create(codeValue)));
         }
 
-        private void Get(CodeVariable codeVariable, WamInstructionRegister sourceRegister)
+        void Get(CodeVariable codeVariable, WamInstructionRegister sourceRegister)
         {
-            WamInstructionRegister targetRegister = GetRegisterAssignment(codeVariable.Name);
+            var targetRegister = GetRegisterAssignment(codeVariable.Name);
             if (targetRegister.IsUnused)
             {
                 targetRegister = GetNextPermanentRegister(codeVariable.Name);
@@ -323,24 +297,22 @@ namespace Prolog
             }
         }
 
-        private void Get(CodeCompoundTerm codeCompoundTerm, WamInstructionRegister sourceRegister)
+        void Get(CodeCompoundTerm codeCompoundTerm, WamInstructionRegister sourceRegister)
         {
-            WamInstructionRegister[] childrenRegisters = new WamInstructionRegister[codeCompoundTerm.Children.Count];
+            var childrenRegisters = new WamInstructionRegister[codeCompoundTerm.Children.Count];
 
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.GetStructure, sourceRegister, Functor.Create(codeCompoundTerm.Functor)));
-            for (int idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
+            for (var idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
             {
-                CodeTerm child = codeCompoundTerm.Children[idx];
-
+                var child = codeCompoundTerm.Children[idx];
                 if (child.IsCodeList)
                 {
                     child = ConvertCodeList(child.AsCodeList);
                 }
-
                 if (child.IsCodeVariable)
                 {
-                    string variableName = child.AsCodeVariable.Name;
-                    WamInstructionRegister variableRegister = GetRegisterAssignment(variableName);
+                    var variableName = child.AsCodeVariable.Name;
+                    var variableRegister = GetRegisterAssignment(variableName);
                     if (variableRegister.IsUnused)
                     {
                         variableRegister = GetNextPermanentRegister(variableName);
@@ -368,15 +340,13 @@ namespace Prolog
 
             // Build substructures.
             //
-            for (int idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
+            for (var idx = 0; idx < codeCompoundTerm.Children.Count; ++idx)
             {
-                CodeTerm child = codeCompoundTerm.Children[idx];
-
+                var child = codeCompoundTerm.Children[idx];
                 if (child.IsCodeList)
                 {
                     child = ConvertCodeList(child.AsCodeList);
                 }
-
                 if (child.IsCodeCompoundTerm)
                 {
                     Get(child, childrenRegisters[idx]);
@@ -384,10 +354,9 @@ namespace Prolog
             }
         }
 
-        private void Call(CodeFunctor codeFunctor, LibraryList libraries)
+        void Call(CodeFunctor codeFunctor, LibraryList libraries)
         {
-            Functor functor = Functor.Create(codeFunctor);
-
+            var functor = Functor.Create(codeFunctor);
             if (functor == Functor.CutFunctor)
             {
                 InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Cut));
@@ -402,111 +371,91 @@ namespace Prolog
             }
         }
 
-        private void Execute(CodeFunctor codeFunctor)
+        void Execute(CodeFunctor codeFunctor)
         {
-            Functor functor = Functor.Create(codeFunctor);
-
+            var functor = Functor.Create(codeFunctor);
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Execute, functor));
         }
 
-        private void Allocate()
+        void Allocate()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Allocate));
         }
 
-        private void Deallocate()
+        void Deallocate()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Deallocate));
         }
 
-        private void Proceed()
+        void Proceed()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Proceed));
         }
 
-        private void Success()
+        void Success()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Success));
         }
 
-        private void Failure()
+        void Failure()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.Failure));
         }
 
-        private void TryMeElse(Functor functor, int index)
+        void TryMeElse(Functor functor, int index)
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.TryMeElse, functor, index));
         }
 
-        private void RetryMeElse(Functor functor, int index)
+        void RetryMeElse(Functor functor, int index)
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.RetryMeElse, functor, index));
         }
 
-        private void TrustMe()
+        void TrustMe()
         {
             InstructionStreamBuilder.Write(new WamInstruction(WamInstructionOpCodes.TrustMe));
         }
 
-        #endregion
-
-        #region Hidden Members: Register Assignment
-
-        private WamInstructionRegister GetArgumentRegister(int registerId)
+        WamInstructionRegister GetArgumentRegister(int registerId)
         {
             return new WamInstructionRegister(WamInstructionRegisterTypes.Argument, (byte)registerId);
         }
 
-        private WamInstructionRegister GetNextTemporaryRegister()
+        WamInstructionRegister GetNextTemporaryRegister()
         {
-            return new WamInstructionRegister(WamInstructionRegisterTypes.Temporary, m_nextTemporaryRegisterId++);
+            return new WamInstructionRegister(WamInstructionRegisterTypes.Temporary, _nextTemporaryRegisterId++);
         }
 
-        private WamInstructionRegister GetNextPermanentRegister(string name)
+        WamInstructionRegister GetNextPermanentRegister(string name)
         {
-            WamInstructionRegister instructionRegister = new WamInstructionRegister(WamInstructionRegisterTypes.Permanent, m_nextPermanentRegisterId++);
+            var instructionRegister = new WamInstructionRegister(WamInstructionRegisterTypes.Permanent, _nextPermanentRegisterId++);
+            _variableAssignments.Add(name, instructionRegister);
 
-            m_variableAssignments.Add(name, instructionRegister);
-
-            WamInstructionStreamVariableAttribute variableAttribute = new WamInstructionStreamVariableAttribute(
+            var variableAttribute = new WamInstructionStreamVariableAttribute(
                 InstructionStreamBuilder.NextIndex,
                 name,
                 instructionRegister);
             InstructionStreamBuilder.AddAttribute(variableAttribute);
-
             return instructionRegister;
         }
 
-        private WamInstructionRegister GetRegisterAssignment(string name)
+        WamInstructionRegister GetRegisterAssignment(string name)
         {
             WamInstructionRegister instructionRegister;
-            if (m_variableAssignments.TryGetValue(name, out instructionRegister))
-            {
-                return instructionRegister;
-            }
-
-            return WamInstructionRegister.Unused;
+            return _variableAssignments.TryGetValue(name, out instructionRegister) ? instructionRegister : WamInstructionRegister.Unused;
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private CodeTerm ConvertCodeList(CodeList codeList)
+        CodeTerm ConvertCodeList(CodeList codeList)
         {
-            CodeTerm result = codeList.Tail;
-
-            for (int index = codeList.Head.Count - 1; index >= 0; --index)
+            var result = codeList.Tail;
+            for (var index = codeList.Head.Count - 1; index >= 0; --index)
             {
                 result = new CodeCompoundTerm(
                     CodeFunctor.ListFunctor,
-                    new CodeTerm[] { codeList.Head[index], result });
+                    new[] { codeList.Head[index], result });
             }
-
             return result;
         }
-
-        #endregion
     }
 }

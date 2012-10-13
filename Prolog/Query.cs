@@ -13,17 +13,7 @@ namespace Prolog
     /// </summary>
     public sealed class Query
     {
-        #region Fields
-
-        private CodeSentence m_codeSentence;
-
-        private LibraryList m_libraries;
-
-        private WamInstructionStream m_wamInstructionStream;
-
-        #endregion
-
-        #region Constructors
+        private WamInstructionStream _wamInstructionStream;
 
         public Query(CodeSentence codeSentence)
         {
@@ -32,53 +22,31 @@ namespace Prolog
                 throw new ArgumentNullException("codeSentence");
             }
 
-            m_codeSentence = codeSentence;
+            CodeSentence = codeSentence;
 
-            m_libraries = LibraryList.Create();
-            m_libraries.Add(Library.Standard);
+            Libraries = LibraryList.Create();
+            Libraries.Add(Library.Standard);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeSentence CodeSentence
-        {
-            get { return m_codeSentence; }
-        }
-
-        public LibraryList Libraries
-        {
-            get { return m_libraries; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public CodeSentence CodeSentence { get; private set; }
+        public LibraryList Libraries { get; private set; }
 
         public override string ToString()
         {
             return string.Format("{0}", CodeSentence);
         }
 
-        #endregion
-
-        #region Internal Members
-
         internal WamInstructionStream WamInstructionStream
         {
             get
             {
-                if (m_wamInstructionStream == null)
+                if (_wamInstructionStream == null)
                 {
-                    Compiler compiler = new Compiler();
-                    m_wamInstructionStream = compiler.Compile(CodeSentence, Libraries, false);
+                    var compiler = new Compiler();
+                    _wamInstructionStream = compiler.Compile(CodeSentence, Libraries, false);
                 }
-
-                return m_wamInstructionStream;
+                return _wamInstructionStream;
             }
         }
-
-        #endregion
     }
 }

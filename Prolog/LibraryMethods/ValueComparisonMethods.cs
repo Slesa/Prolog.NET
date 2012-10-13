@@ -11,26 +11,22 @@ namespace Prolog
 {
     internal static class ValueComparisonMethods
     {
-        #region Public Methods
-
         public static CodeTerm Equal(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) == 0);
                     }
                 }
-
                 return new CodeValueBoolean(arguments[0] == arguments[1]);
             }
             catch (Exception ex)
@@ -42,21 +38,19 @@ namespace Prolog
         public static CodeTerm Unequal(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) != 0);
                     }
                 }
-
                 return new CodeValueBoolean(arguments[0] != arguments[1]);
             }
             catch (Exception ex)
@@ -68,21 +62,19 @@ namespace Prolog
         public static CodeTerm Less(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) < 0);
                     }
                 }
-
                 throw new ArgumentException("Arguments are not comparable.");
             }
             catch (Exception ex)
@@ -94,21 +86,19 @@ namespace Prolog
         public static CodeTerm LessEqual(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) <= 0);
                     }
                 }
-
                 throw new ArgumentException("Arguments are not comparable.");
             }
             catch (Exception ex)
@@ -120,21 +110,19 @@ namespace Prolog
         public static CodeTerm Greater(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) > 0);
                     }
                 }
-
                 throw new ArgumentException("Arguments are not comparable.");
             }
             catch (Exception ex)
@@ -146,21 +134,19 @@ namespace Prolog
         public static CodeTerm GreaterEqual(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             try
             {
-                CodeValue argValue0 = arguments[0] as CodeValue;
-                CodeValue argValue1 = arguments[1] as CodeValue;
+                var argValue0 = arguments[0] as CodeValue;
+                var argValue1 = arguments[1] as CodeValue;
                 if (argValue0 != null && argValue1 != null)
                 {
-                    IComparable lhs = argValue0.Object as IComparable;
-                    IComparable rhs = argValue1.Object as IComparable;
+                    var lhs = argValue0.Object as IComparable;
+                    var rhs = argValue1.Object as IComparable;
                     if (lhs != null && rhs != null)
                     {
                         return new CodeValueBoolean(lhs.CompareTo(rhs) >= 0);
                     }
                 }
-
                 throw new ArgumentException("Arguments are not comparable.");
             }
             catch (Exception ex)
@@ -168,7 +154,5 @@ namespace Prolog
                 return new CodeValueException(ex);
             }
         }
-
-        #endregion
     }
 }

@@ -5,8 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
-using Prolog.Code;
+using System.Linq;
 
 namespace Prolog
 {
@@ -15,14 +14,6 @@ namespace Prolog
     /// </summary>
     public sealed class LibraryMethodList : ReadableList<LibraryMethod>
     {
-        #region Fields
-
-        private Library m_library;
-
-        #endregion
-
-        #region Constructors
-
         internal LibraryMethodList(Library library, ObservableCollection<LibraryMethod> methods)
             : base(methods)
         {
@@ -31,20 +22,13 @@ namespace Prolog
                 throw new ArgumentNullException("library");
             }
 
-            m_library = library;
+            Library = library;
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         /// Gets the <see cref="Prolog.Library"/> containing this object.
         /// </summary>
-        public Library Library
-        {
-            get { return m_library; }
-        }
+        public Library Library { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="LibraryMethod"/> object associated with the specified <see cref="Functor"/>.
@@ -59,22 +43,16 @@ namespace Prolog
                 {
                     throw new ArgumentNullException("functor");
                 }
-
-                foreach (LibraryMethod method in this)
+                foreach (var method in this)
                 {
                     if (method.Functor == functor)
                     {
                         return method;
                     }
                 }
-
                 throw new KeyNotFoundException();
             }
         }
-
-        #endregion
-
-        #region Public Members
 
         /// <summary>
         /// Removes a <see cref="LibraryMethod"/> from the list.
@@ -90,14 +68,9 @@ namespace Prolog
             {
                 throw new ArgumentException("Item not found.", "method");
             }
-
             Items.Remove(method);
             Library.Touch();
         }
-
-        #endregion
-
-        #region Internal Members
 
         internal bool Contains(Functor functor)
         {
@@ -105,16 +78,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            foreach (LibraryMethod method in this)
-            {
-                if (method.Functor == functor)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return this.Any(method => method.Functor == functor);
         }
 
         internal Function Add(Functor functor, FunctionDelegate functionDelegate)
@@ -132,7 +96,7 @@ namespace Prolog
                 throw new ArgumentException("Item already exists.", "functor");
             }
 
-            Function function = new Function(this, functor, functionDelegate);
+            var function = new Function(this, functor, functionDelegate);
             Items.Add(function);
             Library.Touch();
 
@@ -154,7 +118,7 @@ namespace Prolog
                 throw new ArgumentException("Item already exists.", "functor");
             }
 
-            Predicate predicate = new Predicate(this, functor, predicateDelegate, canEvaluate);
+            var predicate = new Predicate(this, functor, predicateDelegate, canEvaluate);
             Items.Add(predicate);
             Library.Touch();
 
@@ -175,8 +139,7 @@ namespace Prolog
             {
                 throw new ArgumentException("Item already exists.", "functor");
             }
-
-            BacktrackingPredicate predicate = new BacktrackingPredicate(this, functor, backtrackingPredicateDelegate);
+            var predicate = new BacktrackingPredicate(this, functor, backtrackingPredicateDelegate);
             Items.Add(predicate);
             Library.Touch();
 
@@ -197,14 +160,11 @@ namespace Prolog
             {
                 throw new ArgumentException("Item already exists.", "functor");
             }
-
-            CodePredicate predicate = new CodePredicate(this, functor, codePredicateDelegate);
+            var predicate = new CodePredicate(this, functor, codePredicateDelegate);
             Items.Add(predicate);
             Library.Touch();
 
             return predicate;
         }
-
-        #endregion
     }
 }

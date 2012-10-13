@@ -6,60 +6,22 @@ namespace Prolog
 {
     internal sealed class WamEnvironment
     {
-        #region Fields
-
-        private static int s_nextId;
-
-        private int m_id;
-        private WamEnvironment m_predecessor;
-        private WamInstructionPointer m_returnInstructionPointer;
-        private WamChoicePoint m_cutChoicePoint;
-
-        private WamReferenceTargetList m_permanentRegisters;
-
-        #endregion
-
-        #region Constructors
+        static int _nextId;
 
         public WamEnvironment(WamEnvironment predecessor, WamInstructionPointer returnInstructionPointer, WamChoicePoint cutChoicePoint)
         {
-            m_id = s_nextId++;
-            m_predecessor = predecessor;
-            m_returnInstructionPointer = returnInstructionPointer;
-            m_cutChoicePoint = cutChoicePoint;
+            Id = _nextId++;
+            Predecessor = predecessor;
+            ReturnInstructionPointer = returnInstructionPointer;
+            CutChoicePoint = cutChoicePoint;
 
-            m_permanentRegisters = new WamReferenceTargetList();
+            PermanentRegisters = new WamReferenceTargetList();
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public int Id
-        {
-            get { return m_id; }
-        }
-
-        public WamEnvironment Predecessor
-        {
-            get { return m_predecessor; }
-        }
-
-        public WamInstructionPointer ReturnInstructionPointer
-        {
-            get { return m_returnInstructionPointer; }
-        }
-
-        public WamReferenceTargetList PermanentRegisters
-        {
-            get { return m_permanentRegisters; }
-        }
-
-        public WamChoicePoint CutChoicePoint
-        {
-            get { return m_cutChoicePoint; }
-        }
-
-        #endregion
+        public int Id { get; private set; }
+        public WamEnvironment Predecessor { get; private set; }
+        public WamInstructionPointer ReturnInstructionPointer { get; private set; }
+        public WamReferenceTargetList PermanentRegisters { get; private set; }
+        public WamChoicePoint CutChoicePoint { get; private set; }
     }
 }

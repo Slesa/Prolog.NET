@@ -12,17 +12,11 @@ namespace Prolog
     /// </summary>
     public sealed class PrologVariableList : ReadableList<PrologVariable>
     {
-        #region Fields
-
-        private IPrologVariableListContainer m_container;
-
-        #endregion
-
-        #region Constructors
+        readonly IPrologVariableListContainer _container;
 
         internal PrologVariableList()
         {
-            m_container = null;
+            _container = null;
         }
 
         internal PrologVariableList(IPrologVariableListContainer container)
@@ -32,36 +26,27 @@ namespace Prolog
                 throw new ArgumentNullException("container");
             }
 
-            m_container = container;
+            _container = container;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public PrologVariable this[string register]
         {
             get
             {
-                foreach (PrologVariable item in this)
+                foreach (var item in this)
                 {
                     if (item.Register == register)
                     {
                         return item;
                     }
                 }
-
                 throw new KeyNotFoundException();
             }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public bool TryGetValue(string register, out PrologVariable value)
         {
-            foreach (PrologVariable item in this)
+            foreach (var item in this)
             {
                 if (item.Register == register)
                 {
@@ -74,13 +59,9 @@ namespace Prolog
             return false;
         }
 
-        #endregion
-
-        #region Internal Members
-
         internal IPrologVariableListContainer Container
         {
-            get { return m_container; }
+            get { return _container; }
         }
 
         internal void Clear()
@@ -90,17 +71,14 @@ namespace Prolog
 
         internal PrologVariable Add(string register)
         {
-            PrologVariable variable = new PrologVariable(this);
-            variable.Register = register;
-
+            var variable = new PrologVariable(this) {Register = register};
             Items.Add(variable);
-
             return variable;
         }
 
         internal void Remove(string register)
         {
-            foreach (PrologVariable variable in this)
+            foreach (var variable in this)
             {
                 if (variable.Register == register)
                 {
@@ -117,15 +95,15 @@ namespace Prolog
 
         internal void Synchronize(PrologVariableList variables)
         {
-            HashSet<string> registers = new HashSet<string>();
-            foreach (PrologVariable variable in this)
+            var registers = new HashSet<string>();
+            foreach (var variable in this)
             {
                 registers.Add(variable.Register);
             }
 
             // Add/update variables in specified list.
             //
-            foreach (PrologVariable variable in variables)
+            foreach (var variable in variables)
             {
                 PrologVariable thisVariable;
                 if (registers.Contains(variable.Register))
@@ -151,12 +129,10 @@ namespace Prolog
 
             // Remove variables not in specified list.
             //
-            foreach (string register in registers)
+            foreach (var register in registers)
             {
                 Remove(register);
             }
         }
-
-        #endregion
     }
 }

@@ -3,11 +3,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace Prolog
 {
@@ -16,16 +11,6 @@ namespace Prolog
     /// </summary>
     public abstract class LibraryMethod
     {
-        #region Fields
-
-        private LibraryMethodList m_container;
-        private Functor m_functor;
-        private bool m_canEvaluate;
-
-        #endregion
-
-        #region Constructors
-
         internal LibraryMethod(LibraryMethodList container, Functor functor, bool canEvaluate)
         {
             if (container == null)
@@ -37,30 +22,13 @@ namespace Prolog
                 throw new ArgumentNullException("functor");
             }
 
-            m_container = container;
-            m_functor = functor;
-            m_canEvaluate = canEvaluate;
+            Container = container;
+            Functor = functor;
+            CanEvaluate = canEvaluate;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public LibraryMethodList Container
-        {
-            get { return m_container; }
-        }
-
-        public Functor Functor
-        {
-            get { return m_functor; }
-        }
-
-        public bool CanEvaluate
-        {
-            get { return m_canEvaluate; }
-        }
-
-        #endregion
+        public LibraryMethodList Container { get; private set; }
+        public Functor Functor { get; private set; }
+        public bool CanEvaluate { get; private set; }
     }
 }

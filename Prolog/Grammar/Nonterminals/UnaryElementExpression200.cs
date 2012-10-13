@@ -11,20 +11,12 @@ namespace Prolog.Grammar
     //
     internal sealed class UnaryElementExpression200 : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(UnaryElementExpression200 lhs, UnaryOp200 unaryOp200, Element element)
         {
             lhs.CodeTerm =
                 new CodeCompoundTerm(
                     unaryOp200.CodeFunctor,
-                    new CodeTerm[] { element.CodeTerm });
+                    new[] { element.CodeTerm });
         }
 
         public static void Rule(UnaryElementExpression200 lhs, Element element)
@@ -32,16 +24,6 @@ namespace Prolog.Grammar
             lhs.CodeTerm = element.CodeTerm;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

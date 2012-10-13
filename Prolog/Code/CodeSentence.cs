@@ -18,39 +18,15 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeSentence : IEquatable<CodeSentence>, IImmuttable
     {
-        #region Fields
-
         public const string ElementName = "CodeSentence";
-
-        private CodeCommentList m_comments;
-        private CodeCompoundTerm m_head;
-        private CodeCompoundTermList m_body;
-
-        #endregion
-
-        #region Constructors
 
         public CodeSentence(IEnumerable<CodeComment> comments, CodeCompoundTerm head, IEnumerable<CodeCompoundTerm> body)
         {
-            if (comments == null)
-            {
-                m_comments = new CodeCommentList(new List<CodeComment>());
-            }
-            else
-            {
-                m_comments = new CodeCommentList(new List<CodeComment>(comments));
-            }
+            Comments = comments == null ? new CodeCommentList(new List<CodeComment>()) : new CodeCommentList(new List<CodeComment>(comments));
 
-            m_head = head;
+            Head = head;
 
-            if (body == null)
-            {
-                m_body = new CodeCompoundTermList(new List<CodeCompoundTerm>());
-            }
-            else
-            {
-                m_body = new CodeCompoundTermList(new List<CodeCompoundTerm>(body));
-            }
+            Body = body == null ? new CodeCompoundTermList(new List<CodeCompoundTerm>()) : new CodeCompoundTermList(new List<CodeCompoundTerm>(body));
         }
 
         public static CodeSentence Create(XElement xCodeSentence)
@@ -61,51 +37,30 @@ namespace Prolog.Code
                 CodeCompoundTermList.Create(xCodeSentence.Element(CodeCompoundTermList.ElementName)));
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeCommentList Comments
-        {
-            get { return m_comments; }
-        }
-
-        public CodeCompoundTerm Head
-        {
-            get { return m_head; }
-        }
-
-        public CodeCompoundTermList Body
-        {
-            get { return m_body; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public CodeCommentList Comments { get; private set; }
+        public CodeCompoundTerm Head { get; private set; }
+        public CodeCompoundTermList Body { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeSentence rhs = obj as CodeSentence;
+            var rhs = obj as CodeSentence;
             if (rhs == null) return false;
 
-            return Head == rhs.Head
-                   && Body == rhs.Body;
+            return Head == rhs.Head && Body == rhs.Body;
         }
 
         public override int GetHashCode()
         {
-            return Head.GetHashCode()
-                   ^ Body.GetHashCode();
+            return Head.GetHashCode() ^ Body.GetHashCode();
         }
 
         public static bool operator ==(CodeSentence lhs, CodeSentence rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -117,27 +72,27 @@ namespace Prolog.Code
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            foreach (CodeComment comment in Comments)
+            foreach (var comment in Comments)
             {
                 sb.Append("/// ");
                 sb.Append(comment.Text);
                 sb.Append(Environment.NewLine);
             }
 
-            string prefix = ":- ";
+            var prefix = ":- ";
 
             if (Head != null)
             {
-                sb.Append(Head.ToString());
+                sb.Append(Head);
                 prefix = " :-" + Environment.NewLine + "    ";
             }
 
-            foreach (CodeCompoundTerm codeCompoundTerm in Body)
+            foreach (var codeCompoundTerm in Body)
             {
                 sb.Append(prefix); prefix = "," + Environment.NewLine + "    ";
-                sb.Append(codeCompoundTerm.ToString());
+                sb.Append(codeCompoundTerm);
             }
 
             return sb.ToString();
@@ -152,18 +107,11 @@ namespace Prolog.Code
                     Body.ToXElement());
         }
 
-        #endregion
-
-        #region IEquatable<CodeSentence> Members
-
         public bool Equals(CodeSentence other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
-            return Head == other.Head
-                   && Body == other.Body;
+            return Head == other.Head && Body == other.Body;
         }
-
-        #endregion
     }
 }

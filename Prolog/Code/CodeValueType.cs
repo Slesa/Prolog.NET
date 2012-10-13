@@ -12,15 +12,7 @@ namespace Prolog.Code
     /// </summary>
     public sealed class CodeValueType : CodeValue, IEquatable<CodeValueType>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValueType";
-
-        private Type m_value;
-
-        #endregion
-
-        #region Constructors
 
         public CodeValueType(Type value)
         {
@@ -29,7 +21,7 @@ namespace Prolog.Code
                 throw new ArgumentNullException("value");
             }
 
-            m_value = value;
+            Value = value;
         }
 
         public static new CodeValueType Create(XElement xCodeValueType)
@@ -37,29 +29,18 @@ namespace Prolog.Code
             throw new NotSupportedException();
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
             get { return Value; }
         }
 
-        public Type Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public Type Value { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeValueType rhs = obj as CodeValueType;
+            var rhs = obj as CodeValueType;
             if (rhs == null) return false;
 
             return Value == rhs.Value;
@@ -72,9 +53,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeValueType lhs, CodeValueType rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -95,10 +76,6 @@ namespace Prolog.Code
                 new XElement(ElementName, Value.ToString()));
         }
 
-        #endregion
-
-        #region IEquatable<CodeObject> Members
-
         public override bool Equals(CodeValue other)
         {
             return Equals(other as CodeValueType);
@@ -106,11 +83,9 @@ namespace Prolog.Code
 
         public bool Equals(CodeValueType other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Value == other.Value;
         }
-
-        #endregion
     }
 }

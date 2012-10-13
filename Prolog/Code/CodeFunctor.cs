@@ -3,6 +3,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace Prolog.Code
@@ -74,13 +75,10 @@ namespace Prolog.Code
             var name = xCodeFunctor.Element("Name").Value;
             var arity = int.Parse(xCodeFunctor.Element("Arity").Value);
 
-            XElement xIsOperator = xCodeFunctor.Element("IsOperator");
-            if (xIsOperator != null)
-            {
-                return new CodeFunctor(name, arity, bool.Parse(xIsOperator.Value));
-            }
-
-            return new CodeFunctor(name, arity);
+            var xIsOperator = xCodeFunctor.Element("IsOperator");
+            return xIsOperator != null
+                ? new CodeFunctor(name, arity, bool.Parse(xIsOperator.Value)) 
+                : new CodeFunctor(name, arity);
         }
 
         public static string CutFunctorName { get; private set; }
@@ -130,16 +128,13 @@ namespace Prolog.Code
             if (IsOperator)
             {
                 return new XElement(ElementName,
-                    new XElement("Name", Name),
-                    new XElement("Arity", Arity.ToString()),
-                    new XElement("IsOperator", IsOperator.ToString()));
+                                    new XElement("Name", Name),
+                                    new XElement("Arity", Arity.ToString(CultureInfo.InvariantCulture)),
+                                    new XElement("IsOperator", IsOperator.ToString()));
             }
-            else
-            {
-                return new XElement(ElementName,
-                    new XElement("Name", Name),
-                    new XElement("Arity", Arity.ToString()));
-            }
+            return new XElement(ElementName,
+                                new XElement("Name", Name),
+                                new XElement("Arity", Arity.ToString(CultureInfo.InvariantCulture)));
         }
 
         public bool Equals(CodeFunctor other)

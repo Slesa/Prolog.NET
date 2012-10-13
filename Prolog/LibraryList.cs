@@ -15,8 +15,6 @@ namespace Prolog
     /// </summary>
     public sealed class LibraryList : ReadableList<Library>
     {
-        #region Constructors
-
         internal LibraryList(ObservableCollection<Library> libraries)
             : base(libraries)
         { }
@@ -26,10 +24,6 @@ namespace Prolog
             return new LibraryList(new ObservableCollection<Library>());
         }
 
-        #endregion
-
-        #region Public Properties
-
         public LibraryMethod this[Functor functor]
         {
             get
@@ -38,8 +32,7 @@ namespace Prolog
                 {
                     throw new ArgumentNullException("functor");
                 }
-
-                foreach (Library library in this)
+                foreach (var library in this)
                 {
                     if (library.Contains(functor))
                     {
@@ -51,10 +44,6 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Public Members
-
         public void Add(Library library)
         {
             if (library == null)
@@ -65,7 +54,6 @@ namespace Prolog
             {
                 throw new ArgumentException("Item already exists.", "library");
             }
-
             Items.Add(library);
         }
 
@@ -79,7 +67,6 @@ namespace Prolog
             {
                 throw new ArgumentException("Item not found.", "library");
             }
-
             Items.Remove(library);
         }
 
@@ -89,18 +76,14 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            foreach (Library library in this)
+            foreach (var library in this)
             {
                 if (library.Contains(functor))
                 {
                     return true;
                 }
             }
-
             return false;
         }
-
-        #endregion
     }
 }

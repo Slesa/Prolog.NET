@@ -8,13 +8,7 @@ namespace Prolog
 {
     internal sealed class BacktrackingPredicate : LibraryMethod
     {
-        #region Fields
-
-        private BacktrackingPredicateDelegate m_backtrackingPredicateDelegate;
-
-        #endregion
-
-        #region Constructors
+        readonly BacktrackingPredicateDelegate _backtrackingPredicateDelegate;
 
         internal BacktrackingPredicate(LibraryMethodList container, Functor functor, BacktrackingPredicateDelegate backtrackingPredicateDelegate)
             : base(container, functor, false)
@@ -23,19 +17,12 @@ namespace Prolog
             {
                 throw new ArgumentNullException("backtrackingPredicateDelegate");
             }
-
-            m_backtrackingPredicateDelegate = backtrackingPredicateDelegate;
+            _backtrackingPredicateDelegate = backtrackingPredicateDelegate;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public BacktrackingPredicateDelegate BacktrackingPredicateDelegate
         {
-            get { return m_backtrackingPredicateDelegate; }
+            get { return _backtrackingPredicateDelegate; }
         }
-
-        #endregion
     }
 }

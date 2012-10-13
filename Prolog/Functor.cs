@@ -13,24 +13,6 @@ namespace Prolog
     /// </summary>
     public sealed class Functor : IEquatable<Functor>, IImmuttable
     {
-        #region Fields
-
-        private static string s_cutFunctorName = "!";
-        private static string s_listFunctorName = ".";
-        private static string s_nilFunctorName = "nil";
-        private static string s_pragmaFunctorName = "pragma";
-        private static Functor s_cutFunctor = new Functor(CutFunctorName, 0);
-        private static Functor s_listFunctor = new Functor(ListFunctorName, 2);
-        private static Functor s_nilFunctor = new Functor(NilFunctorName, 0);
-        private static Functor s_pragmaFunctor = new Functor(PragmaFunctorName, 2);
-
-        private string m_name;
-        private int m_arity;
-
-        #endregion
-
-        #region Constructors
-
         public Functor(string name, int arity)
         {
             if (string.IsNullOrEmpty(name))
@@ -42,8 +24,20 @@ namespace Prolog
                 throw new ArgumentOutOfRangeException("arity");
             }
 
-            m_name = name;
-            m_arity = arity;
+            Name = name;
+            Arity = arity;
+        }
+
+        static Functor()
+        {
+            PragmaFunctor = new Functor(PragmaFunctorName, 2);
+            NilFunctor = new Functor(NilFunctorName, 0);
+            ListFunctor = new Functor(ListFunctorName, 2);
+            CutFunctor = new Functor(CutFunctorName, 0);
+            PragmaFunctorName = "pragma";
+            NilFunctorName = "nil";
+            ListFunctorName = ".";
+            CutFunctorName = "!";
         }
 
         public static Functor Create(CodeFunctor codeFunctor)
@@ -51,87 +45,36 @@ namespace Prolog
             return new Functor(codeFunctor.Name, codeFunctor.Arity);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public string Name
-        {
-            get { return m_name; }
-        }
-
-        public int Arity
-        {
-            get { return m_arity; }
-        }
-
-        public static string CutFunctorName
-        {
-            get { return s_cutFunctorName; }
-        }
-
-        public static string ListFunctorName
-        {
-            get { return s_listFunctorName; }
-        }
-
-        public static string NilFunctorName
-        {
-            get { return s_nilFunctorName; }
-        }
-
-        public static string PragmaFunctorName
-        {
-            get { return s_pragmaFunctorName; }
-        }
-
-        public static Functor CutFunctor
-        {
-            get { return s_cutFunctor; }
-        }
-
-        public static Functor ListFunctor
-        {
-            get { return s_listFunctor; }
-        }
-
-        public static Functor NilFunctor
-        {
-            get { return s_nilFunctor; }
-        }
-
-        public static Functor PragmaFunctor
-        {
-            get { return s_pragmaFunctor; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public string Name { get; private set; }
+        public int Arity { get; private set; }
+        public static string CutFunctorName { get; private set; }
+        public static string ListFunctorName { get; private set; }
+        public static string NilFunctorName { get; private set; }
+        public static string PragmaFunctorName { get; private set; }
+        public static Functor CutFunctor { get; private set; }
+        public static Functor ListFunctor { get; private set; }
+        public static Functor NilFunctor { get; private set; }
+        public static Functor PragmaFunctor { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            Functor rhs = obj as Functor;
+            var rhs = obj as Functor;
             if (rhs == null) return false;
 
-            return Name == rhs.Name
-                   && Arity == rhs.Arity;
+            return Name == rhs.Name && Arity == rhs.Arity;
         }
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode()
-                   ^ Arity.GetHashCode();
+            return Name.GetHashCode() ^ Arity.GetHashCode();
         }
 
         public static bool operator ==(Functor lhs, Functor rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
-
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
-
+            if (ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
             return lhs.Equals(rhs);
         }
 
@@ -145,18 +88,10 @@ namespace Prolog
             return string.Format("{0}/{1}", Name, Arity);
         }
 
-        #endregion
-
-        #region IEquatable<Functor> Members
-
         public bool Equals(Functor other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
-
-            return Name == other.Name
-                   && Arity == other.Arity;
+            if (ReferenceEquals(other, null)) return false;
+            return Name == other.Name && Arity == other.Arity;
         }
-
-        #endregion
     }
 }

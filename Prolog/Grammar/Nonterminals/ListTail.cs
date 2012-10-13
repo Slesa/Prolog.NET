@@ -10,29 +10,11 @@ namespace Prolog.Grammar
     //
     internal sealed class ListTail : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(ListTail lhs, Bar bar, ListTailItem listTailItem)
         {
             lhs.CodeTerm = listTailItem.CodeTerm;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

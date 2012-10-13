@@ -3,6 +3,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace Prolog.Code
@@ -13,51 +14,31 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeValueDateTime : CodeValue, IEquatable<CodeValueDateTime>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValueDateTime";
-
-        private DateTime m_value;
-
-        #endregion
-
-        #region Constructors
 
         public CodeValueDateTime(DateTime value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static new CodeValueDateTime Create(XElement xCodeValueDateTime)
         {
-            DateTime value = DateTime.Parse(xCodeValueDateTime.Value);
-
+            var value = DateTime.Parse(xCodeValueDateTime.Value);
             return new CodeValueDateTime(value);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public override object Object
         {
             get { return Value; }
         }
 
-        public DateTime Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public DateTime Value { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeValueDateTime rhs = obj as CodeValueDateTime;
+            var rhs = obj as CodeValueDateTime;
             if (rhs == null) return false;
 
             return Value == rhs.Value;
@@ -70,9 +51,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeValueDateTime lhs, CodeValueDateTime rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -84,18 +65,14 @@ namespace Prolog.Code
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Value.ToString(CultureInfo.InvariantCulture);
         }
 
         public override XElement ToXElement()
         {
             return ToXElementBase(
-                new XElement(ElementName, Value.ToString()));
+                new XElement(ElementName, Value.ToString(CultureInfo.InvariantCulture)));
         }
-
-        #endregion
-
-        #region IEquatable<CodeStringConstant> Members
 
         public override bool Equals(CodeValue other)
         {
@@ -104,11 +81,9 @@ namespace Prolog.Code
 
         public bool Equals(CodeValueDateTime other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Value == other.Value;
         }
-
-        #endregion
     }
 }

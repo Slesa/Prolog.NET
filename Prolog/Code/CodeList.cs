@@ -37,7 +37,7 @@ namespace Prolog.Code
 
             if (tail.IsCodeList)
             {
-                List<CodeTerm> headTerms = new List<CodeTerm>(head);
+                var headTerms = new List<CodeTerm>(head);
                 headTerms.AddRange(tail.AsCodeList.Head);
 
                 Head = new CodeTermList(headTerms);
@@ -100,7 +100,7 @@ namespace Prolog.Code
             sb.Append("[");
 
             string prefix = null;
-            foreach (CodeTerm codeTerm in Head)
+            foreach (var codeTerm in Head)
             {
                 sb.Append(prefix); prefix = ",";
                 sb.Append(codeTerm);

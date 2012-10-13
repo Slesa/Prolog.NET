@@ -3,8 +3,6 @@
  */
 
 using System.Collections.Generic;
-
-using Lingua;
 using Prolog.Code;
 
 namespace Prolog.Grammar
@@ -14,13 +12,7 @@ namespace Prolog.Grammar
     //
     internal sealed class AdditionalProgramStatements : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeSentence> m_codeSentences = new List<CodeSentence>();
-
-        #endregion
-
-        #region Rules
+        readonly List<CodeSentence> _codeSentences = new List<CodeSentence>();
 
         public static void Rule(AdditionalProgramStatements lhs, Period period, OptionalProgramStatement optionalProgramStatement, AdditionalProgramStatements additionalProgramStatements)
         {
@@ -34,15 +26,9 @@ namespace Prolog.Grammar
         public static void Rule(AdditionalProgramStatements lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
         public List<CodeSentence> CodeSentences
         {
-            get { return m_codeSentences; }
+            get { return _codeSentences; }
         }
-
-        #endregion
     }
 }

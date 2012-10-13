@@ -12,26 +12,15 @@ namespace Prolog
 {
     internal sealed class WamMachine
     {
-        #region Fields
+        const int DEFAULT_STACK_SIZE_LIMIT = 50000;
+        const int MAX_STACK_SIZE_LIMIT = 1000000;
 
-        private const int DEFAULT_STACK_SIZE_LIMIT = 50000;
-        private const int MAX_STACK_SIZE_LIMIT = 1000000;
+        int m_stackSizeLimit = DEFAULT_STACK_SIZE_LIMIT;
 
-        private Program m_program;
-        private Query m_query;
+        readonly Stack<WamContext> _contextStack;
+        readonly PerformanceStatistics _performanceStatistics;
 
-        private int m_stackSizeLimit = DEFAULT_STACK_SIZE_LIMIT;
-
-        private Stack<WamContext> m_contextStack;
-        private WamContext m_currentContext;
-
-        private PerformanceStatistics m_performanceStatistics;
-
-        #endregion
-
-        #region Constructors
-
-        private WamMachine(Program program, Query query)
+        WamMachine(Program program, Query query)
         {
             if (program == null)
             {
@@ -41,14 +30,13 @@ namespace Prolog
             {
                 throw new ArgumentNullException("query");
             }
+            Program = program;
+            Query = query;
 
-            m_program = program;
-            m_query = query;
+            _contextStack = new Stack<WamContext>();
+            CurrentContext = null;
 
-            m_contextStack = new Stack<WamContext>();
-            m_currentContext = null;
-
-            m_performanceStatistics = new PerformanceStatistics();
+            _performanceStatistics = new PerformanceStatistics();
         }
 
         public static WamMachine Create(Program program, Query query)
@@ -61,33 +49,15 @@ namespace Prolog
             {
                 throw new ArgumentNullException("query");
             }
-
-            WamMachine wamMachine = new WamMachine(program, query);
-
+            var wamMachine = new WamMachine(program, query);
             wamMachine.Initialize();
-
             return wamMachine;
         }
 
-        #endregion
-
-        #region Events
-
         public event EventHandler<WamMachineStepEventArgs> Stepped;
 
-        #endregion
-
-        #region Public Properties
-
-        public Program Program
-        {
-            get { return m_program; }
-        }
-
-        public Query Query
-        {
-            get { return m_query; }
-        }
+        public Program Program { get; private set; }
+        public Query Query { get; private set; }
 
         public WamMachineStates State
         {
@@ -119,12 +89,8 @@ namespace Prolog
 
         public PerformanceStatistics PerformanceStatistics
         {
-            get { return m_performanceStatistics; }
+            get { return _performanceStatistics; }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public void Initialize()
         {
@@ -141,12 +107,12 @@ namespace Prolog
 
             PerformanceStatistics.Start();
 
-            WamMachineStepEventArgsState stepEventArgsState = new WamMachineStepEventArgsState();
-            WamMachineStepEventArgs stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
+            var stepEventArgsState = new WamMachineStepEventArgsState();
+            var stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
 
-            ExecutionResults results = ExecutionResults.None;
+            var results = ExecutionResults.None;
 
-            bool loop = true;
+            var loop = true;
             while (loop)
             {
                 results = Step();
@@ -167,9 +133,7 @@ namespace Prolog
                     }
                 }
             }
-
             PerformanceStatistics.Stop();
-
             return results;
         }
 
@@ -182,18 +146,17 @@ namespace Prolog
 
             PerformanceStatistics.Start();
 
-            WamMachineStepEventArgsState stepEventArgsState = new WamMachineStepEventArgsState();
-            WamMachineStepEventArgs stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
+            var stepEventArgsState = new WamMachineStepEventArgsState();
+            var stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
 
-            ExecutionResults results = ExecutionResults.None;
+            var results = ExecutionResults.None;
 
-            bool loop = true;
+            var loop = true;
             while (loop)
             {
                 results = Step();
 
-                if (results == ExecutionResults.Failure
-                    || results == ExecutionResults.Success)
+                if (results == ExecutionResults.Failure || results == ExecutionResults.Success)
                 {
                     loop = false;
                 }
@@ -207,9 +170,7 @@ namespace Prolog
                     }
                 }
             }
-
             PerformanceStatistics.Stop();
-
             return results;
         }
 
@@ -221,11 +182,8 @@ namespace Prolog
             }
 
             PerformanceStatistics.Start();
-
-            ExecutionResults results = Step();
-
+            var results = Step();
             PerformanceStatistics.Stop();
-
             return results;
         }
 
@@ -238,19 +196,18 @@ namespace Prolog
 
             PerformanceStatistics.Start();
 
-            WamMachineStepEventArgsState stepEventArgsState = new WamMachineStepEventArgsState();
-            WamMachineStepEventArgs stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
+            var stepEventArgsState = new WamMachineStepEventArgsState();
+            var stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
 
-            ExecutionResults results = ExecutionResults.None;
+            var results = ExecutionResults.None;
 
-            int initialStackIndex = StackIndex;
-            bool loop = true;
+            var initialStackIndex = StackIndex;
+            var loop = true;
             while (loop)
             {
                 results = Step();
 
-                if (results == ExecutionResults.Failure
-                    || results == ExecutionResults.Success)
+                if (results == ExecutionResults.Failure || results == ExecutionResults.Success)
                 {
                     loop = false;
                 }
@@ -268,9 +225,7 @@ namespace Prolog
                     }
                 }
             }
-
             PerformanceStatistics.Stop();
-
             return results;
         }
 
@@ -283,19 +238,18 @@ namespace Prolog
 
             PerformanceStatistics.Start();
 
-            WamMachineStepEventArgsState stepEventArgsState = new WamMachineStepEventArgsState();
-            WamMachineStepEventArgs stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
+            var stepEventArgsState = new WamMachineStepEventArgsState();
+            var stepEventArgs = new WamMachineStepEventArgs(stepEventArgsState);
 
-            ExecutionResults results = ExecutionResults.None;
+            var results = ExecutionResults.None;
 
-            int initialStackIndex = StackIndex;
-            bool loop = true;
+            var initialStackIndex = StackIndex;
+            var loop = true;
             while (loop)
             {
                 results = Step();
 
-                if (results == ExecutionResults.Failure
-                    || results == ExecutionResults.Success)
+                if (results == ExecutionResults.Failure || results == ExecutionResults.Success)
                 {
                     loop = false;
                 }
@@ -313,9 +267,7 @@ namespace Prolog
                     }
                 }
             }
-
             PerformanceStatistics.Stop();
-
             return results;
         }
 
@@ -341,9 +293,9 @@ namespace Prolog
                 throw new ArgumentNullException("instructionStream");
             }
 
-            WamContext context = new WamContext();
-            m_contextStack.Push(context);
-            m_currentContext = context;
+            var context = new WamContext();
+            _contextStack.Push(context);
+            CurrentContext = context;
 
             State = WamMachineStates.Run;
             InstructionPointer = new WamInstructionPointer(instructionStream);
@@ -361,7 +313,7 @@ namespace Prolog
 
         public void PopContext(bool unwindTrail)
         {
-            if (m_contextStack.Count == 0)
+            if (_contextStack.Count == 0)
             {
                 throw new InvalidOperationException("Context stack is empty.");
             }
@@ -374,22 +326,9 @@ namespace Prolog
                     ChoicePoint = ChoicePoint.Predecessor;
                 }
             }
-
-            m_contextStack.Pop();
-
-            if (m_contextStack.Count == 0)
-            {
-                m_currentContext = null;
-            }
-            else
-            {
-                m_currentContext = m_contextStack.Peek();
-            }
+            _contextStack.Pop();
+            CurrentContext = _contextStack.Count == 0 ? null : _contextStack.Peek();
         }
-
-        #endregion
-
-        #region Internal Members
 
         internal WamEnvironment GetEnvironment(int stackIndex)
         {
@@ -401,7 +340,7 @@ namespace Prolog
             // Determine the offset relative to the current stack index.  0 indicates
             // the current stack index, 1 indicates the prior stack index, and so on.
             //
-            int delta = StackIndex - stackIndex;
+            var delta = StackIndex - stackIndex;
 
             // Determine if we have yet to create an environment for this stack
             // frame.
@@ -414,27 +353,21 @@ namespace Prolog
                     //
                     return null;
                 }
-                else
-                {
-                    // Adjust delta to account for the lack of a current stack frame.
-                    //
-                    delta -= 1;
-                }
+                // Adjust delta to account for the lack of a current stack frame.
+                //
+                delta -= 1;
             }
 
             // Search for the requested environment.
             //
-            WamEnvironment environment = Environment;
+            var environment = Environment;
             if (environment == null)
             {
                 if (stackIndex == 0)
                 {
                     return null;
                 }
-                else
-                {
-                    throw new InvalidOperationException("Environment does not exist.");
-                }
+                throw new InvalidOperationException("Environment does not exist.");
             }
             while (delta > 0)
             {
@@ -445,7 +378,6 @@ namespace Prolog
                 }
                 delta -= 1;
             }
-
             return environment;
         }
 
@@ -459,7 +391,7 @@ namespace Prolog
             // Determine the offset relative to the current stack index.  0 indicates
             // the current stack index, 1 indicates the prior stack index, and so on.
             //
-            int delta = StackIndex - stackIndex;
+            var delta = StackIndex - stackIndex;
 
             // If we've requested the instruction stream for the current stack index,
             // simply use the current instruction pointer.
@@ -486,7 +418,7 @@ namespace Prolog
             // we're using the return instruction pointer, the current environment
             // is used to retrieve the prior stack frame, and so on.
             //
-            WamEnvironment environment = Environment;
+            var environment = Environment;
             if (environment == null)
             {
                 throw new InvalidOperationException("Environment does not exist.");
@@ -500,7 +432,6 @@ namespace Prolog
                 }
                 delta -= 1;
             }
-
             return environment.ReturnInstructionPointer.GetPrior();
         }
 
@@ -526,7 +457,7 @@ namespace Prolog
                 throw new ArgumentNullException("wamReferenceTarget");
             }
 
-            WamCompoundTerm wamCompoundTerm = wamReferenceTarget.Dereference() as WamCompoundTerm;
+            var wamCompoundTerm = wamReferenceTarget.Dereference() as WamCompoundTerm;
             if (wamCompoundTerm == null)
             {
                 return wamReferenceTarget;
@@ -537,24 +468,24 @@ namespace Prolog
                 return wamReferenceTarget;
             }
 
-            LibraryMethod method = Program.Libraries[wamCompoundTerm.Functor];
+            var method = Program.Libraries[wamCompoundTerm.Functor];
             if (method == null
                 || method.CanEvaluate == false)
             {
                 return wamReferenceTarget;
             }
 
-            WamReferenceTarget[] arguments = new WamReferenceTarget[method.Functor.Arity];
-            for (int index = 0; index < method.Functor.Arity; ++index)
+            var arguments = new WamReferenceTarget[method.Functor.Arity];
+            for (var index = 0; index < method.Functor.Arity; ++index)
             {
                 arguments[index] = Evaluate(wamCompoundTerm.Children[index]);
             }
 
-            Function function = method as Function;
+            var function = method as Function;
             if (function != null)
             {
-                CodeTerm[] codeTerms = new CodeTerm[method.Functor.Arity];
-                for (int index = 0; index < method.Functor.Arity; ++index)
+                var codeTerms = new CodeTerm[method.Functor.Arity];
+                for (var index = 0; index < method.Functor.Arity; ++index)
                 {
                     codeTerms[index] = arguments[index].GetCodeTerm();
                 }
@@ -562,11 +493,7 @@ namespace Prolog
                 CodeTerm result;
                 try
                 {
-                    result = function.FunctionDelegate(codeTerms);
-                    if (result == null)
-                    {
-                        result = new CodeValueObject(null);
-                    }
+                    result = function.FunctionDelegate(codeTerms) ?? new CodeValueObject(null);
                 }
                 catch (Exception ex)
                 {
@@ -575,8 +502,8 @@ namespace Prolog
 
                 return WamValue.Create(result);
             }
-
-            Predicate predicate = method as Predicate;
+            
+            var predicate = method as Predicate;
             if (predicate != null)
             {
                 bool result;
@@ -591,141 +518,110 @@ namespace Prolog
 
                 return WamValueBoolean.Create(result);
             }
-
             return wamReferenceTarget;
         }
 
-        #endregion
-
-        #region Hidden Members: Properties
-
-        private int StackSizeLimit
+        int StackSizeLimit
         {
             get { return m_stackSizeLimit; }
             set
             {
-                if (value < 0
-                    || value > MAX_STACK_SIZE_LIMIT)
+                if (value < 0 || value > MAX_STACK_SIZE_LIMIT)
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-
                 m_stackSizeLimit = value;
             }
         }
 
-        private WamContext CurrentContext
-        {
-            get { return m_currentContext; }
-        }
+        WamContext CurrentContext { get; set; }
 
-        private WamInstructionPointer InstructionPointer
+        WamInstructionPointer InstructionPointer
         {
             get { return CurrentContext.InstructionPointer; }
             set { CurrentContext.InstructionPointer = value; }
         }
 
-        private IEnumerator<bool> PredicateEnumerator
+        IEnumerator<bool> PredicateEnumerator
         {
             get { return CurrentContext.PredicateEnumerator; }
             set { CurrentContext.PredicateEnumerator = value; }
         }
 
-        private WamInstructionPointer ReturnInstructionPointer
+        WamInstructionPointer ReturnInstructionPointer
         {
             get { return CurrentContext.ReturnInstructionPointer; }
             set { CurrentContext.ReturnInstructionPointer = value; }
         }
 
-        private WamChoicePoint ChoicePoint
+        WamChoicePoint ChoicePoint
         {
             get { return CurrentContext.ChoicePoint; }
             set { CurrentContext.ChoicePoint = value; }
         }
 
-        private WamChoicePoint CutChoicePoint
+        WamChoicePoint CutChoicePoint
         {
             get { return CurrentContext.CutChoicePoint; }
             set { CurrentContext.CutChoicePoint = value; }
         }
 
-        private WamCompoundTerm CurrentStructure
+        WamCompoundTerm CurrentStructure
         {
             get { return CurrentContext.CurrentStructure; }
             set { CurrentContext.CurrentStructure = value; }
         }
 
-        private int CurrentStructureIndex
+        int CurrentStructureIndex
         {
             get { return CurrentContext.CurrentStructureIndex; }
             set { CurrentContext.CurrentStructureIndex = value; }
         }
 
-        private UnifyModes CurrentUnifyMode
+        UnifyModes CurrentUnifyMode
         {
             get { return CurrentContext.CurrentUnifyMode; }
             set { CurrentContext.CurrentUnifyMode = value; }
         }
 
-        private int Generation
+        int Generation
         {
-            get
-            {
-                if (ChoicePoint != null)
-                {
-                    return ChoicePoint.Generation;
-                }
-
-                return -1;
-            }
+            get { return ChoicePoint != null ? ChoicePoint.Generation : -1; }
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private void ClearContextStack()
+        void ClearContextStack()
         {
-            m_contextStack.Clear();
-            m_currentContext = null;
+            _contextStack.Clear();
+            CurrentContext = null;
         }
 
-        private WamVariable CreateVariable()
+        WamVariable CreateVariable()
         {
             return new WamVariable(Generation);
         }
 
-        private WamCompoundTerm CreateCompoundTerm(Functor functor)
+        WamCompoundTerm CreateCompoundTerm(Functor functor)
         {
-            WamCompoundTerm value = WamCompoundTerm.Create(functor);
-
+            var value = WamCompoundTerm.Create(functor);
             CurrentStructure = value;
             CurrentStructureIndex = -1;
-
             return value;
         }
 
-        private WamInstructionPointer GetInstructionPointer(Functor functor, int index)
+        WamInstructionPointer GetInstructionPointer(Functor functor, int index)
         {
             Procedure procedure;
-            if (m_program.Procedures.TryGetProcedure(functor, out procedure))
+            if (Program.Procedures.TryGetProcedure(functor, out procedure))
             {
                 if (procedure.Clauses.Count >= index)
                 {
                     return new WamInstructionPointer(procedure.Clauses[index].WamInstructionStream);
                 }
-                else
-                {
-                    return WamInstructionPointer.Undefined;
-                }
             }
-            else
-            {
-                return WamInstructionPointer.Undefined;
-            }
+            return WamInstructionPointer.Undefined;
         }
 
-        private void SetRegister(WamInstructionRegister register, WamReferenceTarget value)
+        void SetRegister(WamInstructionRegister register, WamReferenceTarget value)
         {
             switch (register.Type)
             {
@@ -738,7 +634,7 @@ namespace Prolog
             }
         }
 
-        private WamReferenceTarget GetRegister(WamInstructionRegister register)
+        WamReferenceTarget GetRegister(WamInstructionRegister register)
         {
             switch (register.Type)
             {
@@ -751,18 +647,13 @@ namespace Prolog
             }
         }
 
-        private WamReferenceTargetList GetPermanentVariables(int stackIndex)
+        WamReferenceTargetList GetPermanentVariables(int stackIndex)
         {
-            WamEnvironment environment = GetEnvironment(stackIndex);
-            if (environment == null)
-            {
-                return null;
-            }
-
-            return environment.PermanentRegisters;
+            var environment = GetEnvironment(stackIndex);
+            return environment == null ? null : environment.PermanentRegisters;
         }
 
-        private ExecutionResults Execute(WamInstruction instruction)
+        ExecutionResults Execute(WamInstruction instruction)
         {
             PerformanceStatistics.IncrementInstructionCount();
 
@@ -809,7 +700,7 @@ namespace Prolog
             }
         }
 
-        private ExecutionResults Step()
+        ExecutionResults Step()
         {
             switch (State)
             {
@@ -819,11 +710,8 @@ namespace Prolog
                         State = WamMachineStates.Run;
                         return ExecutionResults.None;
                     }
-                    else
-                    {
-                        State = WamMachineStates.Halt;
-                        return ExecutionResults.Failure;
-                    }
+                    State = WamMachineStates.Halt;
+                    return ExecutionResults.Failure;
 
                 case WamMachineStates.Halt:
                     return ExecutionResults.Failure;
@@ -836,7 +724,6 @@ namespace Prolog
                         if (PredicateEnumerator.MoveNext() == false)
                         {
                             ChoicePoint = ChoicePoint.Predecessor;
-
                             results = ExecutionResults.Backtrack;
                         }
                         else
@@ -847,7 +734,7 @@ namespace Prolog
                     }
                     else
                     {
-                        WamInstruction instruction = InstructionPointer.Instruction;
+                        var instruction = InstructionPointer.Instruction;
                         results = Execute(instruction);
                     }
 
@@ -856,23 +743,18 @@ namespace Prolog
                         case ExecutionResults.None:
                             // No action required
                             break;
-
                         case ExecutionResults.Backtrack:
                             State = WamMachineStates.Backtrack;
                             break;
-
                         case ExecutionResults.Success:
                             State = WamMachineStates.Backtrack;
                             break;
-
                         case ExecutionResults.Failure:
                             State = WamMachineStates.Halt;
                             break;
-
                         default:
                             throw new InvalidOperationException(string.Format("Unknown execution result {0}.", results));
                     }
-
                     return results;
 
                 default:
@@ -880,7 +762,7 @@ namespace Prolog
             }
         }
 
-        private void RaiseStepped(WamMachineStepEventArgs e)
+        void RaiseStepped(WamMachineStepEventArgs e)
         {
             if (Stepped != null)
             {
@@ -888,23 +770,17 @@ namespace Prolog
             }
         }
 
-        #endregion
-
-        #region Hidden Members: Control Flow
-
-        private ExecutionResults OnAllocate(WamInstruction instruction)
+        ExecutionResults OnAllocate(WamInstruction instruction)
         {
             Environment = new WamEnvironment(Environment, ReturnInstructionPointer, CutChoicePoint);
             ReturnInstructionPointer = WamInstructionPointer.Undefined;
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnCall(WamInstruction instruction)
+        ExecutionResults OnCall(WamInstruction instruction)
         {
-            WamInstructionPointer instructionPointer = GetInstructionPointer(instruction.Functor, 0);
+            var instructionPointer = GetInstructionPointer(instruction.Functor, 0);
             if (instructionPointer == WamInstructionPointer.Undefined)
             {
                 return ExecutionResults.Failure;
@@ -925,21 +801,19 @@ namespace Prolog
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnCut(WamInstruction instruction)
+        ExecutionResults OnCut(WamInstruction instruction)
         {
             while (ChoicePoint != CutChoicePoint)
             {
                 ChoicePoint = ChoicePoint.Predecessor;
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnExecute(WamInstruction instruction)
+        ExecutionResults OnExecute(WamInstruction instruction)
         {
-            WamInstructionPointer instructionPointer = GetInstructionPointer(instruction.Functor, 0);
+            var instructionPointer = GetInstructionPointer(instruction.Functor, 0);
             if (instructionPointer == WamInstructionPointer.Undefined)
             {
                 return ExecutionResults.Failure;
@@ -954,11 +828,10 @@ namespace Prolog
             TemporaryRegisters.Clear();
 
             InstructionPointer = instructionPointer;
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnDeallocate(WamInstruction instruction)
+        ExecutionResults OnDeallocate(WamInstruction instruction)
         {
             if (Environment == null)
             {
@@ -970,33 +843,32 @@ namespace Prolog
             CutChoicePoint = Environment.CutChoicePoint;
 
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnLibraryCall(WamInstruction instruction)
+        ExecutionResults OnLibraryCall(WamInstruction instruction)
         {
-            LibraryMethod method = Program.Libraries[instruction.Functor];
+            var method = Program.Libraries[instruction.Functor];
 
-            Function function = method as Function;
+            var function = method as Function;
             if (function != null)
             {
                 return OnLibraryCallFunction(instruction, function);
             }
 
-            Predicate predicate = method as Predicate;
+            var predicate = method as Predicate;
             if (predicate != null)
             {
                 return OnLibraryCallPredicate(instruction, predicate);
             }
 
-            BacktrackingPredicate backtrackingPredicate = method as BacktrackingPredicate;
+            var backtrackingPredicate = method as BacktrackingPredicate;
             if (backtrackingPredicate != null)
             {
                 return OnLibraryCallBacktrackingPredicate(instruction, backtrackingPredicate);
             }
 
-            CodePredicate codePredicate = method as CodePredicate;
+            var codePredicate = method as CodePredicate;
             if (codePredicate != null)
             {
                 return OnLibraryCallCodePredicate(instruction, codePredicate);
@@ -1007,10 +879,10 @@ namespace Prolog
             return ExecutionResults.Failure;
         }
 
-        private ExecutionResults OnLibraryCallPredicate(WamInstruction instruction, Predicate predicate)
+        ExecutionResults OnLibraryCallPredicate(WamInstruction instruction, Predicate predicate)
         {
-            WamReferenceTarget[] arguments = new WamReferenceTarget[instruction.Functor.Arity];
-            for (int index = 0; index < instruction.Functor.Arity; ++index)
+            var arguments = new WamReferenceTarget[instruction.Functor.Arity];
+            for (var index = 0; index < instruction.Functor.Arity; ++index)
             {
                 arguments[index] = ArgumentRegisters[index];
             }
@@ -1037,10 +909,10 @@ namespace Prolog
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnLibraryCallCodePredicate(WamInstruction instruction, CodePredicate predicate)
+        ExecutionResults OnLibraryCallCodePredicate(WamInstruction instruction, CodePredicate predicate)
         {
-            WamReferenceTarget[] arguments = new WamReferenceTarget[instruction.Functor.Arity];
-            for (int index = 0; index < instruction.Functor.Arity; ++index)
+            var arguments = new WamReferenceTarget[instruction.Functor.Arity];
+            for (var index = 0; index < instruction.Functor.Arity; ++index)
             {
                 arguments[index] = ArgumentRegisters[index];
             }
@@ -1059,10 +931,10 @@ namespace Prolog
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnLibraryCallBacktrackingPredicate(WamInstruction instruction, BacktrackingPredicate predicate)
+        ExecutionResults OnLibraryCallBacktrackingPredicate(WamInstruction instruction, BacktrackingPredicate predicate)
         {
-            WamReferenceTarget[] arguments = new WamReferenceTarget[instruction.Functor.Arity];
-            for (int index = 0; index < instruction.Functor.Arity; ++index)
+            var arguments = new WamReferenceTarget[instruction.Functor.Arity];
+            for (var index = 0; index < instruction.Functor.Arity; ++index)
             {
                 arguments[index] = ArgumentRegisters[index];
             }
@@ -1079,21 +951,21 @@ namespace Prolog
                 return ExecutionResults.Backtrack;
             }
 
-            IEnumerator<bool> enumerator = enumerable.GetEnumerator();
+            var enumerator = enumerable.GetEnumerator();
 
-            ChoicePoint = new WamChoicePoint(ChoicePoint, Environment, StackIndex, ReturnInstructionPointer, ArgumentRegisters, CutChoicePoint);
-            ChoicePoint.BacktrackInstructionPointer = InstructionPointer.GetNext();
-            ChoicePoint.PredicateEnumerator = enumerator;
-
+            ChoicePoint = new WamChoicePoint(ChoicePoint, Environment, StackIndex, ReturnInstructionPointer, ArgumentRegisters, CutChoicePoint)
+                              {
+                                  BacktrackInstructionPointer = InstructionPointer.GetNext(),
+                                  PredicateEnumerator = enumerator
+                              };
             InstructionPointer = ChoicePoint.BacktrackInstructionPointer;
             PredicateEnumerator = ChoicePoint.PredicateEnumerator;
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnLibraryCallFunction(WamInstruction instruction, Function function)
+        ExecutionResults OnLibraryCallFunction(WamInstruction instruction, Function function)
         {
-            CodeTerm[] functionArguments = new CodeTerm[instruction.Functor.Arity];
+            var functionArguments = new CodeTerm[instruction.Functor.Arity];
             for (int index = 0; index < instruction.Functor.Arity; ++index)
             {
                 functionArguments[index] = Evaluate(ArgumentRegisters[index]).GetCodeTerm();
@@ -1113,11 +985,10 @@ namespace Prolog
 
             try
             {
-                CodeValue functionResultValue = (CodeValue)functionResult;
+                var functionResultValue = (CodeValue)functionResult;
                 if (Convert.ToBoolean(functionResultValue.Object))
                 {
                     InstructionPointer = InstructionPointer.GetNext();
-
                     return ExecutionResults.None;
                 }
                 else
@@ -1135,121 +1006,101 @@ namespace Prolog
             }
         }
 
-        private ExecutionResults OnNoop(WamInstruction instruction)
+        ExecutionResults OnNoop(WamInstruction instruction)
         {
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnProceed(WamInstruction instruction)
+        ExecutionResults OnProceed(WamInstruction instruction)
         {
             StackIndex -= 1;
             InstructionPointer = ReturnInstructionPointer;
 
             ReturnInstructionPointer = WamInstructionPointer.Undefined;
             TemporaryRegisters.Clear();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnRetryMeElse(WamInstruction instruction)
+        ExecutionResults OnRetryMeElse(WamInstruction instruction)
         {
-            WamInstructionPointer instructionPointer = GetInstructionPointer(instruction.Functor, instruction.Index);
+            var instructionPointer = GetInstructionPointer(instruction.Functor, instruction.Index);
             if (instructionPointer == WamInstructionPointer.Undefined)
             {
                 return ExecutionResults.Failure;
             }
-
             ChoicePoint.BacktrackInstructionPointer = instructionPointer;
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnSuccess(WamInstruction instruction)
+        ExecutionResults OnSuccess(WamInstruction instruction)
         {
             return ExecutionResults.Success;
         }
 
-        private ExecutionResults OnFailure(WamInstruction instruction)
+        ExecutionResults OnFailure(WamInstruction instruction)
         {
             return ExecutionResults.Failure;
         }
 
-        private ExecutionResults OnTrustMe(WamInstruction instruction)
+        ExecutionResults OnTrustMe(WamInstruction instruction)
         {
             if (ChoicePoint == null)
             {
                 throw new InvalidOperationException("Choice point not found.");
             }
-
             ChoicePoint = ChoicePoint.Predecessor;
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnTryMeElse(WamInstruction instruction)
+        ExecutionResults OnTryMeElse(WamInstruction instruction)
         {
-            WamInstructionPointer instructionPointer = GetInstructionPointer(instruction.Functor, instruction.Index);
+            var instructionPointer = GetInstructionPointer(instruction.Functor, instruction.Index);
             if (instructionPointer == WamInstructionPointer.Undefined)
             {
                 return ExecutionResults.Failure;
             }
 
-            ChoicePoint = new WamChoicePoint(ChoicePoint, Environment, StackIndex, ReturnInstructionPointer, ArgumentRegisters, CutChoicePoint);
-            ChoicePoint.BacktrackInstructionPointer = instructionPointer;
-
+            ChoicePoint = new WamChoicePoint(ChoicePoint, Environment, StackIndex, ReturnInstructionPointer, ArgumentRegisters, CutChoicePoint)
+                              {
+                                  BacktrackInstructionPointer = instructionPointer
+                              };
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        #endregion
-
-        #region Hidden Members: Put/Set
-
-        private ExecutionResults OnPutValue(WamInstruction instruction)
+        ExecutionResults OnPutValue(WamInstruction instruction)
         {
             SetRegister(instruction.TargetRegister, instruction.ReferenceTarget);
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnPutStructure(WamInstruction instruction)
+        ExecutionResults OnPutStructure(WamInstruction instruction)
         {
             SetRegister(instruction.TargetRegister, CreateCompoundTerm(instruction.Functor));
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnPutBoundVariable(WamInstruction instruction)
+        ExecutionResults OnPutBoundVariable(WamInstruction instruction)
         {
             SetRegister(instruction.TargetRegister, GetRegister(instruction.SourceRegister));
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnPutUnboundVariable(WamInstruction instruction)
+        ExecutionResults OnPutUnboundVariable(WamInstruction instruction)
         {
             SetRegister(instruction.SourceRegister, CreateVariable());
             SetRegister(instruction.TargetRegister, GetRegister(instruction.SourceRegister));
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnSetBoundVariable(WamInstruction instruction)
+        ExecutionResults OnSetBoundVariable(WamInstruction instruction)
         {
             if (CurrentStructure == null)
             {
@@ -1261,15 +1112,12 @@ namespace Prolog
             {
                 throw new InvalidOperationException("Current structure arity exceeded.");
             }
-
             CurrentStructure.Children[CurrentStructureIndex] = GetRegister(instruction.TargetRegister);
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnSetUnboundVariable(WamInstruction instruction)
+        ExecutionResults OnSetUnboundVariable(WamInstruction instruction)
         {
             if (CurrentStructure == null)
             {
@@ -1284,13 +1132,11 @@ namespace Prolog
 
             SetRegister(instruction.TargetRegister, CreateVariable());
             CurrentStructure.Children[CurrentStructureIndex] = GetRegister(instruction.TargetRegister);
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnSetValue(WamInstruction instruction)
+        ExecutionResults OnSetValue(WamInstruction instruction)
         {
             if (CurrentStructure == null)
             {
@@ -1302,35 +1148,26 @@ namespace Prolog
             {
                 throw new InvalidOperationException("Current structure arity exceeded.");
             }
-
             CurrentStructure.Children[CurrentStructureIndex] = instruction.ReferenceTarget;
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        #endregion
-
-        #region Hidden Members: Get/Unify
-
-        private ExecutionResults OnGetValue(WamInstruction instruction)
+        ExecutionResults OnGetValue(WamInstruction instruction)
         {
             if (!(Unify(instruction.ReferenceTarget, GetRegister(instruction.SourceRegister))))
             {
                 return ExecutionResults.Backtrack;
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnGetStructure(WamInstruction instruction)
+        ExecutionResults OnGetStructure(WamInstruction instruction)
         {
-            WamReferenceTarget sourceReference = GetRegister(instruction.SourceRegister).Dereference();
-            WamVariable sourceVariable = sourceReference as WamVariable;
-            WamCompoundTerm sourceCompoundTerm = sourceReference as WamCompoundTerm;
+            var sourceReference = GetRegister(instruction.SourceRegister).Dereference();
+            var sourceVariable = sourceReference as WamVariable;
+            var sourceCompoundTerm = sourceReference as WamCompoundTerm;
 
             // Ensure target is either a variable or compound term.
             //
@@ -1338,7 +1175,7 @@ namespace Prolog
 
             if (sourceVariable != null)
             {
-                WamCompoundTerm compoundTerm = WamCompoundTerm.Create(instruction.Functor);
+                var compoundTerm = WamCompoundTerm.Create(instruction.Functor);
                 Bind(sourceVariable, compoundTerm);
 
                 CurrentStructure = compoundTerm;
@@ -1356,34 +1193,28 @@ namespace Prolog
                 CurrentStructureIndex = -1;
                 CurrentUnifyMode = UnifyModes.Read;
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnGetBoundVariable(WamInstruction instruction)
+        ExecutionResults OnGetBoundVariable(WamInstruction instruction)
         {
             if (!(Unify(GetRegister(instruction.TargetRegister), GetRegister(instruction.SourceRegister))))
             {
                 return ExecutionResults.Backtrack;
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnGetUnboundVariable(WamInstruction instruction)
+        ExecutionResults OnGetUnboundVariable(WamInstruction instruction)
         {
             SetRegister(instruction.TargetRegister, GetRegister(instruction.SourceRegister));
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnUnifyBoundVariable(WamInstruction instruction)
+        ExecutionResults OnUnifyBoundVariable(WamInstruction instruction)
         {
             CurrentStructureIndex += 1;
 
@@ -1398,13 +1229,11 @@ namespace Prolog
             {
                 CurrentStructure.Children[CurrentStructureIndex] = GetRegister(instruction.TargetRegister);
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnUnifyValue(WamInstruction instruction)
+        ExecutionResults OnUnifyValue(WamInstruction instruction)
         {
             CurrentStructureIndex += 1;
 
@@ -1419,13 +1248,11 @@ namespace Prolog
             {
                 CurrentStructure.Children[CurrentStructureIndex] = instruction.ReferenceTarget;
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        private ExecutionResults OnUnifyUnboundVariable(WamInstruction instruction)
+        ExecutionResults OnUnifyUnboundVariable(WamInstruction instruction)
         {
             CurrentStructureIndex += 1;
 
@@ -1438,48 +1265,38 @@ namespace Prolog
                 SetRegister(instruction.TargetRegister, CreateVariable());
                 CurrentStructure.Children[CurrentStructureIndex] = GetRegister(instruction.TargetRegister);
             }
-
             InstructionPointer = InstructionPointer.GetNext();
-
             return ExecutionResults.None;
         }
 
-        #endregion
-
-        #region Hidden Members: Utility
-
-        private void Bind(WamVariable variable, WamReferenceTarget target)
+        void Bind(WamVariable variable, WamReferenceTarget target)
         {
             variable.Bind(target);
             Trail(variable);
         }
 
-        private void Trail(WamVariable variable)
+        void Trail(WamVariable variable)
         {
-            if (ChoicePoint != null)
+            if (ChoicePoint == null) return;
+
+            if (variable.Generation <= ChoicePoint.Generation)
             {
-                if (variable.Generation <= ChoicePoint.Generation)
-                {
-                    ChoicePoint.Trail.Add(variable);
-                }
+                ChoicePoint.Trail.Add(variable);
             }
         }
 
-        private void UnwindTrail()
+        void UnwindTrail()
         {
-            if (ChoicePoint != null)
+            if (ChoicePoint == null) return;
+
+            foreach (WamVariable variable in ChoicePoint.Trail)
             {
-                foreach (WamVariable variable in ChoicePoint.Trail)
-                {
-                    variable.Unbind();
-
-                }
-
-                ChoicePoint.Trail.Clear();
+                variable.Unbind();
             }
+            ChoicePoint.Trail.Clear();
         }
 
-        private bool Backtrack()
+        bool Backtrack()
         {
             if (State != WamMachineStates.Backtrack)
             {
@@ -1505,7 +1322,7 @@ namespace Prolog
             return true;
         }
 
-        private bool Unify(WamReferenceTarget lhs, WamReferenceTarget rhs, bool testOnly)
+        bool Unify(WamReferenceTarget lhs, WamReferenceTarget rhs, bool testOnly)
         {
             if (lhs == null)
             {
@@ -1519,14 +1336,14 @@ namespace Prolog
             lhs = lhs.Dereference();
             rhs = rhs.Dereference();
 
-            WamVariable lhsVariable = lhs as WamVariable;
-            WamVariable rhsVariable = rhs as WamVariable;
+            var lhsVariable = lhs as WamVariable;
+            var rhsVariable = rhs as WamVariable;
 
-            WamCompoundTerm lhsCompoundTerm = lhs as WamCompoundTerm;
-            WamCompoundTerm rhsCompoundTerm = rhs as WamCompoundTerm;
+            var lhsCompoundTerm = lhs as WamCompoundTerm;
+            var rhsCompoundTerm = rhs as WamCompoundTerm;
 
-            WamValue lhsValue = lhs as WamValue;
-            WamValue rhsValue = rhs as WamValue;
+            var lhsValue = lhs as WamValue;
+            var rhsValue = rhs as WamValue;
 
             // Ensure that each term is either a compound term or variable.
             //
@@ -1592,10 +1409,7 @@ namespace Prolog
                     }
                 }
             }
-
             return true;
         }
-
-        #endregion
     }
 }

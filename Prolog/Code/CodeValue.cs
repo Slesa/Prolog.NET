@@ -13,13 +13,7 @@ namespace Prolog.Code
     [Serializable]
     public abstract class CodeValue : CodeTerm, IEquatable<CodeValue>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValue";
-
-        #endregion
-
-        #region Constructors
 
         /// <remarks>
         /// See also WamValue.Create.
@@ -41,7 +35,7 @@ namespace Prolog.Code
 
         public new static CodeValue Create(XElement xCodeValue)
         {
-            foreach (XElement xSubtype in xCodeValue.Elements())
+            foreach (var xSubtype in xCodeValue.Elements())
             {
                 if (xSubtype.Name == CodeValueNumeric.ElementName) return CodeValueNumeric.Create(xSubtype);
                 if (xSubtype.Name == CodeValueBoolean.ElementName) return CodeValueBoolean.Create(xSubtype);
@@ -57,10 +51,6 @@ namespace Prolog.Code
             throw new InvalidOperationException("No subtype element specified.");
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override bool IsCodeValue
         {
             get { return true; }
@@ -68,15 +58,11 @@ namespace Prolog.Code
 
         public abstract object Object { get; }
 
-        #endregion
-
-        #region Public Methods
-
         public static bool operator ==(CodeValue lhs, CodeValue rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -86,10 +72,6 @@ namespace Prolog.Code
             return !(lhs == rhs);
         }
 
-        #endregion
-
-        #region IEquatable<CodeConstant> Members
-
         public override bool Equals(CodeTerm other)
         {
             return Equals(other as CodeValue);
@@ -97,16 +79,10 @@ namespace Prolog.Code
 
         public abstract bool Equals(CodeValue other);
 
-        #endregion
-
-        #region Hidden Members
-
         protected override XElement ToXElementBase(XElement content)
         {
             return base.ToXElementBase(
                 new XElement(ElementName, content));
         }
-
-        #endregion
     }
 }

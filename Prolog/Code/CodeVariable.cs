@@ -13,15 +13,7 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeVariable : CodeTerm, IEquatable<CodeVariable>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeVariable";
-
-        private string m_name;
-
-        #endregion
-
-        #region Constructors
 
         public CodeVariable(string name)
         {
@@ -30,39 +22,27 @@ namespace Prolog.Code
                 throw new ArgumentNullException("name");
             }
 
-            m_name = name;
+            Name = name;
         }
 
         public new static CodeVariable Create(XElement xCodeVariable)
         {
-            string name = xCodeVariable.Value;
-
+            var name = xCodeVariable.Value;
             return new CodeVariable(name);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public string Name
-        {
-            get { return m_name; }
-        }
+        public string Name { get; private set; }
 
         public override bool IsCodeVariable
         {
             get { return true; }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeVariable rhs = obj as CodeVariable;
+            var rhs = obj as CodeVariable;
             if (rhs == null) return false;
 
             return Name == rhs.Name;
@@ -75,9 +55,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeVariable lhs, CodeVariable rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -98,10 +78,6 @@ namespace Prolog.Code
                 new XElement(ElementName, Name));
         }
 
-        #endregion
-
-        #region IEquatable<CodeVariable> Members
-
         public override bool Equals(CodeTerm other)
         {
             return Equals(other as CodeVariable);
@@ -109,11 +85,9 @@ namespace Prolog.Code
 
         public bool Equals(CodeVariable other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Name == other.Name;
         }
-
-        #endregion
     }
 }

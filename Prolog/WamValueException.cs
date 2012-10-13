@@ -3,29 +3,19 @@
  */
 
 using System;
-
 using Prolog.Code;
 
 namespace Prolog
 {
     internal sealed class WamValueException : WamValue
     {
-        #region Fields
-
-        private Exception m_value;
-
-        #endregion
-
-        #region Constructors
-
-        private WamValueException(Exception value)
+        WamValueException(Exception value)
         {
             if (value == null)
             {
                 throw new ArgumentNullException("value");
             }
-
-            m_value = value;
+            Value = value;
         }
 
         public static WamValueException Create(Exception value)
@@ -38,38 +28,21 @@ namespace Prolog
             return new WamValueException(Value);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
-            get { return m_value; }
+            get { return Value; }
         }
 
-        public Exception Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public Exception Value { get; private set; }
 
         public override string ToString()
         {
             return Value.ToString();
         }
 
-        #endregion
-
-        #region Hidden Members
-
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
             return new CodeValueException(Value);
         }
-
-        #endregion
     }
 }

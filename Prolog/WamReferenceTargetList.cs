@@ -9,31 +9,21 @@ namespace Prolog
 {
     internal sealed class WamReferenceTargetList : IReadableList<WamReferenceTarget>
     {
-        #region Fields
-
-        private List<WamReferenceTarget> m_referenceTargets = new List<WamReferenceTarget>();
-
-        #endregion
-
-        #region Constructors
+        readonly List<WamReferenceTarget> _referenceTargets = new List<WamReferenceTarget>();
 
         public WamReferenceTargetList()
         {
-            m_referenceTargets = new List<WamReferenceTarget>();
+            _referenceTargets = new List<WamReferenceTarget>();
         }
 
         public WamReferenceTargetList(IEnumerable<WamReferenceTarget> items)
         {
-            m_referenceTargets = new List<WamReferenceTarget>(items);
+            _referenceTargets = new List<WamReferenceTarget>(items);
         }
-
-        #endregion
-
-        #region IReadableList<ReferenceTarget> Members
 
         public int IndexOf(WamReferenceTarget item)
         {
-            return m_referenceTargets.IndexOf(item);
+            return _referenceTargets.IndexOf(item);
         }
 
         public WamReferenceTarget this[int index]
@@ -44,13 +34,7 @@ namespace Prolog
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
-
-                if (index < m_referenceTargets.Count)
-                {
-                    return m_referenceTargets[index];
-                }
-
-                return null;
+                return index < _referenceTargets.Count ? _referenceTargets[index] : null;
             }
             set
             {
@@ -58,58 +42,38 @@ namespace Prolog
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
-
-                while (m_referenceTargets.Count <= index)
+                while (_referenceTargets.Count <= index)
                 {
-                    m_referenceTargets.Add(null);
+                    _referenceTargets.Add(null);
                 }
-
-                m_referenceTargets[index] = value;
+                _referenceTargets[index] = value;
             }
         }
 
-        #endregion
-
-        #region IReadableCollection<ReferenceTarget> Members
-
         public int Count
         {
-            get
-            {
-                return m_referenceTargets.Count;
-            }
+            get { return _referenceTargets.Count; }
         }
 
         public bool Contains(WamReferenceTarget item)
         {
-            return m_referenceTargets.Contains(item);
+            return _referenceTargets.Contains(item);
         }
 
-        #endregion
-
-        #region IEnumerable<ReferenceTarget> Members
 
         public IEnumerator<WamReferenceTarget> GetEnumerator()
         {
-            return m_referenceTargets.GetEnumerator();
+            return _referenceTargets.GetEnumerator();
         }
-
-        #endregion
-
-        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        #endregion
-
-        #region Internal Members
-
         internal void Clear()
         {
-            m_referenceTargets.Clear();
+            _referenceTargets.Clear();
         }
 
         internal void Copy(WamReferenceTargetList referenceTargets)
@@ -121,7 +85,5 @@ namespace Prolog
                 this[index] = referenceTargets[index];
             }
         }
-
-        #endregion
     }
 }

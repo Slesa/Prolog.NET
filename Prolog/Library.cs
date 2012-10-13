@@ -13,157 +13,145 @@ namespace Prolog
     /// </summary>
     public sealed class Library : INotifyPropertyChanged
     {
-        #region Fields
-
-        private static Library s_standard;
-
-        private bool m_isModified;
-        private LibraryMethodList m_methods;
-
-        #endregion
-
-        #region Constructors
+        static Library _standard;
+        bool _isModified;
 
         public Library()
         {
-            m_isModified = false;
-            m_methods = new LibraryMethodList(this, new ObservableCollection<LibraryMethod>());
+            _isModified = false;
+            Methods = new LibraryMethodList(this, new ObservableCollection<LibraryMethod>());
         }
-
-        #endregion
-
-        #region Public Properties
 
         public static Library Standard
         {
             get
             {
-                if (s_standard == null)
+                if (_standard == null)
                 {
-                    Library standard = new Library();
+                    var standard = new Library();
 
                     // Term Unification and Evaluation
                     //
-                    standard.Add("unify", @"=", 2, new PredicateDelegate(TermUnificationMethods.Unify), false);
-                    standard.Add("can_unify", @"?=", 2, new PredicateDelegate(TermUnificationMethods.CanUnify), true);
-                    standard.Add("cannot_unify", @"\=", 2, new PredicateDelegate(TermUnificationMethods.CannotUnify), true);
-                    standard.Add("is", @":=", 2, new PredicateDelegate(TermUnificationMethods.Is), false);
-                    standard.Add("assert", 1, new PredicateDelegate(TermUnificationMethods.Assert), false);
+                    standard.Add("unify", @"=", 2, TermUnificationMethods.Unify, false);
+                    standard.Add("can_unify", @"?=", 2, TermUnificationMethods.CanUnify, true);
+                    standard.Add("cannot_unify", @"\=", 2, TermUnificationMethods.CannotUnify, true);
+                    standard.Add("is", @":=", 2, TermUnificationMethods.Is, false);
+                    standard.Add("assert", 1, TermUnificationMethods.Assert, false);
                     standard.Add("eval", 1, new CodePredicateDelegate(TermUnificationMethods.Eval));
 
                     // Control Constructs
                     //
-                    standard.Add("true", 0, new PredicateDelegate(ControlConstructMethods.True), false);
-                    standard.Add("fail", 0, new PredicateDelegate(ControlConstructMethods.Fail), false);
+                    standard.Add("true", 0, ControlConstructMethods.True, false);
+                    standard.Add("fail", 0, ControlConstructMethods.Fail, false);
                     standard.Add("for", 3, new BacktrackingPredicateDelegate(ControlConstructMethods.For));
 
                     // All Solutions
                     //
-                    standard.Add("findall", 3, new PredicateDelegate(AllSolutionMethods.FindAll), false);
+                    standard.Add("findall", 3, AllSolutionMethods.FindAll, false);
 
                     // Type and Value Testing
                     //
-                    standard.Add("var", 1, new PredicateDelegate(TypeValueTestingMethods.Var), true);
-                    standard.Add("nonvar", 1, new PredicateDelegate(TypeValueTestingMethods.Nonvar), true);
-                    standard.Add("atom", 1, new PredicateDelegate(TypeValueTestingMethods.Atom), true);
-                    standard.Add("integer", 1, new PredicateDelegate(TypeValueTestingMethods.Integer), true);
-                    standard.Add("float", 1, new PredicateDelegate(TypeValueTestingMethods.Float), true);
-                    standard.Add("number", 1, new PredicateDelegate(TypeValueTestingMethods.Number), true);
-                    standard.Add("atomic", 1, new PredicateDelegate(TypeValueTestingMethods.Atomic), true);
-                    standard.Add("compound", 1, new PredicateDelegate(TypeValueTestingMethods.Compound), true);
-                    standard.Add("callable", 1, new PredicateDelegate(TypeValueTestingMethods.Callable), true);
-                    standard.Add("list", 1, new PredicateDelegate(TypeValueTestingMethods.List), true);
-                    standard.Add("partial_list", 1, new PredicateDelegate(TypeValueTestingMethods.PartialList), true);
-                    standard.Add("list_or_partial_list", 1, new PredicateDelegate(TypeValueTestingMethods.ListOrPartialList), true);
-                    standard.Add("is_type", 2, new FunctionDelegate(TypeValueTestingMethods.IsType));
-                    standard.Add("is_null", 1, new FunctionDelegate(TypeValueTestingMethods.IsNull));
-                    standard.Add("is_empty", 1, new FunctionDelegate(TypeValueTestingMethods.IsEmpty));
+                    standard.Add("var", 1, TypeValueTestingMethods.Var, true);
+                    standard.Add("nonvar", 1, TypeValueTestingMethods.Nonvar, true);
+                    standard.Add("atom", 1, TypeValueTestingMethods.Atom, true);
+                    standard.Add("integer", 1, TypeValueTestingMethods.Integer, true);
+                    standard.Add("float", 1, TypeValueTestingMethods.Float, true);
+                    standard.Add("number", 1, TypeValueTestingMethods.Number, true);
+                    standard.Add("atomic", 1, TypeValueTestingMethods.Atomic, true);
+                    standard.Add("compound", 1, TypeValueTestingMethods.Compound, true);
+                    standard.Add("callable", 1, TypeValueTestingMethods.Callable, true);
+                    standard.Add("list", 1, TypeValueTestingMethods.List, true);
+                    standard.Add("partial_list", 1, TypeValueTestingMethods.PartialList, true);
+                    standard.Add("list_or_partial_list", 1, TypeValueTestingMethods.ListOrPartialList, true);
+                    standard.Add("is_type", 2, TypeValueTestingMethods.IsType);
+                    standard.Add("is_null", 1, TypeValueTestingMethods.IsNull);
+                    standard.Add("is_empty", 1, TypeValueTestingMethods.IsEmpty);
 
                     // Term Processing
                     //
-                    standard.Add("functor", 3, new PredicateDelegate(TermProcessingMethods.Functor), false);
-                    standard.Add("arg", 3, new PredicateDelegate(TermProcessingMethods.Arg), false);
-                    standard.Add("composed_of", @"=..", 2, new PredicateDelegate(TermProcessingMethods.ComposedOf), false);
-                    standard.Add("copy_term", 2, new PredicateDelegate(TermProcessingMethods.CopyTerm), false);
+                    standard.Add("functor", 3, TermProcessingMethods.Functor, false);
+                    standard.Add("arg", 3, TermProcessingMethods.Arg, false);
+                    standard.Add("composed_of", @"=..", 2, TermProcessingMethods.ComposedOf, false);
+                    standard.Add("copy_term", 2, TermProcessingMethods.CopyTerm, false);
 
                     // Type Conversion Expressions
                     //
-                    standard.Add("get_type", 1, new FunctionDelegate(TypeConversionExpressionMethods.GetType));
-                    standard.Add("type_of", 1, new FunctionDelegate(TypeConversionExpressionMethods.TypeOf));
-                    standard.Add("to_integer", 1, new FunctionDelegate(TypeConversionExpressionMethods.ToInteger));
-                    standard.Add("to_double", 1, new FunctionDelegate(TypeConversionExpressionMethods.ToDouble));
-                    standard.Add("to_string", 1, new FunctionDelegate(TypeConversionExpressionMethods.ToString));
-                    standard.Add("to_string", 2, new FunctionDelegate(TypeConversionExpressionMethods.ToString));
-                    standard.Add("to_date", 1, new FunctionDelegate(TypeConversionExpressionMethods.ToDate));
-                    standard.Add("to_date", 3, new FunctionDelegate(TypeConversionExpressionMethods.ToDate));
-                    standard.Add("to_boolean", 1, new FunctionDelegate(TypeConversionExpressionMethods.ToBoolean));
-                    standard.Add("ceiling", 1, new FunctionDelegate(TypeConversionExpressionMethods.Ceiling));
-                    standard.Add("floor", 1, new FunctionDelegate(TypeConversionExpressionMethods.Floor));
-                    standard.Add("round", 1, new FunctionDelegate(TypeConversionExpressionMethods.Round));
-                    standard.Add("truncate", 1, new FunctionDelegate(TypeConversionExpressionMethods.Truncate));
+                    standard.Add("get_type", 1, TypeConversionExpressionMethods.GetType);
+                    standard.Add("type_of", 1, TypeConversionExpressionMethods.TypeOf);
+                    standard.Add("to_integer", 1, TypeConversionExpressionMethods.ToInteger);
+                    standard.Add("to_double", 1, TypeConversionExpressionMethods.ToDouble);
+                    standard.Add("to_string", 1, TypeConversionExpressionMethods.ToString);
+                    standard.Add("to_string", 2, TypeConversionExpressionMethods.ToString);
+                    standard.Add("to_date", 1, TypeConversionExpressionMethods.ToDate);
+                    standard.Add("to_date", 3, TypeConversionExpressionMethods.ToDate);
+                    standard.Add("to_boolean", 1, TypeConversionExpressionMethods.ToBoolean);
+                    standard.Add("ceiling", 1, TypeConversionExpressionMethods.Ceiling);
+                    standard.Add("floor", 1, TypeConversionExpressionMethods.Floor);
+                    standard.Add("round", 1, TypeConversionExpressionMethods.Round);
+                    standard.Add("truncate", 1, TypeConversionExpressionMethods.Truncate);
 
                     // Arithmetic Expressions
                     //
-                    standard.Add("negate", "-",1, new FunctionDelegate(ArithmeticExpressionMethods.Negate));
-                    standard.Add("inc", 1, new FunctionDelegate(ArithmeticExpressionMethods.Increment));
-                    standard.Add("dec", 1, new FunctionDelegate(ArithmeticExpressionMethods.Decrement));
-                    standard.Add("add", @"+", 2, new FunctionDelegate(ArithmeticExpressionMethods.Add));
-                    standard.Add("subtract", @"-", 2, new FunctionDelegate(ArithmeticExpressionMethods.Subtract));
-                    standard.Add("multiply", @"*", 2, new FunctionDelegate(ArithmeticExpressionMethods.Multiply));
-                    standard.Add("divide", @"/", 2, new FunctionDelegate(ArithmeticExpressionMethods.Divide));
-                    standard.Add("integer_divide", @"//", 2, new FunctionDelegate(ArithmeticExpressionMethods.IntegerDivide));
-                    standard.Add("rem", 2, new FunctionDelegate(ArithmeticExpressionMethods.Remainder));
-                    standard.Add("mod", 2, new FunctionDelegate(ArithmeticExpressionMethods.Modulo));
-                    standard.Add("bitwise_and", @"/\", 2, new FunctionDelegate(ArithmeticExpressionMethods.BitwiseAnd));
-                    standard.Add("bitwise_or", @"\/", 2, new FunctionDelegate(ArithmeticExpressionMethods.BitwiseOr));
-                    standard.Add("bitwise_xor", @"^", 2, new FunctionDelegate(ArithmeticExpressionMethods.BitwiseXor));
-                    standard.Add("bitwise_not", @"\", 1, new FunctionDelegate(ArithmeticExpressionMethods.BitwiseNot));
-                    standard.Add("shift_left", @"<<", 2, new FunctionDelegate(ArithmeticExpressionMethods.ShiftLeft));
-                    standard.Add("integer_shift_right", @">>", 2, new FunctionDelegate(ArithmeticExpressionMethods.IntegerShiftRight));
-                    standard.Add("bitwise_shift_right", 2, new FunctionDelegate(ArithmeticExpressionMethods.BitwiseShiftRight));
-                    standard.Add("abs", 1, new FunctionDelegate(ArithmeticExpressionMethods.AbsoluteValue));
-                    standard.Add("sign", 1, new FunctionDelegate(ArithmeticExpressionMethods.Sign));
-                    standard.Add("min", 2, new FunctionDelegate(ArithmeticExpressionMethods.Minimum));
-                    standard.Add("max", 2, new FunctionDelegate(ArithmeticExpressionMethods.Maximum));
-                    standard.Add("power", 2, new FunctionDelegate(ArithmeticExpressionMethods.Power));
-                    standard.Add("sqrt", 1, new FunctionDelegate(ArithmeticExpressionMethods.SquareRoot));
-                    standard.Add("atan", 1, new FunctionDelegate(ArithmeticExpressionMethods.ArcTangent));
-                    standard.Add("cos", 1, new FunctionDelegate(ArithmeticExpressionMethods.Cosign));
-                    standard.Add("acos", 1, new FunctionDelegate(ArithmeticExpressionMethods.ArcCosign));
-                    standard.Add("sin", 1, new FunctionDelegate(ArithmeticExpressionMethods.Sine));
-                    standard.Add("asin", 1, new FunctionDelegate(ArithmeticExpressionMethods.ArcSine));
-                    standard.Add("exp", 1, new FunctionDelegate(ArithmeticExpressionMethods.Exp));
-                    standard.Add("log", 1, new FunctionDelegate(ArithmeticExpressionMethods.Log));
+                    standard.Add("negate", "-",1, ArithmeticExpressionMethods.Negate);
+                    standard.Add("inc", 1, ArithmeticExpressionMethods.Increment);
+                    standard.Add("dec", 1, ArithmeticExpressionMethods.Decrement);
+                    standard.Add("add", @"+", 2, ArithmeticExpressionMethods.Add);
+                    standard.Add("subtract", @"-", 2, ArithmeticExpressionMethods.Subtract);
+                    standard.Add("multiply", @"*", 2, ArithmeticExpressionMethods.Multiply);
+                    standard.Add("divide", @"/", 2, ArithmeticExpressionMethods.Divide);
+                    standard.Add("integer_divide", @"//", 2, ArithmeticExpressionMethods.IntegerDivide);
+                    standard.Add("rem", 2, ArithmeticExpressionMethods.Remainder);
+                    standard.Add("mod", 2, ArithmeticExpressionMethods.Modulo);
+                    standard.Add("bitwise_and", @"/\", 2, ArithmeticExpressionMethods.BitwiseAnd);
+                    standard.Add("bitwise_or", @"\/", 2, ArithmeticExpressionMethods.BitwiseOr);
+                    standard.Add("bitwise_xor", @"^", 2, ArithmeticExpressionMethods.BitwiseXor);
+                    standard.Add("bitwise_not", @"\", 1, ArithmeticExpressionMethods.BitwiseNot);
+                    standard.Add("shift_left", @"<<", 2, ArithmeticExpressionMethods.ShiftLeft);
+                    standard.Add("integer_shift_right", @">>", 2, ArithmeticExpressionMethods.IntegerShiftRight);
+                    standard.Add("bitwise_shift_right", 2, ArithmeticExpressionMethods.BitwiseShiftRight);
+                    standard.Add("abs", 1, ArithmeticExpressionMethods.AbsoluteValue);
+                    standard.Add("sign", 1, ArithmeticExpressionMethods.Sign);
+                    standard.Add("min", 2, ArithmeticExpressionMethods.Minimum);
+                    standard.Add("max", 2, ArithmeticExpressionMethods.Maximum);
+                    standard.Add("power", 2, ArithmeticExpressionMethods.Power);
+                    standard.Add("sqrt", 1, ArithmeticExpressionMethods.SquareRoot);
+                    standard.Add("atan", 1, ArithmeticExpressionMethods.ArcTangent);
+                    standard.Add("cos", 1, ArithmeticExpressionMethods.Cosign);
+                    standard.Add("acos", 1, ArithmeticExpressionMethods.ArcCosign);
+                    standard.Add("sin", 1, ArithmeticExpressionMethods.Sine);
+                    standard.Add("asin", 1, ArithmeticExpressionMethods.ArcSine);
+                    standard.Add("exp", 1, ArithmeticExpressionMethods.Exp);
+                    standard.Add("log", 1, ArithmeticExpressionMethods.Log);
 
                     // String Expressions
                     //
-                    standard.Add("substring", 2, new FunctionDelegate(StringExpressionMethods.Substring));
-                    standard.Add("substring", 3, new FunctionDelegate(StringExpressionMethods.Substring));
-                    standard.Add("length", 1, new FunctionDelegate(StringExpressionMethods.StringLength));
-                    standard.Add("contains", 2, new FunctionDelegate(StringExpressionMethods.StringContains));
-                    standard.Add("replace", 3, new FunctionDelegate(StringExpressionMethods.StringReplace));
+                    standard.Add("substring", 2, StringExpressionMethods.Substring);
+                    standard.Add("substring", 3, StringExpressionMethods.Substring);
+                    standard.Add("length", 1, StringExpressionMethods.StringLength);
+                    standard.Add("contains", 2, StringExpressionMethods.StringContains);
+                    standard.Add("replace", 3, StringExpressionMethods.StringReplace);
 
                     // Value Comparison
                     //
-                    standard.Add("equal", @"=:=", 2, new FunctionDelegate(ValueComparisonMethods.Equal));
-                    standard.Add("unequal", @"=\=", 2, new FunctionDelegate(ValueComparisonMethods.Unequal));
-                    standard.Add("less", @"<", 2, new FunctionDelegate(ValueComparisonMethods.Less));
-                    standard.Add("less_equal", @"=<", 2, new FunctionDelegate(ValueComparisonMethods.LessEqual));
-                    standard.Add("greater", @">", 2, new FunctionDelegate(ValueComparisonMethods.Greater));
-                    standard.Add("greater_equal", @">=", 2, new FunctionDelegate(ValueComparisonMethods.GreaterEqual));
+                    standard.Add("equal", @"=:=", 2, ValueComparisonMethods.Equal);
+                    standard.Add("unequal", @"=\=", 2, ValueComparisonMethods.Unequal);
+                    standard.Add("less", @"<", 2, ValueComparisonMethods.Less);
+                    standard.Add("less_equal", @"=<", 2, ValueComparisonMethods.LessEqual);
+                    standard.Add("greater", @">", 2, ValueComparisonMethods.Greater);
+                    standard.Add("greater_equal", @">=", 2, ValueComparisonMethods.GreaterEqual);
 
                     // Random Numbers
                     //
-                    standard.Add("randomize", 0, new PredicateDelegate(RandomNumberMethods.Randomize), false);
-                    standard.Add("set_seed", 1, new PredicateDelegate(RandomNumberMethods.SetSeed), false);
-                    standard.Add("get_seed", 1, new PredicateDelegate(RandomNumberMethods.GetSeed), false);
-                    standard.Add("random", 1, new PredicateDelegate(RandomNumberMethods.NextDouble), false);
-                    standard.Add("random", 3, new PredicateDelegate(RandomNumberMethods.Next), false);
+                    standard.Add("randomize", 0, RandomNumberMethods.Randomize, false);
+                    standard.Add("set_seed", 1, RandomNumberMethods.SetSeed, false);
+                    standard.Add("get_seed", 1, RandomNumberMethods.GetSeed, false);
+                    standard.Add("random", 1, RandomNumberMethods.NextDouble, false);
+                    standard.Add("random", 3, RandomNumberMethods.Next, false);
 
-                    s_standard = standard;
+                    _standard = standard;
                 }
 
-                return s_standard;
+                return _standard;
             }
         }
 
@@ -175,32 +163,24 @@ namespace Prolog
                 {
                     throw new ArgumentNullException("functor");
                 }
-
                 return Methods[functor];
             }
         }
 
         public bool IsModified
         {
-            get { return m_isModified; }
+            get { return _isModified; }
             private set
             {
-                if (value != m_isModified)
+                if (value != _isModified)
                 {
-                    m_isModified = value;
+                    _isModified = value;
                     RaisePropertyChanged(new PropertyChangedEventArgs("IsModified"));
                 }
             }
         }
 
-        public LibraryMethodList Methods
-        {
-            get { return m_methods; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public LibraryMethodList Methods { get; private set; }
 
         public bool Contains(Functor functor)
         {
@@ -208,13 +188,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            if (Methods.Contains(functor))
-            {
-                return true;
-            }
-
-            return false;
+            return Methods.Contains(functor);
         }
 
         public Function Add(Functor functor, FunctionDelegate functionDelegate)
@@ -227,9 +201,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functionDelegate");
             }
-
-            Function function = Methods.Add(functor, functionDelegate);
-
+            var function = Methods.Add(functor, functionDelegate);
             return function;
         }
 
@@ -254,9 +226,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("predicateDelegate");
             }
-
-            Predicate predicate = Methods.Add(functor, predicateDelegate, canEvaluate);
-
+            var predicate = Methods.Add(functor, predicateDelegate, canEvaluate);
             return predicate;
         }
 
@@ -286,9 +256,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("backtrackingPredicateDelegate");
             }
-
-            BacktrackingPredicate backtrackingPredicate = Methods.Add(functor, backtrackingPredicateDelegate);
-
+            var backtrackingPredicate = Methods.Add(functor, backtrackingPredicateDelegate);
             return backtrackingPredicate;
         }
 
@@ -302,9 +270,7 @@ namespace Prolog
             {
                 throw new ArgumentNullException("codePredicateDelegate");
             }
-
-            CodePredicate codePredicate = Methods.Add(functor, codePredicateDelegate);
-
+            var codePredicate = Methods.Add(functor, codePredicateDelegate);
             return codePredicate;
         }
 
@@ -318,24 +284,14 @@ namespace Prolog
             IsModified = true;
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-        #region Hidden Members
-
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

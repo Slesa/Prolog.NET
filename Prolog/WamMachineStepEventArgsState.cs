@@ -6,20 +6,6 @@ namespace Prolog
 {
     internal class WamMachineStepEventArgsState
     {
-        #region Fields
-
-        private WamInstructionPointer m_instructionPointer;
-
-        #endregion
-
-        #region Public Properties
-
-        public WamInstructionPointer InstructionPointer
-        {
-            get { return m_instructionPointer; }
-            set { m_instructionPointer = value; }
-        }
-
-        #endregion
+        public WamInstructionPointer InstructionPointer { get; set; }
     }
 }

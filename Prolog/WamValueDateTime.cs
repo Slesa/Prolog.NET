@@ -3,24 +3,16 @@
  */
 
 using System;
-
+using System.Globalization;
 using Prolog.Code;
 
 namespace Prolog
 {
     internal sealed class WamValueDateTime : WamValue
     {
-        #region Fields
-
-        private DateTime m_value;
-
-        #endregion
-
-        #region Constructors
-
-        private WamValueDateTime(DateTime value)
+        WamValueDateTime(DateTime value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static WamValueDateTime Create(DateTime value)
@@ -33,38 +25,21 @@ namespace Prolog
             return new WamValueDateTime(Value);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
-            get { return m_value; }
+            get { return Value; }
         }
 
-        public DateTime Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public DateTime Value { get; private set; }
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Value.ToString(CultureInfo.InvariantCulture);
         }
-
-        #endregion
-
-        #region Hidden Members
 
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
             return new CodeValueDateTime(Value);
         }
-
-        #endregion
     }
 }

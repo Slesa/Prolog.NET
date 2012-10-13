@@ -13,17 +13,11 @@ namespace Prolog.Code
     [Serializable]
     public abstract class CodeValueNumeric : CodeValue, IEquatable<CodeValueNumeric>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValueNumeric";
-
-        #endregion
-
-        #region Constructors
 
         public new static CodeValueNumeric Create(XElement xCodeValue)
         {
-            foreach (XElement xSubtype in xCodeValue.Elements())
+            foreach (var xSubtype in xCodeValue.Elements())
             {
                 if (xSubtype.Name == CodeValueInteger.ElementName) return CodeValueInteger.Create(xSubtype);
                 if (xSubtype.Name == CodeValueDouble.ElementName) return CodeValueDouble.Create(xSubtype);
@@ -34,15 +28,11 @@ namespace Prolog.Code
             throw new InvalidOperationException("No subtype element specified.");
         }
 
-        #endregion
-
-        #region Public Methods
-
         public static bool operator ==(CodeValueNumeric lhs, CodeValueNumeric rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -52,10 +42,6 @@ namespace Prolog.Code
             return !(lhs == rhs);
         }
 
-        #endregion
-
-        #region IEquatable<CodeNumericConstant> Members
-
         public override bool Equals(CodeValue other)
         {
             return Equals(other as CodeValueNumeric);
@@ -63,16 +49,10 @@ namespace Prolog.Code
 
         public abstract bool Equals(CodeValueNumeric other);
 
-        #endregion
-
-        #region Hidden Members
-
         protected override XElement ToXElementBase(XElement content)
         {
             return base.ToXElementBase(
                 new XElement(ElementName, content));
         }
-
-        #endregion
     }
 }

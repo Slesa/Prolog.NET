@@ -3,61 +3,33 @@
  */
 
 using System;
-using System.Reflection;
-
-using Lingua;
-using Prolog.Code;
-using Prolog.Grammar;
 
 namespace Prolog
 {
     public sealed class PerformanceStatistics
     {
-        #region Fields
+        int _startTickCount;
+        int _stopTickCount;
 
-        private int m_startTickCount;
-        private int m_stopTickCount;
-        private TimeSpan m_elapsedTime;
+        public int InstructionCount { get; private set; }
 
-        private int m_instructionCount;
-
-        #endregion
-
-        #region Public Properties
-
-        public int InstructionCount
-        {
-            get { return m_instructionCount; }
-        }
-
-        public TimeSpan ElapsedTime
-        {
-            get { return m_elapsedTime; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public TimeSpan ElapsedTime { get; private set; }
 
         internal void Start()
         {
-            m_instructionCount = 0;
-
-            m_startTickCount = Environment.TickCount;
+            InstructionCount = 0;
+            _startTickCount = Environment.TickCount;
         }
 
         internal void Stop()
         {
-            m_stopTickCount = Environment.TickCount;
-
-            m_elapsedTime = TimeSpan.FromMilliseconds(m_stopTickCount - m_startTickCount);
+            _stopTickCount = Environment.TickCount;
+            ElapsedTime = TimeSpan.FromMilliseconds(_stopTickCount - _startTickCount);
         }
 
         internal void IncrementInstructionCount()
         {
-            ++m_instructionCount;
+            ++InstructionCount;
         }
-
-        #endregion
     }
 }

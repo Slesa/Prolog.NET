@@ -12,14 +12,6 @@ namespace Prolog
     /// </summary>
     public class RoutedClauseEventArgs : RoutedEventArgs
     {
-        #region Fields
-
-        private Clause m_clause;
-
-        #endregion
-
-        #region Constructors
-
         public RoutedClauseEventArgs(Clause clause, RoutedEvent routedEvent, object source)
             : base(routedEvent, source)
         {
@@ -28,7 +20,7 @@ namespace Prolog
                 throw new ArgumentNullException("clause");
             }
 
-            m_clause = clause;
+            Clause = clause;
         }
 
         public RoutedClauseEventArgs(Clause clause, RoutedEvent routedEvent)
@@ -39,7 +31,7 @@ namespace Prolog
                 throw new ArgumentNullException("clause");
             }
 
-            m_clause = clause;
+            Clause = clause;
         }
 
         public RoutedClauseEventArgs(Clause clause)
@@ -49,18 +41,9 @@ namespace Prolog
                 throw new ArgumentNullException("clause");
             }
 
-            m_clause = clause;
+            Clause = clause;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public Clause Clause
-        {
-            get { return m_clause; }
-        }
-
-        #endregion
+        public Clause Clause { get; private set; }
     }
 }

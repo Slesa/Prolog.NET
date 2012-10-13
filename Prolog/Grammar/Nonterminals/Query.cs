@@ -12,33 +12,14 @@ namespace Prolog.Grammar
     //
     internal sealed class Query : PrologNonterminal
     {
-        #region Fields
-
-        private CodeSentence m_codeSentence;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(Query lhs, ColonDash colonDash, StatementElement statementElement, AdditionalStatementElements additionalStatementElements)
         {
-            List<CodeCompoundTerm> codeCompoundTerms = new List<CodeCompoundTerm>();
-            codeCompoundTerms.Add(statementElement.CodeCompoundTerm);
+            var codeCompoundTerms = new List<CodeCompoundTerm> {statementElement.CodeCompoundTerm};
             codeCompoundTerms.AddRange(additionalStatementElements.CodeCompoundTerms);
 
             lhs.CodeSentence = new CodeSentence(null, null, codeCompoundTerms);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeSentence CodeSentence
-        {
-            get { return m_codeSentence; }
-            private set { m_codeSentence = value; }
-        }
-
-        #endregion
+        public CodeSentence CodeSentence { get; private set; }
     }
 }

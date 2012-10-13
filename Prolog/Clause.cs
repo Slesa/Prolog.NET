@@ -11,17 +11,9 @@ namespace Prolog
 {
     public sealed class Clause : IPrologInstructionStreamContainer, INotifyPropertyChanged
     {
-        #region Fields
-
-        private ProcedureClauseList m_container;
-        private CodeSentence m_codeSentence;
-
-        private WamInstructionStream m_wamInstructionStream;
-        private PrologInstructionStream m_prologInstructionStream;
-
-        #endregion
-
-        #region Constructors
+        CodeSentence _codeSentence;
+        WamInstructionStream _wamInstructionStream;
+        PrologInstructionStream _prologInstructionStream;
 
         internal Clause(ProcedureClauseList container, CodeSentence codeSentence)
         {
@@ -34,35 +26,27 @@ namespace Prolog
                 throw new ArgumentNullException("codeSentence");
             }
 
-            m_container = container;
-            m_codeSentence = codeSentence;
+            Container = container;
+            _codeSentence = codeSentence;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public ProcedureClauseList Container
-        {
-            get { return m_container; }
-        }
+        public ProcedureClauseList Container { get; private set; }
 
         public CodeSentence CodeSentence
         {
-            get { return m_codeSentence; }
+            get { return _codeSentence; }
             set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
-                if (value.Head == null
-                    || value.Head.Functor != m_codeSentence.Head.Functor)
+                if (value.Head == null || value.Head.Functor != _codeSentence.Head.Functor)
                 {
                     throw new ArgumentException("Code specified for different procedure.");
                 }
 
-                m_codeSentence = value;
+                _codeSentence = value;
                 RaisePropertyChanged(new PropertyChangedEventArgs("CodeSentence"));
 
                 InvalidateInstructionStream();
@@ -96,53 +80,29 @@ namespace Prolog
 
         public PrologInstructionStream PrologInstructionStream
         {
-            get
-            {
-                if (m_prologInstructionStream == null)
-                {
-                    m_prologInstructionStream = new PrologInstructionStream(this);
-                }
-
-                return m_prologInstructionStream;
-            }
+            get { return _prologInstructionStream ?? (_prologInstructionStream = new PrologInstructionStream(this)); }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public override string ToString()
         {
             return string.Format("{0}.", CodeSentence);
         }
 
-        #endregion
-
-        #region IPrologInstructionStreamContainer Members
-
         WamInstructionStream IPrologInstructionStreamContainer.WamInstructionStream
         {
             get { return WamInstructionStream; }
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Internal Members
 
         internal WamInstructionStream WamInstructionStream
         {
             get
             {
-                if (m_wamInstructionStream == null)
+                if (_wamInstructionStream == null)
                 {
-                    Compiler compiler = new Compiler();
-                    m_wamInstructionStream = compiler.Compile(
+                    var compiler = new Compiler();
+                    _wamInstructionStream = compiler.Compile(
                         CodeSentence, 
                         Container.Procedure.Functor, 
                         Index, 
@@ -150,8 +110,7 @@ namespace Prolog
                         Container.Procedure.Container.Program.Libraries,
                         Container.Procedure.Container.Program.IsOptimized);
                 }
-
-                return m_wamInstructionStream;
+                return _wamInstructionStream;
             }
         }
 
@@ -163,27 +122,21 @@ namespace Prolog
 
         internal void InvalidateInstructionStream()
         {
-            m_wamInstructionStream = null;
+            _wamInstructionStream = null;
 
-            if (m_prologInstructionStream != null)
+            if (_prologInstructionStream != null)
             {
-                m_prologInstructionStream = null;
+                _prologInstructionStream = null;
                 RaisePropertyChanged(new PropertyChangedEventArgs("PrologInstructionStream"));
             }
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private void RaisePropertyChanged(PropertyChangedEventArgs e)
+        void RaisePropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, e);
             }
         }
-
-        #endregion
     }
 }

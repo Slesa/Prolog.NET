@@ -9,66 +9,48 @@ namespace Prolog
     /// </remarks>
     internal struct WamInstructionRegister : IImmuttable
     {
-        #region Fields
+        static readonly WamInstructionRegister _unused = new WamInstructionRegister(WamInstructionRegisterTypes.Unused, 0);
 
-        private static WamInstructionRegister s_unused = new WamInstructionRegister(WamInstructionRegisterTypes.Unused, 0);
-
-        private WamInstructionRegisterTypes m_type; // 1 byte
-        private byte m_id;
-
-        #endregion
-
-        #region Constructors
+        WamInstructionRegisterTypes _type; // 1 byte
+        byte _id;
 
         public WamInstructionRegister(WamInstructionRegisterTypes type, byte id)
         {
-            m_type = type;
-            m_id = id;
+            _type = type;
+            _id = id;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public static WamInstructionRegister Unused
         {
-            get { return s_unused; }
+            get { return _unused; }
         }
 
         public WamInstructionRegisterTypes Type
         {
-            get { return m_type; }
+            get { return _type; }
         }
 
         public byte Id
         {
-            get { return m_id; }
+            get { return _id; }
         }
 
         public bool IsUnused
         {
-            get { return m_type == WamInstructionRegisterTypes.Unused; }
+            get { return _type == WamInstructionRegisterTypes.Unused; }
         }
 
         public bool IsUsed
         {
-            get { return m_type != WamInstructionRegisterTypes.Unused; }
+            get { return _type != WamInstructionRegisterTypes.Unused; }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public override string ToString()
         {
             return string.Format("{0}{1}", TypePrefix, Id);
         }
 
-        #endregion
-
-        #region Hidden Members
-
-        private string TypePrefix
+        string TypePrefix
         {
             get
             {
@@ -81,7 +63,5 @@ namespace Prolog
                 }
             }
         }
-
-        #endregion
     }
 }

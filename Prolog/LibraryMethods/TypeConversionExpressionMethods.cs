@@ -11,16 +11,14 @@ namespace Prolog
 {
     internal static class TypeConversionExpressionMethods
     {
-        #region Public Methods
-
         public static CodeTerm GetType(CodeTerm[] arguments)
         {
             Debug.Assert(arguments.Length == 1);
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                string typeName = Convert.ToString(argValue0.Object);
+                var argValue0 = (CodeValue)arguments[0];
+                var typeName = Convert.ToString(argValue0.Object);
                 return new CodeValueType(Type.GetType(typeName));
             }
             catch (Exception ex)
@@ -35,16 +33,13 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                object value = argValue0.Object;
+                var argValue0 = (CodeValue) arguments[0];
+                var value = argValue0.Object;
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
-                else
-                {
-                    return new CodeValueType(value.GetType());
-                }
+                return new CodeValueType(value.GetType());
             }
             catch (Exception ex)
             {
@@ -58,7 +53,7 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
+                var argValue0 = (CodeValue)arguments[0];
                 return new CodeValueInteger(Convert.ToInt32(argValue0.Object));
             }
             catch (Exception ex)
@@ -73,7 +68,7 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
+                var argValue0 = (CodeValue)arguments[0];
                 return new CodeValueDouble(Convert.ToDouble(argValue0.Object));
             }
             catch (Exception ex)
@@ -88,7 +83,7 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
+                var argValue0 = (CodeValue)arguments[0];
                 return new CodeValueBoolean(Convert.ToBoolean(argValue0.Object));
             }
             catch (Exception ex)
@@ -104,18 +99,17 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-                object value = argValue0.Object;
+                var argValue0 = (CodeValue) arguments[0];
+                var value = argValue0.Object;
                 if (arguments.Length == 1)
                 {
                     return new CodeValueString(Convert.ToString(value));
                 }
-                else // arguments.Length == 2
-                {
-                    CodeValue argValue1 = (CodeValue)arguments[1];
-                    string format = Convert.ToString(argValue1.Object);
-                    return new CodeValueString(string.Format(format, value));
-                }
+                // arguments.Length == 2
+
+                var argValue1 = (CodeValue) arguments[1];
+                var format = Convert.ToString(argValue1.Object);
+                return new CodeValueString(string.Format(format, value));
             }
             catch (Exception ex)
             {
@@ -125,25 +119,24 @@ namespace Prolog
 
         public static CodeTerm ToDate(CodeTerm[] arguments)
         {
-            Debug.Assert(arguments.Length == 1
-                         || arguments.Length == 3);
+            Debug.Assert(arguments.Length == 1 || arguments.Length == 3);
 
             try
             {
                 if (arguments.Length == 1)
                 {
-                    CodeValue argValue0 = (CodeValue)arguments[0];
-                    object value = argValue0.Object;
+                    var argValue0 = (CodeValue)arguments[0];
+                    var value = argValue0.Object;
                     return new CodeValueDateTime(Convert.ToDateTime(value));
                 }
                 else // arguments.Length == 3
                 {
-                    CodeValue argValue0 = (CodeValue)arguments[0];
-                    CodeValue argValue1 = (CodeValue)arguments[1];
-                    CodeValue argValue2 = (CodeValue)arguments[2];
-                    int year = Convert.ToInt32(argValue0.Object);
-                    int month= Convert.ToInt32(argValue1.Object);
-                    int day = Convert.ToInt32(argValue2.Object);
+                    var argValue0 = (CodeValue)arguments[0];
+                    var year = Convert.ToInt32(argValue0.Object);
+                    var argValue1 = (CodeValue)arguments[1];
+                    var month= Convert.ToInt32(argValue1.Object);
+                    var argValue2 = (CodeValue)arguments[2];
+                    var day = Convert.ToInt32(argValue2.Object);
                     return new CodeValueDateTime(new DateTime(year, month, day));
                 }
             }
@@ -159,21 +152,17 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-
-                CodeValueInteger argInteger0 = argValue0 as CodeValueInteger;
+                var argValue0 = (CodeValue)arguments[0];
+                var argInteger0 = argValue0 as CodeValueInteger;
                 if (argInteger0 != null)
                 {
                     return argInteger0;
                 }
 
-                CodeValueDouble argDouble0 = argValue0 as CodeValueDouble;
-                if (argDouble0 != null)
-                {
-                    return new CodeValueInteger(Convert.ToInt32(Math.Ceiling(argDouble0.Value)));
-                }
-                
-                return new CodeValueInteger(Convert.ToInt32(Math.Ceiling(Convert.ToDouble(argValue0.Object))));
+                var argDouble0 = argValue0 as CodeValueDouble;
+                return argDouble0 != null 
+                    ? new CodeValueInteger(Convert.ToInt32(Math.Ceiling(argDouble0.Value))) 
+                    : new CodeValueInteger(Convert.ToInt32(Math.Ceiling(Convert.ToDouble(argValue0.Object))));
             }
             catch (Exception ex)
             {
@@ -187,21 +176,17 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-
-                CodeValueInteger argInteger0 = argValue0 as CodeValueInteger;
+                var argValue0 = (CodeValue)arguments[0];
+                var argInteger0 = argValue0 as CodeValueInteger;
                 if (argInteger0 != null)
                 {
                     return argInteger0;
                 }
 
-                CodeValueDouble argDouble0 = argValue0 as CodeValueDouble;
-                if (argDouble0 != null)
-                {
-                    return new CodeValueInteger(Convert.ToInt32(Math.Floor(argDouble0.Value)));
-                }
-
-                return new CodeValueInteger(Convert.ToInt32(Math.Floor(Convert.ToDouble(argValue0.Object))));
+                var argDouble0 = argValue0 as CodeValueDouble;
+                return argDouble0 != null 
+                    ? new CodeValueInteger(Convert.ToInt32(Math.Floor(argDouble0.Value))) 
+                    : new CodeValueInteger(Convert.ToInt32(Math.Floor(Convert.ToDouble(argValue0.Object))));
             }
             catch (Exception ex)
             {
@@ -215,21 +200,17 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-
-                CodeValueInteger argInteger0 = argValue0 as CodeValueInteger;
+                var argValue0 = (CodeValue)arguments[0];
+                var argInteger0 = argValue0 as CodeValueInteger;
                 if (argInteger0 != null)
                 {
                     return argInteger0;
                 }
 
-                CodeValueDouble argDouble0 = argValue0 as CodeValueDouble;
-                if (argDouble0 != null)
-                {
-                    return new CodeValueInteger(Convert.ToInt32(Math.Round(argDouble0.Value)));
-                }
-
-                return new CodeValueInteger(Convert.ToInt32(Math.Round(Convert.ToDouble(argValue0.Object))));
+                var argDouble0 = argValue0 as CodeValueDouble;
+                return argDouble0 != null 
+                    ? new CodeValueInteger(Convert.ToInt32(Math.Round(argDouble0.Value))) 
+                    : new CodeValueInteger(Convert.ToInt32(Math.Round(Convert.ToDouble(argValue0.Object))));
             }
             catch (Exception ex)
             {
@@ -243,28 +224,22 @@ namespace Prolog
 
             try
             {
-                CodeValue argValue0 = (CodeValue)arguments[0];
-
-                CodeValueInteger argInteger0 = argValue0 as CodeValueInteger;
+                var argValue0 = (CodeValue)arguments[0];
+                var argInteger0 = argValue0 as CodeValueInteger;
                 if (argInteger0 != null)
                 {
                     return argInteger0;
                 }
 
-                CodeValueDouble argDouble0 = argValue0 as CodeValueDouble;
-                if (argDouble0 != null)
-                {
-                    return new CodeValueInteger(Convert.ToInt32(Math.Truncate(argDouble0.Value)));
-                }
-
-                return new CodeValueInteger(Convert.ToInt32(Math.Truncate(Convert.ToDouble(argValue0.Object))));
+                var argDouble0 = argValue0 as CodeValueDouble;
+                return argDouble0 != null 
+                    ? new CodeValueInteger(Convert.ToInt32(Math.Truncate(argDouble0.Value))) 
+                    : new CodeValueInteger(Convert.ToInt32(Math.Truncate(Convert.ToDouble(argValue0.Object))));
             }
             catch (Exception ex)
             {
                 return new CodeValueException(ex);
             }
         }
-
-        #endregion
     }
 }

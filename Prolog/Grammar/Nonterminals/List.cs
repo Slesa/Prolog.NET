@@ -10,36 +10,11 @@ namespace Prolog.Grammar
     //
     internal sealed class List : PrologNonterminal
     {
-        #region Fields
-
-        private CodeList m_codeList;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(List lhs, OpenBracket openBracket, OptionalListBody optionalListBody, CloseBracket closeBracket)
         {
-            if (optionalListBody.CodeList == null)
-            {
-                lhs.CodeList = new CodeList();
-            }
-            else
-            {
-                lhs.CodeList = optionalListBody.CodeList;
-            }
+            lhs.CodeList = optionalListBody.CodeList ?? new CodeList();
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeList CodeList
-        {
-            get { return m_codeList; }
-            private set { m_codeList = value; }
-        }
-
-        #endregion
+        public CodeList CodeList { get; private set; }
     }
 }

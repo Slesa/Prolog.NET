@@ -10,39 +10,12 @@ namespace Prolog.Grammar
     //
     internal sealed class ListBody : PrologNonterminal
     {
-        #region Fields
-
-        private CodeList m_codeList;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(ListBody lhs, ListItems listItems, OptionalListTail optionalListTail)
         {
-            CodeTerm tail;
-            if (optionalListTail.CodeTerm != null)
-            {
-                tail = optionalListTail.CodeTerm;
-            }
-            else
-            {
-                tail = new CodeCompoundTerm(CodeFunctor.NilFunctor);
-            }
-
+            var tail = optionalListTail.CodeTerm ?? new CodeCompoundTerm(CodeFunctor.NilFunctor);
             lhs.CodeList = new CodeList(listItems.CodeTerms, tail);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeList CodeList
-        {
-            get { return m_codeList; }
-            private set { m_codeList = value; }
-        }
-
-        #endregion
+        public CodeList CodeList { get; private set; }
     }
 }

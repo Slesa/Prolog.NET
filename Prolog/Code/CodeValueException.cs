@@ -13,19 +13,11 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeValueException : CodeValue, IEquatable<CodeValueException>, IImmuttable
     {
-        #region Fields
-
         public new const string ElementName = "CodeValueException";
-
-        private Exception m_value;
-
-        #endregion
-
-        #region Constructors
 
         public CodeValueException(Exception value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static new CodeValueException Create(XElement xCodeValueException)
@@ -33,29 +25,18 @@ namespace Prolog.Code
             throw new NotSupportedException();
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
             get { return Value; }
         }
 
-        public Exception Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public Exception Value { get; private set; }
 
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeValueException rhs = obj as CodeValueException;
+            var rhs = obj as CodeValueException;
             if (rhs == null) return false;
 
             return Value == rhs.Value;
@@ -68,9 +49,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeValueException lhs, CodeValueException rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -91,10 +72,6 @@ namespace Prolog.Code
                 new XElement(ElementName, Value.ToString()));
         }
 
-        #endregion
-
-        #region IEquatable<CodeStringConstant> Members
-
         public override bool Equals(CodeValue other)
         {
             return Equals(other as CodeValueException);
@@ -102,11 +79,9 @@ namespace Prolog.Code
 
         public bool Equals(CodeValueException other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Value == other.Value;
         }
-
-        #endregion
     }
 }

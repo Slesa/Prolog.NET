@@ -8,13 +8,7 @@ namespace Prolog
 {
     internal sealed class CodePredicate : LibraryMethod
     {
-        #region Fields
-
-        private CodePredicateDelegate m_codePredicateDelegate;
-
-        #endregion
-
-        #region Constructors
+        private readonly CodePredicateDelegate _codePredicateDelegate;
 
         internal CodePredicate(LibraryMethodList container, Functor functor, CodePredicateDelegate codePredicateDelegate)
             : base(container, functor, false)
@@ -24,18 +18,12 @@ namespace Prolog
                 throw new ArgumentNullException("codePredicateDelegate");
             }
 
-            m_codePredicateDelegate = codePredicateDelegate;
+            _codePredicateDelegate = codePredicateDelegate;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public CodePredicateDelegate CodePredicateDelegate
         {
-            get { return m_codePredicateDelegate; }
+            get { return _codePredicateDelegate; }
         }
-
-        #endregion
     }
 }

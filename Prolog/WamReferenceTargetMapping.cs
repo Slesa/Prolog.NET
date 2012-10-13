@@ -11,18 +11,12 @@ namespace Prolog
 {
     internal class WamReferenceTargetMapping
     {
-        #region Fields
-
-        private Dictionary<WamVariable, CodeVariable> m_variables = new Dictionary<WamVariable, CodeVariable>();
-        private int m_count = 0;
-
-        #endregion
-
-        #region Public Methods
+        private readonly Dictionary<WamVariable, CodeVariable> _variables = new Dictionary<WamVariable, CodeVariable>();
+        private int _count = 0;
 
         public void Clear()
         {
-            m_variables.Clear();
+            _variables.Clear();
         }
 
         public CodeVariable Lookup(WamVariable wamVariable)
@@ -33,17 +27,13 @@ namespace Prolog
             }
 
             CodeVariable codeVariable;
-
-            if (!m_variables.TryGetValue(wamVariable, out codeVariable))
+            if (!_variables.TryGetValue(wamVariable, out codeVariable))
             {
-                ++m_count;
-                codeVariable = new CodeVariable(string.Format("V{0}", m_count));
-                m_variables.Add(wamVariable, codeVariable);
+                ++_count;
+                codeVariable = new CodeVariable(string.Format("V{0}", _count));
+                _variables.Add(wamVariable, codeVariable);
             }
-
             return codeVariable;
         }
-
-        #endregion
     }
 }

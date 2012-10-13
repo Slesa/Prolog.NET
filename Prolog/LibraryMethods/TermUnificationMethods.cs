@@ -12,37 +12,29 @@ namespace Prolog
 {
     internal static class TermUnificationMethods
     {
-        #region Public Methods
-
         public static bool Unify(WamMachine machine, WamReferenceTarget[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             return machine.Unify(arguments[0], arguments[1]);
         }
 
         public static bool CanUnify(WamMachine machine, WamReferenceTarget[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             return machine.CanUnify(arguments[0], arguments[1]);
         }
 
         public static bool CannotUnify(WamMachine machine, WamReferenceTarget[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
             return machine.CannotUnify(arguments[0], arguments[1]);
         }
 
         public static bool Is(WamMachine machine, WamReferenceTarget[] arguments)
         {
             Debug.Assert(arguments.Length == 2);
-
-            WamReferenceTarget lhs = arguments[0];
-
-            WamReferenceTarget rhs = machine.Evaluate(arguments[1]);
-
+            var lhs = arguments[0];
+            var rhs = machine.Evaluate(arguments[1]);
             return machine.Unify(lhs, rhs);
         }
 
@@ -50,12 +42,11 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 1);
 
-            WamReferenceTarget expression = machine.Evaluate(arguments[0]);
-
-            CodeTerm codeTerm = expression.GetCodeTerm();
+            var expression = machine.Evaluate(arguments[0]);
+            var codeTerm = expression.GetCodeTerm();
             if (codeTerm != null)
             {
-                CodeValue codeValue = codeTerm as CodeValue;
+                var codeValue = codeTerm as CodeValue;
                 if (codeValue != null)
                 {
                     return Convert.ToBoolean(codeValue.Object);
@@ -69,17 +60,17 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 1);
 
-            WamReferenceTarget expression = arguments[0].Dereference();
+            var expression = arguments[0].Dereference();
 
-            WamCompoundTerm compoundTerm = expression as WamCompoundTerm;
+            var compoundTerm = expression as WamCompoundTerm;
             if (compoundTerm == null)
             {
                 return;
             }
 
-            WamInstructionStreamBuilder builder = new WamInstructionStreamBuilder();
+            var builder = new WamInstructionStreamBuilder();
             builder.Write(new WamInstruction(WamInstructionOpCodes.Allocate));
-            for (int idx = 0; idx < compoundTerm.Functor.Arity; ++idx)
+            for (var idx = 0; idx < compoundTerm.Functor.Arity; ++idx)
             {
                 builder.Write(new WamInstruction(
                     WamInstructionOpCodes.PutValue,
@@ -92,7 +83,5 @@ namespace Prolog
 
             machine.SetInstructionStream(builder.ToInstructionStream());
         }
-
-        #endregion
     }
 }

@@ -10,17 +10,9 @@ namespace Prolog
 {
     internal sealed class WamValueType : WamValue
     {
-        #region Fields
-
-        private Type m_value;
-
-        #endregion
-
-        #region Constructors
-
-        private WamValueType(Type value)
+        WamValueType(Type value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static WamValueType Create(Type value)
@@ -33,38 +25,21 @@ namespace Prolog
             return new WamValueType(Value);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
-            get { return m_value; }
+            get { return Value; }
         }
 
-        public Type Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public Type Value { get; private set; }
 
         public override string ToString()
         {
             return Value.ToString();
         }
 
-        #endregion
-
-        #region Hidden Members
-
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
             return new CodeValueType(Value);
         }
-
-        #endregion
     }
 }

@@ -4,21 +4,13 @@
 
 using System;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using Prolog.Code;
 
 namespace Prolog
 {
     public sealed class ProcedureClauseList : ReadableList<Clause>
     {
-        #region Fields
-
-        private Procedure m_procedure;
-
-        #endregion
-
-        #region Constructors
-
         internal ProcedureClauseList(Procedure procedure, ObservableCollection<Clause> clauses)
             : base(clauses)
         {
@@ -27,21 +19,10 @@ namespace Prolog
                 throw new ArgumentNullException("procedure");
             }
 
-            m_procedure = procedure;
+            Procedure = procedure;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public Procedure Procedure
-        {
-            get { return m_procedure; }
-        }
-
-        #endregion
-
-        #region Public Members
+        public Procedure Procedure { get; private set; }
 
         public void Remove(Clause clause)
         {
@@ -53,7 +34,6 @@ namespace Prolog
             {
                 throw new ArgumentException("Item not found.", "clause");
             }
-
             Items.Remove(clause);
             if (Items.Count == 0)
             {
@@ -74,14 +54,13 @@ namespace Prolog
                 throw new ArgumentException("Item not found.", "clause");
             }
 
-            int index = Items.IndexOf(clause);
-            if (index > 0)
-            {
-                Move(index, index - 1);
-                Procedure.InvalidateInstructionStream();
-                Procedure.InvalidatePosition();
-                Procedure.Container.Program.Touch();
-            }
+            var index = Items.IndexOf(clause);
+            if (index <= 0) return;
+            
+            Move(index, index - 1);
+            Procedure.InvalidateInstructionStream();
+            Procedure.InvalidatePosition();
+            Procedure.Container.Program.Touch();
         }
 
         public void MoveDown(Clause clause)
@@ -91,19 +70,14 @@ namespace Prolog
                 throw new ArgumentException("Item not found.", "clause");
             }
 
-            int index = Items.IndexOf(clause);
-            if (index < Items.Count - 1)
-            {
-                Move(index, index + 1);
-                Procedure.InvalidateInstructionStream();
-                Procedure.InvalidatePosition();
-                Procedure.Container.Program.Touch();
-            }
+            var index = Items.IndexOf(clause);
+            if (index >= Items.Count - 1) return;
+
+            Move(index, index + 1);
+            Procedure.InvalidateInstructionStream();
+            Procedure.InvalidatePosition();
+            Procedure.Container.Program.Touch();
         }
-
-        #endregion
-
-        #region Internal Members
 
         internal bool Contains(CodeSentence codeSentence)
         {
@@ -112,15 +86,7 @@ namespace Prolog
                 throw new ArgumentNullException("codeSentence");
             }
 
-            foreach (Clause clause in this)
-            {
-                if (clause.CodeSentence == codeSentence)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return this.Any(clause => clause.CodeSentence == codeSentence);
         }
 
         internal Clause Add(CodeSentence codeSentence)
@@ -142,7 +108,7 @@ namespace Prolog
                 throw new ArgumentException("Item already exists.", "codeSentence");
             }
 
-            Clause clause = new Clause(this, codeSentence);
+            var clause = new Clause(this, codeSentence);
             Items.Add(clause);
             Procedure.InvalidateInstructionStream();
             Procedure.InvalidatePosition();
@@ -150,7 +116,5 @@ namespace Prolog
 
             return clause;
         }
-
-        #endregion
     }
 }

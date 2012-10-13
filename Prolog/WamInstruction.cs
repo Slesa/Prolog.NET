@@ -3,6 +3,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace Prolog
@@ -12,18 +13,12 @@ namespace Prolog
     /// </remarks>
     internal struct WamInstruction : IImmuttable
     {
-        #region Fields
-
-        private WamInstructionOpCodes m_opCode; // 1 byte
-        private WamInstructionRegister m_sourceRegister; // 2 bytes
-        private WamInstructionRegister m_targetRegister; // 2 bytes
-        private Functor m_functor; // 4 bytes
-        private int m_index; // 4 bytes
-        private WamReferenceTarget m_referenceTarget; // 4 bytes
-
-        #endregion
-
-        #region Constructors
+        readonly WamInstructionOpCodes _opCode; // 1 byte
+        WamInstructionRegister _sourceRegister; // 2 bytes
+        WamInstructionRegister _targetRegister; // 2 bytes
+        readonly Functor _functor; // 4 bytes
+        readonly int _index; // 4 bytes
+        readonly WamReferenceTarget _referenceTarget; // 4 bytes
 
         public WamInstruction(WamInstructionOpCodes opCode, WamInstructionRegister sourceRegister, Functor functor, int index, WamInstructionRegister targetRegister)
         {
@@ -43,23 +38,22 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "targetRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = sourceRegister;
-            m_functor = functor;
-            m_index = index;
-            m_targetRegister = targetRegister;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = sourceRegister;
+            _functor = functor;
+            _index = index;
+            _targetRegister = targetRegister;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode)
         {
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = null;
+            _index = -1;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamInstructionRegister sourceRegister, Functor functor)
@@ -72,13 +66,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "sourceRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = sourceRegister;
-            m_functor = functor;
-            m_index = -1;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = sourceRegister;
+            _functor = functor;
+            _index = -1;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamInstructionRegister sourceRegister, WamReferenceTarget referenceTarget)
@@ -91,13 +84,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "sourceRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = sourceRegister;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = referenceTarget;
+            _opCode = opCode;
+            _sourceRegister = sourceRegister;
+            _functor = null;
+            _index = -1;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = referenceTarget;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, Functor functor, WamInstructionRegister targetRegister)
@@ -110,13 +102,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "targetRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = functor;
-            m_index = -1;
-            m_targetRegister = targetRegister;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = functor;
+            _index = -1;
+            _targetRegister = targetRegister;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamReferenceTarget referenceTarget, WamInstructionRegister targetRegister)
@@ -129,13 +120,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "targetRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = targetRegister;
-            m_referenceTarget = referenceTarget;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = null;
+            _index = -1;
+            _targetRegister = targetRegister;
+            _referenceTarget = referenceTarget;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamInstructionRegister targetRegister)
@@ -144,13 +134,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "targetRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = targetRegister;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = null;
+            _index = -1;
+            _targetRegister = targetRegister;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamInstructionRegister sourceRegister, WamInstructionRegister targetRegister)
@@ -163,13 +152,12 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid value.", "targetRegister");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = sourceRegister;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = targetRegister;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = sourceRegister;
+            _functor = null;
+            _index = -1;
+            _targetRegister = targetRegister;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, Functor functor)
@@ -178,13 +166,12 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = functor;
-            m_index = -1;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = functor;
+            _index = -1;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = null;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, WamReferenceTarget referenceTarget)
@@ -193,13 +180,12 @@ namespace Prolog
             {
                 throw new ArgumentNullException("referenceTarget");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = null;
-            m_index = -1;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = referenceTarget;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = null;
+            _index = -1;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = referenceTarget;
         }
 
         public WamInstruction(WamInstructionOpCodes opCode, Functor functor, int index)
@@ -212,34 +198,28 @@ namespace Prolog
             {
                 throw new ArgumentException("Invalid index.", "index");
             }
-
-            m_opCode = opCode;
-            m_sourceRegister = WamInstructionRegister.Unused;
-            m_functor = functor;
-            m_index = index;
-            m_targetRegister = WamInstructionRegister.Unused;
-            m_referenceTarget = null;
+            _opCode = opCode;
+            _sourceRegister = WamInstructionRegister.Unused;
+            _functor = functor;
+            _index = index;
+            _targetRegister = WamInstructionRegister.Unused;
+            _referenceTarget = null;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public WamInstructionOpCodes OpCode
         {
-            get { return m_opCode; }
+            get { return _opCode; }
         }
 
         public WamInstructionRegister SourceRegister
         {
             get
             {
-                if (m_sourceRegister.IsUnused)
+                if (_sourceRegister.IsUnused)
                 {
                     throw new InvalidOperationException("Register is unused.");
                 }
-
-                return m_sourceRegister;
+                return _sourceRegister;
             }
         }
 
@@ -247,12 +227,11 @@ namespace Prolog
         {
             get
             {
-                if (m_functor == null)
+                if (_functor == null)
                 {
                     throw new InvalidOperationException("Functor is unused.");
                 }
-
-                return m_functor;
+                return _functor;
             }
         }
 
@@ -260,12 +239,11 @@ namespace Prolog
         {
             get
             {
-                if (m_index < 0)
+                if (_index < 0)
                 {
                     throw new InvalidOperationException("Index is unused.");
                 }
-
-                return m_index;
+                return _index;
             }
         }
 
@@ -273,12 +251,11 @@ namespace Prolog
         {
             get
             {
-                if (m_targetRegister.IsUnused)
+                if (_targetRegister.IsUnused)
                 {
                     throw new InvalidOperationException("Register is unused.");
                 }
-
-                return m_targetRegister;
+                return _targetRegister;
             }
         }
 
@@ -286,55 +263,42 @@ namespace Prolog
         {
             get
             {
-                return m_referenceTarget;
+                return _referenceTarget;
             }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
+            var sb = new StringBuilder();
             sb.Append(OpCode.ToString());
-
-            string prefix = " ";
-
-            if (m_sourceRegister.IsUsed)
+            
+            var prefix = " ";
+            if (_sourceRegister.IsUsed)
             {
                 sb.Append(prefix); prefix = ", ";
-                sb.Append(m_sourceRegister.ToString());
+                sb.Append(_sourceRegister.ToString());
             }
-
-            if (m_functor != null)
+            if (_functor != null)
             {
                 sb.Append(prefix); prefix = ", ";
-                sb.Append(m_functor.ToString());
+                sb.Append(_functor);
             }
-
-            if (m_index >= 0)
+            if (_index >= 0)
             {
                 sb.Append(prefix); prefix = ", ";
-                sb.Append(m_index.ToString());
+                sb.Append(_index.ToString(CultureInfo.InvariantCulture));
             }
-
-            if (m_referenceTarget != null)
+            if (_referenceTarget != null)
             {
                 sb.Append(prefix); prefix = ", ";
-                sb.Append(m_referenceTarget.ToString());
+                sb.Append(_referenceTarget);
             }
-
-            if (m_targetRegister.IsUsed)
+            if (_targetRegister.IsUsed)
             {
                 sb.Append(prefix); prefix = ", ";
-                sb.Append(m_targetRegister.ToString());
+                sb.Append(_targetRegister);
             }
-
             return sb.ToString();
         }
-
-        #endregion
     }
 }

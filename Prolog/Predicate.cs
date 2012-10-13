@@ -8,14 +8,6 @@ namespace Prolog
 {
     internal sealed class Predicate : LibraryMethod
     {
-        #region Fields
-
-        private PredicateDelegate m_predicateDelegate;
-
-        #endregion
-
-        #region Constructors
-
         internal Predicate(LibraryMethodList container, Functor functor, PredicateDelegate predicateDelegate, bool canEvaluate)
             : base(container, functor, canEvaluate)
         {
@@ -24,18 +16,9 @@ namespace Prolog
                 throw new ArgumentNullException("predicateDelegate");
             }
 
-            m_predicateDelegate = predicateDelegate;
+            PredicateDelegate = predicateDelegate;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public PredicateDelegate PredicateDelegate
-        {
-            get { return m_predicateDelegate; }
-        }
-
-        #endregion
+        public PredicateDelegate PredicateDelegate { get; private set; }
     }
 }

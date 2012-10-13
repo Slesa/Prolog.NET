@@ -12,13 +12,7 @@ namespace Prolog.Grammar
     //
     internal sealed class ListItems : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeTerm> m_codeTerms = new List<CodeTerm>();
-
-        #endregion
-
-        #region Rules
+        readonly List<CodeTerm> _codeTerms = new List<CodeTerm>();
 
         public static void Rule(ListItems lhs, ListItem listItem, AdditionalListItems additionalListItems)
         {
@@ -26,15 +20,9 @@ namespace Prolog.Grammar
             lhs.CodeTerms.AddRange(additionalListItems.CodeTerms);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public List<CodeTerm> CodeTerms
         {
-            get { return m_codeTerms; }
+            get { return _codeTerms; }
         }
-
-        #endregion
     }
 }

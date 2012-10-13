@@ -5,20 +5,12 @@
 using System;
 using System.Diagnostics;
 
-using Prolog.Code;
-
 namespace Prolog
 {
     internal static class RandomNumberMethods
     {
-        #region Fields
-
-        private static Random s_random = new Random();
-        private static int s_seed = -1;
-
-        #endregion
-
-        #region Public Methods
+        static Random s_random = new Random();
+        static int s_seed = -1;
 
         public static bool Randomize(WamMachine machine, WamReferenceTarget[] arguments)
         {
@@ -34,9 +26,8 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 1);
 
-            WamReferenceTarget operand = arguments[0];
-
-            WamValueInteger seed = WamValueInteger.Create(s_seed);
+            var operand = arguments[0];
+            var seed = WamValueInteger.Create(s_seed);
 
             return machine.Unify(operand, seed);
         }
@@ -45,7 +36,7 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 1);
 
-            WamValueInteger operand = arguments[0].Dereference() as WamValueInteger;
+            var operand = arguments[0].Dereference() as WamValueInteger;
             if (operand == null)
             {
                 return false;
@@ -61,9 +52,8 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 1);
 
-            WamReferenceTarget operand = arguments[0];
-
-            WamValueDouble value = WamValueDouble.Create(s_random.NextDouble());
+            var operand = arguments[0];
+            var value = WamValueDouble.Create(s_random.NextDouble());
 
             return machine.Unify(operand, value);
         }
@@ -72,25 +62,22 @@ namespace Prolog
         {
             Debug.Assert(arguments.Length == 3);
 
-            WamValueInteger minValue = arguments[0].Dereference() as WamValueInteger;
+            var minValue = arguments[0].Dereference() as WamValueInteger;
             if (minValue == null)
             {
                 return false;
             }
 
-            WamValueInteger maxValue = arguments[1].Dereference() as WamValueInteger;
+            var maxValue = arguments[1].Dereference() as WamValueInteger;
             if (maxValue == null)
             {
                 return false;
             }
 
-            WamReferenceTarget operand = arguments[2];
-
-            WamValueInteger value = WamValueInteger.Create(s_random.Next(minValue.Value, maxValue.Value));
+            var operand = arguments[2];
+            var value = WamValueInteger.Create(s_random.Next(minValue.Value, maxValue.Value));
 
             return machine.Unify(operand, value);
         }
-
-        #endregion
     }
 }

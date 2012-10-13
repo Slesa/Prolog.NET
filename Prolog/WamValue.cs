@@ -2,16 +2,12 @@
  * Licensed under the terms of the Microsoft Public License (Ms-PL).
  */
 
-using System;
-
 using Prolog.Code;
 
 namespace Prolog
 {
     internal abstract class WamValue : WamReferenceTarget
     {
-        #region Constructors
-
         /// <remarks>
         /// See also CodeValue.Create.
         /// </remarks>
@@ -30,21 +26,11 @@ namespace Prolog
             return WamValueObject.Create(value.Object);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public abstract object Object { get; }
-
-        #endregion
-
-        #region Public Methods
 
         public override WamReferenceTarget Dereference()
         {
             return this;
         }
-
-        #endregion
     }
 }

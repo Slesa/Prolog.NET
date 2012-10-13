@@ -10,71 +10,33 @@ namespace Prolog
 {
     internal sealed class WamVariable : WamReferenceTarget
     {
-        #region Fields
-
-        private int m_generation;
-
-        private WamReferenceTarget m_target;
-
-        #endregion
-
-        #region Constructors
-
         public WamVariable(int generation)
         {
-            m_generation = generation;
-
-            m_target = null;
+            Generation = generation;
+            Target = null;
         }
 
         public override WamReferenceTarget Clone()
         {
-            WamVariable result = new WamVariable(Generation);
-
-            if (m_target != null)
+            var result = new WamVariable(Generation);
+            if (Target != null)
             {
-                result.m_target = m_target.Clone();
+                result.Target = Target.Clone();
             }
-
             return result;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public int Generation
-        {
-            get { return m_generation; }
-        }
-
-        public WamReferenceTarget Target
-        {
-            get { return m_target; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public int Generation { get; private set; }
+        public WamReferenceTarget Target { get; private set; }
 
         public override string ToString()
         {
-            if (m_target == null)
-            {
-                return "_";
-            }
-
-            return m_target.ToString();
+            return Target == null ? "_" : Target.ToString();
         }
 
         public override WamReferenceTarget Dereference()
         {
-            if (m_target == null)
-            {
-                return this;
-            }
-
-            return m_target.Dereference();
+            return Target == null ? this : Target.Dereference();
         }
 
         public void Bind(WamReferenceTarget target)
@@ -83,28 +45,21 @@ namespace Prolog
             {
                 throw new ArgumentNullException("target");
             }
-
-            if (m_target != null)
+            if (Target != null)
             {
                 throw new InvalidOperationException("Attempt to bind to bound variable.");
             }
-
-            m_target = target;
+            Target = target;
         }
 
         public void Unbind()
         {
-            if (m_target == null)
+            if (Target == null)
             {
                 throw new InvalidOperationException("Attempt to unbind an unbound variable.");
             }
-
-            m_target = null;
+            Target = null;
         }
-
-        #endregion
-
-        #region Hidden Members
 
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
@@ -112,34 +67,19 @@ namespace Prolog
             {
                 case WamDeferenceTypes.AllVariables:
                     {
-                        if (m_target == null)
-                        {
-                            return new CodeValueObject(null);
-                        }
-
-                        return m_target.GetCodeTerm(dereferenceType, mapping);
+                        return Target == null ? new CodeValueObject(null) : Target.GetCodeTerm(dereferenceType, mapping);
                     }
-
                 case WamDeferenceTypes.BoundVariables:
                     {
-                        if (m_target == null)
-                        {
-                            return mapping.Lookup(this);
-                        }
-
-                        return m_target.GetCodeTerm(dereferenceType, mapping);
+                        return Target == null ? mapping.Lookup(this) : Target.GetCodeTerm(dereferenceType, mapping);
                     }
-
                 case WamDeferenceTypes.None:
                     {
                         return mapping.Lookup(this);
                     }
-
                 default:
                     throw new InvalidOperationException(string.Format("Unknown dereferenceType {0}.", dereferenceType));
             }
         }
-
-        #endregion
     }
 }

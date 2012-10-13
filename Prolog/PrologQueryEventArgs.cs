@@ -3,7 +3,6 @@
  */
 
 using System;
-using System.Collections.ObjectModel;
 
 namespace Prolog
 {
@@ -13,35 +12,17 @@ namespace Prolog
     /// </summary>
     public sealed class PrologQueryEventArgs : EventArgs
     {
-        #region Fields
-
-        private static PrologQueryEventArgs s_empty = new PrologQueryEventArgs(null);
-
-        private PrologQueryResults m_results;
-
-        #endregion
-
-        #region Constructors
-
         internal PrologQueryEventArgs(PrologQueryResults results)
         {
-            m_results = results;
+            Results = results;
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public new static PrologQueryEventArgs Empty
+        static PrologQueryEventArgs()
         {
-            get { return s_empty; }
+            Empty = new PrologQueryEventArgs(null);
         }
 
-        public PrologQueryResults Results
-        {
-            get { return m_results; }
-        }
-
-        #endregion
+        public new static PrologQueryEventArgs Empty { get; private set; }
+        public PrologQueryResults Results { get; private set; }
     }
 }

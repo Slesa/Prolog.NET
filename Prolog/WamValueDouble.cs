@@ -3,24 +3,16 @@
  */
 
 using System;
-
+using System.Globalization;
 using Prolog.Code;
 
 namespace Prolog
 {
     internal sealed class WamValueDouble : WamValue
     {
-        #region Fields
-
-        private double m_value;
-
-        #endregion
-
-        #region Constructors
-
-        private WamValueDouble(double value)
+        WamValueDouble(double value)
         {
-            m_value = value;
+            Value = value;
         }
 
         public static WamValueDouble Create(double value)
@@ -33,38 +25,21 @@ namespace Prolog
             return new WamValueDouble(Value);
         }
 
-        #endregion
-
-        #region Public Properties
-
         public override object Object
         {
-            get { return m_value; }
+            get { return Value; }
         }
 
-        public double Value
-        {
-            get { return m_value; }
-        }
-
-        #endregion
-
-        #region Public Methods
+        public double Value { get; private set; }
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Value.ToString(CultureInfo.InvariantCulture);
         }
-
-        #endregion
-
-        #region Hidden Members
 
         protected override CodeTerm GetCodeTermBase(WamDeferenceTypes dereferenceType, WamReferenceTargetMapping mapping)
         {
             return new CodeValueDouble(Value);
         }
-
-        #endregion
     }
 }

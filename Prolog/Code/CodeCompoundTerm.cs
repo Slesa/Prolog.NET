@@ -110,7 +110,7 @@ namespace Prolog.Code
         public static bool operator ==(CodeCompoundTerm lhs, CodeCompoundTerm rhs)
         {
             if (ReferenceEquals(lhs, rhs)) return true;
-            if (ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
             return lhs.Equals(rhs);
         }
 
@@ -182,7 +182,7 @@ namespace Prolog.Code
                     foreach (CodeTerm codeTerm in Children)
                     {
                         sb.Append(prefix); prefix = ",";
-                        sb.Append(codeTerm.ToString());
+                        sb.Append(codeTerm);
                     }
 
                     sb.Append(")");
@@ -194,7 +194,7 @@ namespace Prolog.Code
 
         public override XElement ToXElement()
         {
-            return base.ToXElementBase(
+            return ToXElementBase(
                 new XElement(ElementName,
                     Functor.ToXElement(),
                     Children.ToXElement()));

@@ -15,13 +15,7 @@ namespace Prolog.Code
     [Serializable]
     public sealed class CodeTermList : ReadableList<CodeTerm>, IEquatable<CodeTermList>
     {
-        #region Fields
-
         public const string ElementName = "CodeTermList";
-        
-        #endregion
-
-        #region Constructors
 
         public CodeTermList(IList<CodeTerm> items)
             : base(items)
@@ -33,7 +27,7 @@ namespace Prolog.Code
 
         public static CodeTermList Create(XElement xCodeTermList)
         {
-            List<CodeTerm> codeTerms = new List<CodeTerm>();
+            var codeTerms = new List<CodeTerm>();
             foreach (XElement xCodeTerm in xCodeTermList.Elements(CodeTerm.ElementName))
             {
                 codeTerms.Add(CodeTerm.Create(xCodeTerm));
@@ -42,20 +36,16 @@ namespace Prolog.Code
             return new CodeTermList(codeTerms);
         }
 
-        #endregion
-
-        #region Public Methods
-
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
 
-            CodeTermList rhs = obj as CodeTermList;
+            var rhs = obj as CodeTermList;
             if (rhs == null) return false;
 
             if (Count != rhs.Count) return false;
 
-            for (int idx = 0; idx < Count; ++idx)
+            for (var idx = 0; idx < Count; ++idx)
             {
                 if (this[idx] != rhs[idx]) return false;
             }
@@ -65,9 +55,9 @@ namespace Prolog.Code
 
         public override int GetHashCode()
         {
-            int result = 0;
+            var result = 0;
 
-            foreach (CodeTerm codeTerm in this)
+            foreach (var codeTerm in this)
             {
                 if (codeTerm != null)
                 {
@@ -80,9 +70,9 @@ namespace Prolog.Code
 
         public static bool operator ==(CodeTermList lhs, CodeTermList rhs)
         {
-            if (object.ReferenceEquals(lhs, rhs)) return true;
+            if (ReferenceEquals(lhs, rhs)) return true;
 
-            if (object.ReferenceEquals(lhs, null) || object.ReferenceEquals(rhs, null)) return false;
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) return false;
 
             return lhs.Equals(rhs);
         }
@@ -94,9 +84,9 @@ namespace Prolog.Code
 
         public XElement ToXElement()
         {
-            XElement result = new XElement(ElementName);
+            var result = new XElement(ElementName);
 
-            foreach (CodeTerm codeTerm in this)
+            foreach (var codeTerm in this)
             {
                 result.Add(codeTerm.ToXElement());
             }
@@ -104,24 +94,18 @@ namespace Prolog.Code
             return result;
         }
 
-        #endregion
-
-        #region IEquatable<CodeTermList> Members
-
         public bool Equals(CodeTermList other)
         {
-            if (object.ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             if (Count != other.Count) return false;
 
-            for (int idx = 0; idx < Count; ++idx)
+            for (var idx = 0; idx < Count; ++idx)
             {
                 if (this[idx] != other[idx]) return false;
             }
 
             return true;
         }
-
-        #endregion
     }
 }

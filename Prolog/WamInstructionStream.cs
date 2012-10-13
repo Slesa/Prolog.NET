@@ -9,14 +9,8 @@ namespace Prolog
 {
     internal sealed class WamInstructionStream : IEnumerable<WamInstruction>, IImmuttable
     {
-        #region Fields
-
-        private WamInstruction[] m_instructions;
-        private WamInstructionStreamAttribute[] m_attributes;
-
-        #endregion
-
-        #region Constructors
+        readonly WamInstruction[] _instructions;
+        readonly WamInstructionStreamAttribute[] _attributes;
 
         public WamInstructionStream(WamInstruction[] instructions, WamInstructionStreamAttribute[] attributes)
         {
@@ -29,71 +23,50 @@ namespace Prolog
                 throw new ArgumentNullException("attributes");
             }
 
-            m_instructions = instructions;
-            m_attributes = attributes;
+            _instructions = instructions;
+            _attributes = attributes;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public int Length
         {
-            get { return m_instructions.Length; }
+            get { return _instructions.Length; }
         }
 
         public WamInstruction this[int index]
         {
-            get { return m_instructions[index]; }
+            get { return _instructions[index]; }
         }
 
         public WamInstructionStreamAttribute[] Attributes
         {
-            get { return m_attributes; }
+            get { return _attributes; }
         }
-
-        #endregion
-
-        #region Public Methods
 
         public Dictionary<int, string> GetPermanentVariableAssignments()
         {
-            Dictionary<int, string> result = new Dictionary<int, string>();
-
-            foreach (WamInstructionStreamAttribute attribute in Attributes)
+            var result = new Dictionary<int, string>();
+            foreach (var attribute in Attributes)
             {
-                WamInstructionStreamVariableAttribute variableAttribute = attribute as WamInstructionStreamVariableAttribute;
-                if (variableAttribute != null
-                    && variableAttribute.Register.Type == WamInstructionRegisterTypes.Permanent)
+                var variableAttribute = attribute as WamInstructionStreamVariableAttribute;
+                if (variableAttribute != null && variableAttribute.Register.Type == WamInstructionRegisterTypes.Permanent)
                 {
                     result.Add(variableAttribute.Register.Id, variableAttribute.Name);
                 }
             }
-
             return result;
         }
 
-        #endregion
-
-        #region IEnumerable<Instruction> Members
-
         public IEnumerator<WamInstruction> GetEnumerator()
         {
-            for (int idx = 0; idx < m_instructions.Length; ++idx)
+            for (var idx = 0; idx < _instructions.Length; ++idx)
             {
-                yield return m_instructions[idx];
+                yield return _instructions[idx];
             }
         }
-
-        #endregion
-
-        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
-        #endregion
     }
 }

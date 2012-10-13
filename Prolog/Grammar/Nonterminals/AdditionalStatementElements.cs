@@ -13,13 +13,7 @@ namespace Prolog.Grammar
     //
     internal sealed class AdditionalStatementElements : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeCompoundTerm> m_codeCompoundTerms = new List<CodeCompoundTerm>();
-
-        #endregion
-
-        #region Rules
+        readonly List<CodeCompoundTerm> _codeCompoundTerms = new List<CodeCompoundTerm>();
 
         public static void Rule(AdditionalStatementElements lhs, Comma comma, StatementElement statementElement, AdditionalStatementElements additionalStatementElements)
         {
@@ -30,15 +24,9 @@ namespace Prolog.Grammar
         public static void Rule(AdditionalStatementElements lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
         public List<CodeCompoundTerm> CodeCompoundTerms
         {
-            get { return m_codeCompoundTerms; }
+            get { return _codeCompoundTerms; }
         }
-
-        #endregion
     }
 }

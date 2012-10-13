@@ -14,14 +14,6 @@ namespace Prolog.Grammar
     //
     internal sealed class Element : PrologNonterminal
     {
-        #region Fields
-
-        private CodeTerm m_codeTerm;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(Element lhs, Term term)
         {
             lhs.CodeTerm = term.CodeCompoundTerm;
@@ -44,19 +36,9 @@ namespace Prolog.Grammar
 
         public static void Rule(Element lhs, OpenBrace openBrace, BinaryElementExpression700 binaryElementExpression, CloseBrace closeBrace)
         {
-            lhs.CodeTerm = new CodeCompoundTerm(new CodeFunctor("eval", 1), new CodeTerm[] { binaryElementExpression.CodeTerm });
+            lhs.CodeTerm = new CodeCompoundTerm(new CodeFunctor("eval", 1), new[] { binaryElementExpression.CodeTerm });
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public CodeTerm CodeTerm
-        {
-            get { return m_codeTerm; }
-            private set { m_codeTerm = value; }
-        }
-
-        #endregion
+        public CodeTerm CodeTerm { get; private set; }
     }
 }

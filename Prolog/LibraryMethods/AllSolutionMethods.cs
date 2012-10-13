@@ -2,47 +2,42 @@
  * Licensed under the terms of the Microsoft Public License (Ms-PL).
  */
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using Prolog.Code;
 
 namespace Prolog
 {
     internal static class AllSolutionMethods
     {
-        #region Public Methods
-
         public static bool FindAll(WamMachine machine, WamReferenceTarget[] arguments)
         {
             Debug.Assert(arguments.Length == 3);
 
-            WamReferenceTarget arg0 = arguments[0].Dereference();
-            WamReferenceTarget arg1 = arguments[1].Dereference();
-            WamReferenceTarget arg2 = arguments[2].Dereference();
+            var arg0 = arguments[0].Dereference();
+            var arg1 = arguments[1].Dereference();
+            var arg2 = arguments[2].Dereference();
 
-            WamVariable variable = arg0 as WamVariable;
+            var variable = arg0 as WamVariable;
             if (variable == null)
             {
                 return false;
             }
 
-            WamCompoundTerm goal = arg1 as WamCompoundTerm;
+            var goal = arg1 as WamCompoundTerm;
             if (goal == null)
             {
                 return false;
             }
 
-            WamVariable result = arg2 as WamVariable;
+            var result = arg2 as WamVariable;
             if (result == null)
             {
                 return false;
             }
 
-            WamInstructionStreamBuilder builder = new WamInstructionStreamBuilder();
+            var builder = new WamInstructionStreamBuilder();
             builder.Write(new WamInstruction(WamInstructionOpCodes.Allocate));
-            for (int idx = 0; idx < goal.Functor.Arity; ++idx)
+            for (var idx = 0; idx < goal.Functor.Arity; ++idx)
             {
                 builder.Write(new WamInstruction(
                     WamInstructionOpCodes.PutValue,
@@ -54,14 +49,14 @@ namespace Prolog
 
             machine.PushContext(builder.ToInstructionStream());
 
-            List<WamReferenceTarget> values = new List<WamReferenceTarget>();
+            var values = new List<WamReferenceTarget>();
 
             try
             {
-                ExecutionResults results = machine.RunToSuccess();
+                var results = machine.RunToSuccess();
                 while (results == ExecutionResults.Success)
                 {
-                    WamReferenceTarget value = variable.Clone();
+                    var value = variable.Clone();
                     values.Add(value);
 
                     results = machine.RunToSuccess();
@@ -80,7 +75,5 @@ namespace Prolog
             //
             return machine.Unify(result, WamReferenceTarget.Create(values));
         }
-
-        #endregion
     }
 }

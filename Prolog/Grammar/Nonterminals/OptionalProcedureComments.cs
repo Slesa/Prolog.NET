@@ -14,24 +14,15 @@ namespace Prolog.Grammar
     //
     internal sealed class OptionalProcedureComments : PrologNonterminal
     {
-        #region Fields
-
-        private List<CodeComment> m_comments;
-
-        #endregion
-
-        #region Rules
-
         public static void Rule(OptionalProcedureComments lhs, ProcedureComment procedureComment, OptionalProcedureComments optionalProcedureComments)
         {
-            string comment = procedureComment.Text;
+            var comment = procedureComment.Text;
 
             Debug.Assert(comment.StartsWith("///"));
 
             comment = comment.Substring(3).Trim();
 
-            lhs.Comments = new List<CodeComment>();
-            lhs.Comments.Add(new CodeComment(comment));
+            lhs.Comments = new List<CodeComment> {new CodeComment(comment)};
             if (optionalProcedureComments.Comments != null)
             {
                 lhs.Comments.AddRange(optionalProcedureComments.Comments);
@@ -41,16 +32,6 @@ namespace Prolog.Grammar
         public static void Rule(OptionalProcedureComments lhs)
         { }
 
-        #endregion
-
-        #region Public Properties
-
-        public List<CodeComment> Comments
-        {
-            get { return m_comments; }
-            private set { m_comments = value; }
-        }
-
-        #endregion
+        public List<CodeComment> Comments { get; private set; }
     }
 }

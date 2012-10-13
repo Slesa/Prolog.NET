@@ -11,14 +11,7 @@ namespace Prolog
 {
     public sealed class ProgramProcedureList : ReadableList<Procedure>
     {
-        #region Fields
-
-        private Program m_program;
-        private Dictionary<Functor, Procedure> m_procedureIndex;
-
-        #endregion
-
-        #region Constructors
+        readonly Dictionary<Functor, Procedure> _procedureIndex;
 
         internal ProgramProcedureList(Program program, ObservableCollection<Procedure> procedures)
             : base(procedures)
@@ -32,22 +25,11 @@ namespace Prolog
                 throw new ArgumentNullException("procedures");
             }
 
-            m_program = program;
-            m_procedureIndex = new Dictionary<Functor, Procedure>();
+            Program = program;
+            _procedureIndex = new Dictionary<Functor, Procedure>();
         }
 
-        #endregion
-
-        #region Public Properties
-
-        public Program Program
-        {
-            get { return m_program; }
-        }
-
-        #endregion
-
-        #region Public Members
+        public Program Program { get; private set; }
 
         public bool Contains(Functor functor)
         {
@@ -55,18 +37,17 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-
-            return m_procedureIndex.ContainsKey(functor);
+            return _procedureIndex.ContainsKey(functor);
         }
 
         public Procedure this[Functor functor]
         {
-            get { return m_procedureIndex[functor]; }
+            get { return _procedureIndex[functor]; }
         }
 
         public bool TryGetProcedure(Functor functor, out Procedure procedure)
         {
-            return m_procedureIndex.TryGetValue(functor, out procedure);
+            return _procedureIndex.TryGetValue(functor, out procedure);
         }
 
         public void Remove(Procedure procedure)
@@ -79,20 +60,16 @@ namespace Prolog
             {
                 throw new ArgumentException("Item not found.", "procedure");
             }
-            Debug.Assert(m_procedureIndex.ContainsKey(procedure.Functor));
+            Debug.Assert(_procedureIndex.ContainsKey(procedure.Functor));
 
             Items.Remove(procedure);
-            if (m_procedureIndex.ContainsKey(procedure.Functor))
+            if (_procedureIndex.ContainsKey(procedure.Functor))
             {
-                m_procedureIndex.Remove(procedure.Functor);
+                _procedureIndex.Remove(procedure.Functor);
             }
 
             Program.Touch();
         }
-
-        #endregion
-
-        #region Internal Members
 
         internal Procedure Add(Functor functor)
         {
@@ -100,20 +77,18 @@ namespace Prolog
             {
                 throw new ArgumentNullException("functor");
             }
-            if (m_procedureIndex.ContainsKey(functor))
+            if (_procedureIndex.ContainsKey(functor))
             {
                 throw new ArgumentException("Item already exists.", "functor");
             }
 
-            Procedure procedure = new Procedure(this, functor);
+            var procedure = new Procedure(this, functor);
             Items.Add(procedure);
-            m_procedureIndex.Add(functor, procedure);
+            _procedureIndex.Add(functor, procedure);
 
             Program.Touch();
 
             return procedure;
         }
-
-        #endregion
     }
 }
