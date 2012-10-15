@@ -1,0 +1,9 @@
+Except as noted below, all contents Copyright © 2010 Richard G. Todd.
+
+Except as noted below, all contents licensed under the terms of the Microsoft Public License (Ms-PL).  Please see License.txt for the terms of this license.
+
+This package redistributes the following software.  The copyright of this software retained by their respective owners.
+
+o Lingua.NET - see "License - Lingua.txt" for software license.  Please see http://lingua.codeplex.com for more information.
+
+o Windows® API Code Pack for Microsoft® .NET Framework - see "License - Windows API Code Pack.txt" for software license.  Please see http://code.msdn.microsoft.com/WindowsAPICodePack for more information.

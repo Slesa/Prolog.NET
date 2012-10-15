@@ -7,10 +7,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Prolog.NET")]
 [assembly: AssemblyDescription("Prolog.NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Richard G. Todd")]
-[assembly: AssemblyProduct("Prolog.NET")]
-[assembly: AssemblyCopyright("Copyright © Richard G. Todd 2010")]
-[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
