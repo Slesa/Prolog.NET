@@ -3,11 +3,14 @@
  */
 
 using System.IO;
+using Microsoft.Win32;
 
 namespace Prolog.Scheduler
 {
     public class Scheduler
     {
+        const string SampleFile = "schedule.prolog";
+
         Program _program;
         Query _query;
         PrologMachine _machine;
@@ -18,13 +21,31 @@ namespace Prolog.Scheduler
             {
                 if (_program == null)
                 {
-                    var path = Path.Combine(Properties.Settings.Default.SamplesFolder, "schedule.prolog");
+                    var path = Path.Combine(Properties.Settings.Default.SamplesFolder, SampleFile);
 
                     if (!File.Exists(path))
                     {
-                        throw new FileNotFoundException(string.Format("{0} not found.  Consider updating SamplesFolder setting during program development.", path));
+                        var dialog = new OpenFileDialog()
+                                         {
+                                             FileName = SampleFile,
+                                             DefaultExt = ".prolog",
+                                             Title = "Could not locate sample file",
+                                             InitialDirectory = Directory.GetCurrentDirectory()
+                                         };
+                        var result = dialog.ShowDialog();
+                        if (result == true)
+                        {
+                            path = dialog.FileName;
+                        }
                     }
 
+                    if (!File.Exists(path))
+                    {
+                        throw new FileNotFoundException(
+                            string.Format(
+                                "{0} not found.  Consider updating SamplesFolder setting during program development.",
+                                path));
+                    }
                     var program = Program.Load(path);
                     _program = program;
                 }
