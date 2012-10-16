@@ -12,7 +12,7 @@ let mail = "joerg.preiss@slesa.de"
 
 let currentVersion =
   if not isLocalBuild then buildVersion else
-  "1.0.1"
+  "1.0.2"
 
 TraceEnvironmentVariables()
 
@@ -61,7 +61,7 @@ Target "SetAssemblyInfo" (fun _ ->
       CLSCompliant = None;
       AssemblyCompany = "Richard G. Todd";
       AssemblyProduct = "Prolog.NET";
-      AssemblyCopyright = "Copyright Â©  2010";
+      AssemblyCopyright = "Copyright ©  2010";
       AssemblyTrademark = "MS Public License";
       AssemblyVersion = currentVersion;
       OutputFileName = srcDir @@ @"\VersionInfo.cs"})
@@ -132,6 +132,7 @@ Target "Deploy" (fun _ ->
       Project = projectName
       Description = projectSummary                               
       OutputPath = nugetDir
+      Version = currentVersion
       AccessKey = getBuildParamOrDefault "nugetkey" ""
       Publish = hasBuildParam "nugetkey" }) "Prolog.nuspec"
 )
