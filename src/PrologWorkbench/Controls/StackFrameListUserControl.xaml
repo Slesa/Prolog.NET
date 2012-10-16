@@ -1,0 +1,16 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.StackFrameListUserControl"
+             x:Name="ctrlStackFrameList"
+             Height="300" Width="300">
+    <Grid>
+        <DockPanel>
+            <TextBox Text="Call Stack"
+                     DockPanel.Dock="Top" 
+                     Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
+            <ListBox Name="lstStackFrames" 
+                     ItemsSource="{Binding Path=StackFrames, ElementName=ctrlStackFrameList}" />
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,42 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prolog.Workbench"
+             x:Class="Prolog.Workbench.ProgramTreeUserControl"
+             Height="300" Width="300">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Cut"
+                        Executed="CommandCut_Executed"
+                        CanExecute="CommandCut_CanExecute" />
+        <CommandBinding Command="ApplicationCommands.Copy"
+                        Executed="CommandCopy_Executed"
+                        CanExecute="CommandCopy_CanExecute" />
+        <CommandBinding Command="ApplicationCommands.Paste"
+                        Executed="CommandPaste_Executed"
+                        CanExecute="CommandPaste_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.MoveUp"
+                        Executed="CommandMoveUp_Executed"
+                        CanExecute="CommandMoveUp_CanExecute" />
+        <CommandBinding Command="local:PrologCommands.MoveDown"
+                        Executed="CommandMoveDown_Executed"
+                        CanExecute="CommandMoveDown_CanExecute" />
+    </UserControl.CommandBindings>
+    <DockPanel>
+        <TextBox Text="Program"
+                 DockPanel.Dock="Top"
+                 Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
+        <TreeView Name="ctrlTreeView" 
+                  DataContext="{Binding Program}" ItemsSource="{Binding Procedures}" 
+                  MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
+                    <TextBlock Text="{Binding}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CodeSentence}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+</UserControl>
