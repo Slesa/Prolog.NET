@@ -52,7 +52,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lingua, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\lib\Lingua.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Lingua.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -83,9 +84,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Redistribute\Lingua.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
