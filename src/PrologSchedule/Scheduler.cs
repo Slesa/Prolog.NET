@@ -12,9 +12,6 @@ namespace Prolog.Scheduler
         const string SampleFile = "schedule.prolog";
 
         Program _program;
-        Query _query;
-        PrologMachine _machine;
-
         public Program Program
         {
             get
@@ -49,11 +46,11 @@ namespace Prolog.Scheduler
                     var program = Program.Load(path);
                     _program = program;
                 }
-
                 return _program;
             }
         }
 
+        Query _query;
         public Query Query
         {
             get
@@ -64,11 +61,11 @@ namespace Prolog.Scheduler
                     var query = new Query(codeSentenceQuery);
                     _query = query;
                 }
-
                 return _query;
             }
         }
 
+        PrologMachine _machine;
         public PrologMachine Machine
         {
             get
