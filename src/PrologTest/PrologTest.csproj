@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\VersionInfo.cs">
-      <Link>VersionInfo.cs</Link>
+      <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramTest.cs" />

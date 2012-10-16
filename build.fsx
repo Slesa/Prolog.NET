@@ -12,7 +12,7 @@ let mail = "joerg.preiss@slesa.de"
 
 let currentVersion =
   if not isLocalBuild then buildVersion else
-  "1.0.0.1"
+  "1.0.1"
 
 TraceEnvironmentVariables()
 
@@ -36,7 +36,9 @@ let mspecTool = sprintf @"%sMachine.Specifications.%s\tools\mspec-clr4.exe" pack
 // Files
 let appReferences  = 
   !+ @"**\Prolog\Prolog.csproj" 
-    ++ @"**\PrologTest\PrologTest.csproj"
+    ++ @"src\PrologTest\PrologTest.csproj"
+    ++ @"src\PrologScheduler\PrologScheduler.csproj"
+    ++ @"src\PrologWorkbench\PrologWorkbench.csproj"
         |> Scan
 
 let testReferences = 
@@ -98,9 +100,15 @@ Target "Deploy" (fun _ ->
       |>Scan
         |> CopyTo libDir
   !+ (buildDir @@ "Prolog.dll")
+    ++ (buildDir @@ "Microsoft.WindowsAPICodePack.dll")
+    ++ (buildDir @@ "Microsoft.WindowsAPICodePack.Shell.dll")
     ++ (buildDir @@ "Lingua.dll")
     ++ (buildDir @@ "PrologTest.exe")
     ++ (buildDir @@ "PrologTest.exe.config")
+    ++ (buildDir @@ "PrologScheduler.exe")
+    ++ (buildDir @@ "PrologScheduler.exe.config")
+    ++ (buildDir @@ "PrologWorkbench.exe")
+    ++ (buildDir @@ "PrologWorkbench.exe.config")
       |> Scan
         |> CopyTo toolsDir
   !+ "Copyright.txt"

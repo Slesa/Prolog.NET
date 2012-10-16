@@ -7,7 +7,7 @@
         Left="{local:Settings WindowLeft}" 
         Top="{local:Settings WindowTop}" 
         WindowState="{local:Settings WindowState}" 
-        Icon="/Prolog.Workbench;component/Resources/ApplicationIcon.ico" Closing="Window_Closing">
+        Icon="/PrologWorkbench;component/Resources/ApplicationIcon.ico" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
