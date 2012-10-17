@@ -24,7 +24,7 @@ namespace Prolog.Workbench
             {
                 AppState.PropertyChanged += AppState_PropertyChanged;
                 DataContext = AppState;
-                AppState.View = Views.Transcript;
+                AppState.View = ControlViews.Transcript;
             }
         }
 
@@ -125,7 +125,7 @@ namespace Prolog.Workbench
 
         void CommandViewDebug_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AppState.View = Views.Debug;
+            AppState.View = ControlViews.Debug;
         }
 
         void CommandViewDebug_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -135,7 +135,7 @@ namespace Prolog.Workbench
 
         void CommandViewProgram_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AppState.View = Views.Program;
+            AppState.View = ControlViews.Program;
         }
 
         void CommandViewProgram_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -145,7 +145,7 @@ namespace Prolog.Workbench
 
         void CommandViewTrace_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AppState.View = Views.Trace;
+            AppState.View = ControlViews.Trace;
         }
 
         void CommandViewTrace_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -155,7 +155,7 @@ namespace Prolog.Workbench
 
         void CommandViewTranscript_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AppState.View = Views.Transcript;
+            AppState.View = ControlViews.Transcript;
         }
 
         void CommandViewTranscript_CanExecute(object sender, CanExecuteRoutedEventArgs e)

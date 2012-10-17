@@ -4,7 +4,15 @@
              x:Class="Prolog.Workbench.App" 
              Startup="OnApplicationStartup" Exit="OnApplicationExit">
     <Application.Resources>
-        <System:String x:Key="ApplicationTitle">Prolog.NET</System:String>
-        <SolidColorBrush x:Key="HeadingBrush" Color="#FFE2FFC8"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PrologWorkbench.Theme;component/Themes/Generic.xaml" />
+                <ResourceDictionary>
+                    <System:String x:Key="ApplicationTitle">Prolog.NET</System:String>
+                    <SolidColorBrush x:Key="HeadingBrush" Color="#FFE2FFC8"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+            
     </Application.Resources>
 </Application>

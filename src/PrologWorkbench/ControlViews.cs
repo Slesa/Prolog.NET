@@ -4,7 +4,7 @@
 
 namespace Prolog.Workbench
 {
-    public enum Views
+    public enum ControlViews
     {
         Debug,
         Program,

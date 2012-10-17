@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual Studio 2011
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologTest", "PrologTest\PrologTest.csproj", "{9FC4BB27-9852-4771-918A-9E5788380895}"
@@ -54,8 +54,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

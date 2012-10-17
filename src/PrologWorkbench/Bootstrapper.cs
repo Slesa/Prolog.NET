@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.ServiceLocation;
+using Prolog.Workbench.Views;
 
 namespace Prolog.Workbench
 {

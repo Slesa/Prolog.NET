@@ -13,16 +13,16 @@ namespace Prolog.Workbench
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var valueView = (Views)value;
-            Views parameterView;
+            var valueView = (ControlViews)value;
+            ControlViews parameterView;
             var parameterString = parameter as string;
             if (parameterString != null)
             {
-                parameterView = (Views)Enum.Parse(typeof(Views), parameterString);
+                parameterView = (ControlViews)Enum.Parse(typeof(ControlViews), parameterString);
             }
             else
             {
-                parameterView = (Views)parameter;
+                parameterView = (ControlViews)parameter;
             }
 
             var result = valueView == parameterView;

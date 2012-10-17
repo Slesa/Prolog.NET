@@ -1,1 +1,16 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="Color.Yellow">#FFFBAB</Color>
+    <Color x:Key="Color.MidYellow">#F5D471</Color>
+    <Color x:Key="Color.DarkYellow">#E3AC3D</Color>
+    <Color x:Key="Color.Brown">#B07515</Color>
+    <Color x:Key="Color.DarkBrown">#664208</Color>
+
+    <Color x:Key="Color.Foreground">#FFFBAB</Color>
+    <Color x:Key="Color.Foreground.Inverted">#664208</Color>
+    <Color x:Key="Color.Background">#664208</Color>
+    <Color x:Key="Color.Background.Inverted">#FFFBAB</Color>
+    
+</ResourceDictionary>
+    

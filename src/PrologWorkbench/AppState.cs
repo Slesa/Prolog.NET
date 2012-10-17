@@ -16,14 +16,14 @@ namespace Prolog.Workbench
             Application = application;
 
             Transcript = new Transcript();
-            _view = Views.Transcript;
+            _view = ControlViews.Transcript;
         }
 
         public App Application { get; private set; }
         public Transcript Transcript { get; private set; }
 
-        Views _view;
-        public Views View
+        ControlViews _view;
+        public ControlViews View
         {
             get { return _view; }
             set

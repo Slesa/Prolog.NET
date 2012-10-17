@@ -1,0 +1,26 @@
+﻿<Window x:Class="Prolog.Workbench.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding ShellViewModel}" 
+        Style="{DynamicResource Window.Standard}"
+        d:DesignHeight="800" d:DesignWidth="600"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <StackPanel Background="{DynamicResource Brush.Background}" >
+        <StackPanel Orientation="Horizontal">
+            <Image Source="/PrologWorkbench;component/Resources/ApplicationIcon.ico" />
+            <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" />
+        </StackPanel>
+    </StackPanel>
+    
+</Window>

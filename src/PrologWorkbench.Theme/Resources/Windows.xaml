@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        x:Key="Window.Standard" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource Colors.ForegroundColor}" />
+        <Setter Property="Background" Value="{DynamicResource Colors.Backgroundcolor}" />
+        <!-- Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type Window}">
+                    <Grid>
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <AdornerDecorator>
+                                <ContentPresenter />
+                            </AdornerDecorator>
+                        </Border>
+                        <Button
+                            Width="Auto"
+                            Margin="0,0,8,14"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="Button"
+                            Style="{DynamicResource SimpleButton}"
+                            Template="{DynamicResource Button.Window.Close}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger
+                                    EventName="Click">
+                                    <Centigrade_LiveStyleGuide_Theme:ShutDownAction />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter -->
+        <!-- Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+            </Trigger>
+        </Style.Triggers -->
+    </Style>
+
+    <Style TargetType="{x:Type Window}" BasedOn="{StaticResource Window.Standard}" />
+    
+</ResourceDictionary>
+    
