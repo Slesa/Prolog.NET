@@ -294,6 +294,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PrologWorkbench.Theme\PrologWorkbench.Theme.csproj">
+      <Project>{D9BCD156-95E0-4B3D-9E2D-E8E606149894}</Project>
+      <Name>PrologWorkbench.Theme</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Prolog\Prolog.csproj">
       <Project>{171A6B22-168C-4662-8706-131C098622BD}</Project>
       <Name>Prolog</Name>
