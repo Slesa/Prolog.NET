@@ -53,8 +53,10 @@ namespace Prolog.Workbench
 
             AppState.Program = program;
 
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            var bootstrapper = new Bootstrapper();
+            bootstrapper.Run();
+            //var mainWindow = new MainWindow();
+            //mainWindow.Show();
         }
 
         void OnApplicationExit(object sender, ExitEventArgs e)
