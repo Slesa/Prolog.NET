@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 using Prolog.Code;
+using Prolog.Workbench.Models;
 
 namespace Prolog.Workbench
 {

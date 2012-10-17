@@ -5,6 +5,7 @@
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
+using Prolog.Workbench.Models;
 
 namespace Prolog.Workbench
 {

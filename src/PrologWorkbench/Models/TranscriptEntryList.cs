@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace Prolog.Workbench
+namespace Prolog.Workbench.Models
 {
     public sealed class TranscriptEntryList : ReadableList<TranscriptEntry>
     {

@@ -4,7 +4,7 @@
 
 using System.Collections.ObjectModel;
 
-namespace Prolog.Workbench
+namespace Prolog.Workbench.Models
 {
     public sealed class Transcript
     {

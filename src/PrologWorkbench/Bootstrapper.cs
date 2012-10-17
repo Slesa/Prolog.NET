@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.ServiceLocation;
 
@@ -41,17 +40,5 @@ namespace Prolog.Workbench
             RegisterTypeIfMissing(typeof(ILoggerFacade), typeof(Log4NetLogger), true);
 
         }
-        /*
-        protected override IModuleCatalog CreateModuleCatalog()
-        {
-            return new DirectoryModuleCatalog { ModulePath = @".\Modules" };
-        }
-        */
-        /*
-        protected override void ConfigureModuleCatalog()
-        {
-            System.Type officeModule = typeof (UmsOfficeModule);
-            ModuleCatalog.AddModule(new ModuleInfo(officeModule.Name, officeModule.AssemblyQualifiedName));
-        }*/
     }
 }

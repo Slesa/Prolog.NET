@@ -259,8 +259,8 @@
     <Compile Include="Controls\TraceComponent.xaml.cs">
       <DependentUpon>TraceComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Transcript.cs" />
-    <Compile Include="TranscriptEntryList.cs" />
+    <Compile Include="Models\Transcript.cs" />
+    <Compile Include="Models\TranscriptEntryList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -274,8 +274,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="TranscriptEntry.cs" />
-    <Compile Include="TranscriptEntryTypes.cs" />
+    <Compile Include="Models\TranscriptEntry.cs" />
+    <Compile Include="Models\TranscriptEntryTypes.cs" />
     <Compile Include="Controls\TranscriptComponent.xaml.cs">
       <DependentUpon>TranscriptComponent.xaml</DependentUpon>
     </Compile>
@@ -343,7 +343,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Events\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>
