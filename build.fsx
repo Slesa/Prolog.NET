@@ -115,6 +115,7 @@ Target "Deploy" (fun _ ->
     ++ "License.txt"
     ++ "License-Lingua.txt"
     ++ "Readme.txt"
+    ++ @"doc\*"
     |> Scan
       |> CopyTo contentDir
   
