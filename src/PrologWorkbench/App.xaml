@@ -11,6 +11,8 @@
                     <System:String x:Key="ApplicationTitle">Prolog.NET</System:String>
                     <SolidColorBrush x:Key="HeadingBrush" Color="#FFE2FFC8"/>
                 </ResourceDictionary>
+                <ResourceDictionary Source="/PrologWorkbench.Theme;component/Simple Styles.xaml"/>
+                <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
             

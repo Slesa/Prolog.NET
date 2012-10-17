@@ -1,8 +1,64 @@
-﻿namespace Prolog.Workbench.ViewModels
+﻿using System.ComponentModel;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.ViewModel;
+
+namespace Prolog.Workbench.ViewModels
 {
-    public class ShellViewModel
+    public class ShellViewModel : NotificationObject
     {
-         
+        public ShellViewModel()
+        {
+            NewCommand = new DelegateCommand(OnNew);
+            OpenCommand = new DelegateCommand(OnOpen);
+            SaveCommand = new DelegateCommand(OnSave, CanSave);
+            SaveAsCommand = new DelegateCommand(OnSaveAs, CanSaveAs);
+
+            AppState.PropertyChanged += AppState_PropertyChanged;
+            AppState.View = ControlViews.Transcript;
+        }
+
+        public AppState AppState
+        {
+            get { return App.Current.AppState; }
+        }
+
+        public ICommand NewCommand { get; private set; }
+        void OnNew()
+        {
+
+        }
+        
+        public ICommand OpenCommand { get; private set; }
+        void OnOpen()
+        {
+        }
+        
+        public ICommand SaveCommand { get; private set; }
+        bool CanSave()
+        {
+            return (AppState.Program != null && AppState.Program.IsModified);
+        }
+        void OnSave()
+        {
+        }
+
+        public ICommand SaveAsCommand { get; private set; }
+        bool CanSaveAs()
+        {
+            return (AppState.Program != null && AppState.Program.IsModified);
+        }
+        void OnSaveAs()
+        {
+        }
+
+        void AppState_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "View")
+            {
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
     }
 
 
@@ -21,10 +77,6 @@
                 }
             }
 
-            public AppState AppState
-            {
-                get { return App.Current.AppState; }
-            }
 
             void CommandNew_Executed(object sender, ExecutedRoutedEventArgs e)
             {
@@ -531,13 +583,6 @@
                 }
             }
 
-            void AppState_PropertyChanged(object sender, PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName == "View")
-                {
-                    CommandManager.InvalidateRequerySuggested();
-                }
-            }
         }
 */
 }

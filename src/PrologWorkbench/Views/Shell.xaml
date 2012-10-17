@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" 
         mc:Ignorable="d"
-        DataContext="{Binding ShellViewModel}" 
         Style="{DynamicResource Window.Standard}"
         d:DesignHeight="800" d:DesignWidth="600"
         >
@@ -15,12 +15,24 @@
         </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+        
+    <Window.DataContext>
+        <ViewModels:ShellViewModel />
+    </Window.DataContext>
     
-    <StackPanel Background="{DynamicResource Brush.Background}" >
-        <StackPanel Orientation="Horizontal">
-            <Image Source="/PrologWorkbench;component/Resources/ApplicationIcon.ico" />
-            <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" />
+    <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="False" >
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="Auto">
+            <Image Width="48" Height="48" Source="/PrologWorkbench;component/Resources/ApplicationIcon.ico" />
+            <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
         </StackPanel>
-    </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="New" Command="{Binding NewCommand}" />
+            <Button Content="Open" Command="{Binding OpenCommand}" />
+            <Button Content="Save" Command="{Binding SaveCommand}" />
+            <Button Content="Save as" Command="{Binding SaveAsCommand}" />
+            <Button Content="Close" Command="{Binding CloseCommand}" />
+            <Button Content="Exit" Command="{Binding ExitCommand}" />
+        </StackPanel>
+    </DockPanel>
     
 </Window>
