@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows.Threading;
 
 using Lingua;
@@ -12,8 +13,8 @@ namespace Prolog.Workbench
 {
     public sealed class LinguaTraceListener : TraceListener
     {
-        Dispatcher _dispatcher;
-        WriteTraceLineDelegate _writeTraceLineDelegate;
+        readonly Dispatcher _dispatcher;
+        readonly WriteTraceLineDelegate _writeTraceLineDelegate;
 
         public LinguaTraceListener(Dispatcher dispatcher, WriteTraceLineDelegate writeTraceLineDelegate)
         {
@@ -32,7 +33,7 @@ namespace Prolog.Workbench
 
         public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
         {
-            WriteLine(id.ToString());
+            WriteLine(id.ToString(CultureInfo.InvariantCulture));
         }
 
         public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
