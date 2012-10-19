@@ -219,7 +219,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Log4NetLogger.cs" />
+    <Compile Include="Helpers\Log4NetLogger.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>

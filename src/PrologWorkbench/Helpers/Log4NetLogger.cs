@@ -1,7 +1,7 @@
 using Microsoft.Practices.Prism.Logging;
 using log4net;
 
-namespace Prolog.Workbench
+namespace Prolog.Workbench.Helpers
 {
     class Log4NetLogger : ILoggerFacade
     {
