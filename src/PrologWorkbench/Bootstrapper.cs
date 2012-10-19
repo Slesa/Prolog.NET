@@ -13,8 +13,8 @@ namespace Prolog.Workbench
     {
         protected override DependencyObject CreateShell()
         {
-            return ServiceLocator.Current.GetInstance<MainWindow>();
-            //return ServiceLocator.Current.GetInstance<Shell>();
+            //return ServiceLocator.Current.GetInstance<MainWindow>();
+            return ServiceLocator.Current.GetInstance<Shell>();
         }
 
         protected override void InitializeShell()

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" 
+        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" xmlns:local="clr-namespace:Prolog.Workbench"
         mc:Ignorable="d"
         d:DesignHeight="300" d:DesignWidth="400"
         >
@@ -12,11 +12,13 @@
         <ViewModels:ShellViewModel />
     </Window.DataContext>
     
-    <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="False" >
+    <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="true" >
+        
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="Auto">
             <Image Width="48" Height="48" Source="/PrologWorkbench;component/Resources/ApplicationIcon.ico" />
             <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
         </StackPanel>
+        
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />
             <Button Content="Open" Command="{Binding OpenCommand}" />
@@ -25,6 +27,21 @@
             <Button Content="Close" Command="{Binding CloseCommand}" />
             <Button Content="Exit" Command="{Binding ExitCommand}" />
         </StackPanel>
+        
+        <TabControl>
+            <TabItem Header="Transcript">
+                <local:TranscriptComponent x:Name="ctrlTranscript" />
+            </TabItem>
+            <TabItem Header="Trace">
+                <local:TraceComponent x:Name="ctrlTrace" />
+            </TabItem>
+            <TabItem Header="Program">
+                <local:ProgramExplorerComponent x:Name="ctrlProgram" />
+            </TabItem>
+            <TabItem Header="Debug">
+                <local:DebugComponent x:Name="ctrlDebug" />
+            </TabItem>
+        </TabControl>
     </DockPanel>
     
 </Window>

@@ -248,7 +248,7 @@
       <DependentUpon>InstructionStreamUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PrologDebugCommands.cs" />
-    <Compile Include="AppState.cs" />
+    <Compile Include="Old\AppState.cs" />
     <Compile Include="LinguaTraceListener.cs" />
     <Compile Include="Controls\ProgramExplorerComponent.xaml.cs">
       <DependentUpon>ProgramExplorerComponent.xaml</DependentUpon>

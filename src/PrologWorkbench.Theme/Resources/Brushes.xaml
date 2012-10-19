@@ -10,5 +10,7 @@
     <SolidColorBrush x:Key="Brush.Foreground" Color="{StaticResource Color.Foreground}" />
     <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{StaticResource Color.Foreground.Inverted}" />
 
+    <SolidColorBrush x:Key="Brush.ContentControl.Background" Color="{StaticResource Color.DarkYellow}" />
+
 </ResourceDictionary>
     
