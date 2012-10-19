@@ -5,17 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" 
         mc:Ignorable="d"
-        Style="{DynamicResource Window.Standard}"
-        d:DesignHeight="800" d:DesignWidth="600"
+        d:DesignHeight="300" d:DesignWidth="400"
         >
-    <Window.Resources>
-        <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-        
+    
     <Window.DataContext>
         <ViewModels:ShellViewModel />
     </Window.DataContext>
