@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.ServiceLocation;
+using Prolog.Workbench.Helpers;
 using Prolog.Workbench.Views;
 
 namespace Prolog.Workbench
@@ -36,10 +38,8 @@ namespace Prolog.Workbench
         {
             //RegisterTypeIfMissing(typeof(IServiceLocator), typeof(UnityServiceLocatorAdapter), true);
 
-            //RegisterTypeIfMissing(typeof(Shell), typeof(Shell), true);
-            RegisterTypeIfMissing(typeof(MainWindow), typeof(MainWindow), true);
             RegisterTypeIfMissing(typeof(ILoggerFacade), typeof(Log4NetLogger), true);
-
+            RegisterTypeIfMissing(typeof(IRegionManager), typeof(RegionManager), true);
         }
     }
 }
