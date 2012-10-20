@@ -1,17 +1,19 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
-using Microsoft.Win32;
 
 namespace Prolog.Workbench.ViewModels
 {
     public class ShellViewModel : NotificationObject
     {
-        public ShellViewModel()
+        //readonly IRegionManager _regionManager;
+
+        public ShellViewModel(/*IRegionManager regionManager*/)
         {
+            //_regionManager = regionManager;
+            //_regionManager.AddToRegion("ToolsBarRegion", )
             NewCommand = new DelegateCommand(OnNew);
             OpenCommand = new DelegateCommand(OnOpen);
             SaveCommand = new DelegateCommand(OnSave, CanSave);
@@ -20,66 +22,74 @@ namespace Prolog.Workbench.ViewModels
             ExitCommand = new DelegateCommand(OnExit);
         }
 
-        public AppState AppState
-        {
-            get { return App.Current.AppState; }
-        }
-
         public ICommand NewCommand { get; private set; }
         void OnNew()
         {
+            /*
             if (!EnsureSaved())
             {
                 return;
             }
             AppState.Program = new Program();
+             * */
         }
         
         public ICommand OpenCommand { get; private set; }
         void OnOpen()
         {
+            /*
             if (!EnsureSaved())
             {
                 return;
             }
             Open();
+             * */
         }
         
         public ICommand SaveCommand { get; private set; }
         bool CanSave()
         {
-            return (AppState.Program != null && !string.IsNullOrEmpty(AppState.Program.FileName));
+            return true;
+            //return (AppState.Program != null && !string.IsNullOrEmpty(AppState.Program.FileName));
         }
         void OnSave()
         {
+            /*
             if (AppState.Program != null)
             {
                 Save(true);
             }
+             * */
         }
 
         public ICommand SaveAsCommand { get; private set; }
         bool CanSaveAs()
         {
-            return (AppState.Program != null);
+            return true;
+            //return (AppState.Program != null);
         }
         void OnSaveAs()
         {
+            /*
             if (AppState.Program != null)
             {
                 SaveAs(true);
             }
+             * */
         }
 
         public ICommand CloseCommand { get; private set; }
         bool CanClose()
         {
-            return (AppState.Program != null);
+            return true;
+            //return (AppState.Program != null);
         }
         void OnClose()
         {
+            /*
             if (!EnsureSaved()) return;
             AppState.Program = null;
+             * */
         }
 
         public ICommand ExitCommand { get; private set; }
@@ -92,6 +102,7 @@ namespace Prolog.Workbench.ViewModels
 
         bool EnsureSaved()
         {
+            /*
             if (AppState.Program == null || AppState.Program.IsModified == false)
             {
                 return true;
@@ -120,12 +131,13 @@ namespace Prolog.Workbench.ViewModels
                     return false;
                 }
                 return true;
-            }
+            }*/
             return true;
         }
 
         bool Open()
         {
+            /*
             var dialog = new OpenFileDialog
             {
                 DefaultExt = Properties.Resources.FileDefaultExt,
@@ -158,11 +170,13 @@ namespace Prolog.Workbench.ViewModels
             }
 
             AppState.Program = program;
+             * */
             return true;
         }
 
         bool Save(bool forceSave)
         {
+            /*
             Debug.Assert(AppState.Program != null);
             if (AppState.Program == null)
             {
@@ -198,11 +212,13 @@ namespace Prolog.Workbench.ViewModels
                 //CommonExceptionHandlers.HandleException(this, ex);
                 return false;
             }
+             * */
             return true;
         }
 
         bool SaveAs(bool forceSave)
         {
+            /*
             Debug.Assert(AppState.Program != null);
             if (AppState.Program == null)
             {
@@ -244,7 +260,7 @@ namespace Prolog.Workbench.ViewModels
                 //CommonExceptionHandlers.HandleException(this, ex);
                 return false;
             }
-
+            */
             return true;
         }
     }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" xmlns:local="clr-namespace:Prolog.Workbench"
+        xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         mc:Ignorable="d"
         d:DesignHeight="300" d:DesignWidth="400"
         >
@@ -19,16 +20,20 @@
             <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
         </StackPanel>
         
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+        <ContentControl regions:RegionManager.RegionName="ToolsBarRegion" />
+        <ContentControl regions:RegionManager.RegionName="StatusBarRegion" />
+        <ContentControl regions:RegionManager.RegionName="MainRegion" />
+
+        <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />
             <Button Content="Open" Command="{Binding OpenCommand}" />
             <Button Content="Save" Command="{Binding SaveCommand}" />
             <Button Content="Save as" Command="{Binding SaveAsCommand}" />
             <Button Content="Close" Command="{Binding CloseCommand}" />
             <Button Content="Exit" Command="{Binding ExitCommand}" />
-        </StackPanel>
+        </StackPanel-->
         
-        <TabControl>
+        <!-- TabControl>
             <TabItem Header="Transcript">
                 <local:TranscriptComponent x:Name="ctrlTranscript" />
             </TabItem>
@@ -41,7 +46,7 @@
             <TabItem Header="Debug">
                 <local:DebugComponent x:Name="ctrlDebug" />
             </TabItem>
-        </TabControl>
+        </TabControl-->
     </DockPanel>
     
 </Window>

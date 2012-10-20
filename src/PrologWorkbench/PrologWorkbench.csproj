@@ -133,84 +133,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AboutDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Resource Include="Resources\AboutLicense.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Windows\ButtonImages.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\VariableListUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DebugComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\InstructionStreamUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ProgramExplorerComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ProgramTreeUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\SavePromptDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\StackFrameListUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\TraceComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\TranscriptComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
@@ -224,51 +152,8 @@
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SettingsExtension.cs" />
-    <Compile Include="ViewConverter.cs" />
-    <Compile Include="ControlViews.cs" />
-    <Compile Include="Windows\AboutDialog.xaml.cs">
-      <DependentUpon>AboutDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CodeUtility.cs" />
-    <Compile Include="CommonExceptionHandlers.cs" />
-    <Compile Include="Controls\VariableListUserControl.xaml.cs">
-      <DependentUpon>VariableListUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugComponent.xaml.cs">
-      <DependentUpon>DebugComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\InstructionStreamUserControl.xaml.cs">
-      <DependentUpon>InstructionStreamUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PrologDebugCommands.cs" />
-    <Compile Include="Old\AppState.cs" />
-    <Compile Include="LinguaTraceListener.cs" />
-    <Compile Include="Controls\ProgramExplorerComponent.xaml.cs">
-      <DependentUpon>ProgramExplorerComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ProgramTreeUserControl.xaml.cs">
-      <DependentUpon>ProgramTreeUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PrologCommands.cs" />
-    <Compile Include="Windows\SavePromptDialog.xaml.cs">
-      <DependentUpon>SavePromptDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationTitleConverter.cs" />
-    <Compile Include="Controls\StackFrameListUserControl.xaml.cs">
-      <DependentUpon>StackFrameListUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TraceComponent.xaml.cs">
-      <DependentUpon>TraceComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Transcript.cs" />
-    <Compile Include="Models\TranscriptEntryList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -282,12 +167,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Models\TranscriptEntry.cs" />
-    <Compile Include="Models\TranscriptEntryTypes.cs" />
-    <Compile Include="Controls\TranscriptComponent.xaml.cs">
-      <DependentUpon>TranscriptComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WriteTraceLineDelegate.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -302,6 +181,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PrologWorkbench.Program\PrologWorkbench.Program.csproj">
+      <Project>{9A93B637-17BC-4A90-B1A5-71FF5947F807}</Project>
+      <Name>PrologWorkbench.Program</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrologWorkbench.Theme\PrologWorkbench.Theme.csproj">
       <Project>{D9BCD156-95E0-4B3D-9E2D-E8E606149894}</Project>
       <Name>PrologWorkbench.Theme</Name>
@@ -349,13 +232,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Windows\Resources\StepOut.png" />
-    <Resource Include="Windows\Resources\StepOver.png" />
-    <Resource Include="Windows\Resources\StepIn.png">
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="Old\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

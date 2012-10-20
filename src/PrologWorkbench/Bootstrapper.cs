@@ -1,11 +1,13 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.ServiceLocation;
 using Prolog.Workbench.Helpers;
 using Prolog.Workbench.Views;
+using PrologWorkbench.Program;
 
 namespace Prolog.Workbench
 {
@@ -23,7 +25,7 @@ namespace Prolog.Workbench
 
             log4net.Config.XmlConfigurator.Configure(new FileInfo("log4net.config"));
 
-            Application.Current.MainWindow = (Window)Shell;
+            Application.Current.MainWindow = (Window) Shell;
             Application.Current.MainWindow.Show();
         }
 
@@ -34,12 +36,22 @@ namespace Prolog.Workbench
             RegisterShellObjects();
         }
 
-        void RegisterShellObjects()
+        private void RegisterShellObjects()
         {
             //RegisterTypeIfMissing(typeof(IServiceLocator), typeof(UnityServiceLocatorAdapter), true);
 
-            RegisterTypeIfMissing(typeof(ILoggerFacade), typeof(Log4NetLogger), true);
-            RegisterTypeIfMissing(typeof(IRegionManager), typeof(RegionManager), true);
+            RegisterTypeIfMissing(typeof (ILoggerFacade), typeof (Log4NetLogger), true);
+            RegisterTypeIfMissing(typeof (IRegionManager), typeof (RegionManager), true);
+        }
+
+        protected override void ConfigureModuleCatalog()
+        {
+            var programModule = typeof (ProgramModule);
+            ModuleCatalog.AddModule(new ModuleInfo
+                                        {
+                                            ModuleName = programModule.Name,
+                                            ModuleType = programModule.AssemblyQualifiedName
+                                        });
         }
     }
 }

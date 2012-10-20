@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2011
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologTest", "PrologTest\PrologTest.csproj", "{9FC4BB27-9852-4771-918A-9E5788380895}"
@@ -17,6 +17,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench", "PrologWorkbench\PrologWorkbench.csproj", "{65E6D859-7578-4A05-827C-3D36AE640364}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Theme", "PrologWorkbench.Theme\PrologWorkbench.Theme.csproj", "{D9BCD156-95E0-4B3D-9E2D-E8E606149894}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Core", "PrologWorkbench.Core\PrologWorkbench.Core.csproj", "{A8E26596-A8D3-458F-B902-AFE0A3D924B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Program", "PrologWorkbench.Program\PrologWorkbench.Program.csproj", "{9A93B637-17BC-4A90-B1A5-71FF5947F807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Core.Specs", "PrologWorkbench.Core.Specs\PrologWorkbench.Core.Specs.csproj", "{1945A969-C7E6-4654-9F44-55B68C75A8B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +54,18 @@ Global
 		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E26596-A8D3-458F-B902-AFE0A3D924B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E26596-A8D3-458F-B902-AFE0A3D924B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E26596-A8D3-458F-B902-AFE0A3D924B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E26596-A8D3-458F-B902-AFE0A3D924B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
