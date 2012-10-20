@@ -86,7 +86,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\ProgramToolbarViewModel.cs" />
     <Compile Include="ViewModels\ProgramTreeViewModel.cs" />
+    <Compile Include="Views\ProgramToolbarView.xaml.cs">
+      <DependentUpon>ProgramToolbarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProgramTreeView.xaml.cs">
       <DependentUpon>ProgramTreeView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +106,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ProgramToolbarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProgramTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +124,22 @@
       <Project>{171A6B22-168C-4662-8706-131C098622BD}</Project>
       <Name>Prolog</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document-new.png" />
+    <Resource Include="Resources\document-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document-save-as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document-save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

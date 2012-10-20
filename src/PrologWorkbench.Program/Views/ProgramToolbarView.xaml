@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PrologWorkbench.Program.Views.ProgramToolbarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Image x:Key="PngFileNew" Source="../Resources/document-new.png" />
+            <Image x:Key="PngFileOpen" Source="../Resources/document-open.png" />
+            <Image x:Key="PngFileClose" Source="../Resources/document-close.png" />
+            <Image x:Key="PngFileSave" Source="../Resources/document-save.png" />
+            <Image x:Key="PngFileSaveAs" Source="../Resources/document-save-as.png" />
+            <Image x:Key="PngExit" Source="../Resources/exit.png" />
+            <Style TargetType="{x:Type Image}">
+                <Setter Property="Height" Value="48" />
+                <Setter Property="Width" Value="48" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="New program"/>
+        <Button x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="Load program..."/>
+        <Button x:Name="Close" Command="{Binding CloseCommand}" Content="{StaticResource PngFileClose}" ToolTip="Close current program"/>
+        <Button x:Name="Save" Command="{Binding SaveCommand}" Content="{StaticResource PngFileSave}" ToolTip="Save current program"  />
+        <Button x:Name="SaveAs" Command="{Binding SaveAsCommand}" Content="{StaticResource PngFileSaveAs}" ToolTip="Save program as..."  />
+        <Button x:Name="Exit" Command="{Binding ExitCommand}" Content="{StaticResource PngExit}" ToolTip="Quit application"/>
+    </StackPanel>
+</UserControl>

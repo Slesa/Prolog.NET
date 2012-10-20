@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Program.ViewModels;
+using PrologWorkbench.Program.Views;
 
 namespace PrologWorkbench.Program
 {
@@ -18,7 +19,9 @@ namespace PrologWorkbench.Program
 
         public void Initialize()
         {
+            _container.RegisterType<ProgramToolbarViewModel>();
             _container.RegisterType<ProgramTreeViewModel>();
+            _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof (ProgramToolbarView));
             _regionManager.RegisterViewWithRegion("MainRegion", typeof (ProgramTreeViewModel));
         }
     }

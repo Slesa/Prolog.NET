@@ -87,6 +87,17 @@ namespace PrologWorkbench.Core.Specs
     }
 
 
+    [Subject(typeof(ProgramProvider))]
+    internal class When_resetting_program_file : ProgramProviderSaveSpecBase
+    {
+        Because of = () => Subject.Reset();
+        It should_reset_program = () => Subject.Program.IsModified.ShouldBeFalse();
+    }
+
+
+
+
+
     internal class ProgramProviderSaveSpecBase : ProgramProviderSpecBase
     {
         Establish context = () =>
@@ -119,6 +130,6 @@ namespace PrologWorkbench.Core.Specs
 
         protected const string SourceFilename = @"Resources\test.prolog";
         protected const string DestinationFilename = @"Resources\tmp.prolog";
-        protected static ProgramProvider Subject;
+        protected static IProvideProgram Subject;
     }
 }

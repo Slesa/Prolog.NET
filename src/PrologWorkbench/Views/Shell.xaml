@@ -20,10 +20,12 @@
             <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
         </StackPanel>
         
-        <ContentControl regions:RegionManager.RegionName="ToolsBarRegion" />
-        <ContentControl regions:RegionManager.RegionName="StatusBarRegion" />
+        <DockPanel LastChildFill="True">
+        <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ToolsBarRegion" />
+        <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
+            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ProgramToolbarRegion" />
         <ContentControl regions:RegionManager.RegionName="MainRegion" />
-
+        </DockPanel>
         <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />
             <Button Content="Open" Command="{Binding OpenCommand}" />

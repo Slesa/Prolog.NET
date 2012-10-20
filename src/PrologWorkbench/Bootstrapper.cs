@@ -7,6 +7,7 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.ServiceLocation;
 using Prolog.Workbench.Helpers;
 using Prolog.Workbench.Views;
+using PrologWorkbench.Core;
 using PrologWorkbench.Program;
 
 namespace Prolog.Workbench
@@ -42,6 +43,7 @@ namespace Prolog.Workbench
 
             RegisterTypeIfMissing(typeof (ILoggerFacade), typeof (Log4NetLogger), true);
             RegisterTypeIfMissing(typeof (IRegionManager), typeof (RegionManager), true);
+            RegisterTypeIfMissing(typeof (IProvideProgram), typeof (ProgramProvider), true);
         }
 
         protected override void ConfigureModuleCatalog()

@@ -10,6 +10,11 @@ namespace PrologWorkbench.Core
 
         public Program Program { get; private set; }
 
+        public void Reset()
+        {
+            Program = new Program();
+        }
+
         public bool Load(string fileName)
         {
             Program program;

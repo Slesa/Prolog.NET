@@ -14,7 +14,6 @@ namespace PrologWorkbench.Program.Views
         public ProgramTreeView(ProgramTreeViewModel viewModel)
         {
             InitializeComponent();
-
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 DataContext = viewModel;

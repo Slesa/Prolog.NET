@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Prolog.Workbench.ViewModels
@@ -14,90 +13,10 @@ namespace Prolog.Workbench.ViewModels
         {
             //_regionManager = regionManager;
             //_regionManager.AddToRegion("ToolsBarRegion", )
-            NewCommand = new DelegateCommand(OnNew);
-            OpenCommand = new DelegateCommand(OnOpen);
-            SaveCommand = new DelegateCommand(OnSave, CanSave);
-            SaveAsCommand = new DelegateCommand(OnSaveAs, CanSaveAs);
-            CloseCommand = new DelegateCommand(OnClose, CanClose);
-            ExitCommand = new DelegateCommand(OnExit);
-        }
-
-        public ICommand NewCommand { get; private set; }
-        void OnNew()
-        {
-            /*
-            if (!EnsureSaved())
-            {
-                return;
-            }
-            AppState.Program = new Program();
-             * */
         }
         
-        public ICommand OpenCommand { get; private set; }
-        void OnOpen()
-        {
-            /*
-            if (!EnsureSaved())
-            {
-                return;
-            }
-            Open();
-             * */
-        }
         
-        public ICommand SaveCommand { get; private set; }
-        bool CanSave()
-        {
-            return true;
-            //return (AppState.Program != null && !string.IsNullOrEmpty(AppState.Program.FileName));
-        }
-        void OnSave()
-        {
-            /*
-            if (AppState.Program != null)
-            {
-                Save(true);
-            }
-             * */
-        }
 
-        public ICommand SaveAsCommand { get; private set; }
-        bool CanSaveAs()
-        {
-            return true;
-            //return (AppState.Program != null);
-        }
-        void OnSaveAs()
-        {
-            /*
-            if (AppState.Program != null)
-            {
-                SaveAs(true);
-            }
-             * */
-        }
-
-        public ICommand CloseCommand { get; private set; }
-        bool CanClose()
-        {
-            return true;
-            //return (AppState.Program != null);
-        }
-        void OnClose()
-        {
-            /*
-            if (!EnsureSaved()) return;
-            AppState.Program = null;
-             * */
-        }
-
-        public ICommand ExitCommand { get; private set; }
-        void OnExit()
-        {
-            Application.Current.Shutdown();
-            //Close();
-        }
 
 
         bool EnsureSaved()
