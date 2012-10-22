@@ -1,23 +1,19 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Win32;
+using Microsoft.Practices.Prism.ViewModel;
 using PrologWorkbench.Core;
 
 namespace PrologWorkbench.Program.ViewModels
 {
-    public class ProgramToolbarViewModel
+    public class ProgramToolbarViewModel : NotificationObject
     {
-        const string FileExtesion = "prolog";
-        const string FileFilter = "Prolog Source Files|*.prolog|All Files|*.*";
 
-        readonly IProvideProgram _programProvider;
+        public IProvideProgram ProgramProvider { get; set; }
+        public IProvideFilename FilenameProvider { get; set; }
 
-        public ProgramToolbarViewModel(IProvideProgram programProvider)
+        public ProgramToolbarViewModel()
         {
-            _programProvider = programProvider;
-
             NewCommand = new DelegateCommand(OnNew);
             LoadCommand = new DelegateCommand(OnLoad);
             CloseCommand = new DelegateCommand(OnClose, CanClose);
@@ -26,55 +22,59 @@ namespace PrologWorkbench.Program.ViewModels
             ExitCommand = new DelegateCommand(OnExit);
         }
 
-        public ICommand NewCommand { get; private set; }
-        public ICommand LoadCommand { get; private set; }
-        public ICommand CloseCommand { get; private set; }
-        public ICommand SaveCommand { get; private set; }
-        public ICommand SaveAsCommand { get; private set; }
-        public ICommand ExitCommand { get; private set; }
+        public DelegateCommand NewCommand { get; private set; }
+        public DelegateCommand LoadCommand { get; private set; }
+        public DelegateCommand CloseCommand { get; private set; }
+        public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand SaveAsCommand { get; private set; }
+        public DelegateCommand ExitCommand { get; private set; }
 
 
         void OnNew()
         {
             if (!EnsureSaved()) return;
-            _programProvider.Reset();            
+            ProgramProvider.Reset();
+            CloseCommand.RaiseCanExecuteChanged();
+            SaveAsCommand.RaiseCanExecuteChanged();
         }
 
         void OnLoad()
         {
             if (!EnsureSaved()) return;
-            Load();
+            if (!Load()) return;
         }
 
         void OnClose()
         {
             if (!EnsureSaved()) return;
-            _programProvider.Reset();
+            ProgramProvider.Reset();
+            CloseCommand.RaiseCanExecuteChanged();
+            SaveAsCommand.RaiseCanExecuteChanged();
         }
 
         bool CanClose()
         {
-            return _programProvider.Program != null;
-        }
+            return ProgramProvider.Program != null;
+        } 
 
         void OnSave()
         {
-            if (_programProvider.Program != null) Save();
+            if (ProgramProvider.Program != null) Save();
         }
 
         bool CanSave()
         {
-            return _programProvider.Program != null && !string.IsNullOrEmpty(_programProvider.Program.FileName);
+            return ProgramProvider.Program != null && !string.IsNullOrEmpty(ProgramProvider.Program.FileName);
         }
 
         void OnSaveAs()
         {
-            if (_programProvider.Program != null) SaveAs();
+            if (ProgramProvider.Program != null) SaveAs();
         }
 
         bool CanSaveAs()
         {
-            return _programProvider.Program != null;
+            return ProgramProvider.Program != null;
         }
 
         void OnExit()
@@ -85,58 +85,43 @@ namespace PrologWorkbench.Program.ViewModels
 
         bool EnsureSaved()
         {
-            if (_programProvider.Program == null || _programProvider.Program.IsModified == false)
+            if (ProgramProvider.Program == null || ProgramProvider.Program.IsModified == false)
             {
                 return true;
             }
 
             var fileName = "Untitled";
-            if (_programProvider.Program != null && !string.IsNullOrEmpty(_programProvider.Program.FileName))
+            if (ProgramProvider.Program != null && !string.IsNullOrEmpty(ProgramProvider.Program.FileName))
             {
-                fileName = Path.GetFileName(_programProvider.Program.FileName);
+                fileName = Path.GetFileName(ProgramProvider.Program.FileName);
             }
+            var title = string.Format("Do you want to save {0}?", fileName);
+            var filename = FilenameProvider.GetSaveFileName(title, fileName);
 
-            var dialog = new SaveFileDialog
-                             {
-                                 Title = string.Format("Do you want to save {0}?", fileName),
-                             };
-            if (dialog.ShowDialog() == false) return false;
-            return Save();
+            return !string.IsNullOrEmpty(filename) && Save();
         }
 
         bool Load()
         {
-
-            var dialog = new OpenFileDialog
-                             {
-                                 DefaultExt = FileExtesion,
-                                 Filter = FileFilter,
-                                 InitialDirectory = Directory.GetCurrentDirectory()
-                             };
-            if (dialog.ShowDialog() == false) return false;
-            _programProvider.Load(dialog.FileName);
+            var filename = FilenameProvider.GetLoadFileName();
+            if (string.IsNullOrEmpty(filename)) return false;
+            ProgramProvider.Load(filename);
             return true;
         }
 
         bool Save()
         {
-            if (_programProvider.Program == null) return true;
-            return string.IsNullOrEmpty(_programProvider.Program.FileName) 
+            if (ProgramProvider.Program == null) return true;
+            return string.IsNullOrEmpty(ProgramProvider.Program.FileName) 
                 ? SaveAs() 
-                : _programProvider.Save(_programProvider.Program.FileName);
+                : ProgramProvider.Save(ProgramProvider.Program.FileName);
         }
 
         bool SaveAs()
         {
-            if (_programProvider.Program == null) return true;
-
-            var dialog = new SaveFileDialog
-                             {
-                                 DefaultExt = FileExtesion,
-                                 Filter = FileFilter
-                             };
-            if (dialog.ShowDialog() == false) return false;
-            return _programProvider.Save(dialog.FileName);
+            if (ProgramProvider.Program == null) return true;
+            var filename = FilenameProvider.GetSaveFileName("Save program as...");
+            return !string.IsNullOrEmpty(filename) && ProgramProvider.Save(filename);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace PrologWorkbench.Program
 
         public void Initialize()
         {
+            _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
             _container.RegisterType<ProgramToolbarViewModel>();
             _container.RegisterType<ProgramTreeViewModel>();
             _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof (ProgramToolbarView));
