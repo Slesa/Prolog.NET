@@ -83,7 +83,6 @@ namespace PrologWorkbench.Program.Specs
                                 {
                                     Subject = new ProgramToolbarViewModel {ProgramProvider = new ProgramProvider()};
                                     CalledProperties = new List<string>();
-                                    Subject.PropertyChanged += (sender, args) => CalledProperties.Add(args.PropertyName);
                                 };
 
         protected static IProvideFilename LoadFilenameProvider

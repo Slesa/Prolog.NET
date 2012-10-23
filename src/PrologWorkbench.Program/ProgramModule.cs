@@ -22,8 +22,10 @@ namespace PrologWorkbench.Program
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
             _container.RegisterType<ProgramToolbarViewModel>();
             _container.RegisterType<ProgramTreeViewModel>();
+            _container.RegisterType<StatusBarViewModel>();
             _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof(ProgramToolbarView));
             _regionManager.RegisterViewWithRegion("MainRegion", typeof (ProgramTreeView));
+            _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof (StatusBarView));
         }
     }
 }

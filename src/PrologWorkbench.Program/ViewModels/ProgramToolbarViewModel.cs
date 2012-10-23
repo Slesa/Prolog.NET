@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core;
 
 namespace PrologWorkbench.Program.ViewModels
 {
-    public class ProgramToolbarViewModel : NotificationObject
+    public class ProgramToolbarViewModel 
     {
         [Dependency]
         public IProvideProgram ProgramProvider { get; set; }
