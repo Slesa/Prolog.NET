@@ -2,5 +2,5 @@
 
 namespace PrologWorkbench.Core.Events
 {
-    public class StatusUpdateEvent : CompositePresentationEvent<string>{ }
+    public class UpdateStatusEvent : CompositePresentationEvent<string>{ }
 }

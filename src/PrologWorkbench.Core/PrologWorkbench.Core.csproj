@@ -42,7 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\StatusUpdateEvent.cs" />
+    <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="ProgramProvider.cs" />
     <Compile Include="IProvideProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

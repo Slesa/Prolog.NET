@@ -10,7 +10,7 @@ namespace PrologWorkbench.Program.ViewModels
 
         public StatusBarViewModel(IEventAggregator eventAggregator)
         {
-            eventAggregator.GetEvent<StatusUpdateEvent>().Subscribe(x => Message = x);
+            eventAggregator.GetEvent<UpdateStatusEvent>().Subscribe(x => Message = x);
         }
 
         public string Message
