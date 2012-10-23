@@ -1,6 +1,6 @@
 ﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="PrologWorkbench.Program.Views.ProgramTreeView"
+             x:Class="PrologWorkbench.Program.Views.ProgramView"
              Height="300" Width="300">
     
     <!-- UserControl.CommandBindings>

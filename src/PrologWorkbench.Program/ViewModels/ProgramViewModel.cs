@@ -3,7 +3,7 @@ using Prolog;
 
 namespace PrologWorkbench.Program.ViewModels
 {
-    public class ProgramTreeViewModel : NotificationObject
+    public class ProgramViewModel : NotificationObject
     {
         Procedure _selectedProcedure;
         Clause _selectedClause;

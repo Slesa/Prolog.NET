@@ -89,13 +89,13 @@
     <Compile Include="ViewModels\FilenameProvider.cs" />
     <Compile Include="ViewModels\IProvideFilename.cs" />
     <Compile Include="ViewModels\ProgramToolbarViewModel.cs" />
-    <Compile Include="ViewModels\ProgramTreeViewModel.cs" />
+    <Compile Include="ViewModels\ProgramViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="Views\ProgramToolbarView.xaml.cs">
       <DependentUpon>ProgramToolbarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProgramTreeView.xaml.cs">
-      <DependentUpon>ProgramTreeView.xaml</DependentUpon>
+    <Compile Include="Views\ProgramView.xaml.cs">
+      <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
@@ -116,7 +116,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProgramTreeView.xaml">
+    <Page Include="Views\ProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

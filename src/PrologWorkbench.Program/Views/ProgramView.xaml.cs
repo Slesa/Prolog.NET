@@ -8,10 +8,10 @@ using PrologWorkbench.Program.ViewModels;
 
 namespace PrologWorkbench.Program.Views
 {
-    public partial class ProgramTreeView : UserControl
+    public partial class ProgramView : UserControl
     {
 
-        public ProgramTreeView(ProgramTreeViewModel viewModel)
+        public ProgramView(ProgramViewModel viewModel)
         {
             InitializeComponent();
             if (!DesignerProperties.GetIsInDesignMode(this))
@@ -25,7 +25,7 @@ namespace PrologWorkbench.Program.Views
             "ClauseDoubleClicked",
             RoutingStrategy.Bubble,
             typeof(RoutedClauseEventHandler),
-            typeof(ProgramTreeView));
+            typeof(ProgramView));
 
         public event RoutedPropertyChangedEventHandler<Clause> ClauseDoubleClicked
         {
