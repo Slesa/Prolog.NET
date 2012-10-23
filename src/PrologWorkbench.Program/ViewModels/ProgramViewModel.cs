@@ -1,13 +1,32 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
+using PrologWorkbench.Core.Events;
 
 namespace PrologWorkbench.Program.ViewModels
 {
     public class ProgramViewModel : NotificationObject
     {
-        Procedure _selectedProcedure;
-        Clause _selectedClause;
+        public ProgramViewModel(IEventAggregator eventAggregator)
+        {
+            eventAggregator.GetEvent<ProgramChangedEvent>().Subscribe(x => Program = x);
+        }
 
+        public string Title { get { return "Program"; } }
+
+        Prolog.Program _program;
+        public Prolog.Program Program
+        {
+            get { return _program; }
+            set
+            {
+                if (value == _program) return;
+                _program = value;
+                RaisePropertyChanged(() => Program);
+            }
+        }
+
+        Clause _selectedClause;
         public Clause SelectedClause
         {
             get { return _selectedClause; }
@@ -19,6 +38,7 @@ namespace PrologWorkbench.Program.ViewModels
             }
         }
 
+        Procedure _selectedProcedure;
         public Procedure SelectedProcedure
         {
             get { return _selectedProcedure; }

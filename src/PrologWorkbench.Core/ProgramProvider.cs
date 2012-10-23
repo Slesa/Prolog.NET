@@ -1,5 +1,8 @@
 ﻿using System.IO;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Unity;
 using Prolog;
+using PrologWorkbench.Core.Events;
 using log4net;
 
 namespace PrologWorkbench.Core
@@ -8,11 +11,15 @@ namespace PrologWorkbench.Core
     {
         readonly ILog _logger = LogManager.GetLogger(typeof (ProgramProvider));
 
+        [Dependency]
+        public IEventAggregator EventAggregator { get; set; }
+
         public Program Program { get; private set; }
 
         public void Reset()
         {
             Program = new Program();
+            PublishNewProgram();
         }
 
         public bool Load(string fileName)
@@ -41,6 +48,7 @@ namespace PrologWorkbench.Core
                 return false;
             }
             Program = program;
+            PublishNewProgram();
             return true;
         }
 
@@ -82,6 +90,12 @@ namespace PrologWorkbench.Core
                 return false;
             }
             return true;
+        }
+
+        void PublishNewProgram()
+        {
+            if(EventAggregator!=null)
+                EventAggregator.GetEvent<ProgramChangedEvent>().Publish(Program);
         }
     }
 }

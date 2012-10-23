@@ -15,11 +15,9 @@
     
     <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="true" >
         
-        <DockPanel LastChildFill="True">
             <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
             <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
-            <ContentControl regions:RegionManager.RegionName="MainRegion" />
-        </DockPanel>
+            <ContentControl DockPanel.Dock="Left" regions:RegionManager.RegionName="ProgramRegion" />
         <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />
             <Button Content="Open" Command="{Binding OpenCommand}" />
