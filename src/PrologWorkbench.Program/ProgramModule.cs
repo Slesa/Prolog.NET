@@ -22,8 +22,8 @@ namespace PrologWorkbench.Program
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
             _container.RegisterType<ProgramToolbarViewModel>();
             _container.RegisterType<ProgramTreeViewModel>();
-            _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof (ProgramToolbarView));
-            _regionManager.RegisterViewWithRegion("MainRegion", typeof (ProgramTreeViewModel));
+            _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof(ProgramToolbarView));
+            _regionManager.RegisterViewWithRegion("MainRegion", typeof (ProgramTreeView));
         }
     }
 }
