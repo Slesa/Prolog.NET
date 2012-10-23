@@ -18,13 +18,15 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Button x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="New program"/>
-        <Button x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="Load program..."/>
-        <Button x:Name="Close" Command="{Binding CloseCommand}" Content="{StaticResource PngFileClose}" ToolTip="Close current program"/>
-        <Button x:Name="Save" Command="{Binding SaveCommand}" Content="{StaticResource PngFileSave}" ToolTip="Save current program"  />
-        <Button x:Name="SaveAs" Command="{Binding SaveAsCommand}" Content="{StaticResource PngFileSaveAs}" ToolTip="Save program as..."  />
-        <Button x:Name="Exit" Command="{Binding ExitCommand}" Content="{StaticResource PngExit}" ToolTip="Quit application"/>
+
+    <ContentControl Padding="10">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource Brush.ContentControl.Background}">
+        <Button Margin="3" x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="New program"/>
+            <Button Margin="3" x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="Load program..."/>
+            <Button Margin="3" x:Name="Close" Command="{Binding CloseCommand}" Content="{StaticResource PngFileClose}" ToolTip="Close current program"/>
+            <Button Margin="3" x:Name="Save" Command="{Binding SaveCommand}" Content="{StaticResource PngFileSave}" ToolTip="Save current program"  />
+            <Button Margin="3" x:Name="SaveAs" Command="{Binding SaveAsCommand}" Content="{StaticResource PngFileSaveAs}" ToolTip="Save program as..."  />
+            <Button Margin="3" x:Name="Exit" Command="{Binding ExitCommand}" Content="{StaticResource PngExit}" ToolTip="Quit application"/>
     </StackPanel>
+    </ContentControl>
 </UserControl>

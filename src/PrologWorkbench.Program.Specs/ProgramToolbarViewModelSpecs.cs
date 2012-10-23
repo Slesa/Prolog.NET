@@ -7,7 +7,7 @@ using PrologWorkbench.Program.ViewModels;
 namespace PrologWorkbench.Program.Specs
 {
     [Subject(typeof(ProgramToolbarViewModel))]
-    internal class When_nothing_in__program_viewmodel_was_called : ProgramToolbarViewModelSpecBase
+    internal class When_nothing_in_program_viewmodel_was_called : ProgramToolbarViewModelSpecBase
     {
         It should_allow_new_program = () => Subject.NewCommand.CanExecute().ShouldBeTrue();
         It should_allow_load_program = () => Subject.LoadCommand.CanExecute().ShouldBeTrue();
@@ -54,6 +54,7 @@ namespace PrologWorkbench.Program.Specs
                                     Subject.CloseCommand.CanExecuteChanged += (s, a) => _closeChanged = true;
                                     Subject.SaveCommand.CanExecuteChanged += (s, a) => _saveChanged = true;
                                     Subject.SaveAsCommand.CanExecuteChanged += (s, a) => _saveAsChanged = true;
+                                    Subject.FilenameProvider = LoadFilenameProvider;
                                 };
 
         Because of = () => Subject.LoadCommand.Execute(); 
@@ -80,13 +81,24 @@ namespace PrologWorkbench.Program.Specs
     {
         Establish context = () =>
                                 {
-                                    Subject = new ProgramToolbarViewModel();
-                                    Subject.ProgramProvider = new ProgramProvider();
+                                    Subject = new ProgramToolbarViewModel {ProgramProvider = new ProgramProvider()};
                                     CalledProperties = new List<string>();
                                     Subject.PropertyChanged += (sender, args) => CalledProperties.Add(args.PropertyName);
                                 };
 
+        protected static IProvideFilename LoadFilenameProvider
+        {
+            get
+            {
+                var filenameProvider = An<IProvideFilename>();
+                filenameProvider.WhenToldTo(x => x.GetLoadFileName()).Return(LoadFilename);
+                return filenameProvider;
+            }
+        }
+
         protected static ProgramToolbarViewModel Subject;
         protected static List<string> CalledProperties { get; set; }
+        const string LoadFilename = @"Resources\test.prolog";
+        protected const string SaveFilename = @"Resources\tmp.prolog";
     }
 }

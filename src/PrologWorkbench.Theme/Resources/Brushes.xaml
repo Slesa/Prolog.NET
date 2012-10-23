@@ -12,5 +12,11 @@
 
     <SolidColorBrush x:Key="Brush.ContentControl.Background" Color="{StaticResource Color.DarkYellow}" />
 
+    <SolidColorBrush x:Key="Brush.Yellow" Color="{StaticResource Color.Yellow}" />
+    <SolidColorBrush x:Key="Brush.MidYellow" Color="{StaticResource Color.MidYellow}" />
+    <SolidColorBrush x:Key="Brush.DarkYellow" Color="{StaticResource Color.DarkYellow}"/>
+    <SolidColorBrush x:Key="Brush.Brown" Color="{StaticResource Color.Brown}"/>
+    <SolidColorBrush x:Key="Brush.DarkBrown" Color="{StaticResource Color.DarkBrown}" />
+
 </ResourceDictionary>
     

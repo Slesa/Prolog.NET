@@ -8,7 +8,6 @@ namespace PrologWorkbench.Program.ViewModels
         Procedure _selectedProcedure;
         Clause _selectedClause;
 
-
         public Clause SelectedClause
         {
             get { return _selectedClause; }

@@ -21,10 +21,10 @@
         </StackPanel>
         
         <DockPanel LastChildFill="True">
-        <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ToolsBarRegion" />
-        <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
+            <!--<ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ToolsBarRegion" />-->
+            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
             <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ProgramToolbarRegion" />
-        <ContentControl regions:RegionManager.RegionName="MainRegion" />
+            <ContentControl regions:RegionManager.RegionName="MainRegion" />
         </DockPanel>
         <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />

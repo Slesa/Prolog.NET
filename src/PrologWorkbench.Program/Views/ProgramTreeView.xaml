@@ -20,7 +20,7 @@
                         Executed="CommandMoveDown_Executed"
                         CanExecute="CommandMoveDown_CanExecute" />
     </UserControl.CommandBindings -->
-    <DockPanel>
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TextBox Text="Program"
                  DockPanel.Dock="Top"
                  Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />

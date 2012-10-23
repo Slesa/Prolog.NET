@@ -2,14 +2,16 @@
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
+using Microsoft.Practices.Unity;
 using PrologWorkbench.Core;
 
 namespace PrologWorkbench.Program.ViewModels
 {
     public class ProgramToolbarViewModel : NotificationObject
     {
-
+        [Dependency]
         public IProvideProgram ProgramProvider { get; set; }
+        [Dependency]
         public IProvideFilename FilenameProvider { get; set; }
 
         public ProgramToolbarViewModel()
@@ -42,6 +44,8 @@ namespace PrologWorkbench.Program.ViewModels
         {
             if (!EnsureSaved()) return;
             if (!Load()) return;
+            CloseCommand.RaiseCanExecuteChanged();
+            SaveAsCommand.RaiseCanExecuteChanged();
         }
 
         void OnClose()
@@ -64,7 +68,7 @@ namespace PrologWorkbench.Program.ViewModels
 
         bool CanSave()
         {
-            return ProgramProvider.Program != null && !string.IsNullOrEmpty(ProgramProvider.Program.FileName);
+            return ProgramProvider.Program != null && !string.IsNullOrEmpty(ProgramProvider.Program.FileName) && ProgramProvider.Program.IsModified;
         }
 
         void OnSaveAs()
