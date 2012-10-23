@@ -1,19 +1,20 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core;
 
 namespace PrologWorkbench.Program.ViewModels
 {
-    public class ProgramToolbarViewModel 
+    public class TitleBarViewModel 
     {
         [Dependency]
         public IProvideProgram ProgramProvider { get; set; }
         [Dependency]
         public IProvideFilename FilenameProvider { get; set; }
 
-        public ProgramToolbarViewModel()
+        public TitleBarViewModel()
         {
             NewCommand = new DelegateCommand(OnNew);
             LoadCommand = new DelegateCommand(OnLoad);
@@ -21,6 +22,16 @@ namespace PrologWorkbench.Program.ViewModels
             SaveCommand = new DelegateCommand(OnSave, CanSave);
             SaveAsCommand = new DelegateCommand(OnSaveAs, CanSaveAs);
             ExitCommand = new DelegateCommand(OnExit);
+        }
+
+        public string ApplicationName
+        {
+            get { return "Prolog.NET Workbench"; }
+        }
+
+        public string ApplicationIcon
+        {
+            get { return "/PrologWorkbench;component/Resources/ApplicationIcon.ico"; }
         }
 
         public DelegateCommand NewCommand { get; private set; }

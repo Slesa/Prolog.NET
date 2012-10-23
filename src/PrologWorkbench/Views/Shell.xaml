@@ -15,15 +15,9 @@
     
     <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="true" >
         
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="Auto">
-            <Image Width="48" Height="48" Source="/PrologWorkbench;component/Resources/ApplicationIcon.ico" />
-            <TextBlock Text="Prolog.NET Workbench" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
-        </StackPanel>
-        
         <DockPanel LastChildFill="True">
-            <!--<ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ToolsBarRegion" />-->
+            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
             <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
-            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="ProgramToolbarRegion" />
             <ContentControl regions:RegionManager.RegionName="MainRegion" />
         </DockPanel>
         <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">

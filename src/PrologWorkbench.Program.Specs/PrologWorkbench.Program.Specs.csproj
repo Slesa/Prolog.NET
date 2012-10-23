@@ -55,7 +55,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProgramToolbarViewModelSpecs.cs" />
+    <Compile Include="TitleBarViewModelSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

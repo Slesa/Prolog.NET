@@ -6,8 +6,8 @@ using PrologWorkbench.Program.ViewModels;
 
 namespace PrologWorkbench.Program.Specs
 {
-    [Subject(typeof(ProgramToolbarViewModel))]
-    internal class When_nothing_in_program_viewmodel_was_called : ProgramToolbarViewModelSpecBase
+    [Subject(typeof(TitleBarViewModel))]
+    internal class When_nothing_in_titlebar_viewmodel_was_called : TitleBarViewModelSpecBase
     {
         It should_allow_new_program = () => Subject.NewCommand.CanExecute().ShouldBeTrue();
         It should_allow_load_program = () => Subject.LoadCommand.CanExecute().ShouldBeTrue();
@@ -18,8 +18,8 @@ namespace PrologWorkbench.Program.Specs
     }
 
 
-    [Subject(typeof(ProgramToolbarViewModel))]
-    internal class When_calling_new_program : ProgramToolbarViewModelSpecBase
+    [Subject(typeof(TitleBarViewModel))]
+    internal class When_calling_new_program : TitleBarViewModelSpecBase
     {
         Establish context = () =>
                                 {
@@ -46,8 +46,8 @@ namespace PrologWorkbench.Program.Specs
     }
 
 
-    [Subject(typeof(ProgramToolbarViewModel))]
-    internal class When_calling_load_program : ProgramToolbarViewModelSpecBase
+    [Subject(typeof(TitleBarViewModel))]
+    internal class When_calling_load_program : TitleBarViewModelSpecBase
     {
         Establish context = () =>
                                 {
@@ -77,11 +77,11 @@ namespace PrologWorkbench.Program.Specs
 
 
 
-    internal class ProgramToolbarViewModelSpecBase : WithFakes
+    internal class TitleBarViewModelSpecBase : WithFakes
     {
         Establish context = () =>
                                 {
-                                    Subject = new ProgramToolbarViewModel {ProgramProvider = new ProgramProvider()};
+                                    Subject = new TitleBarViewModel {ProgramProvider = new ProgramProvider()};
                                     CalledProperties = new List<string>();
                                 };
 
@@ -95,7 +95,7 @@ namespace PrologWorkbench.Program.Specs
             }
         }
 
-        protected static ProgramToolbarViewModel Subject;
+        protected static TitleBarViewModel Subject;
         protected static List<string> CalledProperties { get; set; }
         const string LoadFilename = @"Resources\test.prolog";
         protected const string SaveFilename = @"Resources\tmp.prolog";

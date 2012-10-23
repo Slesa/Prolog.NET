@@ -88,11 +88,11 @@
     </Compile>
     <Compile Include="ViewModels\FilenameProvider.cs" />
     <Compile Include="ViewModels\IProvideFilename.cs" />
-    <Compile Include="ViewModels\ProgramToolbarViewModel.cs" />
+    <Compile Include="ViewModels\TitleBarViewModel.cs" />
     <Compile Include="ViewModels\ProgramViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
-    <Compile Include="Views\ProgramToolbarView.xaml.cs">
-      <DependentUpon>ProgramToolbarView.xaml</DependentUpon>
+    <Compile Include="Views\TitleBarView.xaml.cs">
+      <DependentUpon>TitleBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProgramView.xaml.cs">
       <DependentUpon>ProgramView.xaml</DependentUpon>
@@ -112,7 +112,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ProgramToolbarView.xaml">
+    <Page Include="Views\TitleBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,10 +20,10 @@ namespace PrologWorkbench.Program
         public void Initialize()
         {
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
-            _container.RegisterType<ProgramToolbarViewModel>();
+            _container.RegisterType<TitleBarViewModel>();
             _container.RegisterType<ProgramViewModel>();
             _container.RegisterType<StatusBarViewModel>();
-            _regionManager.RegisterViewWithRegion("ProgramToolbarRegion", typeof(ProgramToolbarView));
+            _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
             _regionManager.RegisterViewWithRegion("MainRegion", typeof (ProgramView));
             _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof (StatusBarView));
         }

@@ -4,9 +4,9 @@ using PrologWorkbench.Program.ViewModels;
 
 namespace PrologWorkbench.Program.Views
 {
-    public partial class ProgramToolbarView : UserControl
+    public partial class TitleBarView : UserControl
     {
-        public ProgramToolbarView(ProgramToolbarViewModel viewModel)
+        public TitleBarView(TitleBarViewModel viewModel)
         {
             InitializeComponent();
             if (!DesignerProperties.GetIsInDesignMode(this))
