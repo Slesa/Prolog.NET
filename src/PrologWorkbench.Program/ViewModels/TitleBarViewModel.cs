@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core;
+using PrologWorkbench.Program.Helpers;
 
 namespace PrologWorkbench.Program.ViewModels
 {

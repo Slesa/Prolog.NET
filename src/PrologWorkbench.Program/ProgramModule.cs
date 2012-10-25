@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using PrologWorkbench.Program.Helpers;
 using PrologWorkbench.Program.ViewModels;
 using PrologWorkbench.Program.Views;
 
@@ -26,6 +27,7 @@ namespace PrologWorkbench.Program
             _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
             _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof (StatusBarView));
             _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
+            _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
         }
     }
 }

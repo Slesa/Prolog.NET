@@ -1,4 +1,4 @@
-﻿namespace PrologWorkbench.Program.ViewModels
+﻿namespace PrologWorkbench.Program.Helpers
 {
     public interface IProvideFilename
     {

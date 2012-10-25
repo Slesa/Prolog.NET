@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using Microsoft.Win32;
+using PrologWorkbench.Program.ViewModels;
 
-namespace PrologWorkbench.Program.ViewModels
+namespace PrologWorkbench.Program.Helpers
 {
     public class FilenameProvider : IProvideFilename
     {

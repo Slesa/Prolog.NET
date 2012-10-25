@@ -18,6 +18,7 @@
             <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
             <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
             <ContentControl DockPanel.Dock="Left" regions:RegionManager.RegionName="ProgramRegion" />
+            <ContentControl DockPanel.Dock="Right" regions:RegionManager.RegionName="CommandRegion" />
         <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="New" Command="{Binding NewCommand}" />
             <Button Content="Open" Command="{Binding OpenCommand}" />
