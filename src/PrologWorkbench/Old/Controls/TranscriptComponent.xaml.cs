@@ -13,7 +13,7 @@ using Prolog.Workbench.Models;
 
 namespace Prolog.Workbench
 {
-    /// <summary>
+    /// <summary>F
     /// Interaction logic for TranscriptComponent.xaml
     /// </summary>
     public partial class TranscriptComponent : UserControl

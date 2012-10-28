@@ -1,7 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Events;
-using Prolog;
 
 namespace PrologWorkbench.Core.Events
 {
-    public class ProgramChangedEvent : CompositePresentationEvent<Program>{ }
+    public class ProgramChangedEvent : CompositePresentationEvent<Prolog.Program>{ }
 }

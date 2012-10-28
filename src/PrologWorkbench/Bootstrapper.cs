@@ -8,7 +8,7 @@ using Microsoft.Practices.ServiceLocation;
 using Prolog.Workbench.Helpers;
 using Prolog.Workbench.Views;
 using PrologWorkbench.Core;
-using PrologWorkbench.Program;
+using PrologWorkbench.Editor;
 
 namespace Prolog.Workbench
 {
@@ -48,11 +48,17 @@ namespace Prolog.Workbench
 
         protected override void ConfigureModuleCatalog()
         {
-            var programModule = typeof (ProgramModule);
+            var coreModule = typeof (CoreModule);
             ModuleCatalog.AddModule(new ModuleInfo
                                         {
-                                            ModuleName = programModule.Name,
-                                            ModuleType = programModule.AssemblyQualifiedName
+                                            ModuleName = coreModule.Name,
+                                            ModuleType = coreModule.AssemblyQualifiedName
+                                        });
+            var editorModule = typeof (EditorModule);
+            ModuleCatalog.AddModule(new ModuleInfo
+                                        {
+                                            ModuleName = editorModule.Name,
+                                            ModuleType = editorModule.AssemblyQualifiedName
                                         });
         }
     }
