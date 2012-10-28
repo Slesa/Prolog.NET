@@ -51,10 +51,10 @@
   <ItemGroup>
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
     <Compile Include="CoreModule.cs" />
-    <Compile Include="Events\ProgramChangedEvent.cs" />
     <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />
     <Compile Include="Contracts\IProvideTranscript.cs" />
+    <Compile Include="Models\MachineProvider.cs" />
     <Compile Include="Models\ProgramAccessor.cs" />
     <Compile Include="Models\ProgramProvider.cs" />
     <Compile Include="Contracts\IProvideProgram.cs" />

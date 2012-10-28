@@ -2,6 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="PrologWorkbench.Editor.Views.ProgramView"
              >
+	<UserControl.Resources>
+		<Style x:Key="HeaderedContentControlStyle1" TargetType="{x:Type HeaderedContentControl}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+						<DockPanel>
+							<ContentPresenter ContentSource="Header" DockPanel.Dock="Top"/>
+							<ContentPresenter/>
+						</DockPanel>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
     
     <!-- UserControl.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Cut"
@@ -20,7 +34,7 @@
                         Executed="CommandMoveDown_Executed"
                         CanExecute="CommandMoveDown_CanExecute" />
     </UserControl.CommandBindings -->
-    <HeaderedContentControl Header="{Binding Title}" Background="{DynamicResource Brush.ContentControl.Background}">
+    <HeaderedContentControl Header="{Binding Title}" Background="{DynamicResource Brush.ContentControl.Background}" Style="{DynamicResource HeaderedContentControlStyle1}">
         <TreeView DataContext="{Binding Program}" ItemsSource="{Binding Procedures}" >
                   <!-- MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged" -->
             <TreeView.ItemTemplate>

@@ -1,21 +1,23 @@
-﻿using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.ViewModel;
+﻿using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
-using PrologWorkbench.Core.Events;
+using PrologWorkbench.Core.Contracts;
 
 namespace PrologWorkbench.Editor.ViewModels
 {
     public class ProgramViewModel : NotificationObject
     {
-        public ProgramViewModel(IEventAggregator eventAggregator)
+        readonly IProvideProgram _programProvider;
+
+        public ProgramViewModel(IProvideProgram programProvider)
         {
-            eventAggregator.GetEvent<ProgramChangedEvent>().Subscribe(x => Program = x);
+            _programProvider = programProvider;
+            _programProvider.ProgramChanged += (s, e) => Program = e.Program;
         }
 
         public string Title { get { return "Program"; } }
 
-        Prolog.Program _program;
-        public Prolog.Program Program
+        Program _program;
+        public Program Program
         {
             get { return _program; }
             set

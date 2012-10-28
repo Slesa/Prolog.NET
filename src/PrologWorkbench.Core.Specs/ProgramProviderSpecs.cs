@@ -16,48 +16,76 @@ namespace PrologWorkbench.Core.Specs
         static Program _program;
     }
 
+
     [Subject(typeof(ProgramProvider))]
-    internal class When_resetting_program_file : ProgramProviderSaveSpecBase
+    internal class When_setting_program_file : ProgramProviderSpecBase
     {
-        Because of = () => Subject.Reset();
-        It should_reset_program = () => Subject.Program.IsModified.ShouldBeFalse();
+        Establish context = () =>
+            {
+                _program = new Program();
+                Subject.ProgramChanged += (s, e) =>
+                    {
+                        _handlerCalled = true;
+                        _catchedProgram = e.Program;
+                    };
+            };
+        Because of = () => Subject.Program = _program;
+        It should_set_new_program = () => Subject.Program.ShouldBeTheSameAs(_program);
+        It should_call_handler = () => _handlerCalled.ShouldBeTrue();
+        It should_call_with_new_program = () => _catchedProgram.ShouldBeTheSameAs(_program);
+        static Program _program;
+        static bool _handlerCalled;
+        static Program _catchedProgram;
     }
 
 
-    internal class ProgramProviderSaveSpecBase : ProgramProviderSpecBase
+    [Subject(typeof(ProgramProvider))]
+    internal class When_resetting_empty_program_file : ProgramProviderSpecBase
     {
         Establish context = () =>
-                                {
-                                    //Subject.Load(SourceFilename);
-                                    SetModified();
-                                    //Subject.Program.IsModified = true;
-                                    //Program.GetProperty("IsModified").SetValue(Subject, true, null);
-                                };
+            {
+                Subject.ProgramChanged += (s,e) => _handlerCalled = true;
+            };
+        Because of = () => Subject.Reset();
+        It should_reset_program = () => Subject.Program.ShouldNotBeNull();
+        It should_call_handler = () => _handlerCalled.ShouldBeTrue();
+        static Program _program;
+        static bool _handlerCalled;
+    }
 
-        Cleanup shutdown = () =>
-                               {
-                                   if (System.IO.File.Exists(DestinationFilename))
-                                       System.IO.File.Delete(DestinationFilename);
-                               };
-        static void SetModified()
+
+    [Subject(typeof(ProgramProvider))]
+    internal class When_resetting_program_file : ProgramProviderSpecBase
+    {
+        Establish context = () =>
+            {
+                _program = new Program();
+                SetModified(_program);
+                Subject.Program = _program;
+                Subject.ProgramChanged += (s,e) => _handlerCalled = true;
+            };
+        Because of = () => Subject.Reset();
+        It should_reset_program = () => Subject.Program.IsModified.ShouldBeFalse();
+        It should_create_new_program = () => Subject.Program.ShouldNotEqual(_program);
+        It should_call_handler = () => _handlerCalled.ShouldBeTrue();
+        static Program _program;
+        static bool _handlerCalled;
+    }
+
+
+
+    internal class ProgramProviderSpecBase : WithSubject<ProgramProvider>
+    {
+
+        protected static void SetModified(Program program)
         {
-            Type t = Subject.Program.GetType();
+            var t = program.GetType();
             //t.GetProperty("IsModified", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             t.InvokeMember("IsModified",
                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty |
-                           BindingFlags.Instance, null, Subject.Program, new object[] {true});
+                           BindingFlags.Instance, null, program, new object[] { true });
 
         }
-    }
-
-
-
-    internal class ProgramProviderSpecBase : WithFakes
-    {
-        Establish context = () => Subject = new ProgramProvider();
-
         protected const string SourceFilename = @"Resources\test.prolog";
-        protected const string DestinationFilename = @"Resources\tmp.prolog";
-        protected static IProvideProgram Subject;
     }
 }

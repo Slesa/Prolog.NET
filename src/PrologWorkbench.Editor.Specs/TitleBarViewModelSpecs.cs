@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Machine.Fakes;
 using Machine.Specifications;
-using PrologWorkbench.Core;
+using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor.Helpers;
 using PrologWorkbench.Editor.ViewModels;
@@ -57,6 +57,7 @@ namespace PrologWorkbench.Editor.Specs
                                     Subject.SaveCommand.CanExecuteChanged += (s, a) => _saveChanged = true;
                                     Subject.SaveAsCommand.CanExecuteChanged += (s, a) => _saveAsChanged = true;
                                     Subject.FilenameProvider = LoadFilenameProvider;
+                                    Subject.ProgramAccessor = An<ILoadOrSaveProgram>();
                                 };
 
         Because of = () => Subject.LoadCommand.Execute(); 

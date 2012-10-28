@@ -121,7 +121,7 @@ namespace PrologWorkbench.Editor.ViewModels
         {
             var filename = FilenameProvider.GetLoadFileName();
             if (string.IsNullOrEmpty(filename)) return false;
-            ProgramAccessor.Load(filename);
+            ProgramProvider.Program = ProgramAccessor.Load(filename);
             return true;
         }
 
@@ -130,14 +130,14 @@ namespace PrologWorkbench.Editor.ViewModels
             if (ProgramProvider.Program == null) return true;
             return string.IsNullOrEmpty(ProgramProvider.Program.FileName) 
                 ? SaveAs()
-                : ProgramAccessor.Save(ProgramProvider.Program.FileName);
+                : ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program);
         }
 
         bool SaveAs()
         {
             if (ProgramProvider.Program == null) return true;
             var filename = FilenameProvider.GetSaveFileName("Save program as...");
-            return !string.IsNullOrEmpty(filename) && ProgramAccessor.Save(filename);
+            return !string.IsNullOrEmpty(filename) && ProgramAccessor.Save(filename, ProgramProvider.Program);
         }
     }
 }

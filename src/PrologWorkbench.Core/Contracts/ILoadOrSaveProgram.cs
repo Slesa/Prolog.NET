@@ -1,9 +1,10 @@
-﻿namespace PrologWorkbench.Core.Contracts
+﻿using Prolog;
+
+namespace PrologWorkbench.Core.Contracts
 {
     public interface ILoadOrSaveProgram
     {
-        bool Load(string fileName);
-        bool Save(string fileName);
+        Program Load(string fileName);
+        bool Save(string fileName, Program program);
     }
-
 }
