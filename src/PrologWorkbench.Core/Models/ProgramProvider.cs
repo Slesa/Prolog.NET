@@ -2,10 +2,11 @@
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
 using Prolog;
+using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Events;
 using log4net;
 
-namespace PrologWorkbench.Core
+namespace PrologWorkbench.Core.Models
 {
     public class ProgramProvider : IProvideProgram
     {

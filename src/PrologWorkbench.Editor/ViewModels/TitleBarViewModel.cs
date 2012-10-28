@@ -2,13 +2,15 @@
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
-using PrologWorkbench.Core;
+using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Editor.Helpers;
 
 namespace PrologWorkbench.Editor.ViewModels
 {
     public class TitleBarViewModel 
     {
+        [Dependency]
+        public ILoadOrSaveProgram ProgramAccessor { get; set; }
         [Dependency]
         public IProvideProgram ProgramProvider { get; set; }
         [Dependency]
@@ -119,7 +121,7 @@ namespace PrologWorkbench.Editor.ViewModels
         {
             var filename = FilenameProvider.GetLoadFileName();
             if (string.IsNullOrEmpty(filename)) return false;
-            ProgramProvider.Load(filename);
+            ProgramAccessor.Load(filename);
             return true;
         }
 
@@ -127,15 +129,15 @@ namespace PrologWorkbench.Editor.ViewModels
         {
             if (ProgramProvider.Program == null) return true;
             return string.IsNullOrEmpty(ProgramProvider.Program.FileName) 
-                ? SaveAs() 
-                : ProgramProvider.Save(ProgramProvider.Program.FileName);
+                ? SaveAs()
+                : ProgramAccessor.Save(ProgramProvider.Program.FileName);
         }
 
         bool SaveAs()
         {
             if (ProgramProvider.Program == null) return true;
             var filename = FilenameProvider.GetSaveFileName("Save program as...");
-            return !string.IsNullOrEmpty(filename) && ProgramProvider.Save(filename);
+            return !string.IsNullOrEmpty(filename) && ProgramAccessor.Save(filename);
         }
     }
 }

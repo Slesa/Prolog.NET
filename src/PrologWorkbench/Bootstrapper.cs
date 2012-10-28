@@ -8,6 +8,8 @@ using Microsoft.Practices.ServiceLocation;
 using Prolog.Workbench.Helpers;
 using Prolog.Workbench.Views;
 using PrologWorkbench.Core;
+using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor;
 
 namespace Prolog.Workbench

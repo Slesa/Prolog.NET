@@ -2,6 +2,7 @@
 using Machine.Fakes;
 using Machine.Specifications;
 using PrologWorkbench.Core;
+using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor.Helpers;
 using PrologWorkbench.Editor.ViewModels;
 
