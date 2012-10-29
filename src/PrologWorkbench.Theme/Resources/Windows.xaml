@@ -8,8 +8,8 @@
 
     <Style
         x:Key="Window.Standard" TargetType="{x:Type Window}">
-        <Setter Property="Foreground" Value="{DynamicResource Colors.ForegroundColor}" />
-        <Setter Property="Background" Value="{DynamicResource Colors.Backgroundcolor}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.ForegroundColor}" />
+        <Setter Property="Background" Value="{DynamicResource Color.Backgroundcolor}" />
         <!-- Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate

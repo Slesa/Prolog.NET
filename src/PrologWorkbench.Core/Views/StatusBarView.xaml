@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
-    <ContentControl Background="{DynamicResource Brush.ContentControl.Background}">
-        <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{DynamicResource Brush.ContentControl.Background}">
-            <TextBlock Text="{Binding Message}" />
+
+        <StackPanel Style="{DynamicResource Style.StatusBar.StackPanel}">
+            <TextBlock Text="{Binding Message}" Style="{DynamicResource Style.StatusBar.TextBlock}" />
         </StackPanel>
-    </ContentControl>
+
 </UserControl>

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" xmlns:local="clr-namespace:Prolog.Workbench"
+        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" 
+		xmlns:local="clr-namespace:Prolog.Workbench"
         xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         mc:Ignorable="d"
         d:DesignHeight="300" d:DesignWidth="400"
@@ -13,20 +14,13 @@
         <ViewModels:ShellViewModel />
     </Window.DataContext>
     
-    <DockPanel Background="{DynamicResource Brush.Background}" LastChildFill="true" >
+    <DockPanel Style="{DynamicResource Style.Shell.DockPanel}" LastChildFill="true" >
+
+            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
         
             <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
-            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
             <ContentControl DockPanel.Dock="Left" regions:RegionManager.RegionName="ProgramRegion" />
             <ContentControl DockPanel.Dock="Right" regions:RegionManager.RegionName="CommandRegion" />
-        <!-- StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="New" Command="{Binding NewCommand}" />
-            <Button Content="Open" Command="{Binding OpenCommand}" />
-            <Button Content="Save" Command="{Binding SaveCommand}" />
-            <Button Content="Save as" Command="{Binding SaveAsCommand}" />
-            <Button Content="Close" Command="{Binding CloseCommand}" />
-            <Button Content="Exit" Command="{Binding ExitCommand}" />
-        </StackPanel-->
         
         <!-- TabControl>
             <TabItem Header="Transcript">

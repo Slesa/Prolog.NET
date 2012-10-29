@@ -4,7 +4,6 @@
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Brushes.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/ContentControls.xaml" />
-        <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Windows.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>
