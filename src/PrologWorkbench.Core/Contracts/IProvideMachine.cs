@@ -16,7 +16,7 @@ namespace PrologWorkbench.Core.Contracts
 
     public interface IProvideMachine
     {
-        PrologMachine Machine { get; }
+        PrologMachine Machine { get; set; }
         void Reset();
         event MachineChangedEventHandler MachineChanged;
     }
