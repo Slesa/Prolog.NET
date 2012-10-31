@@ -1,4 +1,5 @@
-﻿using Machine.Fakes;
+﻿using System.Linq;
+using Machine.Fakes;
 using Machine.Specifications;
 using Prolog;
 using Prolog.Code;
@@ -18,15 +19,15 @@ namespace PrologWorkbench.Core.Specs
     [Subject(typeof(MachineProvider))]
     internal class When_setting_machine : MachineProviderSpecBase
     {
-        Establish context = () =>
-                            {
-                                _machine = CreateMachine();
-                                Subject.MachineChanged += (s, e) =>
-                                                          {
-                                                              _handlerCalled = true;
-                                                              _catchedMachine = e.Machine;
-                                                          };
-                            };
+        private Establish context = () =>
+                                    {
+                                        _machine = CreateMachine();
+                                        Subject.MachineChanged += (s, e) =>
+                                                                  {
+                                                                      _handlerCalled = true;
+                                                                      _catchedMachine = e.Machine;
+                                                                  };
+                                    };
         Because of = () => Subject.Machine = _machine;
         It should_set_new_program = () => Subject.Machine.ShouldBeTheSameAs(_machine);
         It should_call_handler = () => _handlerCalled.ShouldBeTrue();
@@ -37,12 +38,29 @@ namespace PrologWorkbench.Core.Specs
     }
 
 
+    [Subject(typeof(ProgramProvider))]
+    internal class When_resetting_empty_machine : MachineProviderSpecBase
+    {
+        private Establish context = () =>
+                                    {
+                                        Subject.Machine = CreateMachine();
+                                        Subject.MachineChanged += (s, e) => _handlerCalled = true;
+                                    };
+        Because of = () => Subject.Reset();
+        It should_reset_program = () => Subject.Machine.ShouldBeNull();
+        It should_call_handler = () => _handlerCalled.ShouldBeTrue();
+        static Program _program;
+        static bool _handlerCalled;
+    }
+
+
+
     internal class MachineProviderSpecBase : WithSubject<MachineProvider>
     {
         protected static PrologMachine CreateMachine() 
         {
-                    //var query = new Query(codeSentence);
-            return PrologMachine.Create(An<Program>(), An<Query>()); //AppState.Program, query);
+            var codeSentence = Parser.Parse("pragma(optimize,true).").FirstOrDefault();
+            return PrologMachine.Create(An<Program>(), new Query(codeSentence)); //AppState.Program, query);
         }
         /*
         protected static void SetModified(Program program)

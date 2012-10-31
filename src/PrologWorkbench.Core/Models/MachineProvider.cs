@@ -35,6 +35,7 @@ namespace PrologWorkbench.Core.Models
 
         public void Reset()
         {
+            Machine = null;
         }
 
         public event MachineChangedEventHandler MachineChanged;
