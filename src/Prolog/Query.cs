@@ -11,7 +11,7 @@ namespace Prolog
     /// <summary>
     /// Represents a query to be evaluated by a <see cref="PrologMachine"/>.
     /// </summary>
-    public sealed class Query
+    public class Query
     {
         private WamInstructionStream _wamInstructionStream;
 

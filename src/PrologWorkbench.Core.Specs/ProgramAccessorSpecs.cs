@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Machine.Fakes;
 using Machine.Specifications;
 using Prolog;

@@ -9,7 +9,7 @@ namespace PrologWorkbench.Core.Contracts
         {
             Machine = machine;
         }
-        public PrologMachine Machine { get; private set; }
+        public PrologMachine Machine { get; set; }
     }
 
     public delegate void MachineChangedEventHandler(object sender, MachineChangedEventArgs e);

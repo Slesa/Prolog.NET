@@ -11,7 +11,7 @@ using Prolog.Code;
 
 namespace Prolog
 {
-    public sealed class Program : INotifyPropertyChanged
+    public class Program : INotifyPropertyChanged
     {
         static readonly string _pragmaOptimizeFunctorName = "optimize";
         static readonly CodeFunctor _pragmaOptimizeFunctor = new CodeFunctor(PragmaOptimizeFunctorName, 0);

@@ -9,11 +9,20 @@ namespace PrologWorkbench.Core.Models
         public PrologMachine Machine
         {
             get { return _machine; }
-            private set
+            set
             {
+                if (Machine == value) return;
                 _machine = value;
                 OnMachineChanged();
+                if (_machine != null)
+                {
+                    _machine.ExecutionComplete += OnMachineExecutionComplete;
+                }
             }
+        }
+
+        void OnMachineExecutionComplete(object sender, PrologQueryEventArgs e)
+        {
         }
 
         void OnMachineChanged()

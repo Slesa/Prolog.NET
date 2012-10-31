@@ -1,9 +1,7 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Machine.Fakes;
 using Machine.Specifications;
 using Prolog;
-using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 
 namespace PrologWorkbench.Core.Specs
@@ -76,7 +74,6 @@ namespace PrologWorkbench.Core.Specs
 
     internal class ProgramProviderSpecBase : WithSubject<ProgramProvider>
     {
-
         protected static void SetModified(Program program)
         {
             var t = program.GetType();
