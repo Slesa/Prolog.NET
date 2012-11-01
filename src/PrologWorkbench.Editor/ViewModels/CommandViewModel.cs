@@ -24,6 +24,8 @@ namespace PrologWorkbench.Editor.ViewModels
             DebugCommand = new DelegateCommand(OnDebug);
         }
 
+        public string Title { get { return Resources.Strings.CommandViewModel_Title; } }
+
         public DelegateCommand ExecuteCommand { get; private set; }
         public DelegateCommand DebugCommand { get; private set; }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Machine.Fakes;
 using Machine.Specifications;
+using Microsoft.Practices.Prism.Events;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor.Helpers;
@@ -84,7 +85,7 @@ namespace PrologWorkbench.Editor.Specs
     {
         Establish context = () =>
                                 {
-                                    Subject = new TitleBarViewModel {ProgramProvider = new ProgramProvider()};
+                                    Subject = new TitleBarViewModel(An<IEventAggregator>()) {ProgramProvider = new ProgramProvider()};
                                     CalledProperties = new List<string>();
                                 };
 

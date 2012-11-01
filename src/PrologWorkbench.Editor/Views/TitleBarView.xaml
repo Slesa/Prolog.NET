@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:strings="clr-namespace:PrologWorkbench.Editor.Resources"
              mc:Ignorable="d" >
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,22 +21,28 @@
     </UserControl.Resources>
 
 
-        <StackPanel Style="{DynamicResource Style.TitleBar.StackPanel}">
+	<Border BorderBrush="Black" BorderThickness="3" CornerRadius="20" Margin="10" Background="{StaticResource Brush.DarkYellow}">
+        <StackPanel Style="{DynamicResource Style.TitleBar.StackPanel}" >
 
-            <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" Background="{DynamicResource Brush.Brown}">
+			<Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
+            <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" >
                 <Image Width="48" Height="48" Source="{Binding ApplicationIcon}" Margin="10,0,10,0" />
-                <TextBlock Text="{Binding ApplicationName}" Foreground="{DynamicResource Brush.Foreground}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBlock Text="{Binding ApplicationName}" Foreground="{DynamicResource Brush.Foreground}" FontSize="40" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0" />
             </StackPanel>
+			</Border>
 
-            <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" Background="{DynamicResource Brush.Brown}" HorizontalAlignment="Stretch">
-                <Button Margin="3" x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="New program"/>
-                <Button Margin="3" x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="Load program..."/>
-                <Button Margin="3" x:Name="Close" Command="{Binding CloseCommand}" Content="{StaticResource PngFileClose}" ToolTip="Close current program"/>
-                <Button Margin="3" x:Name="Save" Command="{Binding SaveCommand}" Content="{StaticResource PngFileSave}" ToolTip="Save current program"  />
-                <Button Margin="3" x:Name="SaveAs" Command="{Binding SaveAsCommand}" Content="{StaticResource PngFileSaveAs}" ToolTip="Save program as..."  />
-                <Button Margin="3" x:Name="Exit" Command="{Binding ExitCommand}" Content="{StaticResource PngExit}" ToolTip="Quit application"/>
-            </StackPanel>
+			<Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
+                <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" HorizontalAlignment="Stretch">
+                    <Button Margin="3" x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="{x:Static strings:Strings.TitleBarView_NewProgram}"/>
+                    <Button Margin="3" x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="{x:Static strings:Strings.TitleBarView_LoadProgram}"/>
+                    <Button Margin="3" x:Name="Close" Command="{Binding CloseCommand}" Content="{StaticResource PngFileClose}" ToolTip="{x:Static strings:Strings.TitleBarView_CloseProgram}"/>
+                    <Button Margin="3" x:Name="Save" Command="{Binding SaveCommand}" Content="{StaticResource PngFileSave}" ToolTip="{x:Static strings:Strings.TitleBarView_SaveProgram}"  />
+                    <Button Margin="3" x:Name="SaveAs" Command="{Binding SaveAsCommand}" Content="{StaticResource PngFileSaveAs}" ToolTip="{x:Static strings:Strings.TitleBarView_SaveProgramAs}"  />
+                    <Button Margin="3" x:Name="Exit" Command="{Binding ExitCommand}" Content="{StaticResource PngExit}" ToolTip="{x:Static strings:Strings.TitleBarView_Exit}"/>
+                </StackPanel>
+			</Border>
 
         </StackPanel>
+	</Border>
 
 </UserControl>

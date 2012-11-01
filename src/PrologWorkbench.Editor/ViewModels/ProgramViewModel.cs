@@ -14,7 +14,7 @@ namespace PrologWorkbench.Editor.ViewModels
             _programProvider.ProgramChanged += (s, e) => Program = e.Program;
         }
 
-        public string Title { get { return "Program"; } }
+        public string Title { get { return Resources.Strings.ProgramViewModel_Title; } }
 
         Program _program;
         public Program Program

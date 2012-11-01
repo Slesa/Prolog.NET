@@ -9,6 +9,8 @@ namespace PrologWorkbench.Editor.ViewModels
         [Dependency]
         public IProvideTranscript TranscriptProvider { get; set; }
 
+        public string Title { get { return Resources.Strings.TranscriptViewModel_Title; } }
+
         public Transcript Transcript { get { return TranscriptProvider.Transcript; } } 
     }
 }

@@ -1,14 +1,18 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Events;
 using PrologWorkbench.Editor.Helpers;
 
 namespace PrologWorkbench.Editor.ViewModels
 {
     public class TitleBarViewModel 
     {
+        readonly IEventAggregator _eventAggregator;
+
         [Dependency]
         public ILoadOrSaveProgram ProgramAccessor { get; set; }
         [Dependency]
@@ -16,8 +20,9 @@ namespace PrologWorkbench.Editor.ViewModels
         [Dependency]
         public IProvideFilename FilenameProvider { get; set; }
 
-        public TitleBarViewModel()
+        public TitleBarViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             NewCommand = new DelegateCommand(OnNew);
             LoadCommand = new DelegateCommand(OnLoad);
             CloseCommand = new DelegateCommand(OnClose, CanClose);
@@ -50,6 +55,7 @@ namespace PrologWorkbench.Editor.ViewModels
             ProgramProvider.Reset();
             CloseCommand.RaiseCanExecuteChanged();
             SaveAsCommand.RaiseCanExecuteChanged();
+            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(Resources.Strings.TitleBarViewModel_CreatedNewProgram);
         }
 
         void OnLoad()
@@ -58,6 +64,7 @@ namespace PrologWorkbench.Editor.ViewModels
             if (!Load()) return;
             CloseCommand.RaiseCanExecuteChanged();
             SaveAsCommand.RaiseCanExecuteChanged();
+
         }
 
         void OnClose()
@@ -111,7 +118,7 @@ namespace PrologWorkbench.Editor.ViewModels
             {
                 fileName = Path.GetFileName(ProgramProvider.Program.FileName);
             }
-            var title = string.Format("Do you want to save {0}?", fileName);
+            var title = string.Format(Resources.Strings.TitleBarViewModel_DoYouWantToSave, fileName);
             var filename = FilenameProvider.GetSaveFileName(title, fileName);
 
             return !string.IsNullOrEmpty(filename) && Save();
@@ -122,22 +129,36 @@ namespace PrologWorkbench.Editor.ViewModels
             var filename = FilenameProvider.GetLoadFileName();
             if (string.IsNullOrEmpty(filename)) return false;
             ProgramProvider.Program = ProgramAccessor.Load(filename);
+            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_LoadedProgram, filename));
             return true;
         }
 
         bool Save()
         {
             if (ProgramProvider.Program == null) return true;
-            return string.IsNullOrEmpty(ProgramProvider.Program.FileName) 
-                ? SaveAs()
-                : ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program);
+            if (string.IsNullOrEmpty(ProgramProvider.Program.FileName))
+                return SaveAs();
+            if( ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program))
+            {
+                _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgram, ProgramProvider.Program.FileName));
+                return true;
+            }
+            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
+            return false;
         }
 
         bool SaveAs()
         {
             if (ProgramProvider.Program == null) return true;
-            var filename = FilenameProvider.GetSaveFileName("Save program as...");
-            return !string.IsNullOrEmpty(filename) && ProgramAccessor.Save(filename, ProgramProvider.Program);
+            var filename = FilenameProvider.GetSaveFileName(Resources.Strings.TitleBarViewModel_SaveProgramAs);
+            if( !string.IsNullOrEmpty(filename)) return false;
+            if (ProgramAccessor.Save(filename, ProgramProvider.Program))
+            {
+                _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgramAs, ProgramProvider.Program.FileName));
+                return true;
+            }
+            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
+            return false;
         }
     }
 }

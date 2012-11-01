@@ -117,13 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommandViewModel_Title" xml:space="preserve">
+    <value>Kommandos</value>
+  </data>
   <data name="MessageDuplicateClause" xml:space="preserve">
     <value>Fact/Rule doppelt angegeben.</value>
   </data>
   <data name="MessageUnrecognizedInput" xml:space="preserve">
     <value>Unbekannte Eingabe.</value>
   </data>
+  <data name="ProgramViewModel_Title" xml:space="preserve">
+    <value>Programm</value>
+  </data>
   <data name="ResponseSuccess" xml:space="preserve">
     <value>Erfolgreich</value>
+  </data>
+  <data name="TitleBarViewModel_CouldNotSaveProgram" xml:space="preserve">
+    <value>Konnte Programm {0} nicht speichern</value>
+  </data>
+  <data name="TitleBarViewModel_CreatedNewProgram" xml:space="preserve">
+    <value>Neues Programm erzeugt</value>
+  </data>
+  <data name="TitleBarViewModel_DoYouWantToSave" xml:space="preserve">
+    <value>Möchten Sie {0} sichern?</value>
+  </data>
+  <data name="TitleBarViewModel_LoadedProgram" xml:space="preserve">
+    <value>Programm {0} geladen</value>
+  </data>
+  <data name="TitleBarViewModel_SavedProgram" xml:space="preserve">
+    <value>Programm {0} gespeichert</value>
+  </data>
+  <data name="TitleBarViewModel_SavedProgramAs" xml:space="preserve">
+    <value>Programm unter {0} gespeichert</value>
+  </data>
+  <data name="TitleBarViewModel_SaveProgramAs" xml:space="preserve">
+    <value>Program speichern unter...</value>
+  </data>
+  <data name="TitleBarView_CloseProgram" xml:space="preserve">
+    <value>Schließe aktuelles Programm</value>
+  </data>
+  <data name="TitleBarView_Exit" xml:space="preserve">
+    <value>Workbench beenden</value>
+  </data>
+  <data name="TitleBarView_LoadProgram" xml:space="preserve">
+    <value>Lade Programm...</value>
+  </data>
+  <data name="TitleBarView_NewProgram" xml:space="preserve">
+    <value>Neues Programm</value>
+  </data>
+  <data name="TitleBarView_SaveProgram" xml:space="preserve">
+    <value>Aktuelles Programm speichern</value>
+  </data>
+  <data name="TitleBarView_SaveProgramAs" xml:space="preserve">
+    <value>Aktuelles Programm speichern unter...</value>
+  </data>
+  <data name="TranscriptViewModel_Title" xml:space="preserve">
+    <value>Transkript</value>
   </data>
 </root>

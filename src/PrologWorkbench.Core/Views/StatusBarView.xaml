@@ -6,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
 
-        <StackPanel Style="{DynamicResource Style.StatusBar.StackPanel}">
-            <TextBlock Text="{Binding Message}" Style="{DynamicResource Style.StatusBar.TextBlock}" />
-        </StackPanel>
+	<Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="10" Background="{StaticResource Brush.DarkYellow}">
+            <TextBlock Margin="10,5,5,5" Text="{Binding Message}" Style="{DynamicResource Style.StatusBar.TextBlock}" />
+	</Border>
 
 </UserControl>
