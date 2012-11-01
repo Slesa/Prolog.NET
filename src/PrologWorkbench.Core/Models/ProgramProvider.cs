@@ -5,6 +5,11 @@ namespace PrologWorkbench.Core.Models
 {
     public class ProgramProvider : IProvideProgram
     {
+        public ProgramProvider()
+        {
+            Reset();
+        }
+
         Program _program;
         public Program Program
         {

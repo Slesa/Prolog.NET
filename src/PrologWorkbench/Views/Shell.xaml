@@ -16,11 +16,23 @@
     
     <DockPanel Style="{DynamicResource Style.Shell.DockPanel}" LastChildFill="true" >
 
-            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
+        <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
         
-            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
-            <ContentControl DockPanel.Dock="Left" regions:RegionManager.RegionName="ProgramRegion" />
-            <ContentControl DockPanel.Dock="Right" regions:RegionManager.RegionName="CommandRegion" />
+        <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <ContentControl Grid.RowSpan="2" regions:RegionManager.RegionName="ProgramRegion" />
+            <ContentControl Grid.Column="1" Grid.Row="0" regions:RegionManager.RegionName="TranscriptRegion" />
+            <ContentControl Grid.Column="1" Grid.Row="1" regions:RegionManager.RegionName="CommandRegion" />
+        </Grid>
         
         <!-- TabControl>
             <TabItem Header="Transcript">

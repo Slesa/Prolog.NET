@@ -10,7 +10,7 @@ namespace PrologWorkbench.Core.Specs
     internal class When_initialy_using_program_provider : ProgramProviderSpecBase
     {
         Because of = () => _program = Subject.Program;
-        It should_have_no_program = () => _program.ShouldBeNull();
+        It should_have_no_program = () => _program.ShouldNotBeNull();
         static Program _program;
     }
 
@@ -72,8 +72,10 @@ namespace PrologWorkbench.Core.Specs
 
 
 
-    internal class ProgramProviderSpecBase : WithSubject<ProgramProvider>
+    internal class ProgramProviderSpecBase : WithFakes
     {
+        Establish context = () => Subject = new ProgramProvider();
+
         protected static void SetModified(Program program)
         {
             var t = program.GetType();
@@ -83,6 +85,8 @@ namespace PrologWorkbench.Core.Specs
                            BindingFlags.Instance, null, program, new object[] { true });
 
         }
+
         protected const string SourceFilename = @"Resources\test.prolog";
+        protected static ProgramProvider Subject;
     }
 }

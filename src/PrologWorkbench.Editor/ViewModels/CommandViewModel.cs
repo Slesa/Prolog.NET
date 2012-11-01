@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using Prolog;
 using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Models;
 
 namespace PrologWorkbench.Editor.ViewModels
 {
@@ -14,6 +15,8 @@ namespace PrologWorkbench.Editor.ViewModels
         public IProvideMachine MachineProvider { get; set; }
         [Dependency]
         public IProvideProgram ProgramProvider { get; set; }
+        [Dependency]
+        public IProvideTranscript TranscriptProvider { get; set; }
 
         public CommandViewModel()
         {
@@ -53,17 +56,16 @@ namespace PrologWorkbench.Editor.ViewModels
             input = input.Trim();
             if (string.IsNullOrEmpty(input)) return;
 
+            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
 
             /*
-            AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
-
             var selectedClause = ctrlProgram.SelectedClause;
             */
 
             var codeSentences = Parser.Parse(input);
             if (codeSentences == null || codeSentences.Length == 0)
             {
-                //AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.MessageUnrecognizedInput);
+                TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageUnrecognizedInput);
                 return;
             }
 
@@ -89,14 +91,14 @@ namespace PrologWorkbench.Editor.ViewModels
                     }
                     else*/
                     {
-                        if (MachineProvider.Machine.Program.Contains(codeSentence))
+                        if (ProgramProvider.Program.Contains(codeSentence))
                         {
-                            //AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.MessageDuplicateClause);
+                            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageDuplicateClause);
                         }
                         else
                         {
-                            MachineProvider.Machine.Program.Add(codeSentence);
-                            //AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.ResponseSuccess);
+                            ProgramProvider.Program.Add(codeSentence);
+                            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
                         }
                     }
                 }

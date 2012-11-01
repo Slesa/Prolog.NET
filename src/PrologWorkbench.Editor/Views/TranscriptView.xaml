@@ -6,6 +6,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Transcript" />
+        <ListBox Grid.Row="1" Name="ctrlTranscriptEntries"
+                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                 DataContext="{Binding Transcript}" ItemsSource="{Binding Entries}">
+                 <!-- MouseDoubleClick="{Binding TranscriptSelectedCommand}" -->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Style="{StaticResource TranscriptEntryStyle}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

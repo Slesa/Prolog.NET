@@ -21,11 +21,15 @@ namespace PrologWorkbench.Editor
         public void Initialize()
         {
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
+
             _container.RegisterType<TitleBarViewModel>();
             _container.RegisterType<ProgramViewModel>();
+            _container.RegisterType<TranscriptViewModel>();
+
             _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
             _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
             _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
+            _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
         }
     }
 }

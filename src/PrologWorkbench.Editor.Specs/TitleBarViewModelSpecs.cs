@@ -13,9 +13,9 @@ namespace PrologWorkbench.Editor.Specs
     {
         It should_allow_new_program = () => Subject.NewCommand.CanExecute().ShouldBeTrue();
         It should_allow_load_program = () => Subject.LoadCommand.CanExecute().ShouldBeTrue();
-        It should_allow_close_program = () => Subject.CloseCommand.CanExecute().ShouldBeFalse();
+        It should_allow_close_program = () => Subject.CloseCommand.CanExecute().ShouldBeTrue(); // True as Program is never null
         It should_allow_save_program = () => Subject.SaveCommand.CanExecute().ShouldBeFalse();
-        It should_allow_save_as_program = () => Subject.SaveAsCommand.CanExecute().ShouldBeFalse();
+        It should_allow_save_as_program = () => Subject.SaveAsCommand.CanExecute().ShouldBeTrue(); // True as Program is never null
         It should_allow_quit_program = () => Subject.ExitCommand.CanExecute().ShouldBeTrue();
     }
 
