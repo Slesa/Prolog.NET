@@ -6,13 +6,13 @@ using System.Collections.ObjectModel;
 
 namespace PrologWorkbench.Core.Models
 {
-    public sealed class Transcript
+    public class Transcript : ObservableCollection<TranscriptEntry>
     {
-        public Transcript()
+        public TranscriptEntry AddTranscriptEntry(TranscriptEntryTypes type, string text)
         {
-            Entries = new TranscriptEntryList(new ObservableCollection<TranscriptEntry>());
+            var entry = new TranscriptEntry(type, text);
+            Add(entry);
+            return entry;
         }
-
-        public TranscriptEntryList Entries { get; private set; }
     }
 }

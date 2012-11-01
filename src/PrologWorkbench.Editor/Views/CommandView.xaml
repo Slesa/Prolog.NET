@@ -6,39 +6,39 @@
              xmlns:strings="clr-namespace:PrologWorkbench.Editor.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-			 <!-- FocusManager.FocusedElement="{Binding _input}" -->
+             <!-- FocusManager.FocusedElement="{Binding _input}" -->
 
 
-	<d:DataContext>
-		<Binding Path="SampleCommandViewModel" Source="{StaticResource SampleDataSource}"/>
-	</d:DataContext>
-	
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/PrologWorkbench.Editor;component/ProjectDataSources.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
+    <d:DataContext>
+        <Binding Path="SampleCommandViewModel" Source="{StaticResource SampleDataSource}"/>
+    </d:DataContext>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PrologWorkbench.Editor;component/ProjectDataSources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <Image x:Key="PngExecute" Source="../Resources/execute.png" />
             <Image x:Key="PngDebug" Source="../Resources/debug.png" />
-		</ResourceDictionary>
-	</UserControl.Resources>
-	
-	<HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
-		<HeaderedContentControl.Header>
-			<TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
-		</HeaderedContentControl.Header>
-		<DockPanel>
-			<Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
-            <StackPanel Orientation="Horizontal" Height="32">
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
+        <HeaderedContentControl.Header>
+            <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
+        </HeaderedContentControl.Header>
+        <DockPanel>
+            <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
+            <StackPanel Orientation="Horizontal" Height="48">
                     <Button Margin="3" x:Name="Execute" Command="{Binding ExecuteCommand}" Content="{StaticResource PngExecute}" ToolTip="{x:Static strings:Strings.CommandView_Execute}"/>
                     <Button Margin="3" x:Name="Debug" Command="{Binding DebugCommand}"  Content="{StaticResource PngDebug}" ToolTip="{x:Static strings:Strings.CommandView_Debug}" />
             </StackPanel>
-			</Border>
+            </Border>
             <TextBox Grid.Row="1" Style="{DynamicResource Style.Content.Body}" x:Name="_input"
-					BorderThickness="0"
+                    BorderThickness="0"
                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                     TextWrapping="Wrap" AcceptsReturn="True"
                     Text="{Binding CurrentInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
-		</HeaderedContentControl>
+        </HeaderedContentControl>
 </UserControl>

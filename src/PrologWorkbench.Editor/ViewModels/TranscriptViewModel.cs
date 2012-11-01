@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Collections.ObjectModel;
+using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 
@@ -11,6 +12,6 @@ namespace PrologWorkbench.Editor.ViewModels
 
         public string Title { get { return Resources.Strings.TranscriptViewModel_Title; } }
 
-        public Transcript Transcript { get { return TranscriptProvider.Transcript; } } 
+        public ObservableCollection<TranscriptEntry> Transcript { get { return TranscriptProvider.Transcript; } } 
     }
 }

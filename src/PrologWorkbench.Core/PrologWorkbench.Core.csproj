@@ -62,7 +62,6 @@
     <Compile Include="Models\StatusUpdateProvider.cs" />
     <Compile Include="Models\Transcript.cs" />
     <Compile Include="Models\TranscriptEntry.cs" />
-    <Compile Include="Models\TranscriptEntryList.cs" />
     <Compile Include="Models\TranscriptEntryTypes.cs" />
     <Compile Include="Models\TranscriptProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

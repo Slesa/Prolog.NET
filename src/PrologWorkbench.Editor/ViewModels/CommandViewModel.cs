@@ -74,7 +74,7 @@ namespace PrologWorkbench.Editor.ViewModels
             input = input.Trim();
             if (string.IsNullOrEmpty(input)) return;
 
-            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
+            TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
 
             /*
             var selectedClause = ctrlProgram.SelectedClause;
@@ -83,7 +83,7 @@ namespace PrologWorkbench.Editor.ViewModels
             var codeSentences = Parser.Parse(input);
             if (codeSentences == null || codeSentences.Length == 0)
             {
-                TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageUnrecognizedInput);
+                TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageUnrecognizedInput);
                 return;
             }
 
@@ -111,12 +111,12 @@ namespace PrologWorkbench.Editor.ViewModels
                     {
                         if (ProgramProvider.Program.Contains(codeSentence))
                         {
-                            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageDuplicateClause);
+                            TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.MessageDuplicateClause);
                         }
                         else
                         {
                             ProgramProvider.Program.Add(codeSentence);
-                            TranscriptProvider.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
+                            TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
                         }
                     }
                 }

@@ -12,7 +12,7 @@ namespace PrologWorkbench.Core.Models
         public Transcript Transcript { get; private set; }
         public void Reset()
         {
-            Transcript.Entries.Clear();
+            Transcript.Clear();
         }
     }
 }
