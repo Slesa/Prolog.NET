@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
@@ -129,7 +130,11 @@ namespace PrologWorkbench.Editor.ViewModels
         {
             var filename = FilenameProvider.GetLoadFileName();
             if (string.IsNullOrEmpty(filename)) return false;
+
+            Mouse.OverrideCursor = Cursors.Wait;
             ProgramProvider.Program = ProgramAccessor.Load(filename);
+            Mouse.OverrideCursor = null;
+            
             StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_LoadedProgram, filename));
             return true;
         }
@@ -139,7 +144,12 @@ namespace PrologWorkbench.Editor.ViewModels
             if (ProgramProvider.Program == null) return true;
             if (string.IsNullOrEmpty(ProgramProvider.Program.FileName))
                 return SaveAs();
-            if( ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program))
+
+            Mouse.OverrideCursor = Cursors.Wait;
+            var result = ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program);
+            Mouse.OverrideCursor = null;
+
+            if (result)
             {
                 StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgram, ProgramProvider.Program.FileName));
                 return true;
@@ -153,7 +163,12 @@ namespace PrologWorkbench.Editor.ViewModels
             if (ProgramProvider.Program == null) return true;
             var filename = FilenameProvider.GetSaveFileName(Resources.Strings.TitleBarViewModel_SaveProgramAs);
             if( !string.IsNullOrEmpty(filename)) return false;
-            if (ProgramAccessor.Save(filename, ProgramProvider.Program))
+
+            Mouse.OverrideCursor = Cursors.Wait;
+            var result = ProgramAccessor.Save(filename, ProgramProvider.Program);
+            Mouse.OverrideCursor = null;
+
+            if (result)
             {
                 StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgramAs, ProgramProvider.Program.FileName));
                 return true;
