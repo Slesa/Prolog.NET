@@ -27,10 +27,14 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ContentControl Grid.RowSpan="2" regions:RegionManager.RegionName="ProgramRegion" />
+          	<GridSplitter Grid.RowSpan="2" Width="3" Background="{DynamicResource Brush.Brown}"  />
             <ContentControl Grid.Column="1" Grid.Row="0" regions:RegionManager.RegionName="TranscriptRegion" />
+          	<GridSplitter ResizeDirection="Rows" Grid.Column="1" Grid.Row="1" Width="Auto" Height="3" 
+				HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+				Background="{DynamicResource Brush.Brown}" />
             <ContentControl Grid.Column="1" Grid.Row="1" regions:RegionManager.RegionName="CommandRegion" />
         </Grid>
         
