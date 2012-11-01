@@ -2,6 +2,7 @@
 using Machine.Fakes;
 using Machine.Specifications;
 using Microsoft.Practices.Prism.Events;
+using Prolog;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor.Helpers;
@@ -54,11 +55,14 @@ namespace PrologWorkbench.Editor.Specs
     {
         Establish context = () =>
                                 {
+                                    var programAccessor = An<ILoadOrSaveProgram>();
+                                    programAccessor.WhenToldTo(x=>x.Load(Param<string>.IsNotNull)).Return(new Program());
                                     Subject.CloseCommand.CanExecuteChanged += (s, a) => _closeChanged = true;
                                     Subject.SaveCommand.CanExecuteChanged += (s, a) => _saveChanged = true;
                                     Subject.SaveAsCommand.CanExecuteChanged += (s, a) => _saveAsChanged = true;
                                     Subject.FilenameProvider = LoadFilenameProvider;
-                                    Subject.ProgramAccessor = An<ILoadOrSaveProgram>();
+                                    Subject.ProgramAccessor = programAccessor;
+                                    Subject.StatusUpdateProvider = An<IProvideStatusUpdates>();
                                 };
 
         Because of = () => Subject.LoadCommand.Execute(); 
@@ -85,7 +89,11 @@ namespace PrologWorkbench.Editor.Specs
     {
         Establish context = () =>
                                 {
-                                    Subject = new TitleBarViewModel(An<IEventAggregator>()) {ProgramProvider = new ProgramProvider()};
+                                    Subject = new TitleBarViewModel
+                                              {
+                                                  ProgramProvider = new ProgramProvider(), 
+                                                  StatusUpdateProvider = An<IProvideStatusUpdates>(),
+                                              };
                                     CalledProperties = new List<string>();
                                 };
 

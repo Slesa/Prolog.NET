@@ -19,10 +19,11 @@ namespace PrologWorkbench.Editor.ViewModels
         public IProvideProgram ProgramProvider { get; set; }
         [Dependency]
         public IProvideFilename FilenameProvider { get; set; }
+        [Dependency]
+        public IProvideStatusUpdates StatusUpdateProvider { get; set; }
 
-        public TitleBarViewModel(IEventAggregator eventAggregator)
+        public TitleBarViewModel()
         {
-            _eventAggregator = eventAggregator;
             NewCommand = new DelegateCommand(OnNew);
             LoadCommand = new DelegateCommand(OnLoad);
             CloseCommand = new DelegateCommand(OnClose, CanClose);
@@ -55,7 +56,7 @@ namespace PrologWorkbench.Editor.ViewModels
             ProgramProvider.Reset();
             CloseCommand.RaiseCanExecuteChanged();
             SaveAsCommand.RaiseCanExecuteChanged();
-            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(Resources.Strings.TitleBarViewModel_CreatedNewProgram);
+            StatusUpdateProvider.Publish(Resources.Strings.TitleBarViewModel_CreatedNewProgram);
         }
 
         void OnLoad()
@@ -129,7 +130,7 @@ namespace PrologWorkbench.Editor.ViewModels
             var filename = FilenameProvider.GetLoadFileName();
             if (string.IsNullOrEmpty(filename)) return false;
             ProgramProvider.Program = ProgramAccessor.Load(filename);
-            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_LoadedProgram, filename));
+            StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_LoadedProgram, filename));
             return true;
         }
 
@@ -140,10 +141,10 @@ namespace PrologWorkbench.Editor.ViewModels
                 return SaveAs();
             if( ProgramAccessor.Save(ProgramProvider.Program.FileName, ProgramProvider.Program))
             {
-                _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgram, ProgramProvider.Program.FileName));
+                StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgram, ProgramProvider.Program.FileName));
                 return true;
             }
-            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
+            StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
             return false;
         }
 
@@ -154,10 +155,10 @@ namespace PrologWorkbench.Editor.ViewModels
             if( !string.IsNullOrEmpty(filename)) return false;
             if (ProgramAccessor.Save(filename, ProgramProvider.Program))
             {
-                _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgramAs, ProgramProvider.Program.FileName));
+                StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_SavedProgramAs, ProgramProvider.Program.FileName));
                 return true;
             }
-            _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
+            StatusUpdateProvider.Publish(string.Format(Resources.Strings.TitleBarViewModel_CouldNotSaveProgram, ProgramProvider.Program.FileName));
             return false;
         }
     }

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
+    <Compile Include="Contracts\IProvideStatusUpdates.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Models\ProgramAccessor.cs" />
     <Compile Include="Models\ProgramProvider.cs" />
     <Compile Include="Contracts\IProvideProgram.cs" />
+    <Compile Include="Models\StatusUpdateProvider.cs" />
     <Compile Include="Models\Transcript.cs" />
     <Compile Include="Models\TranscriptEntry.cs" />
     <Compile Include="Models\TranscriptEntryList.cs" />
