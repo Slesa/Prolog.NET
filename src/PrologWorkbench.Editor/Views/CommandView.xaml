@@ -38,7 +38,7 @@
 					BorderThickness="0"
                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                     TextWrapping="Wrap" AcceptsReturn="True"
-                    Text="{Binding CurrentInput}"/>
+                    Text="{Binding CurrentInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
 		</HeaderedContentControl>
 </UserControl>

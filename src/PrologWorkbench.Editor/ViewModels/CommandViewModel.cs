@@ -20,8 +20,8 @@ namespace PrologWorkbench.Editor.ViewModels
 
         public CommandViewModel()
         {
-            ExecuteCommand = new DelegateCommand(OnExecute);
-            DebugCommand = new DelegateCommand(OnDebug);
+            ExecuteCommand = new DelegateCommand(OnExecute, CanExecute);
+            DebugCommand = new DelegateCommand(OnDebug, CanDebug);
         }
 
         public string Title { get { return Resources.Strings.CommandViewModel_Title; } }
@@ -37,7 +37,16 @@ namespace PrologWorkbench.Editor.ViewModels
                 if (value == _currentInput) return;
                 _currentInput = value;
                 RaisePropertyChanged(()=>CurrentInput);
+                ExecuteCommand.RaiseCanExecuteChanged();
+                DebugCommand.RaiseCanExecuteChanged();
             }
+        }
+
+        #region Commands
+
+        bool CanExecute()
+        {
+            return !string.IsNullOrEmpty(CurrentInput);
         }
 
         void OnExecute()
@@ -45,10 +54,17 @@ namespace PrologWorkbench.Editor.ViewModels
             ProcessInput(true);
         }
 
+        bool CanDebug()
+        {
+            return !string.IsNullOrEmpty(CurrentInput);
+        }
+
         void OnDebug()
         {
             ProcessInput(false);
         }
+
+        #endregion
 
         void ProcessInput(bool executeQuery)
         {
