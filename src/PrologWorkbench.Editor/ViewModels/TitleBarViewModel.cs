@@ -2,18 +2,14 @@
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
-using PrologWorkbench.Core.Events;
 using PrologWorkbench.Editor.Helpers;
 
 namespace PrologWorkbench.Editor.ViewModels
 {
     public class TitleBarViewModel 
     {
-        readonly IEventAggregator _eventAggregator;
-
         [Dependency]
         public ILoadOrSaveProgram ProgramAccessor { get; set; }
         [Dependency]
