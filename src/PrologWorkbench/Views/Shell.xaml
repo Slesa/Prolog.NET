@@ -13,7 +13,6 @@
         AllowsTransparency="True"
         WindowStyle="None"
         >
-    <!--Style="{DynamicResource Window.Standard}"-->
 
     <Window.DataContext>
         <ViewModels:ShellViewModel />

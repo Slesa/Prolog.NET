@@ -183,6 +183,10 @@
       <Project>{A8E26596-A8D3-458F-B902-AFE0A3D924B8}</Project>
       <Name>PrologWorkbench.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrologWorkbench.Debugger\PrologWorkbench.Debugger.csproj">
+      <Project>{7C7BAF99-DE02-4114-A387-566174D3C3E0}</Project>
+      <Name>PrologWorkbench.Debugger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrologWorkbench.Editor\PrologWorkbench.Editor.csproj">
       <Project>{9A93B637-17BC-4A90-B1A5-71FF5947F807}</Project>
       <Name>PrologWorkbench.Editor</Name>
