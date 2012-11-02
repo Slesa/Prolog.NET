@@ -53,6 +53,7 @@
     <Compile Include="Contracts\IProvideCurrentClause.cs" />
     <Compile Include="Contracts\IProvideStatusUpdates.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="Events\SetCurrentInputEvent.cs" />
     <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />
     <Compile Include="Contracts\IProvideTranscript.cs" />

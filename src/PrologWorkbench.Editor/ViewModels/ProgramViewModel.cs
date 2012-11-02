@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
 using PrologWorkbench.Core.Contracts;
 
@@ -14,9 +15,27 @@ namespace PrologWorkbench.Editor.ViewModels
             _programProvider = programProvider;
             _currentClauseProvider = currentClauseProvider;
             _programProvider.ProgramChanged += (s, e) => Program = e.Program;
+
+            CopyClauseCommand = new DelegateCommand(OnCopyClause);
         }
 
         public string Title { get { return Resources.Strings.ProgramViewModel_Title; } }
+
+        public DelegateCommand CopyClauseCommand { get; private set; }
+
+        void OnCopyClause()
+        {
+            /*
+            http://www.codeproject.com/Articles/394750/Navigating-the-different-modules-through-a-TreeVie
+            var view = (ProgramView) 
+            var transcriptEntry = ctrlTranscriptEntries.SelectedItem as TranscriptEntry;
+            if (transcriptEntry != null)
+            {
+                txtCommand.Text = transcriptEntry.Text;
+                txtCommand.Focus();
+            }
+             * */
+        }
 
         Program _program;
         public Program Program
