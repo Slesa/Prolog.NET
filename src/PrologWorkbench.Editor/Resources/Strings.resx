@@ -180,4 +180,7 @@
   <data name="TranscriptViewModel_Title" xml:space="preserve">
     <value>Transcript</value>
   </data>
+  <data name="ResponseFailure" xml:space="preserve">
+    <value>Failure</value>
+  </data>
 </root>

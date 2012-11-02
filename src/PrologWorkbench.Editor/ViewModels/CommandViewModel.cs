@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using System.Text;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using Prolog;
@@ -93,7 +94,7 @@ namespace PrologWorkbench.Editor.ViewModels
                 {
                     var query = new Query(codeSentence);
                     MachineProvider.Machine = PrologMachine.Create(ProgramProvider.Program, query);
-
+                    MachineProvider.Machine.ExecutionComplete += OnMachineExecutionComplete;
                     if (executeQuery)
                     {
                         MachineProvider.Machine.RunToSuccess();
@@ -120,6 +121,40 @@ namespace PrologWorkbench.Editor.ViewModels
                         }
                     }
                 }
+            }
+        }
+
+
+        void OnMachineExecutionComplete(object sender, PrologQueryEventArgs e)
+        {
+            if (e.Results != null)
+            {
+                var sb = new StringBuilder();
+
+                string prefix = null;
+                foreach (var variable in e.Results.Variables)
+                {
+                    sb.Append(prefix); prefix = System.Environment.NewLine;
+                    sb.AppendFormat("{0} = {1}", variable.Name, variable.Text);
+                }
+
+                var variables = sb.ToString();
+                if (!string.IsNullOrEmpty(variables))
+                {
+                    TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, variables);
+                }
+                TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
+
+                //if (StatisticsEnabled)
+                {
+                    TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, string.Format("{0} IC:{1}"
+                        , MachineProvider.Machine.PerformanceStatistics.ElapsedTime
+                        , MachineProvider.Machine.PerformanceStatistics.InstructionCount));
+                }
+            }
+            else
+            {
+                TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseFailure);
             }
         }
     }

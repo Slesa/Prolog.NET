@@ -115,6 +115,15 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failure.
+        /// </summary>
+        public static string ResponseFailure {
+            get {
+                return ResourceManager.GetString("ResponseFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
         public static string ResponseSuccess {
