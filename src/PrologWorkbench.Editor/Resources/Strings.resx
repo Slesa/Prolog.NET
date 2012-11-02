@@ -183,4 +183,7 @@
   <data name="ResponseFailure" xml:space="preserve">
     <value>Failure</value>
   </data>
+  <data name="CommandViewModel_ExecutionTime" xml:space="preserve">
+    <value>Execution time {0}, {1} instructions</value>
+  </data>
 </root>

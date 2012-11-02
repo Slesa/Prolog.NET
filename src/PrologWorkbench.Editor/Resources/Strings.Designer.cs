@@ -79,6 +79,15 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Execution time {0}, {1} instructions.
+        /// </summary>
+        public static string CommandViewModel_ExecutionTime {
+            get {
+                return ResourceManager.GetString("CommandViewModel_ExecutionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Commands.
         /// </summary>
         public static string CommandViewModel_Title {

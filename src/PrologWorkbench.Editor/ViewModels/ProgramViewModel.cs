@@ -7,10 +7,12 @@ namespace PrologWorkbench.Editor.ViewModels
     public class ProgramViewModel : NotificationObject
     {
         readonly IProvideProgram _programProvider;
+        readonly IProvideCurrentClause _currentClauseProvider;
 
-        public ProgramViewModel(IProvideProgram programProvider)
+        public ProgramViewModel(IProvideProgram programProvider, IProvideCurrentClause currentClauseProvider)
         {
             _programProvider = programProvider;
+            _currentClauseProvider = currentClauseProvider;
             _programProvider.ProgramChanged += (s, e) => Program = e.Program;
         }
 
@@ -28,27 +30,25 @@ namespace PrologWorkbench.Editor.ViewModels
             }
         }
 
-        Clause _selectedClause;
         public Clause SelectedClause
         {
-            get { return _selectedClause; }
+            get { return _currentClauseProvider.SelectedClause; }
             set
             {
-                if (value == _selectedClause) return;
-                _selectedClause = value;
+                if (value == _currentClauseProvider.SelectedClause) return;
+                _currentClauseProvider.SelectedClause = value;
                 RaisePropertyChanged(() => SelectedClause);
             }
         }
 
-        Procedure _selectedProcedure;
         public Procedure SelectedProcedure
         {
-            get { return _selectedProcedure; }
+            get { return _currentClauseProvider.SelectedProcedure; }
             set
             {
-                if (value == _selectedProcedure) return;
-                _selectedProcedure = value;
-                RaisePropertyChanged(() => SelectedProcedure);
+                if (value == _currentClauseProvider.SelectedProcedure) return;
+                _currentClauseProvider.SelectedProcedure = value;
+                RaisePropertyChanged(() => _currentClauseProvider.SelectedProcedure);
             }
         }
     }

@@ -18,6 +18,10 @@ namespace PrologWorkbench.Editor.ViewModels
         public IProvideProgram ProgramProvider { get; set; }
         [Dependency]
         public IProvideTranscript TranscriptProvider { get; set; }
+        [Dependency]
+        public IProvideCurrentClause CurrentClauseProvider { get; set; }
+        [Dependency]
+        public IProvideStatusUpdates StatusUpdateProvider { get; set; }
 
         public CommandViewModel()
         {
@@ -77,9 +81,7 @@ namespace PrologWorkbench.Editor.ViewModels
 
             TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
 
-            /*
-            var selectedClause = ctrlProgram.SelectedClause;
-            */
+            var selectedClause = CurrentClauseProvider.SelectedClause;
 
             var codeSentences = Parser.Parse(input);
             if (codeSentences == null || codeSentences.Length == 0)
@@ -102,13 +104,12 @@ namespace PrologWorkbench.Editor.ViewModels
                 }
                 else // fact or rule
                 {
-                    /*
                     if (selectedClause != null && selectedClause.Container.Procedure.Functor == Functor.Create(codeSentence.Head.Functor))
                     {
                         selectedClause.CodeSentence = codeSentence;
-                        AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.ResponseSuccess);
+                        TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
                     }
-                    else*/
+                    else
                     {
                         if (ProgramProvider.Program.Contains(codeSentence))
                         {
@@ -147,7 +148,8 @@ namespace PrologWorkbench.Editor.ViewModels
 
                 //if (StatisticsEnabled)
                 {
-                    TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, string.Format("{0} IC:{1}"
+                    //TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, string.Format(Resources.Strings.CommandViewModel_ExecutionTime
+                    StatusUpdateProvider.Publish(string.Format(Resources.Strings.CommandViewModel_ExecutionTime
                         , MachineProvider.Machine.PerformanceStatistics.ElapsedTime
                         , MachineProvider.Machine.PerformanceStatistics.InstructionCount));
                 }

@@ -50,11 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
+    <Compile Include="Contracts\IProvideCurrentClause.cs" />
     <Compile Include="Contracts\IProvideStatusUpdates.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />
     <Compile Include="Contracts\IProvideTranscript.cs" />
+    <Compile Include="Models\CurrentClauseProvider.cs" />
     <Compile Include="Models\MachineProvider.cs" />
     <Compile Include="Models\ProgramAccessor.cs" />
     <Compile Include="Models\ProgramProvider.cs" />
