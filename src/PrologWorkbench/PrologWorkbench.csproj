@@ -199,6 +199,10 @@
       <Project>{D9BCD156-95E0-4B3D-9E2D-E8E606149894}</Project>
       <Name>PrologWorkbench.Theme</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrologWorkbench.Tracer\PrologWorkbench.Tracer.csproj">
+      <Project>{DBA928E4-4AF7-40CD-882F-121F308D9878}</Project>
+      <Name>PrologWorkbench.Tracer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Prolog\Prolog.csproj">
       <Project>{171A6B22-168C-4662-8706-131C098622BD}</Project>
       <Name>Prolog</Name>

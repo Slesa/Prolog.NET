@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Debugger", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Program", "PrologWorkbench.Program\PrologWorkbench.Program.csproj", "{6C8C813A-3F3B-402D-B735-DCAB10C15A77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Tracer", "PrologWorkbench.Tracer\PrologWorkbench.Tracer.csproj", "{DBA928E4-4AF7-40CD-882F-121F308D9878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
