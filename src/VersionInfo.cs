@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Richard G. Todd")]
 [assembly: AssemblyProduct("Prolog.NET")]
-[assembly: AssemblyCopyright("Copyright Â©  2010")]
+[assembly: AssemblyCopyright("Copyright © 2010")]
 [assembly: AssemblyTrademark("MS Public License")]
 [assembly: AssemblyVersion("1.0.1")]
 [assembly: AssemblyFileVersion("1.0.1")]

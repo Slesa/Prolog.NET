@@ -49,6 +49,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
     <Compile Include="Contracts\IProvideCurrentClause.cs" />
     <Compile Include="Contracts\IProvideStatusUpdates.cs" />

@@ -54,6 +54,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="MachineProviderSpecs.cs" />
     <Compile Include="ProgramAccessorSpecs.cs" />
     <Compile Include="ProgramProviderSpecs.cs" />
