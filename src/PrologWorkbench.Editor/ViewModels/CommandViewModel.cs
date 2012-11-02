@@ -1,9 +1,11 @@
 ﻿using System.Text;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using Prolog;
 using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Events;
 using PrologWorkbench.Core.Models;
 
 namespace PrologWorkbench.Editor.ViewModels
@@ -23,10 +25,11 @@ namespace PrologWorkbench.Editor.ViewModels
         [Dependency]
         public IProvideStatusUpdates StatusUpdateProvider { get; set; }
 
-        public CommandViewModel()
+        public CommandViewModel(IEventAggregator eventAggregator)
         {
             ExecuteCommand = new DelegateCommand(OnExecute, CanExecute);
             DebugCommand = new DelegateCommand(OnDebug, CanDebug);
+            eventAggregator.GetEvent<SetCurrentInputEvent>().Subscribe(x => CurrentInput = x);
         }
 
         public string Title { get { return Resources.Strings.CommandViewModel_Title; } }
