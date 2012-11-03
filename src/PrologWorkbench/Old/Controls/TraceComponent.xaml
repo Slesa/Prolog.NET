@@ -6,6 +6,7 @@
     <UserControl.CommandBindings>
         <CommandBinding Command="local:PrologCommands.ClearTrace" Executed="CommandClearTrace_Executed" CanExecute="CommandClearTrace_CanExecute" />
     </UserControl.CommandBindings>
+
     <DockPanel>
         <TextBox Text="Trace"
                  DockPanel.Dock="Top"
