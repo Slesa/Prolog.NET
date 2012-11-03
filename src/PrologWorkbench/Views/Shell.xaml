@@ -28,38 +28,20 @@
         
         <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ContentControl Grid.RowSpan="2" regions:RegionManager.RegionName="ProgramRegion" />
-            <GridSplitter Grid.RowSpan="2" Width="3" Background="{DynamicResource Brush.Brown}"  />
-            <ContentControl Grid.Column="1" Grid.Row="0" regions:RegionManager.RegionName="TranscriptRegion" />
-            <GridSplitter ResizeDirection="Rows" Grid.Column="1" Grid.Row="1" Width="Auto" Height="3" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                Background="{DynamicResource Brush.Brown}" />
-            <ContentControl Grid.Column="1" Grid.Row="1" regions:RegionManager.RegionName="CommandRegion" />
-        </Grid>
-        
-        <!-- TabControl>
+        <TabControl>
             <TabItem Header="Transcript">
-                <local:TranscriptComponent x:Name="ctrlTranscript" />
+                <ContentControl regions:RegionManager.RegionName="EditorRegion" />
             </TabItem>
             <TabItem Header="Trace">
-                <local:TraceComponent x:Name="ctrlTrace" />
+                <ContentControl regions:RegionManager.RegionName="TraceRegion" />
             </TabItem>
-            <TabItem Header="Program">
+            <!-- TabItem Header="Program">
                 <local:ProgramExplorerComponent x:Name="ctrlProgram" />
             </TabItem>
             <TabItem Header="Debug">
                 <local:DebugComponent x:Name="ctrlDebug" />
-            </TabItem>
-        </TabControl-->
+            </TabItem-->
+        </TabControl>
     </DockPanel>
     
 </Window>

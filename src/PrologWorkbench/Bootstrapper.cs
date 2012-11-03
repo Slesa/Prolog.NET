@@ -11,6 +11,7 @@ using PrologWorkbench.Core;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 using PrologWorkbench.Editor;
+using PrologWorkbench.Tracer;
 
 namespace Prolog.Workbench
 {
@@ -61,6 +62,12 @@ namespace Prolog.Workbench
                                         {
                                             ModuleName = editorModule.Name,
                                             ModuleType = editorModule.AssemblyQualifiedName
+                                        });
+            var tracerModule = typeof (TracerModule);
+            ModuleCatalog.AddModule(new ModuleInfo
+                                        {
+                                            ModuleName = tracerModule.Name,
+                                            ModuleType = tracerModule.AssemblyQualifiedName
                                         });
         }
     }

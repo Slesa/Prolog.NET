@@ -6,15 +6,11 @@ namespace Prolog.Workbench.ViewModels
     {
         //readonly IRegionManager _regionManager;
 
-        public ShellViewModel(/*IRegionManager regionManager*/)
+        public ShellViewModel()
         {
             //_regionManager = regionManager;
             //_regionManager.AddToRegion("ToolsBarRegion", )
         }
-        
-        
-
-
 
         bool EnsureSaved()
         {
@@ -51,134 +47,6 @@ namespace Prolog.Workbench.ViewModels
             return true;
         }
 
-        bool Open()
-        {
-            /*
-            var dialog = new OpenFileDialog
-            {
-                DefaultExt = Properties.Resources.FileDefaultExt,
-                Filter = Properties.Resources.FileFilter
-            };
-            if (dialog.ShowDialog() == false)
-            //if (dialog.ShowDialog(this) == false)
-            {
-                return false;
-            }
-            Program program;
-            try
-            {
-                program = Program.Load(dialog.FileName);
-            }
-            catch (FileNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (IOException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-
-            AppState.Program = program;
-             * */
-            return true;
-        }
-
-        bool Save(bool forceSave)
-        {
-            /*
-            Debug.Assert(AppState.Program != null);
-            if (AppState.Program == null)
-            {
-                return true;
-            }
-
-            if (!forceSave && !AppState.Program.IsModified)
-            {
-                return true;
-            }
-
-            if (string.IsNullOrEmpty(AppState.Program.FileName))
-            {
-                return SaveAs(forceSave);
-            }
-
-            try
-            {
-                AppState.Program.Save();
-            }
-            catch (FileNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (IOException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-             * */
-            return true;
-        }
-
-        bool SaveAs(bool forceSave)
-        {
-            /*
-            Debug.Assert(AppState.Program != null);
-            if (AppState.Program == null)
-            {
-                return true;
-            }
-
-            if (!forceSave && !AppState.Program.IsModified)
-            {
-                return true;
-            }
-
-            var dialog = new SaveFileDialog
-            {
-                DefaultExt = Properties.Resources.FileDefaultExt,
-                Filter = Properties.Resources.FileFilter
-            };
-            //if (dialog.ShowDialog(this) == false)
-            if (dialog.ShowDialog() == false)
-            {
-                return false;
-            }
-
-            try
-            {
-                AppState.Program.SaveAs(dialog.FileName);
-            }
-            catch (FileNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            catch (IOException ex)
-            {
-                //CommonExceptionHandlers.HandleException(this, ex);
-                return false;
-            }
-            */
-            return true;
-        }
     }
 
 

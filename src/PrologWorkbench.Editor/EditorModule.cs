@@ -30,6 +30,8 @@ namespace PrologWorkbench.Editor
             _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
             _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
             _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
+
+            _regionManager.RegisterViewWithRegion("EditorRegion", typeof(EditorView));
         }
     }
 }
