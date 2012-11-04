@@ -10,7 +10,9 @@ using Prolog.Workbench.Views;
 using PrologWorkbench.Core;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
+using PrologWorkbench.Debugger;
 using PrologWorkbench.Editor;
+using PrologWorkbench.Program;
 using PrologWorkbench.Tracer;
 
 namespace Prolog.Workbench
@@ -62,6 +64,18 @@ namespace Prolog.Workbench
                                         {
                                             ModuleName = editorModule.Name,
                                             ModuleType = editorModule.AssemblyQualifiedName
+                                        });
+            var debuggerModule = typeof (DebuggerModule);
+            ModuleCatalog.AddModule(new ModuleInfo
+                                        {
+                                            ModuleName = debuggerModule.Name,
+                                            ModuleType = debuggerModule.AssemblyQualifiedName
+                                        });
+            var programModule = typeof (ProgramModule);
+            ModuleCatalog.AddModule(new ModuleInfo
+                                        {
+                                            ModuleName = programModule.Name,
+                                            ModuleType = programModule.AssemblyQualifiedName
                                         });
             var tracerModule = typeof (TracerModule);
             ModuleCatalog.AddModule(new ModuleInfo

@@ -102,11 +102,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.de-DE.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\trace.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\TraceView.xaml">
       <SubType>Designer</SubType>

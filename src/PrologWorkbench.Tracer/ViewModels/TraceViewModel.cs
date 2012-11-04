@@ -11,13 +11,11 @@ namespace PrologWorkbench.Tracer.ViewModels
 
         public TraceViewModel()
         {
-            EnableTraceCommand = new DelegateCommand(OnEnableTrace);
             ClearTraceCommand = new DelegateCommand(OnClearTrace, CanClearTrace);
         }
 
         public string Title { get { return Resources.Strings.TraceViewModel_Title; } }
 
-        public DelegateCommand EnableTraceCommand { get; private set; }
         public DelegateCommand ClearTraceCommand { get; private set; }
 
         string _traces;
@@ -42,7 +40,7 @@ namespace PrologWorkbench.Tracer.ViewModels
                 if(value==_traceEnabled) return;
                 _traceEnabled = value;
                 RaisePropertyChanged(()=>TraceEnabled);
-                EnableTraceCommand.RaiseCanExecuteChanged();
+                OnEnableTrace();
             }
         }
 

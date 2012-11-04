@@ -32,15 +32,15 @@
             <TabItem Header="Transcript">
                 <ContentControl regions:RegionManager.RegionName="EditorRegion" />
             </TabItem>
+            <TabItem Header="Explorer">
+                <ContentControl regions:RegionManager.RegionName="ExplorerRegion" />
+            </TabItem>
+            <TabItem Header="Debug">
+                <ContentControl regions:RegionManager.RegionName="DebuggerRegion" />
+            </TabItem>
             <TabItem Header="Trace">
                 <ContentControl regions:RegionManager.RegionName="TraceRegion" />
             </TabItem>
-            <!-- TabItem Header="Program">
-                <local:ProgramExplorerComponent x:Name="ctrlProgram" />
-            </TabItem>
-            <TabItem Header="Debug">
-                <local:DebugComponent x:Name="ctrlDebug" />
-            </TabItem-->
         </TabControl>
     </DockPanel>
     

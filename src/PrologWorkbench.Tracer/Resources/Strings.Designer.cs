@@ -22,7 +22,7 @@ namespace PrologWorkbench.Tracer.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PrologWorkbench.Tracer.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PrologWorkbench.Tracer.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace PrologWorkbench.Tracer.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,18 @@ namespace PrologWorkbench.Tracer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable or disable trace.
+        /// </summary>
+        public static string TraceView_EnableTrace {
+            get {
+                return ResourceManager.GetString("TraceView_EnableTrace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trace.
         /// </summary>
-        internal static string TraceViewModel_Title {
+        public static string TraceViewModel_Title {
             get {
                 return ResourceManager.GetString("TraceViewModel_Title", resourceCulture);
             }
