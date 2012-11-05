@@ -191,7 +191,7 @@
       <Project>{9A93B637-17BC-4A90-B1A5-71FF5947F807}</Project>
       <Name>PrologWorkbench.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PrologWorkbench.Program\PrologWorkbench.Program.csproj">
+    <ProjectReference Include="..\PrologWorkbench.Explorer\PrologWorkbench.Explorer.csproj">
       <Project>{6C8C813A-3F3B-402D-B735-DCAB10C15A77}</Project>
       <Name>PrologWorkbench.Program</Name>
     </ProjectReference>

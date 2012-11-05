@@ -71,7 +71,7 @@ namespace Prolog.Workbench
                                             ModuleName = debuggerModule.Name,
                                             ModuleType = debuggerModule.AssemblyQualifiedName
                                         });
-            var programModule = typeof (ProgramModule);
+            var programModule = typeof (ExplorerModule);
             ModuleCatalog.AddModule(new ModuleInfo
                                         {
                                             ModuleName = programModule.Name,
