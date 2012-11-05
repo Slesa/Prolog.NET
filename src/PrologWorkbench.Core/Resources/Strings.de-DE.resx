@@ -120,4 +120,19 @@
   <data name="ProgramViewModel_Title" xml:space="preserve">
     <value>Programm</value>
   </data>
+  <data name="ProgramView_Copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="ProgramView_Cut" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="ProgramView_MoveDown" xml:space="preserve">
+    <value>Nach unten schieben</value>
+  </data>
+  <data name="ProgramView_MoveUp" xml:space="preserve">
+    <value>Nach oben schieben</value>
+  </data>
+  <data name="ProgramView_Paste" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
 </root>

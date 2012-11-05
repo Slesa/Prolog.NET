@@ -61,6 +61,51 @@ namespace PrologWorkbench.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        public static string ProgramView_Copy {
+            get {
+                return ResourceManager.GetString("ProgramView_Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut.
+        /// </summary>
+        public static string ProgramView_Cut {
+            get {
+                return ResourceManager.GetString("ProgramView_Cut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move down.
+        /// </summary>
+        public static string ProgramView_MoveDown {
+            get {
+                return ResourceManager.GetString("ProgramView_MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move up.
+        /// </summary>
+        public static string ProgramView_MoveUp {
+            get {
+                return ResourceManager.GetString("ProgramView_MoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        public static string ProgramView_Paste {
+            get {
+                return ResourceManager.GetString("ProgramView_Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Program.
         /// </summary>
         public static string ProgramViewModel_Title {
