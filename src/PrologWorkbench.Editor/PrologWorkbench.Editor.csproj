@@ -98,9 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleDataSource\SampleDataSource.xaml.cs">
-      <DependentUpon>SampleDataSource.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\TitleBarViewModel.cs" />
     <Compile Include="ViewModels\TranscriptViewModel.cs" />
@@ -131,18 +128,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <DesignTimeOnly Include="SampleData\SampleDataSource\SampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ProjectDataSources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <ContainsDataSources>True</ContainsDataSources>
-    </Page>
-    <DesignTimeOnly Include="SampleData\SampleDataSource\SampleDataSource.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
     <Page Include="Views\CommandView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

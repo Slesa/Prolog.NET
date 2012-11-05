@@ -7,17 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
              <!-- FocusManager.FocusedElement="{Binding _input}" -->
-
-
-    <d:DataContext>
-        <Binding Path="SampleCommandViewModel" Source="{StaticResource SampleDataSource}"/>
-    </d:DataContext>
     
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PrologWorkbench.Editor;component/ProjectDataSources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
             <Image x:Key="PngExecute" Source="../Resources/execute.png" />
             <Image x:Key="PngDebug" Source="../Resources/debug.png" />
         </ResourceDictionary>

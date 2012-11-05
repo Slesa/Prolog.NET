@@ -79,12 +79,8 @@
     </Compile>
     <Compile Include="ViewModels\ExplorerViewModel.cs" />
     <Compile Include="ViewModels\InstructionsViewModel.cs" />
-    <Compile Include="ViewModels\ListingsViewModel.cs" />
     <Compile Include="Views\InstructionsView.xaml.cs">
       <DependentUpon>InstructionsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ListingsView.xaml.cs">
-      <DependentUpon>ListingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExplorerView.xaml.cs">
       <DependentUpon>ExplorerView.xaml</DependentUpon>
@@ -108,10 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\InstructionsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ListingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

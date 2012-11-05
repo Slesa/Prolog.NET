@@ -8,15 +8,8 @@
              mc:Ignorable="d" 
              >
 
-    <d:DataContext>
-        <Binding Path="SampleTransciptViewModel" Source="{StaticResource SampleDataSource}"/>
-    </d:DataContext>
-    
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PrologWorkbench.Editor;component/ProjectDataSources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
             <Style x:Key="TranscriptEntryStyle" TargetType="{x:Type TextBlock}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Type}">

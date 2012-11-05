@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
-using PrologWorkbench.Core.ViewModels;
+using PrologWorkbench.Core.Views;
 using PrologWorkbench.Editor.Helpers;
 using PrologWorkbench.Editor.ViewModels;
 using PrologWorkbench.Editor.Views;
@@ -31,6 +31,7 @@ namespace PrologWorkbench.Editor
             _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
 
             _regionManager.RegisterViewWithRegion("EditorRegion", typeof(EditorView));
+            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
         }
     }
 }

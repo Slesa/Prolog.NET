@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using PrologWorkbench.Core.Views;
 using PrologWorkbench.Program.ViewModels;
 using PrologWorkbench.Program.Views;
 
@@ -19,12 +20,11 @@ namespace PrologWorkbench.Program
 
         public void Initialize()
         {
-            _container.RegisterType<ListingsViewModel>();
             _container.RegisterType<InstructionsViewModel>();
             _container.RegisterType<ExplorerViewModel>();
 
             _regionManager.RegisterViewWithRegion("InstructionsRegion", typeof(InstructionsView));
-            _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ListingsView));
+            _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ProgramView));
             _regionManager.RegisterViewWithRegion("ExplorerRegion", typeof(ExplorerView));
         }
     }
