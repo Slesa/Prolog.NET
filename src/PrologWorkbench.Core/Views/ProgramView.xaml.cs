@@ -4,9 +4,9 @@
 
 using System.ComponentModel;
 using System.Windows.Controls;
-using PrologWorkbench.Editor.ViewModels;
+using PrologWorkbench.Core.ViewModels;
 
-namespace PrologWorkbench.Editor.Views
+namespace PrologWorkbench.Core.Views
 {
     public partial class ProgramView : UserControl
     {

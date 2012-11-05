@@ -3,7 +3,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
 using PrologWorkbench.Core.Contracts;
 
-namespace PrologWorkbench.Editor.ViewModels
+namespace PrologWorkbench.Core.ViewModels
 {
     public class ProgramViewModel : NotificationObject
     {

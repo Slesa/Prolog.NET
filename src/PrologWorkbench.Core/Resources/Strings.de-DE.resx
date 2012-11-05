@@ -117,70 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandViewModel_Title" xml:space="preserve">
-    <value>Commands</value>
-  </data>
-  <data name="CommandView_Debug" xml:space="preserve">
-    <value>Debug program</value>
-  </data>
-  <data name="CommandView_Execute" xml:space="preserve">
-    <value>Execute program</value>
-  </data>
-  <data name="MessageDuplicateClause" xml:space="preserve">
-    <value>Duplicate fact/rule specified.</value>
-  </data>
-  <data name="MessageUnrecognizedInput" xml:space="preserve">
-    <value>Unrecognized input specified.</value>
-  </data>
-  <data name="ResponseSuccess" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="TitleBarViewModel_CouldNotSaveProgram" xml:space="preserve">
-    <value>Could not save program {0}</value>
-  </data>
-  <data name="TitleBarViewModel_CreatedNewProgram" xml:space="preserve">
-    <value>Created new program</value>
-  </data>
-  <data name="TitleBarViewModel_DoYouWantToSave" xml:space="preserve">
-    <value>Do you want to save {0}?</value>
-  </data>
-  <data name="TitleBarViewModel_LoadedProgram" xml:space="preserve">
-    <value>Program {0} loaded</value>
-  </data>
-  <data name="TitleBarViewModel_SavedProgram" xml:space="preserve">
-    <value>Program {0} saved</value>
-  </data>
-  <data name="TitleBarViewModel_SavedProgramAs" xml:space="preserve">
-    <value>Program saved as {0}</value>
-  </data>
-  <data name="TitleBarViewModel_SaveProgramAs" xml:space="preserve">
-    <value>Save program as...</value>
-  </data>
-  <data name="TitleBarView_CloseProgram" xml:space="preserve">
-    <value>Close current program</value>
-  </data>
-  <data name="TitleBarView_Exit" xml:space="preserve">
-    <value>Quit workbench</value>
-  </data>
-  <data name="TitleBarView_LoadProgram" xml:space="preserve">
-    <value>Load program...</value>
-  </data>
-  <data name="TitleBarView_NewProgram" xml:space="preserve">
-    <value>New program</value>
-  </data>
-  <data name="TitleBarView_SaveProgram" xml:space="preserve">
-    <value>Save current program</value>
-  </data>
-  <data name="TitleBarView_SaveProgramAs" xml:space="preserve">
-    <value>Save program as...</value>
-  </data>
-  <data name="TranscriptViewModel_Title" xml:space="preserve">
-    <value>Transcript</value>
-  </data>
-  <data name="ResponseFailure" xml:space="preserve">
-    <value>Failure</value>
-  </data>
-  <data name="CommandViewModel_ExecutionTime" xml:space="preserve">
-    <value>Execution time {0}, {1} instructions</value>
+  <data name="ProgramViewModel_Title" xml:space="preserve">
+    <value>Programm</value>
   </data>
 </root>

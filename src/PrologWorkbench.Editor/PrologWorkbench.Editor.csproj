@@ -103,7 +103,6 @@
     </Compile>
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\TitleBarViewModel.cs" />
-    <Compile Include="ViewModels\ProgramViewModel.cs" />
     <Compile Include="ViewModels\TranscriptViewModel.cs" />
     <Compile Include="Views\CommandView.xaml.cs">
       <DependentUpon>CommandView.xaml</DependentUpon>
@@ -113,9 +112,6 @@
     </Compile>
     <Compile Include="Views\TitleBarView.xaml.cs">
       <DependentUpon>TitleBarView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgramView.xaml.cs">
-      <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TranscriptView.xaml.cs">
       <DependentUpon>TranscriptView.xaml</DependentUpon>
@@ -159,10 +155,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProgramView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\TranscriptView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,7 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PrologWorkbench.Core\PrologWorkbench.Core.csproj">
-      <Project>{A8E26596-A8D3-458F-B902-AFE0A3D924B8}</Project>
+      <Project>{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}</Project>
       <Name>PrologWorkbench.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Prolog\Prolog.csproj">

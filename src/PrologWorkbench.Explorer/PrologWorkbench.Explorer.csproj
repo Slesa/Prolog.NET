@@ -100,10 +100,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PrologWorkbench.Core\PrologWorkbench.Core.csproj">
-      <Project>{A8E26596-A8D3-458F-B902-AFE0A3D924B8}</Project>
+      <Project>{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}</Project>
       <Name>PrologWorkbench.Core</Name>
     </ProjectReference>
   </ItemGroup>

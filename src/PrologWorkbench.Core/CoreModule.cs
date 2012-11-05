@@ -27,8 +27,12 @@ namespace PrologWorkbench.Core
             _container.RegisterType<IProvideMachine, MachineProvider>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IProvideTranscript, TranscriptProvider>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IProvideCurrentClause, CurrentClauseProvider>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<StatusBarViewModel>();
-            _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof (StatusBarView));
+            _container.RegisterType<ProgramViewModel>();
+
+            _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof(StatusBarView));
+            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
         }
     }
 }

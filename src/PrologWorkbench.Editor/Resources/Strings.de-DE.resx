@@ -126,9 +126,6 @@
   <data name="MessageUnrecognizedInput" xml:space="preserve">
     <value>Unbekannte Eingabe.</value>
   </data>
-  <data name="ProgramViewModel_Title" xml:space="preserve">
-    <value>Programm</value>
-  </data>
   <data name="ResponseSuccess" xml:space="preserve">
     <value>Erfolgreich</value>
   </data>

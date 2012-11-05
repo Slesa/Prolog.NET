@@ -4,20 +4,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d"
-             x:Class="PrologWorkbench.Editor.Views.ProgramView">
+             x:Class="PrologWorkbench.Core.Views.ProgramView">
 
-    <d:DataContext>
-        <Binding Path="SampleProgramViewModel" Source="{StaticResource SampleDataSource}"/>
-    </d:DataContext>
-    
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PrologWorkbench.Editor;component/ProjectDataSources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseDoubleClick">
             <i:InvokeCommandAction Command="{Binding CopyClauseCommand}"/>

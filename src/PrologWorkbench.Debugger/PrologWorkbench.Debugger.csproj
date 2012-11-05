@@ -95,16 +95,16 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrologWorkbench.Core\PrologWorkbench.Core.csproj">
-      <Project>{A8E26596-A8D3-458F-B902-AFE0A3D924B8}</Project>
-      <Name>PrologWorkbench.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\DebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrologWorkbench.Core\PrologWorkbench.Core.csproj">
+      <Project>{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}</Project>
+      <Name>PrologWorkbench.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

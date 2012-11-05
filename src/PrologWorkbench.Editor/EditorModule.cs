@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using PrologWorkbench.Core.ViewModels;
 using PrologWorkbench.Editor.Helpers;
 using PrologWorkbench.Editor.ViewModels;
 using PrologWorkbench.Editor.Views;
@@ -23,11 +24,9 @@ namespace PrologWorkbench.Editor
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
 
             _container.RegisterType<TitleBarViewModel>();
-            _container.RegisterType<ProgramViewModel>();
             _container.RegisterType<TranscriptViewModel>();
 
             _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
-            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
             _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
             _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
 
