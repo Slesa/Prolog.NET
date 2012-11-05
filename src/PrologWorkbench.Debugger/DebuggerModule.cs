@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using PrologWorkbench.Debugger.ViewModels;
 using PrologWorkbench.Debugger.Views;
 
 namespace PrologWorkbench.Debugger
@@ -18,7 +19,9 @@ namespace PrologWorkbench.Debugger
 
         public void Initialize()
         {
-            //_container.RegisterType<TraceViewModel>();
+            _container.RegisterType<VariableListViewModel>();
+
+            _regionManager.RegisterViewWithRegion("VariablesRegion", typeof(VariableListView));
             _regionManager.RegisterViewWithRegion("DebuggerRegion", typeof(DebuggerView));
         }
     }

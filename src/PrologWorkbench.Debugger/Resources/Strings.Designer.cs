@@ -59,5 +59,14 @@ namespace PrologWorkbench.Debugger.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        internal static string VariablesListViewModel_Title {
+            get {
+                return ResourceManager.GetString("VariablesListViewModel_Title", resourceCulture);
+            }
+        }
     }
 }
