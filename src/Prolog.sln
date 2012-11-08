@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6E209
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologScheduler", "PrologSchedule\PrologScheduler.csproj", "{3D81B439-74E4-4534-9D56-C8AAE9B320E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologScheduler", "PrologScheduler\PrologScheduler.csproj", "{3D81B439-74E4-4534-9D56-C8AAE9B320E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench", "PrologWorkbench\PrologWorkbench.csproj", "{65E6D859-7578-4A05-827C-3D36AE640364}"
 EndProject
