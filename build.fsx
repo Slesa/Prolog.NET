@@ -23,6 +23,7 @@ let binDir = @".\bin\"
 let buildDir = binDir @@ @"build\"
 let testDir = binDir @@ @"test\"
 let nugetDir = binDir @@ @"nuget\"
+let deployDir = binDir @@ @"deploy\"
 let reportDir = binDir @@ @"report\"
 let packagesDir = srcDir @@ @"packages\"
 let samplesDir = @".\Samples\"
@@ -45,6 +46,7 @@ let testReferences =
   !+ @"**\Prolog.Specs\Prolog.Specs.csproj" 
     |> Scan
 
+let deployReferences = !! @"Setup\**\*.wixproj"
 
 // Targets
 Target "Clean" (fun _ ->
@@ -86,6 +88,16 @@ Target "RunTest" (fun _ ->
 )
 
 Target "Deploy" (fun _ ->
+//  let deployMsi = deployDir @@ sprintf "%s-%s.msi" projectName currentVersion
+//  !! (setupDir @@ "*.wxl")
+//    |> WiX (fun p -> WiXDefaults) deployMsi 
+//  MSBuildReleaseExt deployDir ["Version", currentVersion] "Build" deployReferences
+  MSBuildRelease deployDir "Build" deployReferences
+    |> Log "DeployBuildOutput: "
+)
+
+
+Target "DeployNuget" (fun _ ->
   
   let libDir = nugetDir @@ @"lib\net40"
   CreateDir libDir
@@ -146,7 +158,7 @@ Target "Default" DoNothing
   ==> "SetAssemblyInfo"
   ==> "BuildApp" <=> "BuildTest"
   ==> "RunTest"
-  ==> "Deploy"
+  ==> "DeployNuget" <=> "Deploy"
   ==> "Default"
 
 

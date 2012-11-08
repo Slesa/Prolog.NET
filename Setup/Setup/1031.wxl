@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="de-de" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+
+  <String Id="Language">1031</String>
+  <String Id="ProductName">Prolog.NET</String>
+  <String Id="ProductDescr">Prolog.NET ist ein .NET-basierter Prolog-Interpreter, baseierend auf der Warren Abstract Machine (WAM) Architektur.</String>
+
+  <String Id="ErrorFramework">Microsoft .NET Framework wurde nicht gefunden. [ProductName] benötigt das .NET Framework 4.0.</String>
+
+  <String Id="SharedFeatureTitle">Benötigte Dateien</String>
+  <String Id="SharedFeatureDescription">Von den Anwendungen gemeinsam benutze Dateien und Komponenten.</String>
+
+  <String Id="PrologTestFeatureTitle">Prolog Test-Program</String>
+  <String Id="PrologTestFeatureDescription">Utility zum Test ob Prolog einwandfrei funktioniert.</String>
+
+  <String Id="PrologWorkbenchFeatureTitle">Die Prolog Workbench</String>
+  <String Id="PrologWorkbenchFeatureDescription">Eine Workbench zum Editieren und Starten von Programmen.</String>
+
+
+
+</WixLocalization>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <!-- Produkt-Definition -->
+  <Product Id="6c0d7659-4235-4ff1-89f8-c278ce74d7d4" 
+           UpgradeCode="77f14bca-0f04-4a1b-929c-418566eae9c3"
+           Manufacturer="Slesa Solutions"
+           Name="!(loc.ProductName)"
+           Version="1.0.0"
+           Language="1033"            
+           Codepage="utf-8">
+
+           <!--Version="$(var.ProductVersion)"-->
+    <!-- Package-Definition -->
+    <Package InstallerVersion="200"
+             Manufacturer="Slesa Solutions"
+             Compressed="yes"
+             Description="!(loc.ProductDescr)"
+             Comments="(c) 2012 Slesa Solutions" 
+             />
+
+    <!-- Requirements -->
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <Condition Message="!(loc.ErrorFramework)">NETFRAMEWORK40FULL</Condition>
+
+    <!-- Icons -->
+    <Icon Id="I__PrologIcon" SourceFile="Resources\PrologIcon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="I__PrologIcon"/>
+
+    <!-- Media -->
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <!-- Directory-Struktur -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONFOLDER" Name="Prolog.NET" />
+      </Directory>
+      <Directory Id="DesktopFolder"/>
+    </Directory>
+
+    <!-- Komponenten-Struktur -->
+    <DirectoryRef Id="APPLICATIONFOLDER" FileSource="..\..\bin\build">
+
+      <Component Id="C__SharedComponents" Guid="{F425D437-3BD6-4527-957F-7DD80B805727}" DiskId="1">
+        <File Id="F__Lingua" Name="Lingua.dll" />
+        <File Id="F__Prolog" Name="Prolog.dll" />
+        <File Id="F__WindowsCodePack" Name="Microsoft.WindowsAPICodePack.dll" />
+        <File Id="F__WindowsCodePackShell" Name="Microsoft.WindowsAPICodePack.Shell.dll" />
+      </Component>
+
+      <Component Id="C__PrologTest" Guid="{8B176247-84DC-4D83-920C-A976923D5E6E}">
+        <File Id="F__PrologTest" Name="PrologTest.exe" />
+        <File Id="F__PrologTestConfig" Name="PrologTest.exe.config" />
+      </Component>
+
+      <Component Id="C__PrologWorkbench" Guid="{968A6FAC-664D-40D1-9933-AEF3E2A51A77}">
+        <File Id="F__PrologWorkbench" Name="PrologWorkbench.exe" />
+        <File Id="F__PrologWorkbenchConfig" Name="PrologWorkbench.exe.config" />
+        <File Id="F__Interactivity" Name="System.Windows.Interactivity.dll" />
+        <File Id="F__UnityConfig" Name="Microsoft.Practices.Unity.Configuration.dll" />
+        <File Id="F__Unity" Name="Microsoft.Practices.Unity.dll" />
+        <File Id="F__ServiceLocation" Name="Microsoft.Practices.ServiceLocation.dll" />
+        <File Id="F__PrismUnity" Name="Microsoft.Practices.Prism.UnityExtensions.dll" />
+        <File Id="F__PrismInteractivity" Name="Microsoft.Practices.Prism.Interactivity.dll" />
+        <File Id="F__Prism" Name="Microsoft.Practices.Prism.dll" />
+        <File Id="F__Interactions" Name="Microsoft.Expression.Interactions.dll" />
+        <File Id="F__WorkbenchCore" Name="PrologWorkbench.Core.dll" />
+        <File Id="F__WorkbenchDebugger" Name="PrologWorkbench.Debugger.dll" />
+        <File Id="F__WorkbenchEditor" Name="PrologWorkbench.Editor.dll" />
+        <File Id="F__WorkbenchExplorer" Name="PrologWorkbench.Explorer.dll" />
+        <File Id="F__WorkbenchTheme" Name="PrologWorkbench.Theme.dll" />
+        <File Id="F__WorkbenchTracer" Name="PrologWorkbench.Tracer.dll" />
+      </Component>
+
+    </DirectoryRef>
+
+    <!-- Feature-Struktur -->
+    <Feature Id="SharedFiles" Level="1" 
+             InstallDefault="local" 
+             Absent="disallow" 
+             AllowAdvertise="no" 
+             TypicalDefault="install"
+             Title="!(loc.SharedFeatureTitle)"
+             ConfigurableDirectory="APPLICATIONFOLDER"
+             Description="!(loc.SharedFeatureDescription)">
+      <ComponentRef Id="C__SharedComponents" />
+    </Feature>
+
+    <Feature Id="PrologTest" Level="1" InstallDefault="local" AllowAdvertise="no"
+             Title="!(loc.PrologTestFeatureTitle)"
+             Description="!(loc.PrologTestFeatureDescription)">
+      <ComponentRef Id="C__PrologTest" />
+    </Feature>
+
+    <Feature Id="PrologWorkbench" Level="1" InstallDefault="local" AllowAdvertise="no"
+             Title="!(loc.PrologWorkbenchFeatureTitle)"
+             Description="!(loc.PrologWorkbenchFeatureDescription)">
+      <ComponentRef Id="C__PrologWorkbench" />
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
+    <!-- WixVariable Id="WixUILicenseRtf" Value="..\..\license.txt" / -->
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <UIRef Id="WixUI_Mondo" />
+    <!-- UIRef Id="CustomUI_Mondo" / -->
+  </Product>
+</Wix>
