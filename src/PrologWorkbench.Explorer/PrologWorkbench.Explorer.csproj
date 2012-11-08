@@ -8,8 +8,8 @@
     <ProjectGuid>{6C8C813A-3F3B-402D-B735-DCAB10C15A77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrologWorkbench.Program</RootNamespace>
-    <AssemblyName>PrologWorkbench.Program</AssemblyName>
+    <RootNamespace>PrologWorkbench.Explorer</RootNamespace>
+    <AssemblyName>PrologWorkbench.Explorer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

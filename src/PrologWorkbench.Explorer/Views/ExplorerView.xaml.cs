@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
-using PrologWorkbench.Program.ViewModels;
+using PrologWorkbench.Explorer.ViewModels;
 
-namespace PrologWorkbench.Program.Views
+namespace PrologWorkbench.Explorer.Views
 {
     public partial class ExplorerView : UserControl
     {

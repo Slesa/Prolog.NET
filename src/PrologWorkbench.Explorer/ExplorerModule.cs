@@ -2,10 +2,10 @@
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Views;
-using PrologWorkbench.Program.ViewModels;
-using PrologWorkbench.Program.Views;
+using PrologWorkbench.Explorer.ViewModels;
+using PrologWorkbench.Explorer.Views;
 
-namespace PrologWorkbench.Program
+namespace PrologWorkbench.Explorer
 {
     public class ExplorerModule : IModule
     {

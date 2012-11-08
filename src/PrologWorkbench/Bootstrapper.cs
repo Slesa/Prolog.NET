@@ -12,7 +12,7 @@ using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Models;
 using PrologWorkbench.Debugger;
 using PrologWorkbench.Editor;
-using PrologWorkbench.Program;
+using PrologWorkbench.Explorer;
 using PrologWorkbench.Tracer;
 
 namespace Prolog.Workbench

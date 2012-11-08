@@ -1,4 +1,4 @@
-﻿namespace PrologWorkbench.Program.ViewModels
+﻿namespace PrologWorkbench.Explorer.ViewModels
 {
     public class ExplorerViewModel
     {
