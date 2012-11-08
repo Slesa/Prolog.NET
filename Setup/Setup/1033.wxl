@@ -5,6 +5,7 @@
   <String Id="ProductName">Prolog.NET</String>
   <String Id="ProductDescr">Prolog.NET is a .NET-based Prolog interpreter based on the Warren Abstract Machine (WAM) architecture.</String>
 
+  <String Id="ErrorAdminRights">[ProductName] needs privileged user rights for installion.</String>
   <String Id="ErrorFramework">Microsoft .NET Framework is not installed. [ProductName] requires .NET Framework 4.0!</String>
 
   <String Id="SharedFeatureTitle">Shared files</String>
@@ -12,7 +13,10 @@
   
   <String Id="PrologTestFeatureTitle">Prolog test program</String>
   <String Id="PrologTestFeatureDescription">Utility to check if prolog runs properly.</String>
-  
+
+  <String Id="PrologSchedulerFeatureTitle">Prolog demo application</String>
+  <String Id="PrologSchedulerFeatureDescription">Shows how to use Prolog.NET in a .NET application.</String>
+
   <String Id="PrologWorkbenchFeatureTitle">Prolog Workbench</String>
   <String Id="PrologWorkbenchFeatureDescription">A workbench to edit and run programs.</String>
 

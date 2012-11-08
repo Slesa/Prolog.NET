@@ -92,6 +92,12 @@ Target "Deploy" (fun _ ->
 //  !! (setupDir @@ "*.wxl")
 //    |> WiX (fun p -> WiXDefaults) deployMsi 
 //  MSBuildReleaseExt deployDir ["Version", currentVersion] "Build" deployReferences
+
+  let buildSamplesDir = buildDir @@ @"Samples\"
+  XCopy samplesDir buildSamplesDir
+  let buildTestsDir = buildDir @@ @"Tests\"
+  XCopy testsDir buildTestsDir
+
   MSBuildRelease deployDir "Build" deployReferences
     |> Log "DeployBuildOutput: "
 )

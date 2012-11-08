@@ -23,10 +23,11 @@
     <!-- Requirements -->
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <Condition Message="!(loc.ErrorFramework)">NETFRAMEWORK40FULL</Condition>
+    <Condition Message="!(loc.ErrorAdminRights)">Privileged</Condition>
 
     <!-- Icons -->
-    <Icon Id="I__PrologIcon" SourceFile="Resources\PrologIcon.ico" />
-    <Property Id="ARPPRODUCTICON" Value="I__PrologIcon"/>
+    <Icon Id="I__PrologIcon.exe" SourceFile="Resources\PrologIcon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="I__PrologIcon.exe"/>
 
     <!-- Media -->
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
@@ -34,7 +35,11 @@
     <!-- Directory-Struktur -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="APPLICATIONFOLDER" Name="Prolog.NET" />
+        <Directory Id="APPLICATIONFOLDER" Name="Prolog.NET">
+          <Directory Id="SAMPLESFOLDER" Name="Samples" />
+          <Directory Id="TESTSFOLDER" Name="Tests" />
+          <Directory Id="DEFOLDER" Name="de-DE" />
+        </Directory>
       </Directory>
       <Directory Id="DesktopFolder"/>
     </Directory>
@@ -45,6 +50,7 @@
       <Component Id="C__SharedComponents" Guid="{F425D437-3BD6-4527-957F-7DD80B805727}" DiskId="1">
         <File Id="F__Lingua" Name="Lingua.dll" />
         <File Id="F__Prolog" Name="Prolog.dll" />
+        <File Id="F__Log4Net" Name="log4net.dll" />
         <File Id="F__WindowsCodePack" Name="Microsoft.WindowsAPICodePack.dll" />
         <File Id="F__WindowsCodePackShell" Name="Microsoft.WindowsAPICodePack.Shell.dll" />
       </Component>
@@ -52,8 +58,25 @@
       <Component Id="C__PrologTest" Guid="{8B176247-84DC-4D83-920C-A976923D5E6E}">
         <File Id="F__PrologTest" Name="PrologTest.exe" />
         <File Id="F__PrologTestConfig" Name="PrologTest.exe.config" />
+
+        <Shortcut Id="S__PrologTest" Directory ="DesktopFolder"
+                  WorkingDirectory="APPLICATIONFOLDER"
+                  Name="Prolog.NET Test"
+                  Advertise="yes"
+                  Description="!(loc.PrologTestFeatureDescription)" />
       </Component>
 
+      <Component Id="C__PrologScheduler" Guid="{84FB2CE6-3DD8-4121-8170-B280CF7700CA}">
+        <File Id="F__PrologScheduler" Name="Prolog.Scheduler.exe" />
+        <File Id="F__PrologSchedulerConfig" Name="Prolog.Scheduler.exe.config" />
+
+        <Shortcut Id="S__PrologScheduler" Directory ="DesktopFolder"
+                  WorkingDirectory="APPLICATIONFOLDER"
+                  Name="Prolog.NET Scheduler"
+                  Advertise="yes"
+                  Description="!(loc.PrologTestFeatureDescription)" />
+      </Component>
+      
       <Component Id="C__PrologWorkbench" Guid="{968A6FAC-664D-40D1-9933-AEF3E2A51A77}">
         <File Id="F__PrologWorkbench" Name="PrologWorkbench.exe" />
         <File Id="F__PrologWorkbenchConfig" Name="PrologWorkbench.exe.config" />
@@ -71,11 +94,44 @@
         <File Id="F__WorkbenchExplorer" Name="PrologWorkbench.Explorer.dll" />
         <File Id="F__WorkbenchTheme" Name="PrologWorkbench.Theme.dll" />
         <File Id="F__WorkbenchTracer" Name="PrologWorkbench.Tracer.dll" />
+
+        <Shortcut Id="S__Workbench" Directory ="DesktopFolder"
+                  WorkingDirectory="APPLICATIONFOLDER"
+                  Name="Prolog.NET Workbench"
+                  Icon="I__PrologIcon.exe"
+                  Advertise="yes"
+                  Description="!(loc.PrologWorkbenchFeatureDescription)" />
       </Component>
 
     </DirectoryRef>
 
-    <!-- Feature-Struktur -->
+    <DirectoryRef Id="SAMPLESFOLDER" FileSource="..\..\bin\build\Samples">
+      <Component Id="C__PrologSampleFiles" Guid="{628490BE-4AA2-4CA4-8D21-ECC915ED2B54}">
+        <File Id="F__SampleFarmer" Name="farmer.prolog" />
+        <File Id="F__SampleList" Name="list.prolog" />
+        <File Id="F__SamplePeg" Name="peg.prolog" />
+        <File Id="F__SampleSchedule" Name="schedule.prolog" />
+        <File Id="F__SampleZebra" Name="zebra.prolog" />
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="TESTSFOLDER" FileSource="..\..\bin\build\Tests">
+      <Component Id="C__PrologTestFiles" Guid="{10D19A53-D4AD-405D-AF33-7FBAECD73605}">
+        <File Id="F__TestFarmer" Name="farmer.prolog.xml" />
+        <File Id="F__TestList" Name="list.prolog.xml" />
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="DEFOLDER" FileSource="..\..\bin\build\de-DE">
+      <Component Id="C__PrologWorkbenchDe" Guid="{49C8ABA4-3FC9-463B-BEF6-15105FC0B0F8}">
+        <File Id="F__WorkbenchCoreDe" Name="PrologWorkbench.Core.resources.dll" />
+        <File Id="F__WorkbenchEditorDe" Name="PrologWorkbench.Editor.resources.dll" />
+        <File Id="F__WorkbenchExplorerDe" Name="PrologWorkbench.Explorer.resources.dll" />
+        <File Id="F__WorkbenchTracerDe" Name="PrologWorkbench.Tracer.resources.dll" />
+      </Component>
+    </DirectoryRef>
+    
+      <!-- Feature-Struktur -->
     <Feature Id="SharedFiles" Level="1" 
              InstallDefault="local" 
              Absent="disallow" 
@@ -85,18 +141,27 @@
              ConfigurableDirectory="APPLICATIONFOLDER"
              Description="!(loc.SharedFeatureDescription)">
       <ComponentRef Id="C__SharedComponents" />
+      <ComponentRef Id="C__PrologSampleFiles" />
     </Feature>
 
     <Feature Id="PrologTest" Level="1" InstallDefault="local" AllowAdvertise="no"
              Title="!(loc.PrologTestFeatureTitle)"
              Description="!(loc.PrologTestFeatureDescription)">
       <ComponentRef Id="C__PrologTest" />
+      <ComponentRef Id="C__PrologTestFiles" />
+    </Feature>
+
+    <Feature Id="PrologScheduler" Level="1" InstallDefault="local" AllowAdvertise="no"
+             Title="!(loc.PrologSchedulerFeatureTitle)"
+             Description="!(loc.PrologSchedulerFeatureDescription)">
+      <ComponentRef Id="C__PrologScheduler" />
     </Feature>
 
     <Feature Id="PrologWorkbench" Level="1" InstallDefault="local" AllowAdvertise="no"
              Title="!(loc.PrologWorkbenchFeatureTitle)"
              Description="!(loc.PrologWorkbenchFeatureDescription)">
       <ComponentRef Id="C__PrologWorkbench" />
+      <ComponentRef Id="C__PrologWorkbenchDe" />
     </Feature>
 
     <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
