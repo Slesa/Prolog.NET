@@ -96,7 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Debugger.png" />
+    <Resource Include="Resources\Debugger.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DebuggerView.xaml">

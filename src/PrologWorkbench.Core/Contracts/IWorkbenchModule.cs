@@ -1,4 +1,6 @@
-﻿namespace PrologWorkbench.Core.Contracts
+﻿using System.Windows.Controls;
+
+namespace PrologWorkbench.Core.Contracts
 {
     public interface IWorkbenchModule
     {

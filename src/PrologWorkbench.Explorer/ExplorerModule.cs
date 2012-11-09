@@ -32,7 +32,7 @@ namespace PrologWorkbench.Explorer
         }
 
         public int Position { get { return 20; } }
-        public string Icon { get { return "/PrologWorkbench.Debugger;component/Resources/Explorer.png"; } }
+        public string Icon { get { return "/PrologWorkbench.Explorer;component/Resources/Explorer.png"; } }
         public string Title { get { return Strings.ExplorerModule_Title; } }
     }
 }
