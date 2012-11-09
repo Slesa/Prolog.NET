@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System.Windows.Controls;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
@@ -28,11 +29,13 @@ namespace PrologWorkbench.Explorer
 
             _regionManager.RegisterViewWithRegion("InstructionsRegion", typeof(InstructionsView));
             _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ProgramView));
-            _regionManager.RegisterViewWithRegion("ExplorerRegion", typeof(ExplorerView));
+            
+            _container.RegisterType<ExplorerView>(new ContainerControlledLifetimeManager());
         }
 
         public int Position { get { return 20; } }
         public string Icon { get { return "/PrologWorkbench.Explorer;component/Resources/Explorer.png"; } }
         public string Title { get { return Strings.ExplorerModule_Title; } }
+        public Control View { get { return _container.Resolve<ExplorerView>(); } }
     }
 }

@@ -7,5 +7,6 @@ namespace PrologWorkbench.Core.Contracts
         int Position { get; }
         string Icon { get; }
         string Title { get; }
+        Control View { get; }
     }
 }

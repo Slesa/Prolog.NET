@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System.Windows.Controls;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
@@ -24,11 +25,12 @@ namespace PrologWorkbench.Tracer
             _container.RegisterType<TraceViewModel>();
             _container.RegisterInstance<IWorkbenchModule>("TracerModule", this);
 
-            _regionManager.RegisterViewWithRegion("TraceRegion", typeof(TraceView));
+            _container.RegisterType<TraceView>(new ContainerControlledLifetimeManager());
         }
 
         public int Position { get { return 40; } }
         public string Icon { get { return "/PrologWorkbench.Tracer;component/Resources/Tracer.png"; } }
         public string Title { get { return Strings.TracerModule_Title; } }
+        public Control View { get { return _container.Resolve<TraceView>(); } }
     }
 }

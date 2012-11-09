@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System.Windows.Controls;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
@@ -25,11 +26,13 @@ namespace PrologWorkbench.Debugger
             _container.RegisterInstance<IWorkbenchModule>("DebuggerModule", this);
 
             _regionManager.RegisterViewWithRegion("VariablesRegion", typeof(VariableListView));
-            _regionManager.RegisterViewWithRegion("DebuggerRegion", typeof(DebuggerView));
+            
+            _container.RegisterType<DebuggerView>(new ContainerControlledLifetimeManager());
         }
 
         public int Position { get { return 30; } }
         public string Icon { get { return "/PrologWorkbench.Debugger;component/Resources/Debugger.png"; } }
         public string Title { get { return Strings.DebuggerModule_Title; } }
+        public Control View { get { return _container.Resolve<DebuggerView>(); } }
     }
 }

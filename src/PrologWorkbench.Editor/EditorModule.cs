@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System.Windows.Controls;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
@@ -31,14 +32,15 @@ namespace PrologWorkbench.Editor
 
             _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
             _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
+            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
             _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
 
-            _regionManager.RegisterViewWithRegion("EditorRegion", typeof(EditorView));
-            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
+            _container.RegisterType<EditorView>(new ContainerControlledLifetimeManager());
         }
 
         public int Position { get { return 10; } }
         public string Icon { get { return "/PrologWorkbench.Editor;component/Resources/Editor.png"; } }
         public string Title { get { return Strings.EditorModule_Title; } }
+        public Control View { get { return _container.Resolve<EditorView>(); } }
     }
 }
