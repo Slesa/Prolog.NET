@@ -1,15 +1,18 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using Prolog.Workbench.ViewModels;
 
 namespace Prolog.Workbench.Views
 {
-    /// <summary>
-    /// Interaction logic for Shell.xaml
-    /// </summary>
     public partial class Shell : Window
     {
-        public Shell()
+        public Shell(ShellViewModel viewModel)
         {
             InitializeComponent();
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                DataContext = viewModel;
+            }
         }
     }
 }

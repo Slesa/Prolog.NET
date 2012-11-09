@@ -32,6 +32,7 @@ namespace PrologWorkbench.Core
             _container.RegisterType<ProgramViewModel>();
 
             _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof(StatusBarView));
+            _regionManager.RegisterViewWithRegion("ModulesRegion", typeof(ModulesView));
         }
     }
 }

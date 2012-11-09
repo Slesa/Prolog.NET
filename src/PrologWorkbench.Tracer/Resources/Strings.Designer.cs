@@ -61,6 +61,15 @@ namespace PrologWorkbench.Tracer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trace.
+        /// </summary>
+        public static string TracerModule_Title {
+            get {
+                return ResourceManager.GetString("TracerModule_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable or disable trace.
         /// </summary>
         public static string TraceView_EnableTrace {

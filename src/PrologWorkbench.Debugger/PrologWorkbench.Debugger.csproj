@@ -95,7 +95,9 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Debugger.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DebuggerView.xaml">
       <SubType>Designer</SubType>

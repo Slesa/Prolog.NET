@@ -61,6 +61,15 @@ namespace PrologWorkbench.Explorer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Explorer.
+        /// </summary>
+        public static string ExplorerModule_Title {
+            get {
+                return ResourceManager.GetString("ExplorerModule_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Instructions.
         /// </summary>
         public static string InstructionsViewModel_Title {

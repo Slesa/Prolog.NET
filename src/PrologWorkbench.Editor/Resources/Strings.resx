@@ -183,4 +183,7 @@
   <data name="CommandViewModel_ExecutionTime" xml:space="preserve">
     <value>Execution time {0}, {1} instructions</value>
   </data>
+  <data name="EditorModule_Title" xml:space="preserve">
+    <value>Transcript</value>
+  </data>
 </root>

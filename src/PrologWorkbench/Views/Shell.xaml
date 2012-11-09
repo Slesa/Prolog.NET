@@ -4,7 +4,6 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ViewModels="clr-namespace:Prolog.Workbench.ViewModels" 
         xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         xmlns:Behaviors="clr-namespace:Prolog.Workbench.Behaviors" 
         mc:Ignorable="d"
@@ -14,19 +13,6 @@
         WindowStyle="None"
         >
 
-    <Window.DataContext>
-        <ViewModels:ShellViewModel />
-    </Window.DataContext>
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ImageSource x:Key="PngTranscript">../Resources/Editor.png</ImageSource>
-            <ImageSource x:Key="PngExplorer">../Resources/Explorer.png</ImageSource>
-            <Image x:Key="PngDebugger" Source="../Resources/Debugger.png" />
-            <Image x:Key="PngTracer" Source="../Resources/Tracer.png" />
-        </ResourceDictionary>
-    </Window.Resources>
-
     <i:Interaction.Behaviors>
         <Behaviors:ControlWindowBehavior />
     </i:Interaction.Behaviors>
@@ -34,10 +20,10 @@
     <DockPanel Style="{DynamicResource Style.Shell.DockPanel}" LastChildFill="true" >
 
         <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="StatusBarRegion" />
-        
         <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
+        <ContentControl DockPanel.Dock="Left" regions:RegionManager.RegionName="ModulesRegion" />
 
-        <RadioButton x:Name="_transcript">
+        <!--RadioButton x:Name="_transcript" IsChecked="True">
             <RadioButton.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource PngTranscript}" Width="32" />
@@ -53,20 +39,37 @@
                 </StackPanel>
             </RadioButton.Content>
         </RadioButton>
-        <TabControl>
-            <TabItem Header="Transcript">
-                <ContentControl regions:RegionManager.RegionName="EditorRegion" />
-            </TabItem>
-            <TabItem Header="Explorer">
-                <ContentControl regions:RegionManager.RegionName="ExplorerRegion" />
-            </TabItem>
-            <TabItem Header="Debug">
-                <ContentControl regions:RegionManager.RegionName="DebuggerRegion" />
-            </TabItem>
-            <TabItem Header="Trace">
-                <ContentControl regions:RegionManager.RegionName="TraceRegion" />
-            </TabItem>
-        </TabControl>
+        <RadioButton x:Name="_debugger">
+            <RadioButton.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource PngDebugger}" Width="32"/>
+                    <TextBlock Text="Debugger" />
+                </StackPanel>
+            </RadioButton.Content>
+        </RadioButton>
+        <RadioButton x:Name="_tracer">
+            <RadioButton.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource PngTracer}" Width="32"/>
+                    <TextBlock Text="Tracer" />
+                </StackPanel>
+            </RadioButton.Content>
+        </RadioButton -->
+        
+        <!--<TabControl>
+            <TabItem Header="Transcript">-->
+                <!--<ContentControl Visibility="{Binding _transcript, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" regions:RegionManager.RegionName="EditorRegion" />-->
+            <!--</TabItem>
+            <TabItem Header="Explorer">-->
+                <!--<ContentControl Visibility="{Binding _explorer, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" regions:RegionManager.RegionName="ExplorerRegion" />-->
+            <!--</TabItem>
+            <TabItem Header="Debug">-->
+                <!--<ContentControl Visibility="{Binding _debugger, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"  regions:RegionManager.RegionName="DebuggerRegion" />-->
+            <!--</TabItem>
+            <TabItem Header="Trace">-->
+                <!--<ContentControl Visibility="{Binding _tracer, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"  regions:RegionManager.RegionName="TraceRegion" />-->
+            <!--</TabItem>
+        </TabControl>-->
     </DockPanel>
     
 </Window>
