@@ -17,7 +17,16 @@
     <Window.DataContext>
         <ViewModels:ShellViewModel />
     </Window.DataContext>
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ImageSource x:Key="PngTranscript">../Resources/Editor.png</ImageSource>
+            <ImageSource x:Key="PngExplorer">../Resources/Explorer.png</ImageSource>
+            <Image x:Key="PngDebugger" Source="../Resources/Debugger.png" />
+            <Image x:Key="PngTracer" Source="../Resources/Tracer.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+
     <i:Interaction.Behaviors>
         <Behaviors:ControlWindowBehavior />
     </i:Interaction.Behaviors>
@@ -28,6 +37,22 @@
         
         <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="TitleBarRegion" />
 
+        <RadioButton x:Name="_transcript">
+            <RadioButton.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource PngTranscript}" Width="32" />
+                    <TextBlock Text="Transcript" />
+                </StackPanel>
+            </RadioButton.Content>
+        </RadioButton>
+        <RadioButton x:Name="_explorer">
+            <RadioButton.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource PngExplorer}" Width="32"/>
+                    <TextBlock Text="Explorer" />
+                </StackPanel>
+            </RadioButton.Content>
+        </RadioButton>
         <TabControl>
             <TabItem Header="Transcript">
                 <ContentControl regions:RegionManager.RegionName="EditorRegion" />
