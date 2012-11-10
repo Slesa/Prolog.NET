@@ -97,7 +97,7 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transcript.
+        ///   Looks up a localized string similar to _Editor.
         /// </summary>
         public static string EditorModule_Title {
             get {

@@ -61,7 +61,7 @@ namespace PrologWorkbench.Tracer.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trace.
+        ///   Looks up a localized string similar to _Trace.
         /// </summary>
         public static string TracerModule_Title {
             get {

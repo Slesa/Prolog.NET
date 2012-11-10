@@ -61,7 +61,7 @@ namespace PrologWorkbench.Debugger.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debugger.
+        ///   Looks up a localized string similar to _Debugger.
         /// </summary>
         internal static string DebuggerModule_Title {
             get {

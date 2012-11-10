@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TracerModule_Title" xml:space="preserve">
-    <value>Trace</value>
+    <value>_Trace</value>
   </data>
   <data name="TraceViewModel_Title" xml:space="preserve">
     <value>Trace</value>

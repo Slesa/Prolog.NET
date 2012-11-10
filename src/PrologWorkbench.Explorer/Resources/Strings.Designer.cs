@@ -61,7 +61,7 @@ namespace PrologWorkbench.Explorer.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explorer.
+        ///   Looks up a localized string similar to E_xplorer.
         /// </summary>
         public static string ExplorerModule_Title {
             get {
