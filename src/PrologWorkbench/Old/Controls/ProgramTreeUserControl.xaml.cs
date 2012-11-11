@@ -1,8 +1,4 @@
-﻿/* Copyright © 2010 Richard G. Todd.
- * Licensed under the terms of the Microsoft Public License (Ms-PL).
- */
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,10 +7,6 @@ using Prolog.Code;
 
 namespace Prolog.Workbench
 {
-    /// <summary>
-    /// Interaction logic for ProgramTreeUserControl.xaml
-    /// </summary>
-    public partial class ProgramTreeUserControl : UserControl, INotifyPropertyChanged
     {
         Procedure _selectedProcedure;
         Clause _selectedClause;
@@ -68,57 +60,6 @@ namespace Prolog.Workbench
             RaiseEvent(args);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            base.OnVisualParentChanged(oldParent);
-            if (this.Parent == null) return;
-
-            Width = double.NaN;
-            Height = double.NaN;
-        }
-
-        void RaisePropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
-        }
-
-        private void CommandCut_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var clause = SelectedClause;
-            if (clause == null) return;
-            Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
-            clause.Container.Remove(clause);
-        }
-
-        void CommandCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (SelectedClause != null)
-            {
-                e.CanExecute = true;
-            }
-        }
-
-        void CommandCopy_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var clause = SelectedClause;
-            if (clause != null)
-            {
-                Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
-            }
-        }
-
-        void CommandCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (SelectedClause != null)
-            {
-                e.CanExecute = true;
-            }
-        }
 
         void CommandPaste_Executed(object sender, ExecutedRoutedEventArgs e)
         {

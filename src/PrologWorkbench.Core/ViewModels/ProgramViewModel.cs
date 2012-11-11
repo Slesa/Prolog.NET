@@ -1,6 +1,8 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using System.Windows;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
+using Prolog.Code;
 using PrologWorkbench.Core.Contracts;
 
 namespace PrologWorkbench.Core.ViewModels
@@ -16,12 +18,47 @@ namespace PrologWorkbench.Core.ViewModels
             _currentClauseProvider = currentClauseProvider;
             _programProvider.ProgramChanged += (s, e) => Program = e.Program;
 
+            CopyCommand = new DelegateCommand(OnCopy, CanCopy);
+            CutCommand = new DelegateCommand(OnCut, CanCut);
+
             CopyClauseCommand = new DelegateCommand(OnCopyClause);
         }
 
         public string Title { get { return Resources.Strings.ProgramViewModel_Title; } }
 
+        public DelegateCommand CopyCommand { get; private set; }
+        public DelegateCommand CutCommand { get; private set; }
+
         public DelegateCommand CopyClauseCommand { get; private set; }
+
+        #region Commands
+
+        void OnCopy()
+        {
+            var clause = SelectedClause;
+            if (clause == null) return;
+            Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
+        }
+
+        bool CanCopy()
+        {
+            return (SelectedClause != null);
+        }
+
+        void OnCut()
+        {
+            var clause = SelectedClause;
+            if (clause == null) return;
+            Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
+            clause.Container.Remove(clause);
+        }
+
+        bool CanCut()
+        {
+            return (SelectedClause != null);
+        }
+
+        #endregion
 
         void OnCopyClause()
         {
@@ -57,6 +94,9 @@ namespace PrologWorkbench.Core.ViewModels
                 if (value == _currentClauseProvider.SelectedClause) return;
                 _currentClauseProvider.SelectedClause = value;
                 RaisePropertyChanged(() => SelectedClause);
+                
+                CopyCommand.RaiseCanExecuteChanged();
+                CutCommand.RaiseCanExecuteChanged();
             }
         }
 
