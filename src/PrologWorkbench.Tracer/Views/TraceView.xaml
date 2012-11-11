@@ -20,7 +20,11 @@
         <DockPanel>
             <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
                 <StackPanel Orientation="Horizontal" Height="48">
-                    <ToggleButton Margin="3" Style="{DynamicResource ToggleButtonStyle}" x:Name="Enabled" IsChecked="{Binding TraceEnabled, Mode=TwoWay}" Content="{StaticResource PngEnableTrace}" ToolTip="{x:Static strings:Strings.TraceView_EnableTrace}"/>
+                    <ToggleButton Margin="3" x:Name="Enabled" 
+                                  Style="{DynamicResource ToggleButtonStyle}" 
+                                  IsChecked="{Binding TraceEnabled, Mode=TwoWay}" 
+                                  Content="{StaticResource PngEnableTrace}" 
+                                  ToolTip="{x:Static strings:Strings.TraceView_EnableTrace}"/>
                 </StackPanel>
             </Border>
             <TextBox Style="{DynamicResource Style.Content.Body}" Text="{Binding Traces}" BorderThickness="0" IsReadOnly="True"

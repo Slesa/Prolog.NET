@@ -16,18 +16,6 @@ namespace Prolog.Workbench
     public partial class TranscriptComponent : UserControl
     {
 
-        void CommandExecuteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var input = txtCommand.Text;
-            ProcessInput(input, true);
-        }
-
-        void CommandDebugCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var input = txtCommand.Text;
-            ProcessInput(input, false);
-        }
-
 
         void txtCommand_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {

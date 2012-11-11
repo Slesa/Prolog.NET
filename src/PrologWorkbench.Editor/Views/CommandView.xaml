@@ -23,8 +23,8 @@
             <i:InvokeCommandAction Command="{Binding ExecuteCommand}" />
         </ei:KeyTrigger>
         <ei:KeyTrigger Key="Return"
-                       Modifiers="Ctrl+Shift">
-            <i:InvokeCommandAction Command="{Binding DebugCommand}" />
+        	Modifiers="Shift">
+        	<i:InvokeCommandAction Command="{Binding DebugCommand}" />
         </ei:KeyTrigger>
     </i:Interaction.Triggers>
 

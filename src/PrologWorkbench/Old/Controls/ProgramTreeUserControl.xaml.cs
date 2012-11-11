@@ -29,11 +29,6 @@ namespace Prolog.Workbench
             }
         }
 
-        public AppState AppState
-        {
-            get { return App.Current.AppState; }
-        }
-
         public Clause SelectedClause
         {
             get { return _selectedClause; }
