@@ -177,4 +177,7 @@
   <data name="CommandViewModel_ExecutionTime" xml:space="preserve">
     <value>Ausführungszeit {0}, {1} Instruktionen</value>
   </data>
+  <data name="CommandView_Statistics" xml:space="preserve">
+    <value>Statistik an- oder abschalten</value>
+  </data>
 </root>

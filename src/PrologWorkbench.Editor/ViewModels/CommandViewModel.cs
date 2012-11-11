@@ -37,6 +37,18 @@ namespace PrologWorkbench.Editor.ViewModels
         public DelegateCommand ExecuteCommand { get; private set; }
         public DelegateCommand DebugCommand { get; private set; }
 
+        bool _statisticsEnabled;
+        public bool StatisticsEnabled
+        {
+            get { return _statisticsEnabled; }
+            set
+            {
+                if (value == _statisticsEnabled) return;
+                _statisticsEnabled = value;
+                RaisePropertyChanged(() => StatisticsEnabled);
+            }
+        }
+
         public string CurrentInput
         {
             get { return _currentInput; }
@@ -149,10 +161,10 @@ namespace PrologWorkbench.Editor.ViewModels
                 }
                 TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, Resources.Strings.ResponseSuccess);
 
-                //if (StatisticsEnabled)
+                if (StatisticsEnabled)
                 {
-                    //TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, string.Format(Resources.Strings.CommandViewModel_ExecutionTime
-                    StatusUpdateProvider.Publish(string.Format(Resources.Strings.CommandViewModel_ExecutionTime
+                    TranscriptProvider.Transcript.AddTranscriptEntry(TranscriptEntryTypes.Response, string.Format(Resources.Strings.CommandViewModel_ExecutionTime
+                    //StatusUpdateProvider.Publish(string.Format(Resources.Strings.CommandViewModel_ExecutionTime
                         , MachineProvider.Machine.PerformanceStatistics.ElapsedTime
                         , MachineProvider.Machine.PerformanceStatistics.InstructionCount));
                 }

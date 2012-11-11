@@ -186,4 +186,7 @@
   <data name="EditorModule_Title" xml:space="preserve">
     <value>_Editor</value>
   </data>
+  <data name="CommandView_Statistics" xml:space="preserve">
+    <value>Enable or disable statistics</value>
+  </data>
 </root>

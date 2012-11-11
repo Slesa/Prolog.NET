@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:strings="clr-namespace:PrologWorkbench.Editor.Resources"
-             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
              <!-- FocusManager.FocusedElement="{Binding _input}" -->
     
@@ -12,9 +13,21 @@
         <ResourceDictionary>
             <Image x:Key="PngExecute" Source="../Resources/execute.png" />
             <Image x:Key="PngDebug" Source="../Resources/debug.png" />
+            <Image x:Key="PngStatistics" Source="../Resources/statistics.png" />
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
+    <i:Interaction.Triggers>
+        <ei:KeyTrigger Key="Return"
+                       Modifiers="Ctrl">
+            <i:InvokeCommandAction Command="{Binding ExecuteCommand}" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Return"
+                       Modifiers="Ctrl+Shift">
+            <i:InvokeCommandAction Command="{Binding DebugCommand}" />
+        </ei:KeyTrigger>
+    </i:Interaction.Triggers>
+
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
         <HeaderedContentControl.Header>
             <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
@@ -22,8 +35,21 @@
         <DockPanel>
             <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
             <StackPanel Orientation="Horizontal" Height="48">
-                    <Button Margin="3" x:Name="Execute" Command="{Binding ExecuteCommand}" Content="{StaticResource PngExecute}" ToolTip="{x:Static strings:Strings.CommandView_Execute}"/>
-                    <Button Margin="3" x:Name="Debug" Command="{Binding DebugCommand}"  Content="{StaticResource PngDebug}" ToolTip="{x:Static strings:Strings.CommandView_Debug}" />
+                    <Button Margin="3" x:Name="Execute" 
+                            Style="{DynamicResource ButtonStyle}" 
+                            Command="{Binding ExecuteCommand}" 
+                            Content="{StaticResource PngExecute}" 
+                            ToolTip="{x:Static strings:Strings.CommandView_Execute}"/>
+                    <Button Margin="3" x:Name="Debug" 
+                            Style="{DynamicResource ButtonStyle}" 
+                            Command="{Binding DebugCommand}" 
+                            Content="{StaticResource PngDebug}" 
+                            ToolTip="{x:Static strings:Strings.CommandView_Debug}" />
+                    <ToggleButton Margin="3" x:Name="Statistics" 
+                                  Style="{DynamicResource ToggleButtonStyle}" 
+                                  IsChecked="{Binding StatisticsEnabled, Mode=TwoWay}" 
+                                  Content="{StaticResource PngStatistics}" 
+                                  ToolTip="{x:Static strings:Strings.CommandView_Statistics}" />
             </StackPanel>
             </Border>
             <TextBox Grid.Row="1" Style="{DynamicResource Style.Content.Body}" x:Name="_input"

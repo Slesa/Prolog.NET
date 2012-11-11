@@ -10,22 +10,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Image x:Key="PngEnableTrace" Source="../Resources/trace.png" />
-            <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Padding="5,5,5,5" CornerRadius="5,5,5,5" Background="#FFBFACAC" BorderBrush="#FF000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
-                                <ContentPresenter x:Name="contentPresenter"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsChecked" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFC31010"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>    
     </UserControl.Resources>
     
@@ -36,7 +20,7 @@
         <DockPanel>
             <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
                 <StackPanel Orientation="Horizontal" Height="48">
-                    <ToggleButton Margin="3" Style="{StaticResource ToggleButtonStyle}"  x:Name="Enabled" IsChecked="{Binding TraceEnabled, Mode=TwoWay}" Content="{StaticResource PngEnableTrace}" ToolTip="{x:Static strings:Strings.TraceView_EnableTrace}"/>
+                    <ToggleButton Margin="3" Style="{DynamicResource ToggleButtonStyle}" x:Name="Enabled" IsChecked="{Binding TraceEnabled, Mode=TwoWay}" Content="{StaticResource PngEnableTrace}" ToolTip="{x:Static strings:Strings.TraceView_EnableTrace}"/>
                 </StackPanel>
             </Border>
             <TextBox Style="{DynamicResource Style.Content.Body}" Text="{Binding Traces}" BorderThickness="0" IsReadOnly="True"

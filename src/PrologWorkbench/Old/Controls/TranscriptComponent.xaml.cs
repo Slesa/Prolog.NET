@@ -13,27 +13,8 @@ using Prolog.Workbench.Models;
 
 namespace Prolog.Workbench
 {
-    /// <summary>F
-    /// Interaction logic for TranscriptComponent.xaml
-    /// </summary>
     public partial class TranscriptComponent : UserControl
     {
-        public TranscriptComponent()
-        {
-            InitializeComponent();
-
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                DataContext = AppState;
-                var notifyCollectionChanged = ctrlTranscriptEntries.Items as INotifyCollectionChanged;
-                notifyCollectionChanged.CollectionChanged += ctrlTranscriptEntries_CollectionChanged;
-            }
-        }
-
-        public AppState AppState
-        {
-            get { return App.Current.AppState; }
-        }
 
         void CommandExecuteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -83,68 +64,5 @@ namespace Prolog.Workbench
 
         }
 
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            base.OnVisualParentChanged(oldParent);
-
-            if (this.Parent != null)
-            {
-                this.Width = double.NaN;
-                this.Height = double.NaN;
-            }
-        }
-
-        void ProcessInput(string input, bool executeQuery)
-        {
-            // Ignore empty input.
-            //
-            if (input == null) return;
-            input = input.Trim();
-            if (string.IsNullOrEmpty(input)) return;
-
-            AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Request, input);
-
-            var selectedClause = ctrlProgram.SelectedClause;
-            var codeSentences = Parser.Parse(input);
-            if (codeSentences == null || codeSentences.Length == 0)
-            {
-                AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.MessageUnrecognizedInput);
-                return;
-            }
-
-            foreach (var codeSentence in codeSentences)
-            {
-                if (codeSentence.Head == null) // query
-                {
-                    var query = new Query(codeSentence);
-                    AppState.Machine = PrologMachine.Create(AppState.Program, query);
-
-                    if (executeQuery)
-                    {
-                        AppState.Machine.RunToSuccess();
-                    }
-                }
-                else // fact or rule
-                {
-                    if (selectedClause != null && selectedClause.Container.Procedure.Functor == Functor.Create(codeSentence.Head.Functor))
-                    {
-                        selectedClause.CodeSentence = codeSentence;
-                        AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.ResponseSuccess);
-                    }
-                    else
-                    {
-                        if (AppState.Program.Contains(codeSentence))
-                        {
-                            AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources. MessageDuplicateClause);
-                        }
-                        else
-                        {
-                            AppState.Program.Add(codeSentence);
-                            AppState.Transcript.Entries.AddTranscriptEntry(TranscriptEntryTypes.Response, Properties.Resources.ResponseSuccess);
-                        }
-                    }
-                }
-            }
-        }
     }
 }
