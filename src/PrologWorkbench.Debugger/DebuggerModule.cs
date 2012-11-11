@@ -22,10 +22,19 @@ namespace PrologWorkbench.Debugger
 
         public void Initialize()
         {
-            _container.RegisterType<VariableListViewModel>();
+            _container.RegisterType<ArgumentsVariableListViewModel>();
+            _container.RegisterType<TemporaryVariableListViewModel>();
+            _container.RegisterType<PermanentVariablesListViewModel>();
+
             _container.RegisterInstance<IWorkbenchModule>("DebuggerModule", this);
 
-            _regionManager.RegisterViewWithRegion("VariablesRegion", typeof(VariableListView));
+            _container.RegisterType<VariableListView>("VarArgumentsView", new InjectionConstructor(_container.Resolve<ArgumentsVariableListViewModel>()));
+            _container.RegisterType<VariableListView>("VarTemporariesView", new InjectionConstructor(_container.Resolve<TemporaryVariableListViewModel>()));
+            _container.RegisterType<VariableListView>("VarPermanentsView", new InjectionConstructor(_container.Resolve<PermanentVariablesListViewModel>()));
+
+            _regionManager.RegisterViewWithRegion("VarArgumentsRegion", () => _container.Resolve<VariableListView>("VarArgumentsView"));
+            _regionManager.RegisterViewWithRegion("VarTemporariesRegion", () => _container.Resolve<VariableListView>("VarTemporariesView"));
+            _regionManager.RegisterViewWithRegion("VarPermanentsRegion", () => _container.Resolve<VariableListView>("VarPermanentsView"));
             
             _container.RegisterType<DebuggerView>(new ContainerControlledLifetimeManager());
         }

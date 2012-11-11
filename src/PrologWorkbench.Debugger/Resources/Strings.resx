@@ -120,7 +120,13 @@
   <data name="DebuggerModule_Title" xml:space="preserve">
     <value>_Debugger</value>
   </data>
-  <data name="VariablesListViewModel_Title" xml:space="preserve">
-    <value>Variables</value>
+  <data name="VariablesListViewModel_ArgumentsList" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="VariablesListViewModel_PermanentsList" xml:space="preserve">
+    <value>Permanent variables</value>
+  </data>
+  <data name="VariablesListViewModel_TemporariesList" xml:space="preserve">
+    <value>Temporary variables</value>
   </data>
 </root>

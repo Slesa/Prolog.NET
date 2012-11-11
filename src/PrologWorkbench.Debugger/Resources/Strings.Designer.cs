@@ -70,11 +70,29 @@ namespace PrologWorkbench.Debugger.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Variables.
+        ///   Looks up a localized string similar to Arguments.
         /// </summary>
-        internal static string VariablesListViewModel_Title {
+        internal static string VariablesListViewModel_ArgumentsList {
             get {
-                return ResourceManager.GetString("VariablesListViewModel_Title", resourceCulture);
+                return ResourceManager.GetString("VariablesListViewModel_ArgumentsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permanent variables.
+        /// </summary>
+        internal static string VariablesListViewModel_PermanentsList {
+            get {
+                return ResourceManager.GetString("VariablesListViewModel_PermanentsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temporary variables.
+        /// </summary>
+        internal static string VariablesListViewModel_TemporariesList {
+            get {
+                return ResourceManager.GetString("VariablesListViewModel_TemporariesList", resourceCulture);
             }
         }
     }

@@ -9,7 +9,7 @@
             <TextBox Text="{Binding Path=Caption, ElementName=ctrlVariableList}"
                      DockPanel.Dock="Top" 
                      Background="{DynamicResource HeadingBrush}" FontWeight="Bold" />
-            <ListBox ItemsSource="{Binding Path=Variables, ElementName=ctrlVariableList}">
+            <ListBox ItemsSource="{Binding Variables}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock TextWrapping="Wrap">
