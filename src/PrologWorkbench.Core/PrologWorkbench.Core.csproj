@@ -79,6 +79,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Behaviors\SelectedItemBehavior.cs" />
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
     <Compile Include="Contracts\IProvideCurrentClause.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />

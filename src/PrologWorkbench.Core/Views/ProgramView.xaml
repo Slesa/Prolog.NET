@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:strings="clr-namespace:PrologWorkbench.Core.Resources"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             mc:Ignorable="d"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:PrologWorkbench.Core.Behaviors" mc:Ignorable="d"
              x:Class="PrologWorkbench.Core.Views.ProgramView"
              d:DesignWidth="300" d:DesignHeight="300">
 
@@ -23,7 +23,7 @@
             <i:InvokeCommandAction Command="{Binding CopyClauseCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
         <HeaderedContentControl.Header>
             <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
@@ -38,19 +38,22 @@
                     <Button Margin="3" Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramView_MoveDown}" />
                 </StackPanel>
             </Border>
-            <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" Background="{Binding Parent.Background}" DataContext="{Binding Program}" ItemsSource="{Binding Procedures}" >
-            <!-- MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged" -->
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
-                    <TextBlock Text="{Binding}" FontSize="16" />
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding CodeSentence}" FontSize="12" />
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+            <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}" >
+                <!-- MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged" -->
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
+                        <TextBlock Text="{Binding}" FontSize="16" />
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CodeSentence}" FontSize="12" />
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <i:Interaction.Behaviors>
+                    <behaviors:SelectedItemBehavior SelectedItem="{Binding SelectedItem}" />
+                </i:Interaction.Behaviors>
+            </TreeView>
         </DockPanel>
     </HeaderedContentControl>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
@@ -72,6 +73,19 @@ namespace PrologWorkbench.Core.ViewModels
                 txtCommand.Focus();
             }
              * */
+        }
+
+        object _selectedItem;
+        public object SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                RaisePropertyChanged(()=>SelectedItem);
+                SelectedProcedure = _selectedItem as Procedure;
+                SelectedClause = _selectedItem as Clause;
+            }
         }
 
         Program _program;
