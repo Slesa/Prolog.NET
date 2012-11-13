@@ -1,21 +1,27 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
+using Microsoft.Practices.Unity;
 using Prolog;
 using Prolog.Code;
 using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Events;
 
 namespace PrologWorkbench.Core.ViewModels
 {
     public class ProgramViewModel : NotificationObject
     {
         readonly IProvideProgram _programProvider;
-        readonly IProvideCurrentClause _currentClauseProvider;
+        readonly IEventAggregator _eventAggregator;
 
-        public ProgramViewModel(IProvideProgram programProvider, IProvideCurrentClause currentClauseProvider)
+        [Dependency]
+        public IProvideCurrentClause CurrentClauseProvider { get; set; }
+
+        public ProgramViewModel(IProvideProgram programProvider, IEventAggregator eventAggregator)
         {
             _programProvider = programProvider;
-            _currentClauseProvider = currentClauseProvider;
+            _eventAggregator = eventAggregator;
             _programProvider.ProgramChanged += (s, e) => Program = e.Program;
 
             CopyCommand = new DelegateCommand(OnCopy, CanCopy);
@@ -123,16 +129,10 @@ namespace PrologWorkbench.Core.ViewModels
 
         void OnCopyClause()
         {
-            /*
-            http://www.codeproject.com/Articles/394750/Navigating-the-different-modules-through-a-TreeVie
-            var view = (ProgramView) 
-            var transcriptEntry = ctrlTranscriptEntries.SelectedItem as TranscriptEntry;
-            if (transcriptEntry != null)
-            {
-                txtCommand.Text = transcriptEntry.Text;
-                txtCommand.Focus();
-            }
-             * */
+            var clause = SelectedClause;
+            if (clause == null) return;
+
+            _eventAggregator.GetEvent<SetCurrentInputEvent>().Publish(clause.CodeSentence.ToString());
         }
 
         object _selectedItem;
@@ -162,11 +162,11 @@ namespace PrologWorkbench.Core.ViewModels
 
         public Clause SelectedClause
         {
-            get { return _currentClauseProvider.SelectedClause; }
+            get { return CurrentClauseProvider.SelectedClause; }
             set
             {
-                if (value == _currentClauseProvider.SelectedClause) return;
-                _currentClauseProvider.SelectedClause = value;
+                if (value == CurrentClauseProvider.SelectedClause) return;
+                CurrentClauseProvider.SelectedClause = value;
                 RaisePropertyChanged(() => SelectedClause);
                 
                 CopyCommand.RaiseCanExecuteChanged();
@@ -178,12 +178,12 @@ namespace PrologWorkbench.Core.ViewModels
 
         public Procedure SelectedProcedure
         {
-            get { return _currentClauseProvider.SelectedProcedure; }
+            get { return CurrentClauseProvider.SelectedProcedure; }
             set
             {
-                if (value == _currentClauseProvider.SelectedProcedure) return;
-                _currentClauseProvider.SelectedProcedure = value;
-                RaisePropertyChanged(() => _currentClauseProvider.SelectedProcedure);
+                if (value == CurrentClauseProvider.SelectedProcedure) return;
+                CurrentClauseProvider.SelectedProcedure = value;
+                RaisePropertyChanged(() => CurrentClauseProvider.SelectedProcedure);
             }
         }
     }
