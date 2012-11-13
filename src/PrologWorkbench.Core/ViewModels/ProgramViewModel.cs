@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
@@ -21,6 +20,9 @@ namespace PrologWorkbench.Core.ViewModels
 
             CopyCommand = new DelegateCommand(OnCopy, CanCopy);
             CutCommand = new DelegateCommand(OnCut, CanCut);
+            PasteCommand = new DelegateCommand(OnPaste, CanPaste);
+            MoveUpCommand = new DelegateCommand(OnMoveUp, CanMoveUp);
+            MoveDownCommand = new DelegateCommand(OnMoveDown, CanMoveDown);
 
             CopyClauseCommand = new DelegateCommand(OnCopyClause);
         }
@@ -29,6 +31,9 @@ namespace PrologWorkbench.Core.ViewModels
 
         public DelegateCommand CopyCommand { get; private set; }
         public DelegateCommand CutCommand { get; private set; }
+        public DelegateCommand PasteCommand { get; private set; }
+        public DelegateCommand MoveUpCommand { get; private set; }
+        public DelegateCommand MoveDownCommand { get; private set; }
 
         public DelegateCommand CopyClauseCommand { get; private set; }
 
@@ -39,6 +44,7 @@ namespace PrologWorkbench.Core.ViewModels
             var clause = SelectedClause;
             if (clause == null) return;
             Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
+            PasteCommand.RaiseCanExecuteChanged();
         }
 
         bool CanCopy()
@@ -52,11 +58,65 @@ namespace PrologWorkbench.Core.ViewModels
             if (clause == null) return;
             Clipboard.SetDataObject(new CodeSentenceDataObject(clause.CodeSentence), true);
             clause.Container.Remove(clause);
+            PasteCommand.RaiseCanExecuteChanged();
         }
 
         bool CanCut()
         {
             return (SelectedClause != null);
+        }
+
+        void OnPaste()
+        {
+            var dataObject = Clipboard.GetDataObject();
+            if (dataObject == null) return;
+
+            var codeSentenceObject = dataObject.GetData(CodeSentenceDataObject.CodeSentenceDataFormat);
+            if (codeSentenceObject == null) return;
+
+            var codeSentence = codeSentenceObject as CodeSentence;
+            // TODO Do we want to paste clauses without a head or not?
+            if (codeSentence == null /*|| codeSentence.Head == null*/) return;
+
+            _programProvider.Program.Add(codeSentence);
+        }
+
+        bool CanPaste()
+        {
+            // TODO Well, how to update CanExecute, when Clipboard changes?
+            return true;
+            var dataObject = Clipboard.GetDataObject();
+            if (dataObject == null) return false;
+
+            return dataObject.GetDataPresent(CodeSentenceDataObject.CodeSentenceDataFormat);
+        }
+
+        void OnMoveUp()
+        {
+            var clause = SelectedClause;
+            if (clause == null) return;
+            clause.Container.MoveUp(clause);
+            MoveUpCommand.RaiseCanExecuteChanged();
+            MoveDownCommand.RaiseCanExecuteChanged();
+        }
+
+        bool CanMoveUp()
+        {
+            return (SelectedClause != null && !SelectedClause.IsFirst);
+        }
+
+        void OnMoveDown()
+        {
+            var clause = SelectedClause;
+            if (clause == null) return;
+            clause.Container.MoveDown(clause);
+            MoveUpCommand.RaiseCanExecuteChanged();
+            MoveDownCommand.RaiseCanExecuteChanged();
+        }
+
+        bool CanMoveDown()
+        {
+            return (SelectedClause != null && !SelectedClause.IsLast);
         }
 
         #endregion
@@ -111,6 +171,8 @@ namespace PrologWorkbench.Core.ViewModels
                 
                 CopyCommand.RaiseCanExecuteChanged();
                 CutCommand.RaiseCanExecuteChanged();
+                MoveUpCommand.RaiseCanExecuteChanged();
+                MoveDownCommand.RaiseCanExecuteChanged();
             }
         }
 
