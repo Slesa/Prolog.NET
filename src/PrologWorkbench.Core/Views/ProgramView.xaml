@@ -39,9 +39,7 @@
                 </StackPanel>
             </Border>
             <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" 
-                      Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}"
-                      behaviors:DoubleClickBehavior.DoubleClick="{Binding CopyClauseCommand}">
-                <!-- MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged" -->
+                      Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
                         <TextBlock Text="{Binding}" FontSize="16" />
