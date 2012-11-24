@@ -1,28 +1,11 @@
-﻿/* Copyright © 2010 Richard G. Todd.
- * Licensed under the terms of the Microsoft Public License (Ms-PL).
- */
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Prolog.Workbench
 {
-    /// <summary>
-    /// Interaction logic for DebugComponent.xaml
-    /// </summary>
     public partial class DebugComponent : UserControl
     {
-        public DebugComponent()
-        {
-            InitializeComponent();
-
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                AppState.PropertyChanged += AppState_PropertyChanged;
-            }
-        }
-
         public AppState AppState
         {
             get { return App.Current.AppState; }
@@ -50,12 +33,5 @@ namespace Prolog.Workbench
             ctrlStackFrames.SelectedItem = stackFrame;
         }
 
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            base.OnVisualParentChanged(oldParent);
-            if (Parent == null) return;
-            Width = double.NaN;
-            Height = double.NaN;
-        }
     }
 }

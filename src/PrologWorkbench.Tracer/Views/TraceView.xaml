@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Image x:Key="PngEnableTrace" Source="../Resources/trace.png" />
+            <Image x:Key="PngClearTrace" Source="../Resources/clear.png" />
         </ResourceDictionary>    
     </UserControl.Resources>
     
@@ -25,6 +26,7 @@
                                   IsChecked="{Binding TraceEnabled, Mode=TwoWay}" 
                                   Content="{StaticResource PngEnableTrace}" 
                                   ToolTip="{x:Static strings:Strings.TraceView_EnableTrace}"/>
+                    <Button Margin="3" Command="{Binding ClearTraceCommand}"  Content="{StaticResource PngClearTrace}" ToolTip="{x:Static strings:Strings.TraceView_Clear}" />
                 </StackPanel>
             </Border>
             <TextBox Style="{DynamicResource Style.Content.Body}" Text="{Binding Traces}" BorderThickness="0" IsReadOnly="True"

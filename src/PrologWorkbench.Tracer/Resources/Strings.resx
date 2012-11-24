@@ -126,4 +126,7 @@
   <data name="TraceView_EnableTrace" xml:space="preserve">
     <value>Enable or disable trace</value>
   </data>
+  <data name="TraceView_Clear" xml:space="preserve">
+    <value>Clear trace log</value>
+  </data>
 </root>

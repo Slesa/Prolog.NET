@@ -120,6 +120,9 @@
   <data name="TraceViewModel_Title" xml:space="preserve">
     <value>Trace</value>
   </data>
+  <data name="TraceView_Clear" xml:space="preserve">
+    <value>Tracelog leeren</value>
+  </data>
   <data name="TraceView_EnableTrace" xml:space="preserve">
     <value>Trace an- oder abschalten</value>
   </data>

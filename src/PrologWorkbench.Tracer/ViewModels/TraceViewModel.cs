@@ -77,6 +77,7 @@ namespace PrologWorkbench.Tracer.ViewModels
         void WriteTraceLine(string text)
         {
             Traces += text + System.Environment.NewLine;
+            ClearTraceCommand.RaiseCanExecuteChanged();
         }
     }
 }
