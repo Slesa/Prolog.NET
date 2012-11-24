@@ -7,6 +7,7 @@ using Prolog;
 using Prolog.Code;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.Events;
+using PrologWorkbench.Core.Resources;
 
 namespace PrologWorkbench.Core.ViewModels
 {
@@ -33,7 +34,7 @@ namespace PrologWorkbench.Core.ViewModels
             CopyClauseCommand = new DelegateCommand(OnCopyClause);
         }
 
-        public string Title { get { return Resources.Strings.ProgramViewModel_Title; } }
+        public string Title { get { return Strings.ProgramViewModel_Title; } }
 
         public DelegateCommand CopyCommand { get; private set; }
         public DelegateCommand CutCommand { get; private set; }
@@ -84,6 +85,11 @@ namespace PrologWorkbench.Core.ViewModels
             // TODO Do we want to paste clauses without a head or not?
             if (codeSentence == null /*|| codeSentence.Head == null*/) return;
 
+            if (_programProvider.Program.Contains(codeSentence))
+            {
+                _eventAggregator.GetEvent<UpdateStatusEvent>().Publish(Strings.ProgramViewModel_SentenceAlreadyContained);
+                return;
+            }
             _programProvider.Program.Add(codeSentence);
         }
 

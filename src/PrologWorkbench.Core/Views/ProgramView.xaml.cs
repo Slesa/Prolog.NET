@@ -10,7 +10,6 @@ namespace PrologWorkbench.Core.Views
 {
     public partial class ProgramView : UserControl
     {
-
         public ProgramView(ProgramViewModel viewModel)
         {
             InitializeComponent();

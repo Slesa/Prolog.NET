@@ -38,7 +38,9 @@
                     <Button Margin="3" Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramView_MoveDown}" />
                 </StackPanel>
             </Border>
-            <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}" >
+            <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" 
+                      Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}"
+                      behaviors:DoubleClickBehavior.DoubleClick="{Binding CopyClauseCommand}">
                 <!-- MouseDoubleClick="ctrlTreeView_MouseDoubleClick" SelectedItemChanged="ctrlTreeView_SelectedItemChanged" -->
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
