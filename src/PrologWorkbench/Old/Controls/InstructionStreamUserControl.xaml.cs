@@ -30,13 +30,5 @@ namespace Prolog.Workbench
             get { return (PrologInstructionStream)GetValue(InstructionStreamProperty); }
             set { SetValue(InstructionStreamProperty, value); }
         }
-
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            base.OnVisualParentChanged(oldParent);
-            if (Parent == null) return;
-            Width = double.NaN;
-            Height = double.NaN;
-        }
     }
 }

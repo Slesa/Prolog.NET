@@ -101,6 +101,10 @@
       <Project>{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}</Project>
       <Name>PrologWorkbench.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Prolog\Prolog.csproj">
+      <Project>{171A6B22-168C-4662-8706-131C098622BD}</Project>
+      <Name>Prolog</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\InstructionsView.xaml">
