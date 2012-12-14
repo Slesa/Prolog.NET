@@ -26,7 +26,7 @@
 
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
         <HeaderedContentControl.Header>
-            <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
+            <TextBlock Text="{Binding Title}" />
         </HeaderedContentControl.Header>
         <DockPanel>
             <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">

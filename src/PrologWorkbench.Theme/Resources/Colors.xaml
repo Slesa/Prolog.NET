@@ -21,6 +21,8 @@
     <Color x:Key="Color.Brown">#B07515</Color>
     <Color x:Key="Color.DarkBrown">#664208</Color>
 
+    <Color x:Key="Color.Blue">#6666CC</Color>
+
     <Color x:Key="Color.Foreground">#FFF6CF</Color>
     <Color x:Key="Color.Foreground.Inverted">#664208</Color>
     <Color x:Key="Color.Background">#664208</Color>

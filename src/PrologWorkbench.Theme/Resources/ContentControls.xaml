@@ -12,28 +12,31 @@
 	
 	<!-- Global: Headered Content Control -->
 	<Style x:Key="Style.HeaderedContentControl" TargetType="{x:Type HeaderedContentControl}" BasedOn="{StaticResource Control.Base}">
-	<Setter Property="Template">
-		<Setter.Value>
-			<ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-				<Border BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" Background="{DynamicResource Brush.Yellow}">
-				<Grid>
-					<DockPanel Margin="0,0,0,3">
-						<Grid DockPanel.Dock="Top">
-							<Rectangle Fill="{StaticResource ResourceKey=Brush.Brown}" StrokeThickness="3" Stroke="{DynamicResource Brush.Brown}" RadiusY="-7" RadiusX="-7" />
-							<ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}" d:LayoutOverrides="Height" />
-						</Grid>
-						<ContentPresenter Margin="{TemplateBinding Padding}" />						
-					</DockPanel>
-					<!-- Border BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7"/ -->
-				</Grid>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+					<Border Margin="3" CornerRadius="15" Background="{DynamicResource Brush.Yellow}" >
+						<DockPanel>
+							<Border DockPanel.Dock="Top" 
+                                    CornerRadius="15,15,0,0" Background="{DynamicResource Brush.Brown}">
+								<ContentPresenter ContentSource="Header" 
+                                                  TextBlock.FontSize="22" 
+                                                  TextBlock.Foreground="{StaticResource Brush.Blue}"
+												  Margin="5,2,5,5" 
+                                                  HorizontalAlignment="Center" />
+							</Border>
+							<ContentPresenter Margin="{TemplateBinding Padding}" 
+                                                HorizontalAlignment="Stretch"
+                                              />
+						</DockPanel>
+							<!-- Border BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7"/ -->
 					</Border>
-			</ControlTemplate>
-		</Setter.Value>
-	</Setter>
-		<Setter Property="BorderThickness" Value="3"/>
-		<Setter Property="Padding" Value="5,2,5,5"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 	
+	<Style TargetType="{x:Type HeaderedContentControl}" BasedOn="{StaticResource Style.HeaderedContentControl}" />
 	
 	
 	<!-- Top-Down: Shell -->
