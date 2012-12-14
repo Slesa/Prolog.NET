@@ -3,9 +3,14 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- Global: Font -->
-	<Style TargetType="{x:Type Control}">
+	<Style x:Key="Control.Base" TargetType="{x:Type Control}">
 		<!-- Setter Property="FontFamily" Value="Segoe UI" / -->
-		<Setter Property="FontFamily" Value="Verdana" />
+		<Setter Property="FontFamily" Value="Segoe UI" />
+	</Style>
+	
+	<Style BasedOn="{StaticResource Control.Base}" TargetType="{x:Type Control}">
+		<!-- Setter Property="FontFamily" Value="Segoe UI" / -->
+		<Setter Property="FontFamily" Value="SketchFlow Print" />
 	</Style>
 	
 <Style TargetType="{x:Type GridSplitter}">
