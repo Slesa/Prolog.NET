@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Defaults.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Brushes.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Buttons.xaml" />

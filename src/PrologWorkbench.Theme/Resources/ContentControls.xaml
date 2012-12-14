@@ -7,12 +7,6 @@
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Brushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-
-	<!-- Global: Font -->
-	<Style TargetType="{x:Type ContentControl}">
-		<Setter Property="FontFamily" Value="Segoe UI" />
-	</Style>
 	
 	
 	<!-- Global: Headered Content Control -->
