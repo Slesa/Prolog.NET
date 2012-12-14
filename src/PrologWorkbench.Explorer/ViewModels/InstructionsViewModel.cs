@@ -38,7 +38,7 @@ namespace PrologWorkbench.Explorer.ViewModels
         PrologInstructionStream _instructionStream;
         public PrologInstructionStream InstructionStream
         {
-            get { return SelectedClause.PrologInstructionStream; }
+            get { return SelectedClause!= null ? SelectedClause.PrologInstructionStream : null; }
             //set { _instructionStream = value; }
         }
     }
