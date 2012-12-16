@@ -30,18 +30,16 @@
 
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
         <HeaderedContentControl.Header>
-            <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
+            <TextBlock Text="{Binding Title}" FontSize="22" Foreground="{DynamicResource Brush.Foreground}" />
         </HeaderedContentControl.Header>
         <DockPanel>
-            <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
-            <StackPanel Orientation="Horizontal" Height="48">
-                    <Button Margin="3" x:Name="Execute" 
-                            Style="{DynamicResource ButtonStyle}" 
+            <Border DockPanel.Dock="Bottom" BorderThickness="0" CornerRadius="0,0,15,15" Background="{DynamicResource Brush.Brown}">
+            <StackPanel Orientation="Horizontal" Height="48" Margin="5,0,5,0">
+                    <Button x:Name="Execute" 
                             Command="{Binding ExecuteCommand}" 
                             Content="{StaticResource PngExecute}" 
                             ToolTip="{x:Static strings:Strings.CommandView_Execute}"/>
-                    <Button Margin="3" x:Name="Debug" 
-                            Style="{DynamicResource ButtonStyle}" 
+                    <Button x:Name="Debug" 
                             Command="{Binding DebugCommand}" 
                             Content="{StaticResource PngDebug}" 
                             ToolTip="{x:Static strings:Strings.CommandView_Debug}" />

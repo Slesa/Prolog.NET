@@ -26,16 +26,16 @@
 
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
         <HeaderedContentControl.Header>
-            <TextBlock Text="{Binding Title}" />
+            <TextBlock Text="{Binding Title}" FontSize="22" Foreground="{DynamicResource Brush.Foreground}" />
         </HeaderedContentControl.Header>
         <DockPanel>
-            <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
-                <StackPanel Orientation="Horizontal" Height="48">
-                    <Button Margin="3" Command="{Binding CopyCommand}" Content="{StaticResource PngCopy}" ToolTip="{x:Static strings:Strings.ProgramView_Copy}"/>
-                    <Button Margin="3" Command="{Binding CutCommand}"  Content="{StaticResource PngCut}" ToolTip="{x:Static strings:Strings.ProgramView_Cut}" />
-                    <Button Margin="3" Command="{Binding PasteCommand}"  Content="{StaticResource PngPaste}" ToolTip="{x:Static strings:Strings.ProgramView_Paste}" />
-                    <Button Margin="3" Command="{Binding MoveUpCommand}"  Content="{StaticResource PngMoveUp}" ToolTip="{x:Static strings:Strings.ProgramView_MoveUp}" />
-                    <Button Margin="3" Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramView_MoveDown}" />
+            <Border DockPanel.Dock="Bottom" BorderThickness="0" CornerRadius="0,0,15,15" Background="{DynamicResource Brush.Brown}">
+                <StackPanel Orientation="Horizontal" Height="48" Margin="5,0,5,0">
+                    <Button Command="{Binding CopyCommand}" Content="{StaticResource PngCopy}" ToolTip="{x:Static strings:Strings.ProgramView_Copy}"  />
+                    <Button Command="{Binding CutCommand}"  Content="{StaticResource PngCut}" ToolTip="{x:Static strings:Strings.ProgramView_Cut}" />
+                    <Button Command="{Binding PasteCommand}"  Content="{StaticResource PngPaste}" ToolTip="{x:Static strings:Strings.ProgramView_Paste}" />
+                    <Button Command="{Binding MoveUpCommand}"  Content="{StaticResource PngMoveUp}" ToolTip="{x:Static strings:Strings.ProgramView_MoveUp}" />
+                    <Button Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramView_MoveDown}" />
                 </StackPanel>
             </Border>
             <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" 

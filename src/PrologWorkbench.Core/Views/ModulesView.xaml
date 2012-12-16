@@ -11,7 +11,7 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ItemsControl}">
-			            <Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Margin="10" Background="{DynamicResource Brush.Brown}">
+			            <Border DockPanel.Dock="Bottom" BorderThickness="0" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
 							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 						</Border>
 					</ControlTemplate>
@@ -29,10 +29,9 @@
 			</Setter>
 		</Style>
 		<Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
-			<Setter Property="Foreground" Value="{DynamicResource Brush.DarkBrown}"/>
+			<Setter Property="Foreground" Value="Black"/>
 			<Setter Property="Background" Value="{DynamicResource Brush.Brown}"/>
-			<Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}"/>
-			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="BorderThickness" Value="0"/>
 			<Setter Property="FontSize" Value="18" />
 			<Setter Property="Template">
 				<Setter.Value>
@@ -49,10 +48,10 @@
 								<Setter Property="Padding" Value="4,0,0,0"/>
 							</Trigger>
 							<Trigger Property="IsEnabled" Value="false">
-								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+								<Setter Property="Foreground" Value="DarkGray"/>
 							</Trigger>
 							<Trigger Property="IsChecked" Value="true">
-								<Setter Property="Background" Value="{DynamicResource Brush.DarkBrown}"/>
+								<Setter Property="Background" Value="{DynamicResource Brush.Blue}"/>
 								<Setter Property="Foreground" Value="{DynamicResource Brush.Yellow}"/>
 								<Setter Property="FontWeight" Value="Bold" />
 							</Trigger>

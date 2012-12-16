@@ -31,4 +31,49 @@
         </Setter>
     </Style>
 
+	<!-- Global: Buttons -->
+    <Style x:Key="Style.Button" TargetType="{x:Type Button}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="OnClick">
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.CornerRadius)" Storyboard.TargetName="border">
+								<DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+									<DiscreteObjectKeyFrame.Value>
+										<CornerRadius>32</CornerRadius>
+									</DiscreteObjectKeyFrame.Value>
+								</DiscreteObjectKeyFrame>
+							</ObjectAnimationUsingKeyFrames>
+							<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="border">
+								<EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="4,4,2,2"/>
+							</ThicknessAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Border x:Name="border" Margin="2" CornerRadius="48" BorderBrush="Black" BorderThickness="0" >
+						<Border.Effect >
+							<BlurEffect Radius="0"/>
+						</Border.Effect>
+						<ContentPresenter />
+					</Border>
+                    <ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="ButtonBase.Click">
+							<BeginStoryboard Storyboard="{StaticResource OnClick1}"/>
+						</EventTrigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" Value="0.5" />
+							<Setter Property="Effect" TargetName="border">
+								<Setter.Value>
+									<BlurEffect Radius="4"/>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+     </Style>
+	
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Style.Button}" />
+
 </ResourceDictionary>
