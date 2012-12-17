@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
 
-    <Border CornerRadius="{DynamicResource Corner.Main}" Margin="5" Background="{DynamicResource Brush.DarkYellow}">
+    <Border CornerRadius="{DynamicResource Corner.Main}" Margin="5" Background="{DynamicResource Brush.LightColor}">
         <TextBlock Margin="10,5,10,5" Text="{Binding Message}" Style="{DynamicResource Style.StatusBar.TextBlock}" />
     </Border>
 

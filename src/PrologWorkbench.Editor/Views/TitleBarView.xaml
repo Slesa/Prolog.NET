@@ -21,17 +21,17 @@
     </UserControl.Resources>
 
 
-	<Border CornerRadius="{DynamicResource Corner.Main}" Margin="5" Background="{StaticResource Brush.DarkYellow}">
+	<Border CornerRadius="{DynamicResource Corner.Main}" Margin="5" Background="{DynamicResource Brush.LightColor}">
         <StackPanel Style="{DynamicResource Style.TitleBar.StackPanel}" >
 
-			<Border CornerRadius="{DynamicResource Corner.Main.Inner}" Margin="5" Background="{DynamicResource Brush.Brown}">
+			<Border CornerRadius="{DynamicResource Corner.Main.Inner}" Margin="5" Background="{DynamicResource Brush.DarkColor}">
             <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" >
                 <Image Width="48" Height="48" Source="{Binding ApplicationIcon}" Margin="10,0,10,0" />
                 <TextBlock Text="{Binding ApplicationName}" Foreground="{DynamicResource Brush.Foreground}" FontSize="40" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0" />
             </StackPanel>
 			</Border>
 
-			<Border CornerRadius="{DynamicResource Corner.Main.Inner}" Margin="5" Background="{DynamicResource Brush.Brown}">
+			<Border CornerRadius="{DynamicResource Corner.Main.Inner}" Margin="5" Background="{DynamicResource Brush.DarkColor}">
                 <StackPanel Orientation="Horizontal" Height="Auto" Margin="10,0,10,0" HorizontalAlignment="Stretch">
                     <Button Margin="3" x:Name="New" Command="{Binding NewCommand}" Content="{StaticResource PngFileNew}" ToolTip="{x:Static strings:Strings.TitleBarView_NewProgram}"/>
                     <Button Margin="3" x:Name="Load" Command="{Binding LoadCommand}" Content="{StaticResource PngFileOpen}" ToolTip="{x:Static strings:Strings.TitleBarView_LoadProgram}"/>

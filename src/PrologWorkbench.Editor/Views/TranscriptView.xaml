@@ -34,7 +34,7 @@
         <HeaderedContentControl.Header>
             <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
         </HeaderedContentControl.Header>
-        <ListBox Style="{DynamicResource Style.Content.Body}" BorderThickness="0"
+        <ListBox Style="{DynamicResource Style.Module.Content}" BorderThickness="0"
             Name="ctrlTranscriptEntries"
                  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                  ItemsSource="{Binding Path=Transcript}" DataContext="{Binding}" SelectedItem="{Binding CurrentTranscript}">

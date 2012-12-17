@@ -50,7 +50,7 @@
                                   ToolTip="{x:Static strings:Strings.CommandView_Statistics}" />
             	</StackPanel>
             </Border>
-            <TextBox Grid.Row="1" Style="{DynamicResource Style.Content.Body}" x:Name="_input"
+            <TextBox Grid.Row="1" Style="{DynamicResource Style.Module.Content}" x:Name="_input"
                     BorderThickness="0"
                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                     TextWrapping="Wrap" AcceptsReturn="True"

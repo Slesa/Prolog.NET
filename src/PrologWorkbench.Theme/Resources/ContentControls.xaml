@@ -15,10 +15,10 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-					<Border Margin="3" CornerRadius="{DynamicResource Corner.Module}" Background="{DynamicResource Brush.Yellow}" >
+					<Border Margin="3" CornerRadius="{DynamicResource Corner.Module}" Background="{DynamicResource Brush.Content}" >
 						<DockPanel>
 							<Border DockPanel.Dock="Top" Height="48"
-                                    CornerRadius="{DynamicResource Corner.Module.Top}" Background="{DynamicResource Brush.Brown}">
+                                    CornerRadius="{DynamicResource Corner.Module.Top}" Background="{DynamicResource Brush.DarkColor}">
 								<ContentPresenter ContentSource="Header" 
                                                   TextBlock.FontSize="22" 
                                                   HorizontalAlignment="Center"
@@ -40,7 +40,7 @@
 	<!-- Toolbar in Module -->
 	<Style x:Key="Style.Module.ToolBorder" TargetType="{x:Type Border}">
 		<Setter Property="CornerRadius" Value="{DynamicResource Corner.Module.Bottom}" />
-		<Setter Property="Background" Value="{DynamicResource Brush.Brown}" />
+		<Setter Property="Background" Value="{DynamicResource Brush.DarkColor}" />
 		<Setter Property="Padding" Value="4" />
 	</Style>
 	<Style x:Key="Style.Module.ToolBar" TargetType="{x:Type StackPanel}">
@@ -48,10 +48,18 @@
 		<Setter Property="Height" Value="32" />
 		<Setter Property="Margin" Value="5,2,5,2" />
 	</Style>
-	
-	<!-- Top-Down: Shell -->
+  <Style x:Key="Style.Module.Content" TargetType="{x:Type Control}">
+    <Setter Property="Margin" Value="10" />
+    <Setter Property="Background" Value="{StaticResource Brush.Content}" />
+    <Setter Property="Foreground" Value="Black" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+  </Style>
+
+  <!-- Top-Down: Shell -->
     <Style x:Key="Style.Shell.DockPanel" TargetType="{x:Type DockPanel}">
-        <Setter Property="Background" Value="{StaticResource Brush.DarkBrown}" />
+        <Setter Property="Background" Value="{StaticResource Brush.Background}" />
     </Style>
 
 	<!-- StatusBar -->
@@ -72,25 +80,6 @@
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="Orientation" Value="Horizontal" />
-	</Style>
-
-	<!-- UserControls -->
-	<Style x:Key="Style.Content" TargetType="{x:Type Grid}">
-		<Setter Property="Margin" Value="10" />
-	</Style>
-	<Style x:Key="Style.Content.Title" TargetType="{x:Type TextBlock}">
-		<Setter Property="Margin" Value="10" />
-		<Setter Property="HorizontalAlignment" Value="Center" />
-		<Setter Property="Background" Value="{StaticResource Brush.DarkYellow}" />
-		<Setter Property="Foreground" Value="{StaticResource Brush.DarkBrown}" />
-	</Style>
-	<Style x:Key="Style.Content.Body" TargetType="{x:Type Control}">
-		<Setter Property="Margin" Value="10" />
-		<Setter Property="Background" Value="{StaticResource Brush.Yellow}" />
-		<Setter Property="Foreground" Value="Black" />
-		<Setter Property="FontSize" Value="16" />
-		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-		<Setter Property="VerticalContentAlignment" Value="Stretch" />
 	</Style>
     
 </ResourceDictionary>

@@ -5,17 +5,22 @@
         <ResourceDictionary Source="/PrologWorkbench.Theme;component/Resources/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource Color.Background}" />
-    <SolidColorBrush x:Key="Brush.Background.Inverted" Color="{StaticResource Color.Background.Inverted}" />
-    <SolidColorBrush x:Key="Brush.Foreground" Color="{StaticResource Color.Foreground}" />
-    <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{StaticResource Color.Foreground.Inverted}" />
+  <!--<SolidColorBrush x:Key="Brush.Foreground" Color="{StaticResource Color.Foreground}" />
+  <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{StaticResource Color.Brown}" />
+  <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource Color.Background}" />
+  <SolidColorBrush x:Key="Brush.Highlight" Color="{StaticResource Color.Blue}" />
+  <SolidColorBrush x:Key="Brush.Content" Color="{StaticResource Color.Yellow}" />
+  <SolidColorBrush x:Key="Brush.DarkColor" Color="{StaticResource Color.Brown}"/>
+  <SolidColorBrush x:Key="Brush.LightColor" Color="{StaticResource Color.DarkYellow}"/>-->
 
-    <SolidColorBrush x:Key="Brush.Yellow" Color="{StaticResource Color.Yellow}" />
-    <SolidColorBrush x:Key="Brush.MidYellow" Color="{StaticResource Color.MidYellow}" />
-    <SolidColorBrush x:Key="Brush.DarkYellow" Color="{StaticResource Color.DarkYellow}"/>
-    <SolidColorBrush x:Key="Brush.Brown" Color="{StaticResource Color.Brown}"/>
-    <SolidColorBrush x:Key="Brush.DarkBrown" Color="{StaticResource Color.DarkBrown}" />
-    <SolidColorBrush x:Key="Brush.Blue" Color="{StaticResource Color.Blue}" />
+  <SolidColorBrush x:Key="Brush.Foreground" Color="{StaticResource Color.Foreground}" />
+  <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{StaticResource Color.Brown}" />
+  <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource Color.Background}" />
+  <SolidColorBrush x:Key="Brush.Highlight" Color="{StaticResource Color.Blue}" />
+  <SolidColorBrush x:Key="Brush.Content" Color="{StaticResource Color.Yellow}" />
+  <SolidColorBrush x:Key="Brush.DarkColor" Color="{StaticResource Color.Brown}"/>
+  <SolidColorBrush x:Key="Brush.LightColor" Color="{StaticResource Color.DarkYellow}"/>
+
 
 </ResourceDictionary>
     

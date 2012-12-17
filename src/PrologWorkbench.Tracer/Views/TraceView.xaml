@@ -19,7 +19,7 @@
             <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
         </HeaderedContentControl.Header>
         <DockPanel>
-            <Border DockPanel.Dock="Bottom" CornerRadius="{DynamicResource Corner.Module.Bottom}" Background="{DynamicResource Brush.Brown}">
+            <Border DockPanel.Dock="Bottom" CornerRadius="{DynamicResource Corner.Module.Bottom}" Background="{DynamicResource Brush.DarkColor}">
                 <StackPanel Orientation="Horizontal" Height="48" Margin="5,0,5,0">
                     <ToggleButton Margin="3" x:Name="Enabled" 
                                   Style="{DynamicResource ToggleButtonStyle}" 
@@ -29,7 +29,7 @@
                     <Button Margin="3" Command="{Binding ClearTraceCommand}"  Content="{StaticResource PngClearTrace}" ToolTip="{x:Static strings:Strings.TraceView_Clear}" />
                 </StackPanel>
             </Border>
-            <TextBox Style="{DynamicResource Style.Content.Body}" Text="{Binding Traces}" BorderThickness="0" IsReadOnly="True"
+            <TextBox Style="{DynamicResource Style.Module.Content}" Text="{Binding Traces}" BorderThickness="0" IsReadOnly="True"
                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True"  />
         </DockPanel>
     </HeaderedContentControl>

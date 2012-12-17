@@ -77,7 +77,7 @@
 							<Setter Property="Opacity" Value="0.5" />
 							<Setter Property="Effect" TargetName="border">
 								<Setter.Value>
-									<BlurEffect Radius="4"/>
+									<BlurEffect Radius="1"/>
 								</Setter.Value>
 							</Setter>
 						</Trigger>
