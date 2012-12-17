@@ -11,7 +11,7 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ItemsControl}">
-			            <Border DockPanel.Dock="Bottom" Padding="10" CornerRadius="{DynamicResource MainCorner}" Margin="3" Background="{DynamicResource Brush.Brown}">
+			            <Border DockPanel.Dock="Bottom" Padding="10" CornerRadius="{DynamicResource Corner.Main}" Margin="5,3,3,3" Background="{DynamicResource Brush.Brown}">
 							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 						</Border>
 					</ControlTemplate>

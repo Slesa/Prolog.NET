@@ -33,12 +33,12 @@
             <TextBlock Text="{Binding Title}" FontSize="22" Foreground="{DynamicResource Brush.Foreground}" />
         </HeaderedContentControl.Header>
         <DockPanel>
-            <Border DockPanel.Dock="Bottom" BorderThickness="0" CornerRadius="{DynamicResource ModuleCorner}" Background="{DynamicResource Brush.Brown}">
-            <StackPanel Orientation="Horizontal" Height="48" Margin="5,0,5,0">
+            <Border DockPanel.Dock="Bottom" Style="{DynamicResource Style.Module.ToolBorder}">
+            	<StackPanel Style="{DynamicResource Style.Module.ToolBar}">
                     <Button x:Name="Execute" 
                             Command="{Binding ExecuteCommand}" 
                             Content="{StaticResource PngExecute}" 
-                            ToolTip="{x:Static strings:Strings.CommandView_Execute}"/>
+                            ToolTip="{x:Static strings:Strings.CommandView_Execute}" Margin="0,-1,0,1"/>
                     <Button x:Name="Debug" 
                             Command="{Binding DebugCommand}" 
                             Content="{StaticResource PngDebug}" 
@@ -48,7 +48,7 @@
                                   IsChecked="{Binding StatisticsEnabled, Mode=TwoWay}" 
                                   Content="{StaticResource PngStatistics}" 
                                   ToolTip="{x:Static strings:Strings.CommandView_Statistics}" />
-            </StackPanel>
+            	</StackPanel>
             </Border>
             <TextBox Grid.Row="1" Style="{DynamicResource Style.Content.Body}" x:Name="_input"
                     BorderThickness="0"

@@ -15,10 +15,10 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-					<Border Margin="3" CornerRadius="15" Background="{DynamicResource Brush.Yellow}" >
+					<Border Margin="3" CornerRadius="{DynamicResource Corner.Module}" Background="{DynamicResource Brush.Yellow}" >
 						<DockPanel>
 							<Border DockPanel.Dock="Top" Height="48"
-                                    CornerRadius="15,15,0,0" Background="{DynamicResource Brush.Brown}">
+                                    CornerRadius="{DynamicResource Corner.Module.Top}" Background="{DynamicResource Brush.Brown}">
 								<ContentPresenter ContentSource="Header" 
                                                   TextBlock.FontSize="22" 
                                                   HorizontalAlignment="Center"
@@ -37,6 +37,17 @@
 	
 	<Style TargetType="{x:Type HeaderedContentControl}" BasedOn="{StaticResource Style.HeaderedContentControl}" />
 		
+	<!-- Toolbar in Module -->
+	<Style x:Key="Style.Module.ToolBorder" TargetType="{x:Type Border}">
+		<Setter Property="CornerRadius" Value="{DynamicResource Corner.Module.Bottom}" />
+		<Setter Property="Background" Value="{DynamicResource Brush.Brown}" />
+		<Setter Property="Padding" Value="4" />
+	</Style>
+	<Style x:Key="Style.Module.ToolBar" TargetType="{x:Type StackPanel}">
+		<Setter Property="Orientation" Value="Horizontal" />
+		<Setter Property="Height" Value="32" />
+		<Setter Property="Margin" Value="5,2,5,2" />
+	</Style>
 	
 	<!-- Top-Down: Shell -->
     <Style x:Key="Style.Shell.DockPanel" TargetType="{x:Type DockPanel}">
