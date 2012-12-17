@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="PrologWorkbench.Core.Views.ModulesView" 
+             x:Class="PrologWorkbench.Core.Views.ModulesView" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.Resources>
@@ -11,7 +11,7 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ItemsControl}">
-			            <Border DockPanel.Dock="Bottom" BorderThickness="0" CornerRadius="10" Margin="5" Background="{DynamicResource Brush.Brown}">
+			            <Border DockPanel.Dock="Bottom" Padding="10" CornerRadius="{DynamicResource MainCorner}" Margin="3" Background="{DynamicResource Brush.Brown}">
 							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 						</Border>
 					</ControlTemplate>
@@ -45,7 +45,7 @@
 						<ControlTemplate.Triggers>
 							<Trigger Property="HasContent" Value="true">
 								<Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}"/>
-								<Setter Property="Padding" Value="4,0,0,0"/>
+								<Setter Property="Padding" Value="4,0,4,0"/>
 							</Trigger>
 							<Trigger Property="IsEnabled" Value="false">
 								<Setter Property="Foreground" Value="DarkGray"/>
@@ -65,7 +65,7 @@
     <ItemsControl ItemsSource="{Binding Modules}" Style="{DynamicResource ItemsControlStyle}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>

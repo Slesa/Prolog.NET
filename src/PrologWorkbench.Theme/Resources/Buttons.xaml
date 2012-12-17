@@ -58,7 +58,7 @@
 					</Border>
                     <ControlTemplate.Triggers>
 						<EventTrigger RoutedEvent="ButtonBase.Click">
-							<BeginStoryboard Storyboard="{StaticResource OnClick1}"/>
+							<BeginStoryboard Storyboard="{StaticResource OnClick}"/>
 						</EventTrigger>
 						<Trigger Property="IsEnabled" Value="false">
 							<Setter Property="Opacity" Value="0.5" />
