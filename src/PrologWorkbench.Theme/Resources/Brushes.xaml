@@ -13,13 +13,14 @@
   <SolidColorBrush x:Key="Brush.DarkColor" Color="{StaticResource Color.Brown}"/>
   <SolidColorBrush x:Key="Brush.LightColor" Color="{StaticResource Color.DarkYellow}"/>-->
 
-  <SolidColorBrush x:Key="Brush.Foreground" Color="{StaticResource Color.Foreground}" />
-  <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{StaticResource Color.Brown}" />
-  <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource Color.Background}" />
-  <SolidColorBrush x:Key="Brush.Highlight" Color="{StaticResource Color.Blue}" />
-  <SolidColorBrush x:Key="Brush.Content" Color="{StaticResource Color.Yellow}" />
-  <SolidColorBrush x:Key="Brush.DarkColor" Color="{StaticResource Color.Brown}"/>
-  <SolidColorBrush x:Key="Brush.LightColor" Color="{StaticResource Color.DarkYellow}"/>
+  <SolidColorBrush x:Key="Brush.Foreground" Color="{DynamicResource Color.Foreground}" />
+  <SolidColorBrush x:Key="Brush.Foreground.Inverted" Color="{DynamicResource Color.Foreground}" />
+  <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}" />
+  <SolidColorBrush x:Key="Brush.Highlight" Color="{DynamicResource Color.Blue}" />
+  <SolidColorBrush x:Key="Brush.Content" Color="{DynamicResource Color.Yellow}" />
+  <SolidColorBrush x:Key="Brush.Content.Text" Color="{DynamicResource Color.White}" />
+  <SolidColorBrush x:Key="Brush.DarkColor" Color="{DynamicResource Color.DarkYellow}"/>
+  <SolidColorBrush x:Key="Brush.LightColor" Color="{DynamicResource Color.Brown}"/>
 
 
 </ResourceDictionary>

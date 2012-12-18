@@ -35,10 +35,10 @@
         <DockPanel>
             <Border DockPanel.Dock="Bottom" Style="{DynamicResource Style.Module.ToolBorder}">
             	<StackPanel Style="{DynamicResource Style.Module.ToolBar}">
-                    <Button x:Name="Execute" 
+                    <Button x:Name="Execute"
                             Command="{Binding ExecuteCommand}" 
                             Content="{StaticResource PngExecute}" 
-                            ToolTip="{x:Static strings:Strings.CommandView_Execute}" Margin="0,-1,0,1"/>
+                            ToolTip="{x:Static strings:Strings.CommandView_Execute}" />
                     <Button x:Name="Debug" 
                             Command="{Binding DebugCommand}" 
                             Content="{StaticResource PngDebug}" 

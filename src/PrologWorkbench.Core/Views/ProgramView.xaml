@@ -39,13 +39,13 @@
                 </StackPanel>
             </Border>
             <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" 
-                      Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}">
+                      Background="{Binding Parent.Background}" ItemsSource="{Binding Program.Procedures}" Foreground="{DynamicResource Brush.Foreground}">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Clauses}">
-                        <TextBlock Text="{Binding}" FontSize="16" />
+                        <TextBlock Text="{Binding}" FontSize="16" Foreground="{DynamicResource Brush.Foreground}" />
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CodeSentence}" FontSize="12" />
+                                <TextBlock Text="{Binding CodeSentence}" FontSize="12" Foreground="{DynamicResource Brush.Foreground}" />
                             </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
                     </HierarchicalDataTemplate>

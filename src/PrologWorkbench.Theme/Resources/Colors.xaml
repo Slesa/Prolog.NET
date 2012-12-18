@@ -16,7 +16,7 @@
     <Color x:Key="Color.DarkBrown">#633607</Color>
 	-->
 
-  <!-- Karamelbonbon -->
+  <!-- Karamelbonbon 
     <Color x:Key="Color.Yellow">#FFF6CF</Color>
     <Color x:Key="Color.MidYellow">#F5D471</Color>
     <Color x:Key="Color.DarkYellow">#E3AC3D</Color>
@@ -26,10 +26,23 @@
     <Color x:Key="Color.Blue">#6666CC</Color>
 
     <Color x:Key="Color.Foreground">#FFF6CF</Color>
-    <Color x:Key="Color.Background">#664208</Color>
-  
-  
-  
-    
+    <Color x:Key="Color.Background">#664208</Color> -->
+
+  <Color x:Key="Color.Black">Black</Color>
+  <Color x:Key="Color.White">White</Color>
+  <Color x:Key="Color.Yellow">#FF080000</Color>
+  <Color x:Key="Color.MidYellow">#F5D471</Color>
+  <Color x:Key="Color.DarkYellow">#FF5A77DE</Color>
+  <Color x:Key="Color.Brown">#FF323A80</Color>
+  <Color x:Key="Color.DarkBrown">#664208</Color>
+
+  <Color x:Key="Color.Blue">#FFE94227</Color>
+
+  <Color x:Key="Color.Foreground">White</Color>
+  <Color x:Key="Color.Background">#FF2B2A28</Color>
+
+
+
+
 </ResourceDictionary>
     

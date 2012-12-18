@@ -29,7 +29,7 @@
 			</Setter>
 		</Style>
 		<Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
-			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Foreground.Inverted}"/>
 			<Setter Property="Background" Value="{DynamicResource Brush.DarkColor}"/>
 			<Setter Property="BorderThickness" Value="0"/>
 			<Setter Property="FontSize" Value="18" />
