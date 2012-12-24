@@ -4,7 +4,7 @@ using Machine.Specifications;
 using Prolog;
 using PrologWorkbench.Core.Models;
 
-namespace PrologWorkbench.Core.Specs
+namespace PrologWorkbench.Core.Specs.Models
 {
     [Subject(typeof(ProgramProvider))]
     internal class When_initialy_using_program_provider : ProgramProviderSpecBase

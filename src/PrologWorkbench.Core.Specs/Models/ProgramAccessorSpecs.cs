@@ -4,7 +4,7 @@ using Machine.Specifications;
 using Prolog;
 using PrologWorkbench.Core.Models;
 
-namespace PrologWorkbench.Core.Specs
+namespace PrologWorkbench.Core.Specs.Models
 {
     [Subject(typeof(ProgramAccessor))]
     internal class When_loading_program_file_from_not_existing_file : ProgramAccessorSpecBase
@@ -87,8 +87,24 @@ namespace PrologWorkbench.Core.Specs
                 SetModified(_program);
             };
         Because of = () => _result = Subject.Save(DestinationFilename, _program);
-        It should_load_program = () => _result.ShouldBeTrue();
+        It should_save_program = () => _result.ShouldBeTrue();
         It should_rename_prolog_program = () => _program.FileName.ShouldEqual(DestinationFilename);
+        static bool _result;
+        static Program _program;
+    }
+
+
+    [Subject(typeof (ProgramAccessor))]
+    class When_saving_modified_program_file_with_same_name : ProgramAccessorSpecBase
+    {
+        Establish context = () =>
+            {
+                _program = Subject.Load(SourceFilename);
+                SetModified(_program);
+            };
+        Because of = () => _result = Subject.Save(SourceFilename, _program);
+        It should_save_program = () => _result.ShouldBeTrue();
+        It should_rename_prolog_program = () => _program.FileName.ShouldEqual(SourceFilename);
         static bool _result;
         static Program _program;
     }

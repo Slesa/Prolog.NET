@@ -56,11 +56,6 @@ namespace PrologWorkbench.Core.Models
                 else
                     program.Save();
             }
-            catch (FileNotFoundException ex)
-            {
-                _logger.Error("Coult not save file: ", ex);
-                return false;
-            }
             catch (DirectoryNotFoundException ex)
             {
                 _logger.Error("Coult not save file: ", ex);

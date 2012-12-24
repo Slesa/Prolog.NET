@@ -2,10 +2,9 @@
 using Machine.Fakes;
 using Machine.Specifications;
 using Prolog;
-using Prolog.Code;
 using PrologWorkbench.Core.Models;
 
-namespace PrologWorkbench.Core.Specs
+namespace PrologWorkbench.Core.Specs.Models
 {
     [Subject(typeof(MachineProvider))]
     internal class When_initialy_using_machine_provider : MachineProviderSpecBase
