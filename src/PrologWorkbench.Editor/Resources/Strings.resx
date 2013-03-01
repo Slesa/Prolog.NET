@@ -189,4 +189,19 @@
   <data name="CommandView_Statistics" xml:space="preserve">
     <value>Enable or disable statistics</value>
   </data>
+  <data name="ProgramEditView_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="ProgramEditView_Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="ProgramEditView_MoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="ProgramEditView_MoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="ProgramEditView_Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
 </root>

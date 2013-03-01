@@ -4,18 +4,18 @@
 
 using System.ComponentModel;
 using System.Windows.Controls;
-using PrologWorkbench.Core.ViewModels;
+using PrologWorkbench.Explorer.ViewModels;
 
-namespace PrologWorkbench.Core.Views
+namespace PrologWorkbench.Explorer.Views
 {
-    public partial class ProgramView : UserControl
+    public partial class ProgramInfoView : UserControl
     {
-        public ProgramView(ProgramViewModel viewModel)
+        public ProgramInfoView(ProgramInfoViewModel infoViewModel)
         {
             InitializeComponent();
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                DataContext = viewModel;
+                DataContext = infoViewModel;
             }
         }
     }

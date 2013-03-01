@@ -107,13 +107,10 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ModulesViewModel.cs" />
-    <Compile Include="ViewModels\ProgramViewModel.cs" />
+    <Compile Include="ViewModels\ProgramViewModelBase.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="Views\ModulesView.xaml.cs">
       <DependentUpon>ModulesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgramView.xaml.cs">
-      <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
@@ -129,10 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ModulesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

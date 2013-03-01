@@ -2,19 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:strings="clr-namespace:PrologWorkbench.Core.Resources"
+             xmlns:strings="clr-namespace:PrologWorkbench.Explorer.Resources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:behaviors="clr-namespace:PrologWorkbench.Core.Behaviors" mc:Ignorable="d"
-             x:Class="PrologWorkbench.Core.Views.ProgramView"
+             xmlns:behaviors="clr-namespace:PrologWorkbench.Core.Behaviors;assembly=PrologWorkbench.Core"
+             mc:Ignorable="d"
+             x:Class="PrologWorkbench.Explorer.Views.ProgramInfoView"
              d:DesignWidth="300" d:DesignHeight="300">
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <Image x:Key="PngCopy" Source="../Resources/copy.png" />
-            <Image x:Key="PngCut" Source="../Resources/cut.png" />
-            <Image x:Key="PngPaste" Source="../Resources/paste.png" />
-            <Image x:Key="PngMoveUp" Source="../Resources/move_up.png" />
-            <Image x:Key="PngMoveDown" Source="../Resources/move_down.png" />
+            <Image x:Key="PngCopy" Source="/PrologWorkbench.Core;component/Resources/copy.png" />
+            <Image x:Key="PngCut" Source="/PrologWorkbench.Core;component/Resources/cut.png" />
+            <Image x:Key="PngPaste" Source="/PrologWorkbench.Core;component/Resources/paste.png" />
+            <Image x:Key="PngMoveUp" Source="/PrologWorkbench.Core;component/Resources/move_up.png" />
+            <Image x:Key="PngMoveDown" Source="/PrologWorkbench.Core;component/Resources/move_down.png" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -31,11 +32,11 @@
         <DockPanel>
             <Border DockPanel.Dock="Bottom" Style="{DynamicResource Style.Module.ToolBorder}">
                 <StackPanel Style="{DynamicResource Style.Module.ToolBar}">
-                    <Button Command="{Binding CopyCommand}" Content="{StaticResource PngCopy}" ToolTip="{x:Static strings:Strings.ProgramView_Copy}"  />
-                    <Button Command="{Binding CutCommand}"  Content="{StaticResource PngCut}" ToolTip="{x:Static strings:Strings.ProgramView_Cut}" />
-                    <Button Command="{Binding PasteCommand}"  Content="{StaticResource PngPaste}" ToolTip="{x:Static strings:Strings.ProgramView_Paste}" />
-                    <Button Command="{Binding MoveUpCommand}"  Content="{StaticResource PngMoveUp}" ToolTip="{x:Static strings:Strings.ProgramView_MoveUp}" />
-                    <Button Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramView_MoveDown}" />
+                    <Button Command="{Binding CopyCommand}" Content="{StaticResource PngCopy}" ToolTip="{x:Static strings:Strings.ProgramInfoView_Copy}"  />
+                    <Button Command="{Binding CutCommand}"  Content="{StaticResource PngCut}" ToolTip="{x:Static strings:Strings.ProgramInfoView_Cut}" />
+                    <Button Command="{Binding PasteCommand}"  Content="{StaticResource PngPaste}" ToolTip="{x:Static strings:Strings.ProgramInfoView_Paste}" />
+                    <Button Command="{Binding MoveUpCommand}"  Content="{StaticResource PngMoveUp}" ToolTip="{x:Static strings:Strings.ProgramInfoView_MoveUp}" />
+                    <Button Command="{Binding MoveDownCommand}"  Content="{StaticResource PngMoveDown}" ToolTip="{x:Static strings:Strings.ProgramInfoView_MoveDown}" />
                 </StackPanel>
             </Border>
             <TreeView x:Name="_clauses" BorderThickness="0" Margin="5" 

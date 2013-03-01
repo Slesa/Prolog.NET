@@ -11,15 +11,15 @@ using PrologWorkbench.Core.Resources;
 
 namespace PrologWorkbench.Core.ViewModels
 {
-    public class ProgramViewModel : NotificationObject
+    public class ProgramViewModelBase : NotificationObject
     {
         readonly IProvideProgram _programProvider;
-        readonly IEventAggregator _eventAggregator;
+        protected readonly IEventAggregator _eventAggregator;
 
         [Dependency]
         public IProvideCurrentClause CurrentClauseProvider { get; set; }
 
-        public ProgramViewModel(IProvideProgram programProvider, IEventAggregator eventAggregator)
+        public ProgramViewModelBase(IProvideProgram programProvider, IEventAggregator eventAggregator)
         {
             _programProvider = programProvider;
             _eventAggregator = eventAggregator;
@@ -30,8 +30,6 @@ namespace PrologWorkbench.Core.ViewModels
             PasteCommand = new DelegateCommand(OnPaste, CanPaste);
             MoveUpCommand = new DelegateCommand(OnMoveUp, CanMoveUp);
             MoveDownCommand = new DelegateCommand(OnMoveDown, CanMoveDown);
-
-            CopyClauseCommand = new DelegateCommand(OnCopyClause);
         }
 
         public string Title { get { return Strings.ProgramViewModel_Title; } }
@@ -41,8 +39,6 @@ namespace PrologWorkbench.Core.ViewModels
         public DelegateCommand PasteCommand { get; private set; }
         public DelegateCommand MoveUpCommand { get; private set; }
         public DelegateCommand MoveDownCommand { get; private set; }
-
-        public DelegateCommand CopyClauseCommand { get; private set; }
 
         #region Commands
 
@@ -132,14 +128,6 @@ namespace PrologWorkbench.Core.ViewModels
         }
 
         #endregion
-
-        void OnCopyClause()
-        {
-            var clause = SelectedClause;
-            if (clause == null) return;
-
-            _eventAggregator.GetEvent<SetCurrentInputEvent>().Publish(clause.CodeSentence.ToString());
-        }
 
         object _selectedItem;
         public object SelectedItem

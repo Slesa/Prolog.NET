@@ -16,10 +16,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ContentControl Grid.RowSpan="2" regions:RegionManager.RegionName="ProgramRegion" />
-        <GridSplitter Grid.RowSpan="2" />
+        <GridSplitter Grid.RowSpan="2" Style="{DynamicResource InvisibleSplitter}"  />
         <ContentControl Grid.Column="1" Grid.Row="0" regions:RegionManager.RegionName="TranscriptRegion" />
         <GridSplitter ResizeDirection="Rows" Grid.Column="1" Grid.Row="1" Width="Auto" Height="3" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{DynamicResource InvisibleSplitter}"  />
         <ContentControl Grid.Column="1" Grid.Row="1" regions:RegionManager.RegionName="CommandRegion" />
     </Grid>
 

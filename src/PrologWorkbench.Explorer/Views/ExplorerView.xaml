@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <ContentControl regions:RegionManager.RegionName="ListingsRegion" />
-        <GridSplitter />
+        <GridSplitter Style="{DynamicResource InvisibleSplitter}"  />
         <ContentControl Grid.Column="1" regions:RegionManager.RegionName="InstructionsRegion" />
     </Grid>
 </UserControl>

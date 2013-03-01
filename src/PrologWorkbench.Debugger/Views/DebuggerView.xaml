@@ -18,16 +18,16 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--<ContentControl Grid.RowSpan="3" regions:RegionManager.RegionName="ProgramRegion" />-->
-        <GridSplitter Grid.RowSpan="3" Width="3"  />
+        <GridSplitter Grid.RowSpan="3" Width="3" Style="{DynamicResource InvisibleSplitter}" />
         <!--<ContentControl Grid.Column="1" Grid.Row="0" regions:RegionManager.RegionName="TranscriptRegion" />-->
-        <GridSplitter Grid.RowSpan="3" Grid.Column="1" Width="3"  />
+        <GridSplitter Grid.RowSpan="3" Grid.Column="1" Width="3" Style="{DynamicResource InvisibleSplitter}"  />
         
         <ContentControl Grid.Column="2" Grid.Row="0" regions:RegionManager.RegionName="VarArgumentsRegion" />
         <GridSplitter ResizeDirection="Rows" Grid.Column="2" Grid.Row="1" Width="Auto" Height="3" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{DynamicResource InvisibleSplitter}"  />
         <ContentControl Grid.Column="2" Grid.Row="1" regions:RegionManager.RegionName="VarTemporariesRegion" />
         <GridSplitter ResizeDirection="Rows" Grid.Column="2" Grid.Row="2" Width="Auto" Height="3" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{DynamicResource InvisibleSplitter}"  />
         <ContentControl Grid.Column="2" Grid.Row="2" regions:RegionManager.RegionName="VarPermanentsRegion" />
     </Grid>
 </UserControl>

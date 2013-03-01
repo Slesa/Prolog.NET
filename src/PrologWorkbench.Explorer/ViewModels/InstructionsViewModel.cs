@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using Prolog;

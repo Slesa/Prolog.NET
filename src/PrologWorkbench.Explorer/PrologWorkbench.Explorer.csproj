@@ -81,11 +81,15 @@
     </Compile>
     <Compile Include="ViewModels\ExplorerViewModel.cs" />
     <Compile Include="ViewModels\InstructionsViewModel.cs" />
+    <Compile Include="ViewModels\ProgramInfoViewModel.cs" />
     <Compile Include="Views\InstructionsView.xaml.cs">
       <DependentUpon>InstructionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExplorerView.xaml.cs">
       <DependentUpon>ExplorerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgramInfoView.xaml.cs">
+      <DependentUpon>ProgramInfoView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +124,10 @@
     <Page Include="Views\ExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProgramInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

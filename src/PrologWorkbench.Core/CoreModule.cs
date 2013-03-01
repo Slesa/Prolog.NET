@@ -29,7 +29,6 @@ namespace PrologWorkbench.Core
             _container.RegisterType<IProvideCurrentClause, CurrentClauseProvider>(new ContainerControlledLifetimeManager());
 
             _container.RegisterType<StatusBarViewModel>();
-            _container.RegisterType<ProgramViewModel>();
 
             _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof(StatusBarView));
             _regionManager.RegisterViewWithRegion("ModulesRegion", typeof(ModulesView));

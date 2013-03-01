@@ -27,12 +27,13 @@ namespace PrologWorkbench.Editor
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
             _container.RegisterInstance<IWorkbenchModule>("EditorModule", this);
 
+            _container.RegisterType<ProgramEditViewModel>();
             _container.RegisterType<TitleBarViewModel>();
             _container.RegisterType<TranscriptViewModel>();
 
             _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
             _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
-            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramView));
+            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramEditView));
             _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
 
             _container.RegisterType<EditorView>(new ContainerControlledLifetimeManager());

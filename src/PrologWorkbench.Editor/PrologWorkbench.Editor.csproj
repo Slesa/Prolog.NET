@@ -89,6 +89,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\ProgramEditViewModel.cs" />
     <Compile Include="ViewModels\TitleBarViewModel.cs" />
     <Compile Include="ViewModels\TranscriptViewModel.cs" />
     <Compile Include="Views\CommandView.xaml.cs">
@@ -96,6 +97,9 @@
     </Compile>
     <Compile Include="Views\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgramEditView.xaml.cs">
+      <DependentUpon>ProgramEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TitleBarView.xaml.cs">
       <DependentUpon>TitleBarView.xaml</DependentUpon>
@@ -119,6 +123,10 @@
     <Page Include="Views\EditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProgramEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TitleBarView.xaml">
       <SubType>Designer</SubType>

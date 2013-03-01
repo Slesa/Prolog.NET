@@ -1,20 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- Mokka 
+  <!-- Mokka 
     <Color x:Key="Color.Yellow">#FFFBAB</Color>
     <Color x:Key="Color.MidYellow">#F5D471</Color>
     <Color x:Key="Color.DarkYellow">#E3AC3D</Color>
     <Color x:Key="Color.Brown">#B07515</Color>
     <Color x:Key="Color.DarkBrown">#664208</Color>
-	-->
-	<!-- Creme Brulee 
+  -->
+  <!-- Creme Brulee 
     <Color x:Key="Color.Yellow">#FFF6CF</Color>
     <Color x:Key="Color.MidYellow">#FEE4A7</Color>
     <Color x:Key="Color.DarkYellow">#E4B159</Color>
     <Color x:Key="Color.Brown">#745E4B</Color>
     <Color x:Key="Color.DarkBrown">#633607</Color>
-	-->
+  -->
 
   <!-- Karamelbonbon 
     <Color x:Key="Color.Yellow">#FFF6CF</Color>
@@ -40,6 +40,7 @@
 
   <Color x:Key="Color.Foreground">White</Color>
   <Color x:Key="Color.Background">#FF2B2A28</Color>
+  <!--<Color x:Key="Color.SplitterBackground">White</Color>-->
 
 
 

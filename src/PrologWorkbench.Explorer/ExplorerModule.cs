@@ -23,12 +23,14 @@ namespace PrologWorkbench.Explorer
 
         public void Initialize()
         {
-            _container.RegisterType<InstructionsViewModel>();
-            _container.RegisterType<ExplorerViewModel>();
             _container.RegisterInstance<IWorkbenchModule>("ExplorerModule", this);
 
+            _container.RegisterType<InstructionsViewModel>();
+            _container.RegisterType<ExplorerViewModel>();
+            _container.RegisterType<ProgramInfoViewModel>();
+
             _regionManager.RegisterViewWithRegion("InstructionsRegion", typeof(InstructionsView));
-            _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ProgramView));
+            _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ProgramInfoView));
             
             _container.RegisterType<ExplorerView>(new ContainerControlledLifetimeManager());
         }
