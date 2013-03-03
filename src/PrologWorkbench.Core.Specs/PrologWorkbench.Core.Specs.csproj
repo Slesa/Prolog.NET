@@ -85,6 +85,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="CoreModuleSpecs.cs" />
     <Compile Include="Models\MachineProviderSpecs.cs" />
     <Compile Include="Models\ProgramAccessorSpecs.cs" />
     <Compile Include="Models\ProgramProviderSpecs.cs" />

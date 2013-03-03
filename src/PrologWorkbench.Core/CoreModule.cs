@@ -10,6 +10,9 @@ namespace PrologWorkbench.Core
 {
     public class CoreModule : IModule
     {
+        public static readonly string TagStatusBarRegion = "StatusBarRegion";
+        public static readonly string TagModulesRegion = "ModulesRegion";
+
         readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
 
@@ -30,8 +33,8 @@ namespace PrologWorkbench.Core
 
             _container.RegisterType<StatusBarViewModel>();
 
-            _regionManager.RegisterViewWithRegion("StatusBarRegion", typeof(StatusBarView));
-            _regionManager.RegisterViewWithRegion("ModulesRegion", typeof(ModulesView));
+            _regionManager.RegisterViewWithRegion(TagStatusBarRegion, typeof(StatusBarView));
+            _regionManager.RegisterViewWithRegion(TagModulesRegion, typeof(ModulesView));
         }
     }
 }

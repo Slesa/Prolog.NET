@@ -11,6 +11,8 @@ namespace PrologWorkbench.Tracer
 {
     public class TracerModule : IModule, IWorkbenchModule
     {
+        public static readonly string TagTracerModule = "TracerModule";
+
         readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
 
@@ -23,7 +25,7 @@ namespace PrologWorkbench.Tracer
         public void Initialize()
         {
             _container.RegisterType<TraceViewModel>();
-            _container.RegisterInstance<IWorkbenchModule>("TracerModule", this);
+            _container.RegisterInstance<IWorkbenchModule>(TagTracerModule, this);
 
             _container.RegisterType<TraceView>(new ContainerControlledLifetimeManager());
         }
