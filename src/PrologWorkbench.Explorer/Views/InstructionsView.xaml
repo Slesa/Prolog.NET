@@ -6,14 +6,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Style x:Key="InstructionStreamEntryStyle" TargetType="{x:Type TextBlock}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsCurrentInstruction}" Value="true">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontStyle" Value="Italic"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+      <Style x:Key="InstructionStreamEntryStyle" TargetType="{x:Type TextBlock}">
+        <Style.Setters>
+          <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+        </Style.Setters>
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding IsCurrentInstruction}" Value="true">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
     </UserControl.Resources>
 
     <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">

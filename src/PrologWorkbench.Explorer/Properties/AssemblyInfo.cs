@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -17,3 +18,4 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("17ad9394-9f07-4d74-b6a7-95b0978255c9")]
 
+[assembly: InternalsVisibleTo("PrologWorkbench.Explorer.Specs")]

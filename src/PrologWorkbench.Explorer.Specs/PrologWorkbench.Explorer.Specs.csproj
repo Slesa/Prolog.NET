@@ -8,8 +8,8 @@
     <ProjectGuid>{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrologWorkbench.Program.Specs</RootNamespace>
-    <AssemblyName>PrologWorkbench.Program.Specs</AssemblyName>
+    <RootNamespace>PrologWorkbench.Explorer.Specs</RootNamespace>
+    <AssemblyName>PrologWorkbench.Explorer.Specs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -84,6 +84,8 @@
     </Compile>
     <Compile Include="ExplorerModuleSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ExplorerViewSpecs.cs" />
+    <Compile Include="Views\InstructionsViewSpecs.cs" />
     <Compile Include="Views\ProgramInfoViewSpecs.cs" />
   </ItemGroup>
   <ItemGroup>

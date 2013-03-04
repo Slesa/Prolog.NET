@@ -1,7 +1,8 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using System.ComponentModel;
 using Microsoft.Practices.Prism.Events;
 using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Core.ViewModels;
+using PrologWorkbench.Explorer.Events;
 
 namespace PrologWorkbench.Explorer.ViewModels
 {
@@ -10,17 +11,13 @@ namespace PrologWorkbench.Explorer.ViewModels
         public ProgramInfoViewModel(IProvideProgram programProvider, IEventAggregator eventAggregator) 
             : base(programProvider, eventAggregator)
         {
-            ShowInstructionsCommand = new DelegateCommand(OnShowInstructions);
+            PropertyChanged += OnPropertyChanged;
         }
 
-        public DelegateCommand ShowInstructionsCommand { get; private set; }
-
-        void OnShowInstructions()
+        void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var clause = SelectedClause;
-            if (clause == null) return;
-
-            //_eventAggregator.GetEvent<SetCurrentInputEvent>().Publish(clause.CodeSentence.ToString());
+            if (!e.PropertyName.Equals("SelectedClause")) return;
+            _eventAggregator.GetEvent<ExplorerClauseChangedEvent>().Publish(SelectedClause);
         }
     }
 }

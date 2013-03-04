@@ -4,12 +4,11 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
-using PrologWorkbench.Explorer;
 using PrologWorkbench.Explorer.Resources;
 using PrologWorkbench.Explorer.ViewModels;
 using PrologWorkbench.Explorer.Views;
 
-namespace PrologWorkbench.Program.Specs
+namespace PrologWorkbench.Explorer.Specs
 {
     [Subject(typeof(ExplorerModule))]
     internal class When_creating_explorer_module : WithFakes

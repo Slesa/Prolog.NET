@@ -5,7 +5,7 @@ using PrologWorkbench.Core.Contracts;
 using PrologWorkbench.Explorer.ViewModels;
 using PrologWorkbench.Explorer.Views;
 
-namespace PrologWorkbench.Program.Specs.Views
+namespace PrologWorkbench.Explorer.Specs.Views
 {
     [Subject(typeof(ProgramInfoView))]
     public class When_creating_program_view : WithFakes
