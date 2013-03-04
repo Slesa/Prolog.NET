@@ -11,6 +11,14 @@ namespace PrologWorkbench.Debugger
 {
     public class DebuggerModule : IModule, IWorkbenchModule
     {
+        public static readonly string TagDebuggerModule = "DebuggerModule";
+        public static readonly string TagVarArgumentsView = "VarArgumentsView";
+        public static readonly string TagVarTemporariesView = "VarTemporariesView";
+        public static readonly string TagVarPermanentsView = "VarPermanentsView";
+        public static readonly string TagVarArgumentsRegion = "VarArgumentsRegion";
+        public static readonly string TagVarTemporariesRegion = "VarTemporariesRegion";
+        public static readonly string TagVarPermanentsRegion = "VarPermanentsRegion";
+
         readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
 
@@ -22,19 +30,19 @@ namespace PrologWorkbench.Debugger
 
         public void Initialize()
         {
+            _container.RegisterInstance<IWorkbenchModule>(TagDebuggerModule, this);
+
             _container.RegisterType<ArgumentsVariableListViewModel>();
             _container.RegisterType<TemporaryVariableListViewModel>();
             _container.RegisterType<PermanentVariablesListViewModel>();
+            
+            _container.RegisterType<VariableListView>(TagVarArgumentsView, new InjectionConstructor(_container.Resolve<ArgumentsVariableListViewModel>()));
+            _container.RegisterType<VariableListView>(TagVarTemporariesView, new InjectionConstructor(_container.Resolve<TemporaryVariableListViewModel>()));
+            _container.RegisterType<VariableListView>(TagVarPermanentsView, new InjectionConstructor(_container.Resolve<PermanentVariablesListViewModel>()));
 
-            _container.RegisterInstance<IWorkbenchModule>("DebuggerModule", this);
-
-            _container.RegisterType<VariableListView>("VarArgumentsView", new InjectionConstructor(_container.Resolve<ArgumentsVariableListViewModel>()));
-            _container.RegisterType<VariableListView>("VarTemporariesView", new InjectionConstructor(_container.Resolve<TemporaryVariableListViewModel>()));
-            _container.RegisterType<VariableListView>("VarPermanentsView", new InjectionConstructor(_container.Resolve<PermanentVariablesListViewModel>()));
-
-            _regionManager.RegisterViewWithRegion("VarArgumentsRegion", () => _container.Resolve<VariableListView>("VarArgumentsView"));
-            _regionManager.RegisterViewWithRegion("VarTemporariesRegion", () => _container.Resolve<VariableListView>("VarTemporariesView"));
-            _regionManager.RegisterViewWithRegion("VarPermanentsRegion", () => _container.Resolve<VariableListView>("VarPermanentsView"));
+            _regionManager.RegisterViewWithRegion(TagVarArgumentsRegion, () => _container.Resolve<VariableListView>(TagVarArgumentsView));
+            _regionManager.RegisterViewWithRegion(TagVarTemporariesRegion, () => _container.Resolve<VariableListView>(TagVarTemporariesView));
+            _regionManager.RegisterViewWithRegion(TagVarPermanentsRegion, () => _container.Resolve<VariableListView>(TagVarPermanentsView));
             
             _container.RegisterType<DebuggerView>(new ContainerControlledLifetimeManager());
         }

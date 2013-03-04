@@ -3,7 +3,6 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
-using PrologWorkbench.Core.Views;
 using PrologWorkbench.Explorer.Resources;
 using PrologWorkbench.Explorer.ViewModels;
 using PrologWorkbench.Explorer.Views;
@@ -12,6 +11,10 @@ namespace PrologWorkbench.Explorer
 {
     public class ExplorerModule : IModule, IWorkbenchModule
     {
+        public static readonly string TagExplorerModule = "ExplorerModule";
+        public static readonly string TagInstructionsRegion = "InstructionsRegion";
+        public static readonly string TagListingsRegion = "ListingsRegion";
+
         readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
 
@@ -23,14 +26,14 @@ namespace PrologWorkbench.Explorer
 
         public void Initialize()
         {
-            _container.RegisterInstance<IWorkbenchModule>("ExplorerModule", this);
+            _container.RegisterInstance<IWorkbenchModule>(TagExplorerModule, this);
 
             _container.RegisterType<InstructionsViewModel>();
             _container.RegisterType<ExplorerViewModel>();
             _container.RegisterType<ProgramInfoViewModel>();
 
-            _regionManager.RegisterViewWithRegion("InstructionsRegion", typeof(InstructionsView));
-            _regionManager.RegisterViewWithRegion("ListingsRegion", typeof(ProgramInfoView));
+            _regionManager.RegisterViewWithRegion(TagInstructionsRegion, typeof(InstructionsView));
+            _regionManager.RegisterViewWithRegion(TagListingsRegion, typeof(ProgramInfoView));
             
             _container.RegisterType<ExplorerView>(new ContainerControlledLifetimeManager());
         }

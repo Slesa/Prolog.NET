@@ -3,7 +3,6 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
-using PrologWorkbench.Core.Views;
 using PrologWorkbench.Editor.Helpers;
 using PrologWorkbench.Editor.Resources;
 using PrologWorkbench.Editor.ViewModels;
@@ -13,6 +12,12 @@ namespace PrologWorkbench.Editor
 {
     public class EditorModule : IModule, IWorkbenchModule
     {
+        public static readonly string TagEditorModule = "EditorModule";
+        public static readonly string TagTitleBarRegion = "TitleBarRegion";
+        public static readonly string TagCommandRegion = "CommandRegion";
+        public static readonly string TagProgramRegion = "ProgramRegion";
+        public static readonly string TagTranscriptRegion = "TranscriptRegion";
+
         readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
 
@@ -25,16 +30,16 @@ namespace PrologWorkbench.Editor
         public void Initialize()
         {
             _container.RegisterType(typeof(IProvideFilename), typeof(FilenameProvider));
-            _container.RegisterInstance<IWorkbenchModule>("EditorModule", this);
+            _container.RegisterInstance<IWorkbenchModule>(TagEditorModule, this);
 
             _container.RegisterType<ProgramEditViewModel>();
             _container.RegisterType<TitleBarViewModel>();
             _container.RegisterType<TranscriptViewModel>();
 
-            _regionManager.RegisterViewWithRegion("TitleBarRegion", typeof(TitleBarView));
-            _regionManager.RegisterViewWithRegion("CommandRegion", typeof(CommandView));
-            _regionManager.RegisterViewWithRegion("ProgramRegion", typeof(ProgramEditView));
-            _regionManager.RegisterViewWithRegion("TranscriptRegion", typeof(TranscriptView));
+            _regionManager.RegisterViewWithRegion(TagTitleBarRegion, typeof(TitleBarView));
+            _regionManager.RegisterViewWithRegion(TagCommandRegion, typeof(CommandView));
+            _regionManager.RegisterViewWithRegion(TagProgramRegion, typeof(ProgramEditView));
+            _regionManager.RegisterViewWithRegion(TagTranscriptRegion, typeof(TranscriptView));
 
             _container.RegisterType<EditorView>(new ContainerControlledLifetimeManager());
         }

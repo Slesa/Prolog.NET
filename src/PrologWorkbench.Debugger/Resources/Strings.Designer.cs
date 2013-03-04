@@ -22,7 +22,7 @@ namespace PrologWorkbench.Debugger.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PrologWorkbench.Debugger.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PrologWorkbench.Debugger.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace PrologWorkbench.Debugger.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PrologWorkbench.Debugger.Resources {
         /// <summary>
         ///   Looks up a localized string similar to _Debugger.
         /// </summary>
-        internal static string DebuggerModule_Title {
+        public static string DebuggerModule_Title {
             get {
                 return ResourceManager.GetString("DebuggerModule_Title", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace PrologWorkbench.Debugger.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Arguments.
         /// </summary>
-        internal static string VariablesListViewModel_ArgumentsList {
+        public static string VariablesListViewModel_ArgumentsList {
             get {
                 return ResourceManager.GetString("VariablesListViewModel_ArgumentsList", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace PrologWorkbench.Debugger.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Permanent variables.
         /// </summary>
-        internal static string VariablesListViewModel_PermanentsList {
+        public static string VariablesListViewModel_PermanentsList {
             get {
                 return ResourceManager.GetString("VariablesListViewModel_PermanentsList", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace PrologWorkbench.Debugger.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Temporary variables.
         /// </summary>
-        internal static string VariablesListViewModel_TemporariesList {
+        public static string VariablesListViewModel_TemporariesList {
             get {
                 return ResourceManager.GetString("VariablesListViewModel_TemporariesList", resourceCulture);
             }

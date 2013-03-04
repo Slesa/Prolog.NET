@@ -20,12 +20,12 @@ namespace PrologWorkbench.Core.Specs
                 
                 _regionManager = new RegionManager();
                 
-                _coreModule = new CoreModule(_container, _regionManager);
+                _subject = new CoreModule(_container, _regionManager);
                  var locator = new UnityServiceLocator(_container);
                  ServiceLocator.SetLocatorProvider(() => locator);
             };
 
-        Because of = () => _coreModule.Initialize();
+        Because of = () => _subject.Initialize();
 
         It should_register_status_update_provider = () =>
             _container.Registrations.ShouldContain(
@@ -66,7 +66,7 @@ namespace PrologWorkbench.Core.Specs
         It should_register_modules_view_region = () => _regionManager.Regions.ContainsRegionWithName(CoreModule.TagModulesRegion);
 
         static IUnityContainer _container;
-        static CoreModule _coreModule;
+        static CoreModule _subject;
         static IRegionManager _regionManager;
         static IRegionViewRegistry _regionViewRegistry;
     }
