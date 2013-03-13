@@ -12,9 +12,13 @@ namespace PrologWorkbench.Debugger
     public class DebuggerModule : IModule, IWorkbenchModule
     {
         public static readonly string TagDebuggerModule = "DebuggerModule";
+        public static readonly string TagStackFrameView = "StackFrameView";
+        public static readonly string TagInstructionsView = "InstructionsView";
         public static readonly string TagVarArgumentsView = "VarArgumentsView";
         public static readonly string TagVarTemporariesView = "VarTemporariesView";
         public static readonly string TagVarPermanentsView = "VarPermanentsView";
+        public static readonly string TagStackFrameRegion = "StackFrameRegion";
+        public static readonly string TagInstructionsRegion = "InstructionsRegion";
         public static readonly string TagVarArgumentsRegion = "VarArgumentsRegion";
         public static readonly string TagVarTemporariesRegion = "VarTemporariesRegion";
         public static readonly string TagVarPermanentsRegion = "VarPermanentsRegion";
@@ -32,6 +36,8 @@ namespace PrologWorkbench.Debugger
         {
             _container.RegisterInstance<IWorkbenchModule>(TagDebuggerModule, this);
 
+            _container.RegisterType<StackFrameViewModel>();
+            _container.RegisterType<InstructionsViewModel>();
             _container.RegisterType<ArgumentsVariableListViewModel>();
             _container.RegisterType<TemporaryVariableListViewModel>();
             _container.RegisterType<PermanentVariablesListViewModel>();
@@ -40,6 +46,8 @@ namespace PrologWorkbench.Debugger
             _container.RegisterType<VariableListView>(TagVarTemporariesView, new InjectionConstructor(_container.Resolve<TemporaryVariableListViewModel>()));
             _container.RegisterType<VariableListView>(TagVarPermanentsView, new InjectionConstructor(_container.Resolve<PermanentVariablesListViewModel>()));
 
+            _regionManager.RegisterViewWithRegion(TagStackFrameRegion, () => _container.Resolve<StackFrameView>(TagStackFrameView));
+            _regionManager.RegisterViewWithRegion(TagInstructionsRegion, () => _container.Resolve<InstructionsView>(TagInstructionsView));
             _regionManager.RegisterViewWithRegion(TagVarArgumentsRegion, () => _container.Resolve<VariableListView>(TagVarArgumentsView));
             _regionManager.RegisterViewWithRegion(TagVarTemporariesRegion, () => _container.Resolve<VariableListView>(TagVarTemporariesView));
             _regionManager.RegisterViewWithRegion(TagVarPermanentsRegion, () => _container.Resolve<VariableListView>(TagVarPermanentsView));

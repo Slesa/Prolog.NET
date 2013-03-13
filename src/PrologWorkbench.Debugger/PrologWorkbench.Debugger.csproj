@@ -77,9 +77,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\InstructionsViewModel.cs" />
+    <Compile Include="ViewModels\StackFrameViewModel.cs" />
     <Compile Include="ViewModels\VariableListViewModel.cs" />
     <Compile Include="Views\DebuggerView.xaml.cs">
       <DependentUpon>DebuggerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstructionsView.xaml.cs">
+      <DependentUpon>InstructionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StackFrameView.xaml.cs">
+      <DependentUpon>StackFrameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VariableListView.xaml.cs">
       <DependentUpon>VariableListView.xaml</DependentUpon>
@@ -100,6 +108,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InstructionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StackFrameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

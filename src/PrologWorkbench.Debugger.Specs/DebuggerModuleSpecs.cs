@@ -17,6 +17,9 @@ namespace PrologWorkbench.Debugger.Specs
             {
                 _container = new UnityContainer();
                 _regionViewRegistry = An<IRegionViewRegistry>();
+                //ServiceLocator.SetLocatorProvider(_container);
+                //_regionViewRegistry = new RegionViewRegistry(ServiceLocator.Current);
+                //_regionManager.WhenToldTo(x=>x.RegisterViewWithRegion())
                 _container.RegisterInstance(_regionViewRegistry);
                 _container.RegisterInstance(An<IProvideMachine>());
 
@@ -33,6 +36,16 @@ namespace PrologWorkbench.Debugger.Specs
             _container.Registrations.ShouldContain(
                 x =>
                 x.RegisteredType == typeof(IWorkbenchModule) && x.Name.Equals(DebuggerModule.TagDebuggerModule));
+
+        It should_register_stack_frame_viewmodel = () =>
+            _container.Registrations.ShouldContain(
+                x =>
+                x.RegisteredType == typeof(StackFrameViewModel) && x.MappedToType == typeof(StackFrameViewModel));
+
+        It should_register_instructions_viewmodel = () =>
+            _container.Registrations.ShouldContain(
+                x =>
+                x.RegisteredType == typeof(InstructionsViewModel) && x.MappedToType == typeof(InstructionsViewModel));
 
         It should_register_arguments_variable_viewmodel = () =>
             _container.Registrations.ShouldContain(
@@ -64,9 +77,16 @@ namespace PrologWorkbench.Debugger.Specs
                 x =>
                 x.RegisteredType == typeof(VariableListView) && x.MappedToType == typeof(VariableListView) && x.Name.Equals(DebuggerModule.TagVarPermanentsView));
 
-        It should_register_var_arguments_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarArgumentsRegion);
-        It should_register_var_permanents_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarPermanentsRegion);
-        It should_register_var_temporaries_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarTemporariesRegion);
+        [Ignore("Must mock region manager first")]
+        It should_register_stack_frame_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagStackFrameRegion).ShouldBeTrue();
+        [Ignore("Must mock region manager first")]
+        It should_register_instructions_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagInstructionsRegion).ShouldBeTrue();
+        [Ignore("Must mock region manager first")]
+        It should_register_var_arguments_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarArgumentsRegion).ShouldBeTrue();
+        [Ignore("Must mock region manager first")]
+        It should_register_var_permanents_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarPermanentsRegion).ShouldBeTrue();
+        [Ignore("Must mock region manager first")]
+        It should_register_var_temporaries_region = () => _regionManager.Regions.ContainsRegionWithName(DebuggerModule.TagVarTemporariesRegion).ShouldBeTrue();
 
         It should_have_an_icon = () => _subject.Icon.ShouldNotBeNull();
         It should_have_a_title = () => _subject.Title.ShouldEqual(Strings.DebuggerModule_Title);

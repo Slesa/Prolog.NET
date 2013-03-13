@@ -120,6 +120,12 @@
   <data name="DebuggerModule_Title" xml:space="preserve">
     <value>_Debugger</value>
   </data>
+  <data name="InstructionsViewModel_Title" xml:space="preserve">
+    <value>Instructions</value>
+  </data>
+  <data name="StackFrameViewModel_Title" xml:space="preserve">
+    <value>Call Stack</value>
+  </data>
   <data name="VariablesListViewModel_ArgumentsList" xml:space="preserve">
     <value>Arguments</value>
   </data>
