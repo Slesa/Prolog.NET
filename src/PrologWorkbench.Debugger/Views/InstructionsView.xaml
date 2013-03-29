@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
   <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
     <HeaderedContentControl.Header>
-      <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
+      <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
     </HeaderedContentControl.Header>
     <DockPanel>
       <ListBox Style="{DynamicResource Style.Module.Content}" ItemsSource="{Binding Path=Variables, ElementName=ctrlVariableList}">

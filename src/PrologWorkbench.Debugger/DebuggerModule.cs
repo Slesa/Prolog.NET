@@ -18,7 +18,7 @@ namespace PrologWorkbench.Debugger
         public static readonly string TagVarTemporariesView = "VarTemporariesView";
         public static readonly string TagVarPermanentsView = "VarPermanentsView";
         public static readonly string TagStackFrameRegion = "StackFrameRegion";
-        public static readonly string TagInstructionsRegion = "InstructionsRegion";
+        public static readonly string TagInstructionsRegion = "DebugInstructionsRegion";
         public static readonly string TagVarArgumentsRegion = "VarArgumentsRegion";
         public static readonly string TagVarTemporariesRegion = "VarTemporariesRegion";
         public static readonly string TagVarPermanentsRegion = "VarPermanentsRegion";
@@ -42,6 +42,8 @@ namespace PrologWorkbench.Debugger
             _container.RegisterType<TemporaryVariableListViewModel>();
             _container.RegisterType<PermanentVariablesListViewModel>();
             
+            _container.RegisterType<StackFrameView>(TagStackFrameView);
+            _container.RegisterType<InstructionsView>(TagInstructionsView);
             _container.RegisterType<VariableListView>(TagVarArgumentsView, new InjectionConstructor(_container.Resolve<ArgumentsVariableListViewModel>()));
             _container.RegisterType<VariableListView>(TagVarTemporariesView, new InjectionConstructor(_container.Resolve<TemporaryVariableListViewModel>()));
             _container.RegisterType<VariableListView>(TagVarPermanentsView, new InjectionConstructor(_container.Resolve<PermanentVariablesListViewModel>()));
