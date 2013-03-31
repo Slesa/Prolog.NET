@@ -87,6 +87,7 @@
     <Compile Include="Contracts\IProvideTranscript.cs" />
     <Compile Include="Contracts\IWorkbenchModule.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="Events\ActivateDebuggerEvent.cs" />
     <Compile Include="Events\SetCurrentInputEvent.cs" />
     <Compile Include="Events\UpdateStatusEvent.cs" />
     <Compile Include="Models\CurrentClauseProvider.cs" />

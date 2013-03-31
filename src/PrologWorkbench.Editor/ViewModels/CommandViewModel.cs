@@ -12,6 +12,7 @@ namespace PrologWorkbench.Editor.ViewModels
 {
     public class CommandViewModel : NotificationObject
     {
+        readonly IEventAggregator _eventAggregator;
         string _currentInput;
 
         [Dependency]
@@ -27,9 +28,11 @@ namespace PrologWorkbench.Editor.ViewModels
 
         public CommandViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<SetCurrentInputEvent>().Subscribe(x => CurrentInput = x);
+
             ExecuteCommand = new DelegateCommand(OnExecute, CanExecute);
             DebugCommand = new DelegateCommand(OnDebug, CanDebug);
-            eventAggregator.GetEvent<SetCurrentInputEvent>().Subscribe(x => CurrentInput = x);
         }
 
         public string Title { get { return Resources.Strings.CommandViewModel_Title; } }
@@ -82,6 +85,7 @@ namespace PrologWorkbench.Editor.ViewModels
         void OnDebug()
         {
             ProcessInput(false);
+            _eventAggregator.GetEvent<ActivateDebuggerEvent>().Publish(true);
         }
 
         #endregion

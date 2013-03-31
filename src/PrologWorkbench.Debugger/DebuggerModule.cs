@@ -36,6 +36,7 @@ namespace PrologWorkbench.Debugger
         {
             _container.RegisterInstance<IWorkbenchModule>(TagDebuggerModule, this);
 
+            _container.RegisterType<DebuggerViewModel>();
             _container.RegisterType<StackFrameViewModel>();
             _container.RegisterType<InstructionsViewModel>();
             _container.RegisterType<ArgumentsVariableListViewModel>();

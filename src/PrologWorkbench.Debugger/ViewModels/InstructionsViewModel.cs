@@ -1,21 +1,32 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.ViewModel;
 using Prolog;
 
 namespace PrologWorkbench.Debugger.ViewModels
 {
     public class InstructionsViewModel : NotificationObject
     {
+        public InstructionsViewModel(IEventAggregator eventAggregator)
+        {
+            eventAggregator.GetEvent<CurrentStackFrameChangedEvent>().Subscribe(OnStackFrameChanged);
+        }
+
         public string Title { get { return Resources.Strings.InstructionsViewModel_Title; } }
 
-        PrologStackFrame _stackFrame;
-        public PrologStackFrame StackFrame
+        PrologInstructionStream _instructions;
+        public PrologInstructionStream Instructions
         {
-            get { return _stackFrame; }
+            get { return _instructions; }
             set
             {
-                _stackFrame = value;
-                RaisePropertyChanged(() => StackFrame);
+                _instructions = value;
+                RaisePropertyChanged(() => Instructions);
             }
+        }
+
+        void OnStackFrameChanged(PrologStackFrame stackFrame)
+        {
+            Instructions = stackFrame != null ? stackFrame.InstructionStream : null;
         }
     }
 }

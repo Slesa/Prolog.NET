@@ -3,15 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:strings="clr-namespace:PrologWorkbench.Debugger.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <Image x:Key="PngRestart" Source="/PrologWorkbench.Debugger;component/Resources/debug_restart.png" />
+      <Image x:Key="PngBackTrack" Source="/PrologWorkbench.Debugger;component/Resources/debug_to_backtrack.png" />
+      <Image x:Key="PngSuccess" Source="/PrologWorkbench.Debugger;component/Resources/debug_to_success.png" />
+      <Image x:Key="PngStepInto" Source="/PrologWorkbench.Debugger;component/Resources/debug_step_into.png" />
+      <Image x:Key="PngStepOver" Source="/PrologWorkbench.Debugger;component/Resources/debug_step_over.png" />
+      <Image x:Key="PngCaller" Source="/PrologWorkbench.Debugger;component/Resources/debug_to_caller.png" />
+    </ResourceDictionary>
+  </UserControl.Resources>
+
   <HeaderedContentControl Style="{DynamicResource Style.HeaderedContentControl}">
     <HeaderedContentControl.Header>
       <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Title}" Foreground="{DynamicResource Brush.Foreground}" />
     </HeaderedContentControl.Header>
     <DockPanel>
-      <ListBox Style="{DynamicResource Style.Module.Content}" ItemsSource="{Binding StackFrames}">
-      </ListBox>
+      <Border DockPanel.Dock="Bottom" Style="{DynamicResource Style.Module.ToolBorder}">
+        <StackPanel Style="{DynamicResource Style.Module.ToolBar}">
+          <Button Command="{Binding RestartCommand}" Content="{StaticResource PngRestart}" ToolTip="{x:Static strings:Strings.StackFrameView_Restart}"  />
+          <Button Command="{Binding RunToBacktrackCommand}"  Content="{StaticResource PngBackTrack}" ToolTip="{x:Static strings:Strings.StackFrameView_RunToBacktrack}" />
+          <Button Command="{Binding RunToSuccessCommand}"  Content="{StaticResource PngSuccess}" ToolTip="{x:Static strings:Strings.StackFrameView_RunToSuccess}" />
+          <Button Command="{Binding StepIntoCommand}"  Content="{StaticResource PngStepInto}" ToolTip="{x:Static strings:Strings.StackFrameView_StepInto}" />
+          <Button Command="{Binding StepOverCommand}"  Content="{StaticResource PngStepOver}" ToolTip="{x:Static strings:Strings.StackFrameView_StepOver}" />
+          <Button Command="{Binding ReturnToCallerCommand}"  Content="{StaticResource PngCaller}" ToolTip="{x:Static strings:Strings.StackFrameView_ReturnToCaller}" />
+        </StackPanel>
+      </Border>
+      <ListBox Style="{DynamicResource Style.Module.Content}" ItemsSource="{Binding StackFrames}" SelectedItem="{Binding CurrentStackFrame}" />
     </DockPanel>
   </HeaderedContentControl>
 </UserControl>

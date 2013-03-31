@@ -77,6 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DebuggerViewModel.cs" />
     <Compile Include="ViewModels\InstructionsViewModel.cs" />
     <Compile Include="ViewModels\StackFrameViewModel.cs" />
     <Compile Include="ViewModels\VariableListViewModel.cs" />
@@ -133,6 +134,14 @@
       <Project>{171A6B22-168C-4662-8706-131C098622BD}</Project>
       <Name>Prolog</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\debug_restart.png" />
+    <Resource Include="Resources\debug_step_into.png" />
+    <Resource Include="Resources\debug_step_over.png" />
+    <Resource Include="Resources\debug_to_backtrack.png" />
+    <Resource Include="Resources\debug_to_caller.png" />
+    <Resource Include="Resources\debug_to_success.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

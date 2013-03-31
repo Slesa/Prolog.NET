@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
@@ -40,7 +39,8 @@ namespace PrologWorkbench.Core.ViewModels
 
     public class ModulesViewModel
     {
-        private readonly IUnityContainer _container;
+        public static readonly string TagMainRegion = "MainRegion";
+        readonly IUnityContainer _container;
         readonly IRegionManager _regionManager;
         private IEnumerable<ModuleViewModel> _modules;
 
@@ -60,7 +60,7 @@ namespace PrologWorkbench.Core.ViewModels
                     foreach(var module in modules)
                     {
                         module.PropertyChanged += OnModuleSelected;
-                        _regionManager.Regions["MainRegion"].Add(module.View, module.Title);
+                        _regionManager.Regions[TagMainRegion].Add(module.View, module.Title);
                     }
                     modules.First().IsChecked = true;
                     _modules = modules.OrderBy(x => x.Position);
@@ -77,7 +77,7 @@ namespace PrologWorkbench.Core.ViewModels
             if (module == null) return;
             if (!module.IsChecked) return;
 
-            _regionManager.Regions["MainRegion"].Activate(module.View);
+            _regionManager.Regions[TagMainRegion].Activate(module.View);
         }
 
     }

@@ -126,6 +126,24 @@
   <data name="StackFrameViewModel_Title" xml:space="preserve">
     <value>Call Stack</value>
   </data>
+  <data name="StackFrameView_Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="StackFrameView_ReturnToCaller" xml:space="preserve">
+    <value>Return to caller</value>
+  </data>
+  <data name="StackFrameView_RunToBacktrack" xml:space="preserve">
+    <value>Run to backtrack</value>
+  </data>
+  <data name="StackFrameView_RunToSuccess" xml:space="preserve">
+    <value>Run to success</value>
+  </data>
+  <data name="StackFrameView_StepInto" xml:space="preserve">
+    <value>Step into</value>
+  </data>
+  <data name="StackFrameView_StepOver" xml:space="preserve">
+    <value>Step over</value>
+  </data>
   <data name="VariablesListViewModel_ArgumentsList" xml:space="preserve">
     <value>Arguments</value>
   </data>
