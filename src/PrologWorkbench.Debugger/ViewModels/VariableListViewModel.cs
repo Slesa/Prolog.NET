@@ -69,7 +69,7 @@ namespace PrologWorkbench.Debugger.ViewModels
 
         protected override void AdjustVariables()
         {
-            Variables = MachineProvider.Machine.Arguments;
+            Variables = MachineProvider.Machine!=null ? MachineProvider.Machine.Arguments : null;
         }
     }
 
@@ -82,7 +82,7 @@ namespace PrologWorkbench.Debugger.ViewModels
 
         protected override void AdjustVariables()
         {
-            Variables = MachineProvider.Machine.TemporaryVariables;
+            Variables = MachineProvider.Machine!=null ? MachineProvider.Machine.TemporaryVariables : null;
         }
     }
 
@@ -100,7 +100,7 @@ namespace PrologWorkbench.Debugger.ViewModels
 
         void OnStackFrameChanged(PrologStackFrame stackFrame)
         {
-            Variables = stackFrame.Variables;
+            Variables = stackFrame!=null ? stackFrame.Variables : null;
         }
     }
 }
