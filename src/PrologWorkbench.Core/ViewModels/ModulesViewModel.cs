@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.Contracts;
+using PrologWorkbench.Core.Events;
 
 namespace PrologWorkbench.Core.ViewModels
 {
@@ -44,10 +46,18 @@ namespace PrologWorkbench.Core.ViewModels
         readonly IRegionManager _regionManager;
         private IEnumerable<ModuleViewModel> _modules;
 
-        public ModulesViewModel(IUnityContainer container, IRegionManager regionManager)
+        public ModulesViewModel(IUnityContainer container, IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _container = container;
             _regionManager = regionManager;
+            eventAggregator.GetEvent<ActivateModuleEvent>().Subscribe(OnActivateModule);
+        }
+
+        void OnActivateModule(string moduleName)
+        {
+            var module = Modules.FirstOrDefault(m=>m.View.Name.Equals(moduleName));
+            if (module == null) return;
+            module.IsChecked = true;
         }
 
         public IEnumerable<ModuleViewModel> Modules

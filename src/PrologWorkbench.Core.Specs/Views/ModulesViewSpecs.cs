@@ -1,5 +1,6 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrologWorkbench.Core.ViewModels;
@@ -12,7 +13,7 @@ namespace PrologWorkbench.Core.Specs.Views
     {
         Establish context = () =>
                             {
-                                _viewModel = new ModulesViewModel(An<IUnityContainer>(), An<IRegionManager>());
+                                _viewModel = new ModulesViewModel(An<IUnityContainer>(), An<IRegionManager>(), An<IEventAggregator>());
                             };
 
         Because of = () => _subject = new ModulesView(_viewModel);

@@ -2,5 +2,5 @@
 
 namespace PrologWorkbench.Core.Events
 {
-    public class ActivateDebuggerEvent : CompositePresentationEvent<bool> { }
+    public class ActivateModuleEvent: CompositePresentationEvent<string>{ }
 }
