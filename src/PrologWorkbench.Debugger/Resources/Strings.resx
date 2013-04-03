@@ -120,6 +120,9 @@
   <data name="DebuggerModule_Title" xml:space="preserve">
     <value>_Debugger</value>
   </data>
+  <data name="DebuggerModule_ToolTip" xml:space="preserve">
+    <value>Debug the currently loaded module</value>
+  </data>
   <data name="InstructionsViewModel_Title" xml:space="preserve">
     <value>Instructions</value>
   </data>

@@ -180,4 +180,7 @@
   <data name="CommandView_Statistics" xml:space="preserve">
     <value>Statistik an- oder abschalten</value>
   </data>
+  <data name="EditorModule_ToolTip" xml:space="preserve">
+    <value>Editiere und starte das aktuell geladene Modul</value>
+  </data>
 </root>

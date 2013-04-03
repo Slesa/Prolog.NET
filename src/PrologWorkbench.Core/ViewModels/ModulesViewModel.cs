@@ -18,6 +18,7 @@ namespace PrologWorkbench.Core.ViewModels
             Icon = module.Icon;
             Title = module.Title;
             Position = module.Position;
+            ToolTip = module.ToolTip;
             View = module.View;
         }
 
@@ -33,10 +34,11 @@ namespace PrologWorkbench.Core.ViewModels
             }
         }
 
-        public string Icon { get; set; }
-        public string Title { get; set; }
-        public int Position { get; set; }
-        public Control View { get; set; }
+        public string Icon { get; private set; }
+        public string Title { get; private set; }
+        public string ToolTip { get; private set; }
+        public int Position { get; private set; }
+        public Control View { get; private set; }
     }
 
     public class ModulesViewModel

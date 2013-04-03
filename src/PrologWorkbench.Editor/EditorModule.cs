@@ -47,6 +47,7 @@ namespace PrologWorkbench.Editor
         public int Position { get { return 10; } }
         public string Icon { get { return "/PrologWorkbench.Editor;component/Resources/Editor.png"; } }
         public string Title { get { return Strings.EditorModule_Title; } }
+        public string ToolTip { get { return Strings.EditorModule_ToolTip; } }
         public Control View { get { return _container.Resolve<EditorView>(); } }
     }
 }

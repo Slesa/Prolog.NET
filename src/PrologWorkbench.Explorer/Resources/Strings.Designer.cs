@@ -70,6 +70,15 @@ namespace PrologWorkbench.Explorer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Explore the content of the currently loaded module.
+        /// </summary>
+        public static string ExplorerModule_ToolTip {
+            get {
+                return ResourceManager.GetString("ExplorerModule_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Instructions.
         /// </summary>
         public static string InstructionsViewModel_Title {

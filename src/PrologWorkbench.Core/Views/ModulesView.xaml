@@ -76,13 +76,15 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <RadioButton x:Name="radioButton" GroupName="Modules" IsChecked="{Binding IsChecked, Mode=TwoWay}" Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                    <StackPanel Orientation="Horizontal" 
+                                Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}"
+                                ToolTip="{Binding ToolTip}">
                         <Image Source="{Binding Icon}" Width="48" />
                         <Label Content="{Binding Title}" 
-							Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
-							FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
-							FontWeight="{Binding Path=FontWeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
-							Margin="10" VerticalAlignment="Center" />
+							                Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
+                              FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
+                              FontWeight="{Binding Path=FontWeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}" 
+                              Margin="10" VerticalAlignment="Center" />
                     </StackPanel>
                 </RadioButton>
             </DataTemplate>

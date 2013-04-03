@@ -70,6 +70,15 @@ namespace PrologWorkbench.Debugger.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debug the currently loaded module.
+        /// </summary>
+        public static string DebuggerModule_ToolTip {
+            get {
+                return ResourceManager.GetString("DebuggerModule_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Instructions.
         /// </summary>
         public static string InstructionsViewModel_Title {

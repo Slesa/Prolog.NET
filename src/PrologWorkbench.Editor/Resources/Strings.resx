@@ -204,4 +204,7 @@
   <data name="ProgramEditView_Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="EditorModule_ToolTip" xml:space="preserve">
+    <value>Edit and run the currently loaded module</value>
+  </data>
 </root>

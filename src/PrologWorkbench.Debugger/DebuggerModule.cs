@@ -61,6 +61,7 @@ namespace PrologWorkbench.Debugger
         public int Position { get { return 30; } }
         public string Icon { get { return "/PrologWorkbench.Debugger;component/Resources/Debugger.png"; } }
         public string Title { get { return Strings.DebuggerModule_Title; } }
+        public string ToolTip { get { return Strings.DebuggerModule_ToolTip; } }
         public Control View { get { return _container.Resolve<DebuggerView>(); } }
     }
 }

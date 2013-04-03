@@ -115,6 +115,15 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit and run the currently loaded module.
+        /// </summary>
+        public static string EditorModule_ToolTip {
+            get {
+                return ResourceManager.GetString("EditorModule_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicate fact/rule specified..
         /// </summary>
         public static string MessageDuplicateClause {

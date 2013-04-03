@@ -33,6 +33,7 @@ namespace PrologWorkbench.Tracer
         public int Position { get { return 40; } }
         public string Icon { get { return "/PrologWorkbench.Tracer;component/Resources/Tracer.png"; } }
         public string Title { get { return Strings.TracerModule_Title; } }
+        public string ToolTip { get { return Strings.TracerModule_ToolTip; } }
         public Control View { get { return _container.Resolve<TraceView>(); } }
     }
 }

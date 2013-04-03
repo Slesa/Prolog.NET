@@ -129,4 +129,7 @@
   <data name="TraceView_Clear" xml:space="preserve">
     <value>Clear trace log</value>
   </data>
+  <data name="TracerModule_ToolTip" xml:space="preserve">
+    <value>Show tracing informations</value>
+  </data>
 </root>
