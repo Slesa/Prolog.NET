@@ -214,11 +214,29 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl-W.
+        /// </summary>
+        public static string TitleBarView_CloseProgram_Hotkey {
+            get {
+                return ResourceManager.GetString("TitleBarView_CloseProgram_Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit workbench.
         /// </summary>
         public static string TitleBarView_Exit {
             get {
                 return ResourceManager.GetString("TitleBarView_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl-X.
+        /// </summary>
+        public static string TitleBarView_Exit_Hotkey {
+            get {
+                return ResourceManager.GetString("TitleBarView_Exit_Hotkey", resourceCulture);
             }
         }
         
@@ -232,6 +250,15 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl-O.
+        /// </summary>
+        public static string TitleBarView_LoadProgram_Hotkey {
+            get {
+                return ResourceManager.GetString("TitleBarView_LoadProgram_Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New program.
         /// </summary>
         public static string TitleBarView_NewProgram {
@@ -241,11 +268,29 @@ namespace PrologWorkbench.Editor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl-N.
+        /// </summary>
+        public static string TitleBarView_NewProgram_Hotkey {
+            get {
+                return ResourceManager.GetString("TitleBarView_NewProgram_Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save current program.
         /// </summary>
         public static string TitleBarView_SaveProgram {
             get {
                 return ResourceManager.GetString("TitleBarView_SaveProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl-S.
+        /// </summary>
+        public static string TitleBarView_SaveProgram_Hotkey {
+            get {
+                return ResourceManager.GetString("TitleBarView_SaveProgram_Hotkey", resourceCulture);
             }
         }
         

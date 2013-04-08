@@ -79,6 +79,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Behaviors\SelectedItemBehavior.cs" />
+    <Compile Include="Behaviors\ToolTipHotkey.cs" />
     <Compile Include="Contracts\ILoadOrSaveProgram.cs" />
     <Compile Include="Contracts\IProvideCurrentClause.cs" />
     <Compile Include="Contracts\IProvideMachine.cs" />

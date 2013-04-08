@@ -207,4 +207,19 @@
   <data name="EditorModule_ToolTip" xml:space="preserve">
     <value>Edit and run the currently loaded module</value>
   </data>
+  <data name="TitleBarView_CloseProgram_Hotkey" xml:space="preserve">
+    <value>Ctrl-W</value>
+  </data>
+  <data name="TitleBarView_Exit_Hotkey" xml:space="preserve">
+    <value>Ctrl-X</value>
+  </data>
+  <data name="TitleBarView_LoadProgram_Hotkey" xml:space="preserve">
+    <value>Ctrl-O</value>
+  </data>
+  <data name="TitleBarView_NewProgram_Hotkey" xml:space="preserve">
+    <value>Ctrl-N</value>
+  </data>
+  <data name="TitleBarView_SaveProgram_Hotkey" xml:space="preserve">
+    <value>Ctrl-S</value>
+  </data>
 </root>
