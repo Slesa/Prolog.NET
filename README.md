@@ -5,6 +5,9 @@ A .NET-base implementation of Prolog based on the Warren Abstract Machine (WAM) 
 
 (Forked Prolog.NET by R. Todd  from CodePlex)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/6b2av6dlso837ull?svg=true)](https://ci.appveyor.com/project/Slesa/prolog-net)
+
+
 
 ## Introduction 
 
