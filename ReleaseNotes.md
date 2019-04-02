@@ -1,3 +1,8 @@
+# 1.1.2
+* Update Avalonia to 0.7
+* Provide package for DotNet Core 2.0 and .NET 4.6.1
+* Build DotNet Core Demo OS dependent
+
 # 1.1.1
 * Created packages for .NET 4.0, 4.5 and DotNet Core
 * Added WPF Demo tool in Avalonia for DotNet Core

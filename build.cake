@@ -171,7 +171,8 @@ Task("Default")
   .IsDependentOn("VersionInfo")
   .IsDependentOn("Restore-NuGet-Packages")
   .IsDependentOn("Build")
-  .IsDependentOn("CreatePackages");
+  .IsDependentOn("CreatePackages")
+  .IsDependentOn("PublishPackages");
 
 Task("Deploy")
   .IsDependentOn("PublishPackages");
