@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"(true|false)(?![\p{L}\p{N}_])", Priority = 1)] // See Atom
+    [Terminal(@"(true|false)(?![\p{L}\p{N}_])"/*, Priority = 1*/)] // See Atom
     internal sealed class LiteralBoolean : PrologTerminal
     { }
 }

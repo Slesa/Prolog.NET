@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"\\==", Priority = 2)] // see OpCannotUnify
+    [Terminal(@"\\=="/*, Priority = 2*/)] // see OpCannotUnify
     internal sealed class OpTermUnequal : PrologTerminal
     { }
 }

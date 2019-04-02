@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"<<", Priority = 1)] // See OpLess
+    [Terminal(@"<<"/*, Priority = 1*/)] // See OpLess
     internal sealed class OpShiftLeft : PrologTerminal
     { }
 }

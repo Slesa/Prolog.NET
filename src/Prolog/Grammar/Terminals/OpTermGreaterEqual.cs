@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"@>=", Priority = 1)] // See OpTermGreater
+    [Terminal(@"@>="/*, Priority = 1*/)] // See OpTermGreater
     internal sealed class OpTermGreaterEqual : PrologTerminal
     { }
 }

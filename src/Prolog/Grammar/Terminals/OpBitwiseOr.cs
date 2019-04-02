@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"\\/", Priority = 1)] // See OpBitwiseNegate
+    [Terminal(@"\\/"/*, Priority = 1*/)] // See OpBitwiseNegate
     internal sealed class OpBitwiseOr : PrologTerminal
     { }
 }

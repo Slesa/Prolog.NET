@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prolog.Test", "Prolog.Test\Prolog.Test.csproj", "{8D13D301-B100-4116-B526-62721D20966E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prolog.Scheduler", "Prolog.Scheduler\Prolog.Scheduler.csproj", "{05BED0F9-096F-4EE5-A50C-83E143913492}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BED0F9-096F-4EE5-A50C-83E143913492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BED0F9-096F-4EE5-A50C-83E143913492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BED0F9-096F-4EE5-A50C-83E143913492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BED0F9-096F-4EE5-A50C-83E143913492}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {AA3B1DFD-8361-421D-852A-CB8FBF2F2FEC}
+	EndGlobalSection
+EndGlobal

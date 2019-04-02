@@ -1,0 +1,67 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Prolog.Scheduler.Views;assembly=Prolog.Scheduler"
+             >
+  <UserControl.Styles>
+    <Style Selector="TextBlock.Header">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="Background" Value="PowderBlue" />
+    </Style>
+    <Style Selector="LayoutTransformControl.Shift">
+      <Setter Property="LayoutTransform">
+        <Setter.Value>
+          <RotateTransform Angle="270"/>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Background" Value="PowderBlue" />
+    </Style>
+  </UserControl.Styles>
+  <!--ShowGridLines="True"-->
+  <Grid Name="gridSchedule">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" Grid.Column="1" Classes="Header">Monday</TextBlock>
+    <TextBlock Grid.Row="0" Grid.Column="2" Classes="Header">Tuesday</TextBlock>
+    <TextBlock Grid.Row="0" Grid.Column="3" Classes="Header">Wednesday</TextBlock>
+    <TextBlock Grid.Row="0" Grid.Column="4" Classes="Header">Thursday</TextBlock>
+    <TextBlock Grid.Row="0" Grid.Column="5" Classes="Header">Friday</TextBlock>
+    <LayoutTransformControl Grid.Column="0" Grid.Row="1" Classes="Shift">
+      <TextBlock >First</TextBlock>
+    </LayoutTransformControl>
+    <LayoutTransformControl Grid.Row="2" Grid.Column="0" Classes="Shift">
+      <TextBlock>Second</TextBlock>
+    </LayoutTransformControl>
+    <LayoutTransformControl Grid.Row="3" Grid.Column="0" Classes="Shift">
+      <TextBlock>Third</TextBlock>
+    </LayoutTransformControl>
+    <v:ScheduleDayView Grid.Row="1" Grid.Column="1" DataContext="{Binding Monday.First}" />
+    <v:ScheduleDayView Grid.Row="2" Grid.Column="1" DataContext="{Binding Monday.Second}" />
+    <v:ScheduleDayView Grid.Row="3" Grid.Column="1" DataContext="{Binding Monday.Third}" />
+    <v:ScheduleDayView Grid.Row="1" Grid.Column="2" DataContext="{Binding Tuesday.First}" />
+    <v:ScheduleDayView Grid.Row="2" Grid.Column="2" DataContext="{Binding Tuesday.Second}" />
+    <v:ScheduleDayView Grid.Row="3" Grid.Column="2" DataContext="{Binding Tuesday.Third}" />
+    <v:ScheduleDayView Grid.Row="1" Grid.Column="3" DataContext="{Binding Wednesday.First}" />
+    <v:ScheduleDayView Grid.Row="2" Grid.Column="3" DataContext="{Binding Wednesday.Second}" />
+    <v:ScheduleDayView Grid.Row="3" Grid.Column="3" DataContext="{Binding Wednesday.Third}" />
+    <v:ScheduleDayView Grid.Row="1" Grid.Column="4" DataContext="{Binding Thursday.First}" />
+    <v:ScheduleDayView Grid.Row="2" Grid.Column="4" DataContext="{Binding Thursday.Second}" />
+    <v:ScheduleDayView Grid.Row="3" Grid.Column="4" DataContext="{Binding Thursday.Third}" />
+    <v:ScheduleDayView Grid.Row="1" Grid.Column="5" DataContext="{Binding Friday.First}" />
+    <v:ScheduleDayView Grid.Row="2" Grid.Column="5" DataContext="{Binding Friday.Second}" />
+    <v:ScheduleDayView Grid.Row="3" Grid.Column="5" DataContext="{Binding Friday.Third}" />
+  </Grid>
+</UserControl>

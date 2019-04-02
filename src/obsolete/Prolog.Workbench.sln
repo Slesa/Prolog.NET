@@ -1,0 +1,122 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologTest", "PrologTest\PrologTest.csproj", "{9FC4BB27-9852-4771-918A-9E5788380895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog.Specs", "Prolog.Specs\Prolog.Specs.csproj", "{437C4D5D-F465-4592-97B4-8428DEDB14F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologScheduler", "PrologScheduler\PrologScheduler.csproj", "{3D81B439-74E4-4534-9D56-C8AAE9B320E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench", "PrologWorkbench\PrologWorkbench.csproj", "{65E6D859-7578-4A05-827C-3D36AE640364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Theme", "PrologWorkbench.Theme\PrologWorkbench.Theme.csproj", "{D9BCD156-95E0-4B3D-9E2D-E8E606149894}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Editor", "PrologWorkbench.Editor\PrologWorkbench.Editor.csproj", "{9A93B637-17BC-4A90-B1A5-71FF5947F807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Core.Specs", "PrologWorkbench.Core.Specs\PrologWorkbench.Core.Specs.csproj", "{1945A969-C7E6-4654-9F44-55B68C75A8B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Editor.Specs", "PrologWorkbench.Editor.Specs\PrologWorkbench.Editor.Specs.csproj", "{F05D28D6-015F-4359-880C-EF7C65D3BD4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Debugger", "PrologWorkbench.Debugger\PrologWorkbench.Debugger.csproj", "{7C7BAF99-DE02-4114-A387-566174D3C3E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Explorer", "PrologWorkbench.Explorer\PrologWorkbench.Explorer.csproj", "{6C8C813A-3F3B-402D-B735-DCAB10C15A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Tracer", "PrologWorkbench.Tracer\PrologWorkbench.Tracer.csproj", "{DBA928E4-4AF7-40CD-882F-121F308D9878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Debugger.Specs", "PrologWorkbench.Debugger.Specs\PrologWorkbench.Debugger.Specs.csproj", "{EEC9AEAB-3240-4526-9601-498F9024BC48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Explorer.Specs", "PrologWorkbench.Explorer.Specs\PrologWorkbench.Explorer.Specs.csproj", "{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Tracer.Specs", "PrologWorkbench.Tracer.Specs\PrologWorkbench.Tracer.Specs.csproj", "{39E706BB-E0F9-4047-9E8A-07A706542C87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrologWorkbench.Core", "PrologWorkbench.Core\PrologWorkbench.Core.csproj", "{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog.Test", "Prolog.Test\Prolog.Test.csproj", "{8D13D301-B100-4116-B526-62721D20966E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171A6B22-168C-4662-8706-131C098622BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC4BB27-9852-4771-918A-9E5788380895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437C4D5D-F465-4592-97B4-8428DEDB14F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437C4D5D-F465-4592-97B4-8428DEDB14F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437C4D5D-F465-4592-97B4-8428DEDB14F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437C4D5D-F465-4592-97B4-8428DEDB14F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D81B439-74E4-4534-9D56-C8AAE9B320E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E6D859-7578-4A05-827C-3D36AE640364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9BCD156-95E0-4B3D-9E2D-E8E606149894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A93B637-17BC-4A90-B1A5-71FF5947F807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1945A969-C7E6-4654-9F44-55B68C75A8B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05D28D6-015F-4359-880C-EF7C65D3BD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05D28D6-015F-4359-880C-EF7C65D3BD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05D28D6-015F-4359-880C-EF7C65D3BD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05D28D6-015F-4359-880C-EF7C65D3BD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7BAF99-DE02-4114-A387-566174D3C3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7BAF99-DE02-4114-A387-566174D3C3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7BAF99-DE02-4114-A387-566174D3C3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7BAF99-DE02-4114-A387-566174D3C3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8C813A-3F3B-402D-B735-DCAB10C15A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA928E4-4AF7-40CD-882F-121F308D9878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC9AEAB-3240-4526-9601-498F9024BC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC9AEAB-3240-4526-9601-498F9024BC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC9AEAB-3240-4526-9601-498F9024BC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC9AEAB-3240-4526-9601-498F9024BC48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C16CB5B-1DAF-4E7B-8B29-E6A567E8A9D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39E706BB-E0F9-4047-9E8A-07A706542C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39E706BB-E0F9-4047-9E8A-07A706542C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39E706BB-E0F9-4047-9E8A-07A706542C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39E706BB-E0F9-4047-9E8A-07A706542C87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCE1E5C-AB18-464F-A29B-5FD85EDB0A9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D13D301-B100-4116-B526-62721D20966E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {AA3B1DFD-8361-421D-852A-CB8FBF2F2FEC}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,33 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Prolog.Scheduler.ViewModels;assembly=Prolog.Scheduler"
+        xmlns:v="clr-namespace:Prolog.Scheduler.Views;assembly=Prolog.Scheduler"
+        Icon="resm:Prolog.Scheduler.Assets.ApplicationIcon.ico"
+        Title="Prolog Scheduler"
+        Height="300" Width="300">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Menu Name="mnuMain" Grid.Row="0">
+      <MenuItem Header="_File" Name="mnuFile">
+        <MenuItem Header="E_xit" Name="mnuFileExit" Command="{Binding OnFileExitCommand}" />
+      </MenuItem>
+    </Menu>
+    <StackPanel Grid.Row="1" Orientation="Horizontal">
+      <Button Name="btnNextSolution" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="3" Command="{Binding OnNextCommand}">Next Solution</Button>
+      <Button Name="btnRestart" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="3" Command="{Binding OnRestartCommand}">Restart</Button>
+    </StackPanel>
+    <v:ScheduleView Grid.Row="2" DataContext="{Binding Schedule}" />
+    <TextBox Grid.Row="3" IsReadOnly="True" Text="{Binding StatusMsg}" />
+  </Grid>
+
+</Window>

@@ -6,7 +6,7 @@ using Lingua;
 
 namespace Prolog.Grammar
 {
-    [Terminal(@"=\\=", Priority = 1)] // see OpUnify
+    [Terminal(@"=\\="/*, Priority = 1*/)] // see OpUnify
     internal sealed class OpUnequal : PrologTerminal
     { }
 }

@@ -19,3 +19,8 @@ ipch/
 target/
 # mstest test results
 TestResults
+/src/VersionInfo.cs
+.vs/
+*.DotSettings
+src/Documentation
+src/packages

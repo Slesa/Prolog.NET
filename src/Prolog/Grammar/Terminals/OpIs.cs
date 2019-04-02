@@ -10,7 +10,7 @@ namespace Prolog.Grammar
     internal sealed class OpIs1 : PrologTerminal
     { }
 
-    [Terminal(@"is(?![\p{L}\p{N}_])", Priority = 1)] // See Atom
+    [Terminal(@"is(?![\p{L}\p{N}_])"/*, Priority = 1*/)] // See Atom
     internal sealed class OpIs2 : PrologTerminal
     { }
 }

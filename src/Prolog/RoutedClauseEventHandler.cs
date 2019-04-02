@@ -1,4 +1,5 @@
-﻿/* Copyright © 2010 Richard G. Todd.
+﻿#if WPFCODE
+/* Copyright © 2010 Richard G. Todd.
  * Licensed under the terms of the Microsoft Public License (Ms-PL).
  */
 
@@ -11,3 +12,4 @@ namespace Prolog
     /// <param name="e">The event data.</param>
     public delegate void RoutedClauseEventHandler(object sender, RoutedClauseEventArgs e);
 }
+#endif
