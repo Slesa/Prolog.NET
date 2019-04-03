@@ -1,4 +1,4 @@
-﻿likes(mary, john).
+likes(mary, john).
 likes(mary, wine).
 likes(john, wine).
 likes(john, golf).

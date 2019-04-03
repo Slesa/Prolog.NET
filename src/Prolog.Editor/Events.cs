@@ -19,4 +19,14 @@
             Result = result;
         }
     }
+
+    public class FileNameChangedEvent
+    {
+        public string FileName { get; }
+
+        public FileNameChangedEvent(string fileName)
+        {
+            FileName = fileName;
+        }
+    }
 }

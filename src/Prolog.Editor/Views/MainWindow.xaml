@@ -3,7 +3,7 @@
         xmlns:vm="clr-namespace:Prolog.Editor.ViewModels;assembly=Prolog.Editor"
         xmlns:v="clr-namespace:Prolog.Editor.Views;assembly=Prolog.Editor"
         Icon="resm:Prolog.Editor.Assets.avalonia-logo.ico"
-        Title="Prolog.Editor">
+        Title="{Binding WindowTitle}">
 
   <Design.DataContext>
     <vm:MainWindowViewModel/>

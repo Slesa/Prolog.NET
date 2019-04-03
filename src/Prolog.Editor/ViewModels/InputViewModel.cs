@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -23,15 +23,22 @@ namespace Prolog.Editor.ViewModels
             ExecuteCommand = ReactiveCommand.Create(OnExecute,
                 this.WhenAny(
                     x => x.Code,
-                    (hasCode) => !string.IsNullOrWhiteSpace(hasCode.Value)));
+                    hasCode => !string.IsNullOrWhiteSpace(hasCode.Value)));
             //.Subscribe(_ => OnExecute());
             //OkButton = ReactiveCommand.Create(
             //    this.WhenAny(x => x.Code, y => y.Query,
             //        (x, y) => !string.IsNullOrWhiteSpace(x.Value) && !string.IsNullOrWhiteSpace(y.Value)) );
             // this.WhenAny(x => x.Code, y=> y.Query, (x, y) => !string.IsNullOrWhiteSpace(x) && !string.IsNullOrWhiteSpace(y));
-            LoadCommand = ReactiveCommand.Create(OnLoad);
-            SaveCommand = ReactiveCommand.Create(OnSave);
+            LoadCommand = ReactiveCommand.CreateFromObservable(OnLoad);
+            LoadCommand.Subscribe(ReadFile);
+            SaveCommand = ReactiveCommand.Create(OnSave,
+                this.WhenAny(
+                    x => x.FileName,
+                    fileName => !string.IsNullOrWhiteSpace(fileName.Value)));
         }
+
+        public PrologMachine Machine { get; private set; }
+        public ReactiveCommand<Unit, string> LoadCommand { get; }
 
         string _code;
         public string Code
@@ -47,58 +54,100 @@ namespace Prolog.Editor.ViewModels
             set => this.RaiseAndSetIfChanged(ref _query, value);
         }
 
-        public ReactiveCommand<Unit, Unit> LoadCommand { get; }
-        void OnLoad()
+        string _fileName;
+        public string FileName
         {
-            var fileName = AskFileName().Result;
+            get => _fileName;
+            set
+            {
+                _hub.Publish(new FileNameChangedEvent(value));
+                this.RaiseAndSetIfChanged(ref _fileName, value);
+            }
+        }
+
+
+        IObservable<string> OnLoad()
+        {
+            return Observable.Create<string>(async (observer, token) =>
+            {
+                var files = await AskFileName();
+                if (files != null) observer.OnNext(files[0]);
+                observer.OnCompleted();
+            });
+        }
+
+        void ReadFile(string fileName)
+        {
             if (fileName == null || !File.Exists(fileName)) return;
             var text = File.ReadAllLines(fileName);
             var code = "";
+            var query = "";
             foreach (var line in text)
             {
                 var c = line.Trim();
                 if (c.StartsWith(":-"))
                 {
-                    Query = c;
+                    query = c;
                     continue;
                 }
-                code += line;
+                code += line + Environment.NewLine;
             }
+            Query = query;
             Code = code;
+            FileName = fileName;
+            Machine = null;
         }
 
         public ReactiveCommand<Unit, Unit> SaveCommand { get; }
         void OnSave()
         {
-
+            var sb = new StringBuilder();
+                sb.AppendLine(Code)
+                    .AppendLine("")
+                    .AppendLine(GetQueryText());
+            File.WriteAllText(FileName, sb.ToString());
         }
 
         public ReactiveCommand<Unit, Unit> ExecuteCommand { get; }
         void OnExecute()
         {
-            var codeSentences = GetCodeSentences();
-            if (codeSentences == null)
-                return;
-            var query = GetQuery();
-            if (query == null)
-                return;
-            var program = new Prolog.Program();
-            foreach (var sentence in codeSentences)
-                program.Add(sentence);
-            _hub.Publish(new ResultEvent(""));
-            PrologMachine machine = null;
+            if (Machine == null)
+            {
+                var codeSentences = GetCodeSentences();
+                if (codeSentences == null)
+                    return;
+                var query = GetQuery();
+                if (query == null)
+                    return;
+                var program = new Prolog.Program();
+                foreach (var sentence in codeSentences)
+                    program.Add(sentence);
+                _hub.Publish(new ResultEvent(""));
+                try
+                {
+                    Machine = PrologMachine.Create(program, query);
+                }
+                catch (Exception ex)
+                {
+                    _hub.Publish(new StatusMessageEvent($"Unable to create environment: {ex.Message}"));
+                }
+            }
+            ExecuteNext();
+        }
+
+        void ExecuteNext()
+        {
             try
             {
-                machine = PrologMachine.Create(program, query);
-                machine.ExecutionComplete += CodeExecuted;
-                var result = machine.RunToSuccess();
+                Machine.ExecutionComplete += CodeExecuted;
+                var result = Machine.RunToSuccess();
 
                 var execResult = Enum.GetName(typeof(ExecutionResults), result);
                 _hub.Publish(new StatusMessageEvent($"Result of execution: {execResult}"));
             }
             catch (Exception ex)
             {
-                if(machine!=null) machine.ExecutionComplete -= CodeExecuted;
+                if (Machine != null) Machine.ExecutionComplete -= CodeExecuted;
                 _hub.Publish(new StatusMessageEvent($"Got error in execution: {ex.Message}"));
             }
         }
@@ -127,22 +176,26 @@ namespace Prolog.Editor.ViewModels
             _hub.Publish(new ResultEvent(sb.ToString()));
         }
 
-        async Task<string> AskFileName()
+        Task<string[]> AskFileName()
         {
             var dialog = new OpenFileDialog()
             {
                 //InitialFileName = SampleFile,
                 Filters = new List<FileDialogFilter>
-                { new FileDialogFilter
-                {
-                    Extensions = new List<string> { "*.prolog", "*.plg"},
-                    Name = "Prolog Files"
-                } },
+                { new FileDialogFilter {
+                    Extensions = new List<string> { "prolog", "pl"},
+                    Name = "Prolog Files" },
+                  new FileDialogFilter {
+                    Extensions = new List<string> { "txt"},
+                    Name = "Text Files" },
+                  new FileDialogFilter {
+                    Extensions = new List<string> { "*"},
+                    Name = "All Files" },
+                },
                 Title = "Could not locate sample file",
                 InitialDirectory = Directory.GetCurrentDirectory()
             };
-            var result = await dialog.ShowAsync();
-            return result.FirstOrDefault();
+            return dialog.ShowAsync();
         }
 
         IEnumerable<CodeSentence> GetCodeSentences()
@@ -168,16 +221,23 @@ namespace Prolog.Editor.ViewModels
                 _hub.Publish(new StatusMessageEvent("Query was empty"));
                 return null;
             }
-            var buffer = Query.Trim();
-            if (!buffer.StartsWith(":-"))
-                buffer = ":-" + buffer;
-            var codeSentences = Parser.Parse(buffer);
+
+            var query = GetQueryText();
+            var codeSentences = Parser.Parse(query);
             if (codeSentences == null || codeSentences.Length == 0)
             {
                 _hub.Publish(new StatusMessageEvent("Query sentence was empty"));
                 return null;
             }
             return new Query(codeSentences[0]);
+        }
+
+        string GetQueryText()
+        {
+            var result = Query.Trim();
+            if (!result.StartsWith(":-"))
+                result = ":-" + result;
+            return result;
         }
     }
 }
