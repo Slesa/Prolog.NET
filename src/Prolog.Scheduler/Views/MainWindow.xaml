@@ -4,7 +4,7 @@
         xmlns:v="clr-namespace:Prolog.Scheduler.Views;assembly=Prolog.Scheduler"
         Icon="resm:Prolog.Scheduler.Assets.ApplicationIcon.ico"
         Title="Prolog Scheduler"
-        Height="300" Width="300">
+        Height="800" Width="600">
 
   <Design.DataContext>
     <vm:MainWindowViewModel/>
@@ -27,7 +27,7 @@
       <Button Name="btnRestart" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="3" Command="{Binding OnRestartCommand}">Restart</Button>
     </StackPanel>
     <v:ScheduleView Grid.Row="2" DataContext="{Binding Schedule}" />
-    <TextBox Grid.Row="3" IsReadOnly="True" Text="{Binding StatusMsg}" />
+    <TextBox Grid.Row="3" IsReadOnly="True" Focusable="False" Text="{Binding StatusMsg}" />
   </Grid>
 
 </Window>

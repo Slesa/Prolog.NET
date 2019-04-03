@@ -124,13 +124,13 @@ Task("Build")
      };
     DotNetCorePublish(coreAppsSolution, corePublish);
 
-    if (IsWindows) {
+    /* Does not build if (IsWindows) {
       var wpfPath = buildPath + "/wpf";
       var wpfAppsSettings = new MSBuildSettings()
         .WithProperty("OutputPath", wpfPath)
         .WithProperty("Configuration", configuration);
       MSBuild(wpfAppsSolution, wpfAppsSettings);
-    }
+    } */
 });
 
 Task("CreatePackages")

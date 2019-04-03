@@ -1,0 +1,30 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Prolog.Editor.ViewModels;assembly=Prolog.Editor"
+        xmlns:v="clr-namespace:Prolog.Editor.Views;assembly=Prolog.Editor"
+        Icon="resm:Prolog.Editor.Assets.avalonia-logo.ico"
+        Title="Prolog.Editor">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <v:InputView Grid.Column="0" Grid.Row="0" DataContext="{Binding InputViewModel}" Margin="10" />
+    <GridSplitter Background="LightGray" Width="10" Grid.Row="0" Grid.Column="1"/>
+    <v:ResultView Grid.Column="2" Grid.Row="0" DataContext="{Binding ResultViewModel}" Margin="10" />
+    <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="True" Focusable="False" Text="{Binding StatusText}" />
+
+  </Grid>
+
+</Window>
