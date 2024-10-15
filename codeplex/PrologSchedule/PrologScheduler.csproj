@@ -131,11 +131,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Schedule.cs" />
     <Compile Include="ScheduleDay.cs" />
     <Compile Include="Controls\ScheduleDayControl.xaml.cs">
@@ -149,10 +144,6 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +158,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\schedule.prolog">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Redistribute\Microsoft.WindowsAPICodePack.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace Prolog.Scheduler
             {
                 if (m_program == null)
                 {
-                    string path = Path.Combine(Properties.Settings.Default.SamplesFolder, "schedule.prolog");
+                    string path = Path.Combine(".\\data", "schedule.prolog");
 
                     if (!File.Exists(path))
                     {

@@ -52,7 +52,7 @@ namespace PrologTest
 
         public void CreateTestResults()
         {
-            Program program = Program.Load(Path.Combine(Properties.Settings.Default.SamplesFolder, ProgramName));
+            Program program = Program.Load(Path.Combine(".\\data", ProgramName));
 
             XElement xDocument =
                 new XElement(RootElementName,
@@ -76,14 +76,14 @@ namespace PrologTest
                 }
             }
 
-            xDocument.Save(Path.Combine(Properties.Settings.Default.TestsFolder, TestCaseName));
+            xDocument.Save(Path.Combine(".\\data", TestCaseName));
         }
 
         public void ValidateTestResults()
         {
             Console.WriteLine("Validate: {0}", TestCaseName);
 
-            XElement xDocument = XElement.Load(Path.Combine(Properties.Settings.Default.TestsFolder, TestCaseName));
+            XElement xDocument = XElement.Load(Path.Combine(".\\data", TestCaseName));
 
             int testCaseNumber = 0;
             foreach (XElement xTestCase in xDocument.Elements(TestCaseElementName))

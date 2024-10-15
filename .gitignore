@@ -21,6 +21,7 @@ target/
 TestResults
 /src/VersionInfo.cs
 .vs/
+.idea/
 *.DotSettings
 src/Documentation
 src/packages/

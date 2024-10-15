@@ -311,8 +311,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
-editbin /stack:5000000 "$(TargetPath)"</PostBuildEvent>
-  </PropertyGroup>
 </Project>
