@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prolog", "Prolog\Prolog.csproj", "{171A6B22-168C-4662-8706-131C098622BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prolog.Test", "Prolog.Test\Prolog.Test.csproj", "{69E1FD43-47B1-432E-B169-EE94BAD9A676}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,18 @@ Global
 		{171A6B22-168C-4662-8706-131C098622BD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{171A6B22-168C-4662-8706-131C098622BD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{171A6B22-168C-4662-8706-131C098622BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Debug|x86.Build.0 = Debug|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|x86.ActiveCfg = Release|Any CPU
+		{69E1FD43-47B1-432E-B169-EE94BAD9A676}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,28 +14,24 @@ namespace Prolog.Test
 {
     public class ProgramTest
     {
-        readonly IConfiguration _configuration;
+        const string DataPath = "data";
         const string RootElementName = "ProgramTest";
         const string ProgramNameAttributeName = "programName";
         const string TestCaseElementName = "TestCase";
         const string SourceElementName = "Source";
 
-        public ProgramTest(string programName, IConfiguration configuration)
+        public ProgramTest(string programName)
         {
-            _configuration = configuration;
             ProgramName = programName;
         }
 
         public string ProgramName { get; private set; }
 
-        public string TestCaseName
-        {
-            get { return ProgramName + ".xml"; }
-        }
+        public string TestCaseName => ProgramName + ".xml";
 
         public void CreateTestResults()
         {
-            var filename = Path.Combine(_configuration["Paths:SampleFolder"], ProgramName);
+            var filename = Path.Combine(DataPath, ProgramName);
             if (!File.Exists(filename))
             {
                 Console.WriteLine("File {0} not found, aborting", filename);
@@ -58,14 +54,14 @@ namespace Prolog.Test
                     xDocument.Add(xTest);
                 }
             }
-            xDocument.Save(Path.Combine(_configuration["Paths:TestFolder"], TestCaseName));
+            xDocument.Save(Path.Combine(DataPath, TestCaseName));
         }
 
         public void ValidateTestResults()
         {
             Console.WriteLine("Validate: {0}", TestCaseName);
 
-            var xDocument = XElement.Load(Path.Combine(_configuration["Paths:TestFolder"], TestCaseName));
+            var xDocument = XElement.Load(Path.Combine(DataPath, TestCaseName));
 
             var testCaseNumber = 0;
             foreach (var xTestCase in xDocument.Elements(TestCaseElementName))

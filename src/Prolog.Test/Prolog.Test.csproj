@@ -2,16 +2,22 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\data\Tests\farmer.prolog.xml" Link="data\Tests\farmer.prolog.xml">
+    <Content Include="data\farmer.prolog.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\data\Tests\list.prolog.xml" Link="data\Tests\list.prolog.xml">
+    <Content Include="data\list.prolog.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="data\farmer.prolog">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\list.prolog">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,17 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="data\Tests\" />
-    <Folder Include="data\Samples\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\data\Samples\farmer.prolog" Link="data\Samples\farmer.prolog">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\data\Samples\list.prolog" Link="data\Samples\list.prolog">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="data" />
   </ItemGroup>
 
 </Project>

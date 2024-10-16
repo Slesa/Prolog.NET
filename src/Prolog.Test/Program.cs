@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 
 namespace Prolog.Test
 {
@@ -12,7 +10,6 @@ namespace Prolog.Test
         [STAThread]
         static void Main(string[] args)
         {
-            var configuration = CreateConfiguration();
             while (true)
             {
                 Console.WriteLine("Options:");
@@ -35,7 +32,7 @@ namespace Prolog.Test
                         {
                             foreach (var programName in ProgramNames)
                             {
-                                var programTest = new ProgramTest(programName, configuration);
+                                var programTest = new ProgramTest(programName);
                                 programTest.CreateTestResults();
                             }
                         }
@@ -45,7 +42,7 @@ namespace Prolog.Test
                     {
                         foreach (var programName in ProgramNames)
                         {
-                            var programTest = new ProgramTest(programName, configuration);
+                            var programTest = new ProgramTest(programName);
                             programTest.ValidateTestResults();
                         }
                     }
@@ -110,28 +107,6 @@ namespace Prolog.Test
             }
 
             //System.Windows.Clipboard.SetText(sbGrammar.ToString());
-        }
-
-        static IReadOnlyDictionary<string, string> DefaultConfigurationStrings { get; } =
-            new Dictionary<string, string>()
-            {
-                [$"Paths:SampleFolder"] = @"data\Samples",
-                [$"Paths:TestFolder"] = @"data\Tests",
-            };
-
-        static IConfiguration CreateConfiguration()
-        {
-            return new ConfigurationBuilder()
-                .AddIniFile("app.ini", true, true)
-                .AddInMemoryCollection(DefaultConfigurationStrings)
-                .Build();
-
-            // This allows us to set a system environment variable to Development
-            // when running a compiled Release build on a local workstation, so we don't
-            // have to alter our real production appsettings file for compiled-local-test.
-            //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
-            // .AddEnvironmentVariables()
-            //.AddAzureKeyVault()
         }
 
     }
