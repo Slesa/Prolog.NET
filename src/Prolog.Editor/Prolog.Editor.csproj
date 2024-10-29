@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <ApplicationIcon>avalonia-logo.ico</ApplicationIcon>
     <StartupObject />
   </PropertyGroup>
@@ -20,10 +20,10 @@
     <None Remove="Views\ResultView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.6.1" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.6.1" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.6.1" />
-    <PackageReference Include="Easy.MessageHub" Version="4.0.1" />
+    <PackageReference Include="Avalonia" Version="11.1.4" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.1.4" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.4" />
+    <PackageReference Include="Easy.MessageHub" Version="5.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prolog\Prolog.csproj" />

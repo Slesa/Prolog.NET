@@ -13,6 +13,14 @@ namespace Prolog.Code
     [Serializable]
     public abstract class CodeValueNumeric : CodeValue, IEquatable<CodeValueNumeric>, IImmuttable
     {
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((CodeValueNumeric)obj);
+        }
+
         public new const string ElementName = "CodeValueNumeric";
 
         public new static CodeValueNumeric Create(XElement xCodeValue)

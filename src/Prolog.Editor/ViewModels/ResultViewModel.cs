@@ -5,9 +5,8 @@ namespace Prolog.Editor.ViewModels
 {
     public class ResultViewModel : ViewModelBase
     {
-        public ResultViewModel()
+        public ResultViewModel(MessageHub hub)
         {
-            var hub = MessageHub.Instance;
             hub.Subscribe<ResultEvent>(x => Result = x.Result);
         }
 

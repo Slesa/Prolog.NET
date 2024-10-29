@@ -1,7 +1,5 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
-using Prolog.Editor.ViewModels;
-using Prolog.Editor.Views;
+using Avalonia.ReactiveUI;
 
 namespace Prolog.Editor
 {
@@ -9,13 +7,14 @@ namespace Prolog.Editor
     {
         static void Main(string[] args)
         {
-            BuildAvaloniaApp().Start<MainWindow>(() => new MainWindowViewModel());
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
 
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .UseReactiveUI()
-                .LogToDebug();
+                .LogToTrace()
+                .UseReactiveUI();
+                // .LogToDebug();
     }
 }
