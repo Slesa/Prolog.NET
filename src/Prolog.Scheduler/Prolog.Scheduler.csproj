@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <ApplicationIcon>ApplicationIcon.ico</ApplicationIcon>
     <StartupObject />
   </PropertyGroup>
@@ -29,10 +29,10 @@
     <None Remove="Views\ScheduleView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.7.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.7.0" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.7.0" />
-    <PackageReference Include="Lingua.dll" Version="1.1.2" />
+    <PackageReference Include="Avalonia" Version="11.1.4" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.1.4" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.4" />
+    <PackageReference Include="Lingua.dll" Version="1.1.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>

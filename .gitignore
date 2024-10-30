@@ -16,6 +16,7 @@ tmp/
 ipch/
 *_Spliced.*
 .metadata/
+.dotnet/
 target/
 # mstest test results
 TestResults

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Easy.MessageHub;
 using Prolog.Code;
 using ReactiveUI;
@@ -16,9 +20,9 @@ namespace Prolog.Editor.ViewModels
     {
         readonly MessageHub _hub;
 
-        public InputViewModel()
+        public InputViewModel(MessageHub hub)
         {
-            _hub = MessageHub.Instance;
+            _hub = hub;
             //ExecuteCommand = ReactiveCommand.Create(OnExecute);
             ExecuteCommand = ReactiveCommand.Create(OnExecute,
                 this.WhenAny(
@@ -151,7 +155,12 @@ namespace Prolog.Editor.ViewModels
                 _hub.Publish(new StatusMessageEvent($"Got error in execution: {ex.Message}"));
             }
         }
+        private static IEnumerable<Window> Windows =>
+            (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.Windows ?? Array.Empty<Window>();
 
+        public Window? FindWindowByViewModel(INotifyPropertyChanged viewModel) =>
+            Windows.FirstOrDefault(x => ReferenceEquals(viewModel, x.DataContext));
+        
         void CodeExecuted(object sender, PrologQueryEventArgs e)
         {
             var machine = sender as PrologMachine;
@@ -193,9 +202,9 @@ namespace Prolog.Editor.ViewModels
                     Name = "All Files" },
                 },
                 Title = "Could not locate sample file",
-                InitialDirectory = Directory.GetCurrentDirectory()
+                Directory = Directory.GetCurrentDirectory()
             };
-            return dialog.ShowAsync();
+            return dialog.ShowAsync(FindWindowByViewModel(this));
         }
 
         IEnumerable<CodeSentence> GetCodeSentences()

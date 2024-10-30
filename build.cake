@@ -6,11 +6,10 @@ Information("Configuration is "+configuration);
 var target = Argument("target", "Default");
 Information("Target is "+target);
 
-
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
 //////////////////////////////////////////////////////////////////////
-var workingPathName = EnvironmentVariable("BUILD_REPOSITORY_LOCALPATH") ?? ".";
+var workingPathName = "."; //EnvironmentVariable("BUILD_REPOSITORY_LOCALPATH") ?? ".";
 var workingDir = MakeAbsolute(new DirectoryPath( workingPathName ));
 var releaseNotes = ParseReleaseNotes( workingDir + "/ReleaseNotes.md");
 var version = releaseNotes.Version.ToString(); //string.Format("{0}.{1}.{2}", releaseNotes.Version.Major, releaseNotes.Version.Minor, releaseNotes.Version.Patch);
@@ -28,12 +27,12 @@ var deployDir = new DirectoryPath( binDir.CombineWithFilePath("deploy").FullPath
 //////////////////////////////////////////////////////////////////////
 // PROPERTIES
 //////////////////////////////////////////////////////////////////////
-var platform = new CakePlatform();
-public bool IsWindows { get { return platform.Family==PlatformFamily.Windows; } }
+//var platform = new CakePlatform();
+//public bool IsWindows { get { return platform.Family==PlatformFamily.Windows; } }
 public bool IsLocalBuild { get { return BuildSystem.IsLocalBuild; } }
 public bool IsDevelop { get { return BranchName.ToLower()=="develop"; } }
 public bool IsMaster { get { return BranchName.ToLower()=="master"; } }
-public string BranchName { get { return TFBuild.Environment.Repository.Branch; } }
+public string BranchName { get { return EnvironmentVariable("APPVEYOR_REPO_BRANCH"); } } // TFBuild.Environment.Repository.Branch; } }
 
 public string CurrentVersion() {
     var isAppVeyorBuild = AppVeyor.IsRunningOnAppVeyor;
@@ -92,17 +91,18 @@ Task("VersionInfo")
 
 Task("Restore-NuGet-Packages")
   .Does( () => {
-    var settings = new DotNetCoreRestoreSettings {
+    var settings = new DotNetRestoreSettings {
         ArgumentCustomization = args => CreateNugetArguments(args),
     };    
-    DotNetCoreRestore(wpfAppsSolution, settings);
-    DotNetCoreRestore(coreAppsSolution, settings);
+    DotNetRestore(wpfAppsSolution, settings);
+    DotNetRestore(coreAppsSolution, settings);
 });
 
 Task("Build")
   .Does( () => {
-    var framework = IsWindows ? "net461" : "netcoreapp2.2";
-    var coreSettings = new DotNetCoreBuildSettings
+    var platform = new CakePlatform();
+    // var framework = IsWindows ? "net461" : "netcoreapp2.2";
+    var coreSettings = new DotNetBuildSettings
     {
         ArgumentCustomization = args => CreateNugetArguments(args),
         //Framework = "netcoreapp2.0",
@@ -110,19 +110,19 @@ Task("Build")
         //OutputDirectory = buildPath,
         NoRestore = true,
     };
-    if (!IsWindows) coreSettings.Framework = framework;
-    DotNetCoreBuild(prologSolution, coreSettings);
+    // if (!IsWindows) coreSettings.Framework = framework;
+    DotNetBuild(prologSolution, coreSettings);
 
     var corePath = buildPath + "/core";
-    var corePublish = new DotNetCorePublishSettings
+    var corePublish = new DotNetBuildSettings
      {
-         Framework = framework,
+        //  Framework = framework,
          //NoBuild = true,
          NoRestore = true,
          Configuration = configuration,
          OutputDirectory = corePath
      };
-    DotNetCorePublish(coreAppsSolution, corePublish);
+    DotNetBuild(coreAppsSolution, corePublish);
 
     /* Does not build if (IsWindows) {
       var wpfPath = buildPath + "/wpf";
@@ -134,9 +134,9 @@ Task("Build")
 });
 
 Task("CreatePackages")
-  .WithCriteria( IsWindows )
+  // .WithCriteria( IsWindows )
   .Does( () => {
-    var settings = new DotNetCorePackSettings
+    var settings = new DotNetPackSettings
     {
         ArgumentCustomization = args => CreateNugetArguments(args),
         Configuration = configuration,
@@ -145,26 +145,18 @@ Task("CreatePackages")
         NoRestore = true,
         NoBuild = true,
     };
-    DotNetCorePack(prologProject, settings);
+    DotNetPack(prologProject, settings);
 });
 
 Task("PublishPackages")
-  .WithCriteria( IsWindows )
+  .WithCriteria( !IsLocalBuild )
   .Does( () => {
+    var apikey = EnvironmentVariable("NUGET_APIKEY");
     var packages = GetFiles(deployDir+"/*.nupkg");
     NuGetPush(packages, new NuGetPushSettings {
         Source = "https://nuget.org",
-        ApiKey = "oy2lb3fjjur4feps73dqllx3uaj6chiu5ct4zqwgg2az7q"
+        ApiKey = apikey
     });
-    /* var settings = new DotNetCorePublishSettings
-    {
-        ArgumentCustomization = args => CreateNugetArguments(args),
-        Configuration = configuration,
-        OutputDirectory = deployDir,
-        NoRestore = true,
-        NoBuild = true,
-    };
-    DotNetCorePublish(linguaProject, settings); */
 });
 
 //////////////////////////////////////////////////////////////////////

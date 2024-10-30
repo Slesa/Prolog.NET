@@ -6,8 +6,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
-using Microsoft.Extensions.Configuration;
-using Prolog;
 using Prolog.Code;
 
 namespace Prolog.Test

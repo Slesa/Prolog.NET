@@ -5,7 +5,7 @@ using Prolog.Editor.ViewModels;
 
 namespace Prolog.Editor
 {
-    public class ViewLocator : IDataTemplate
+ /*   public class ViewLocator : IDataTemplate
     {
         public bool SupportsRecycling => false;
 
@@ -28,5 +28,5 @@ namespace Prolog.Editor
         {
             return data is ViewModelBase;
         }
-    }
+    } */
 }

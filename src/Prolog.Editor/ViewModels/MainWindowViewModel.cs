@@ -5,15 +5,17 @@ namespace Prolog.Editor.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        readonly MessageHub _hub;
+        
         public MainWindowViewModel()
         {
-            InputViewModel = new InputViewModel();
-            ResultViewModel = new ResultViewModel();
+            _hub = new MessageHub();
+            InputViewModel = new InputViewModel(_hub);
+            ResultViewModel = new ResultViewModel(_hub);
             WindowTitle = "";
 
-            var hub = MessageHub.Instance;
-            hub.Subscribe<StatusMessageEvent>(x => StatusText = x.Text);
-            hub.Subscribe<FileNameChangedEvent>(x => WindowTitle = x.FileName);
+            _hub.Subscribe<StatusMessageEvent>(x => StatusText = x.Text);
+            _hub.Subscribe<FileNameChangedEvent>(x => WindowTitle = x.FileName);
         }
         public InputViewModel InputViewModel { get; }
         public ResultViewModel ResultViewModel { get; }
