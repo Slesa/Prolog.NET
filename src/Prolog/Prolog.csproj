@@ -3,17 +3,25 @@
   <PropertyGroup>
     <Description>A .NET-base implementation of Prolog based on the Warren Abstract Machine (WAM) architecture.</Description>
     <Authors>"R. Todd"; "J. Preiss"</Authors>
-    <TargetFrameworks>net48;netcoreapp3.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <AssemblyName>Prolog</AssemblyName>
     <PackageId>Prolog.NET</PackageId>
     <PackageTags>Parser Grammar Prolog</PackageTags>
     <PackageReleaseNotes>My Release Notes</PackageReleaseNotes>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <!-- PackageIconUrl>http://github.com/machine/machine.specifications/raw/master/Misc/Machine.Specifications-128x128.png</PackageIconUrl -->
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Slesa/Prolog.NET</PackageProjectUrl>
 <!--    <PackageLicenseUrl>https://github.com/Slesa/Prolog.NET/blob/master/License.txt</PackageLicenseUrl>-->
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <!-- NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(BuildServer)' != '' ">
+    <TargetFrameworks>net48;netcoreapp3.1;net6.0;net7.0;net8.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildServer)' == '' ">
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
@@ -47,9 +55,10 @@
     <None Include="..\..\README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 
-  <!-- ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.0.0" />
-    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.0.0" />
-  </ItemGroup -->
+  <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
 
 </Project>

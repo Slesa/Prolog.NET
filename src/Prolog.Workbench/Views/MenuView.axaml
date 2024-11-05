@@ -1,0 +1,80 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Prolog.Scheduler.Views.MenuView">
+    
+    <Menu Name="mainMenu" Grid.Row="0">
+        <MenuItem Header="_File" Name="mnuFile">
+            <MenuItem Header="_New" Name="mnuFileNew" Command="{Binding NewCommand}" />
+            <MenuItem Header="_Open" Name="mnuFileOpen" Command="{Binding OpenCommand}" />
+            <MenuItem Header="_Save" Name="mnuFileSave" Command="{Binding SaveCommand}" />
+            <MenuItem Header="Save _As" Name="mnuFileSaveAs" Command="{Binding SaveAsCommand}" />
+            <MenuItem Header="Close" Name="mnuFileClose" Command="{Binding CloseCommand}" />
+            <Separator />
+            <MenuItem Header="E_xit" Name="mnuFileExit" Command="{Binding ExitCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Edit" Name="mnuEdit">
+            <MenuItem Header="Cu_t" Name="mnuEditCut" Command="{Binding CutCommand}" />
+            <MenuItem Header="_Copy" Name="mnuEditCopy" Command="{Binding CopyCommand}" />
+            <MenuItem Header="_Paste" Name="mnuEditPaste" Command="{Binding PasteCommand}" />
+        </MenuItem>
+        <MenuItem Header="_View" Name="mnuView">
+            <MenuItem Header="_Transcript" Name="mnuViewTranscript" Command="{Binding ViewTranscriptCommand}" />
+                      <!-- IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Transcript}" /> -->
+            <MenuItem Header="Pro_gram" Name="mnuViewProgram" Command="{Binding ViewProgramCommand}" /> 
+                      <!-- IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Program}" /> -->
+            <MenuItem Header="_Debug" Name="mnuViewDebug" Command="{Binding ViewDebugCommand}" /> 
+                      <!-- IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Debug}" /> -->
+            <MenuItem Header="T_race" Name="mnuViewTrace" Command="{Binding ViewTraceCommand}" /> 
+                      <!-- IsChecked="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Trace}" /> -->
+        </MenuItem>
+        <MenuItem Header="_Transcript" Name="mnuTranscript">
+                  <!-- Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Transcript}"> -->
+            <MenuItem Header="E_xecute" Name="mnuTranscriptExecuteCommand" Command="{Binding ExecuteCommand}" />
+            <MenuItem Header="_Debug" Name="mnuTranscriptDebugCommand" Command="{Binding DebugCommand}" />
+            <MenuItem Header="_Continue" Name="mnuTranscriptContinueCommand" Command="{Binding RunToSuccessCommand}" />
+            <Separator />
+            <MenuItem Header="Move _Up" Name="mnuTranscriptMoveUp" Command="{Binding MoveUpCommand}" />
+            <MenuItem Header="Move _Down" Name="mnuTranscriptMoveDown" Command="{Binding MoveDown}" />
+            <Separator />
+            <MenuItem Header="Enable _Optimization" Name="mnuTranscriptEnableOptimization" Command="{Binding EnableOptimizationCommand}" /> 
+                      <!-- IsChecked="{Binding Program.IsOptimized}" /> -->
+            <MenuItem Header="Enable _Statistics" Name="mnuTranscriptEnableStatistics" Command="{Binding EnableStatisticsCommand}" /> 
+                      <!-- IsChecked="{Binding StatisticsEnabled}" /> -->
+        </MenuItem>
+        <MenuItem Header="_Program" Name="mnuProgram">
+                  <!-- Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Program}"> -->
+            <MenuItem Header="Move _Up" Name="mnuProgramMoveUp" Command="{Binding MoveUpCommand}" />
+            <MenuItem Header="Move _Down" Name="mnuProgramMoveDown" Command="{Binding MoveDownCommand}" />
+            <Separator />
+            <MenuItem Header="Enable _Optimization" Name="mnuProgramEnableOptimization" Command="{Binding EnableOptimizationCommand}" /> 
+                      <!-- IsChecked="{Binding Program.IsOptimized}" /> -->
+        </MenuItem>
+        <MenuItem Header="Tra_ce" Name="mnuTrace">
+                  <!-- Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Trace}"> -->
+            <MenuItem Header="_Enable" Name="mnuTraceEnable" Command="{Binding EnableTraceCommand}" /> 
+                      <!-- IsChecked="{Binding TraceEnabled}" /> -->
+            <MenuItem Header="_Clear" Name="mnuTraceClear" Command="{Binding ClearTraceCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Debug" Name="mnuDebug">
+                  <!-- Visibility="{Binding View, Converter={StaticResource ViewConverter}, ConverterParameter=Debug}"> -->
+            <MenuItem Header="Restart" Name="mnuDebugRestart" Command="{Binding RestartCommand}" />
+            <MenuItem Header="Run to Backtrack" Name="mnuDebugRunToBacktrack" Command="{Binding RunToBacktrackCommand}" />
+            <MenuItem Header="Run to Success" Name="mnuDebugRunToSuccess" Command="{Binding RunToSuccessCommand}" />
+            <MenuItem Header="Step Into" Name="mnuDebugStepIn" Command="{Binding StepInCommand}" />
+            <MenuItem Header="Step Over" Name="mnuDebugStepOver" Command="{Binding StepOverCommand}" />
+            <MenuItem Header="Return to Caller" Name="mnuDebugStepOut" Command="{Binding StepOutCommand}" />
+            <Separator />
+            <MenuItem Header="Add Breakpoint" Name="mnuDebugAddBreakpoint" Command="{Binding AddBreakpointCommand}" />
+            <MenuItem Header="Remove Breakpoint" Name="mnuDebugClearBreakpoint" Command="{Binding ClearBreakpointCommand}" />
+            <MenuItem Header="Toggle Breakpoint" Name="mnuDebugToggleBreakpoint" Command="{Binding ToggleBreakpointCommand}" />
+            <MenuItem Header="Remove All Breakpoints" Name="mnuDebugClearAllBreakpoints" Command="{Binding ClearAllBreakpointsCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Help" Name="mnuHelp">
+            <MenuItem Header="_About Prolog.NET" Name="mnuHelpAbout" Command="{Binding HelpAboutCommand}" />
+        </MenuItem>
+    </Menu>
+    
+</UserControl>

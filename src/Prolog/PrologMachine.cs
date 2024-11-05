@@ -16,9 +16,9 @@ namespace Prolog
     /// </remarks>
     public sealed class PrologMachine : IPrologVariableListContainer, INotifyPropertyChanged
     {
-        private WamMachine m_wamMachine;
+        readonly WamMachine m_wamMachine;
 
-        private PrologMachine(Program program, Query query)
+        PrologMachine(Program program, Query query)
         {
             if (program == null)
             {

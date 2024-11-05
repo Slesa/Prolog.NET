@@ -62,27 +62,28 @@ $InstallPath = Join-Path $PSScriptRoot ".dotnet"
 $GlobalJsonPath = Join-Path $PSScriptRoot "global.json"
 if (!(Test-Path $InstallPath)) {
     New-Item -Path $InstallPath -ItemType Directory -Force | Out-Null;
-}
 
-if ($IsMacOS -or $IsLinux) {
-    $ScriptPath = Join-Path $InstallPath 'dotnet-install.sh'
-    (New-Object System.Net.WebClient).DownloadFile($DotNetUnixInstallerUri, $ScriptPath);
-    & $ScriptPath -Version "latest" -InstallDir $InstallPath --no-path
+
+    if ($IsMacOS -or $IsLinux) {
+        $ScriptPath = Join-Path $InstallPath 'dotnet-install.sh'
+        (New-Object System.Net.WebClient).DownloadFile($DotNetUnixInstallerUri, $ScriptPath);
+        & $ScriptPath -Version "latest" -InstallDir $InstallPath --no-path
 #    & bash $ScriptPath --jsonfile "$GlobalJsonPath" --install-dir "$InstallPath" --no-path
 
-    Remove-PathVariable "$InstallPath"
-    $env:PATH = "$($InstallPath):$env:PATH"
-}
-else {
-    $ScriptPath = Join-Path $InstallPath 'dotnet-install.ps1'
-    (New-Object System.Net.WebClient).DownloadFile($DotNetInstallerUri, $ScriptPath);
-    & $ScriptPath -Channel "6.0" -InstallDir $InstallPath;
-    & $ScriptPath -Channel "7.0" -InstallDir $InstallPath;
-    & $ScriptPath -Channel "8.0" -InstallDir $InstallPath;
+        Remove-PathVariable "$InstallPath"
+        $env:PATH = "$($InstallPath):$env:PATH"
+    }
+    else {
+        $ScriptPath = Join-Path $InstallPath 'dotnet-install.ps1'
+        (New-Object System.Net.WebClient).DownloadFile($DotNetInstallerUri, $ScriptPath);
+        & $ScriptPath -Channel "6.0" -InstallDir $InstallPath;
+        & $ScriptPath -Channel "7.0" -InstallDir $InstallPath;
+        & $ScriptPath -Channel "8.0" -InstallDir $InstallPath;
 #    & $ScriptPath -JSonFile $GlobalJsonPath -InstallDir $InstallPath;
 
-    Remove-PathVariable "$InstallPath"
-    $env:PATH = "$InstallPath;$env:PATH"
+        Remove-PathVariable "$InstallPath"
+        $env:PATH = "$InstallPath;$env:PATH"
+    }
 }
 $env:DOTNET_ROOT=$InstallPath
 

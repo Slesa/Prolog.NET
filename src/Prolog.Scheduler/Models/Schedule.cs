@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* Copyright © 2010 Richard G. Todd.
+ * Licensed under the terms of the Microsoft Public License (Ms-PL).
+ */
+
+using System;
 using System.Diagnostics;
 using Prolog.Code;
 
@@ -35,7 +39,7 @@ namespace Prolog.Scheduler.Models
         public ScheduleDay Wednesday { get; }
         public ScheduleDay Thursday { get; }
         public ScheduleDay Friday { get; }
-
+        
         public void Copy(Schedule schedule)
         {
             Monday.Copy(schedule.Monday);
@@ -102,7 +106,7 @@ namespace Prolog.Scheduler.Models
             scheduleShift.Name = person;
         }
 
-        /// <summary>
+                /// <summary>
         /// Processes a <see cref="CodeTerm"/> that specifies a work period.
         /// </summary>
         /// <param name="codeTerm">A <see cref="CodeTerm"/> that references an <see cref="CodeCompoundTerm"/>.</param>

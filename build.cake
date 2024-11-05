@@ -1,3 +1,6 @@
+#tool nuget:?package=Machine.Specifications.Runner.Console&version=1.0.0
+
+
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -20,9 +23,9 @@ var binDir = new DirectoryPath( workingDir.CombineWithFilePath("bin").FullPath )
 var buildDir = new DirectoryPath( binDir.CombineWithFilePath("build").FullPath );
 var buildPath = buildDir.FullPath;
 var deployDir = new DirectoryPath( binDir.CombineWithFilePath("deploy").FullPath );
-//var testDir = new DirectoryPath( binDir.CombineWithFilePath("test").FullPath );
-//var testPath = testDir.FullPath;
-//var reportDir = new DirectoryPath( binDir.CombineWithFilePath("report").FullPath );
+var testDir = new DirectoryPath( binDir.CombineWithFilePath("test").FullPath );
+var testPath = testDir.FullPath;
+var reportDir = new DirectoryPath( binDir.CombineWithFilePath("report").FullPath );
 
 //////////////////////////////////////////////////////////////////////
 // PROPERTIES
@@ -31,7 +34,7 @@ var deployDir = new DirectoryPath( binDir.CombineWithFilePath("deploy").FullPath
 //public bool IsWindows { get { return platform.Family==PlatformFamily.Windows; } }
 public bool IsLocalBuild { get { return BuildSystem.IsLocalBuild; } }
 public bool IsDevelop { get { return BranchName.ToLower()=="develop"; } }
-public bool IsMaster { get { return BranchName.ToLower()=="master"; } }
+public bool IsMain { get { return BranchName.ToLower()=="main"; } }
 public string BranchName { get { return EnvironmentVariable("APPVEYOR_REPO_BRANCH"); } } // TFBuild.Environment.Repository.Branch; } }
 
 public string CurrentVersion() {
@@ -45,8 +48,12 @@ public string CurrentVersion() {
     return version + ".0";
 }
 
+
+var Projects         	= GetFiles( srcDir.CombineWithFilePath("**/*.csproj").FullPath );
+var TestProjects     	= GetFiles( srcDir.CombineWithFilePath("**/*.Specs.csproj").FullPath );
+var PrologProject = "src/Prolog/Prolog.csproj";
+
 var  prologSolution = "src/Prolog.sln";
-var  prologProject = "src/Prolog/Prolog.csproj";
 var  coreAppsSolution = "src/Prolog.Core.Apps.sln";
 var  wpfAppsSolution = "src/Prolog.Wpf.Apps.sln";
 
@@ -54,7 +61,7 @@ ProcessArgumentBuilder CreateNugetArguments(ProcessArgumentBuilder args) {
     var relNotes = string.Join("\n", releaseNotes.Notes)
         .Replace(",", " and");
 //        .Replace(",", "[MSBuild]::Escape(',')");
-    Information("Release notes: \n"+relNotes);
+    //Information("Release notes: \n"+relNotes);
     return args
         .Append("/p:Version="+version)
         .Append("/p:PackageReleaseNotes=\""+relNotes+"\"");
@@ -71,10 +78,11 @@ Task("Clean")
     {
       CleanDirectory(buildDir);
       CleanDirectory(deployDir);
-      //CleanDirectory(testDir);
-      //CleanDirectory(reportDir);
+      CleanDirectory(testDir);
+      CleanDirectory(reportDir);
     }
 });
+
 
 Task("VersionInfo")
   .Does( () => {
@@ -89,49 +97,71 @@ Task("VersionInfo")
     });      
 });
 
+
 Task("Restore-NuGet-Packages")
   .Does( () => {
     var settings = new DotNetRestoreSettings {
         ArgumentCustomization = args => CreateNugetArguments(args),
+        MSBuildSettings = new DotNetMSBuildSettings().WithProperty("BuildServer", "AppVeyor")
     };    
-    DotNetRestore(wpfAppsSolution, settings);
-    DotNetRestore(coreAppsSolution, settings);
+    foreach(var project in Projects)
+        DotNetRestore(project.FullPath, settings);
+    //DotNetRestore(wpfAppsSolution, settings);
+    //DotNetRestore(coreAppsSolution, settings);
 });
+
+
+string GetProjectName(FilePath csproj)
+{
+    var name = csproj.ToString();
+    return name.Replace(".csproj", "");
+}
 
 Task("Build")
   .Does( () => {
-    var platform = new CakePlatform();
-    // var framework = IsWindows ? "net461" : "netcoreapp2.2";
-    var coreSettings = new DotNetBuildSettings
+    foreach(var project in Projects)
+    {
+        Information("Building {project.ToString()}");
+        var settings = new DotNetBuildSettings
+        {
+            ArgumentCustomization = args => CreateNugetArguments(args),
+            Configuration = configuration,
+            NoRestore = true,
+            MSBuildSettings = new DotNetMSBuildSettings().WithProperty("BuildServer", "AppVeyor"),
+            OutputDirectory = buildDir.Combine(GetProjectName(project.GetFilename())).FullPath
+        };
+        DotNetBuild(project.FullPath, settings); 
+    }
+});
+
+
+Task("BuildTests")
+  .Does( () => {
+    var settings = new DotNetBuildSettings
     {
         ArgumentCustomization = args => CreateNugetArguments(args),
-        //Framework = "netcoreapp2.0",
         Configuration = configuration,
-        //OutputDirectory = buildPath,
         NoRestore = true,
+        MSBuildSettings = new DotNetMSBuildSettings().WithProperty("BuildServer", "AppVeyor"),
+        OutputDirectory = testPath
     };
-    // if (!IsWindows) coreSettings.Framework = framework;
-    DotNetBuild(prologSolution, coreSettings);
-
-    var corePath = buildPath + "/core";
-    var corePublish = new DotNetBuildSettings
-     {
-        //  Framework = framework,
-         //NoBuild = true,
-         NoRestore = true,
-         Configuration = configuration,
-         OutputDirectory = corePath
-     };
-    DotNetBuild(coreAppsSolution, corePublish);
-
-    /* Does not build if (IsWindows) {
-      var wpfPath = buildPath + "/wpf";
-      var wpfAppsSettings = new MSBuildSettings()
-        .WithProperty("OutputPath", wpfPath)
-        .WithProperty("Configuration", configuration);
-      MSBuild(wpfAppsSolution, wpfAppsSettings);
-    } */
+    foreach(var project in TestProjects)
+    {
+        DotNetBuild(project.FullPath, settings); 
+    }
 });
+
+
+Task("RunTests")
+	.Does(() =>
+	{
+  	var specFiles = GetFiles( testDir.CombineWithFilePath("**/*.Specs.dll").FullPath );
+	  MSpec(specFiles, new MSpecSettings { 
+		   	OutputDirectory = reportDir.FullPath, 
+		    HtmlReport = true 
+		 });
+  });
+
 
 Task("CreatePackages")
   // .WithCriteria( IsWindows )
@@ -145,8 +175,9 @@ Task("CreatePackages")
         NoRestore = true,
         NoBuild = true,
     };
-    DotNetPack(prologProject, settings);
+    DotNetPack(PrologProject, settings);
 });
+
 
 Task("PublishPackages")
   .WithCriteria( !IsLocalBuild )
@@ -168,6 +199,8 @@ Task("Default")
   .IsDependentOn("VersionInfo")
   .IsDependentOn("Restore-NuGet-Packages")
   .IsDependentOn("Build")
+  .IsDependentOn("BuildTests")
+  .IsDependentOn("RunTests")
   .IsDependentOn("CreatePackages")
   .IsDependentOn("PublishPackages");
 

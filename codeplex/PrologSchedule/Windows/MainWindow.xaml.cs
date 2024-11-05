@@ -3,6 +3,7 @@
  */
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 
 namespace Prolog.Scheduler
@@ -46,8 +47,14 @@ namespace Prolog.Scheduler
 
         private void GetNextSolution()
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             Schedule schedule = App.Current.AppState.Scheduler.Execute();
-
+            stopWatch.Stop();
+            var ts = stopWatch.Elapsed;
+            var elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds:00}";
+            System.Diagnostics.Debug.WriteLine($"Calculation took {elapsedTime} - Ready");
+            
             if (schedule == null)
             {
                 MessageBox.Show("No more schedules exist.", "Scheduler", MessageBoxButton.OK);

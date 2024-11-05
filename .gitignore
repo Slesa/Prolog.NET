@@ -28,3 +28,5 @@ src/Documentation
 src/packages/
 src/VersionInfo.cs
 /tools/
+src.old/
+src/Prolog/Redistribute/

@@ -1,21 +1,23 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
-using Prolog.Scheduler.ViewModels;
-using Prolog.Scheduler.Views;
+using Avalonia.ReactiveUI;
+using System;
 
-namespace Prolog.Scheduler
+namespace Prolog.Scheduler;
+
+sealed class Program
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            BuildAvaloniaApp().Start<MainWindow>(() => new MainWindowViewModel());
-        }
+    // Initialization code. Don't use any Avalonia, third-party APIs or any
+    // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+    // yet and stuff might break.
+    [STAThread]
+    public static void Main(string[] args) => BuildAvaloniaApp()
+        .StartWithClassicDesktopLifetime(args);
 
-        public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .UseReactiveUI()
-                .LogToDebug();
-    }
+    // Avalonia configuration, don't remove; also used by visual designer.
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .WithInterFont()
+            .LogToTrace()
+            .UseReactiveUI();
 }
